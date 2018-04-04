@@ -6,3 +6,4 @@ target/
 .project
 .settings/
 .classpath
+LOG_PATH_IS_UNDEFINED/

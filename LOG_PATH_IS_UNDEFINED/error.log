@@ -53,3 +53,8 @@
 2018-04-04 12:18:10.192 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter -Located MBean 'getDataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=getDataSource,type=DruidDataSource]
 2018-04-04 12:18:10.266 [restartedMain] INFO  o.s.b.c.e.t.TomcatEmbeddedServletContainer -Tomcat started on port(s): 8081 (http)
 2018-04-04 12:18:10.273 [restartedMain] INFO  c.d.DistributionApplication -Started DistributionApplication in 9.518 seconds (JVM running for 11.488)
+2018-04-04 12:18:56.526 [http-nio-8081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-04-04 12:18:56.527 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet -FrameworkServlet 'dispatcherServlet': initialization started
+2018-04-04 12:18:56.558 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet -FrameworkServlet 'dispatcherServlet': initialization completed in 31 ms
+2018-04-04 12:21:52.962 [http-nio-8081-exec-8] INFO  o.s.b.f.xml.XmlBeanDefinitionReader -Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+2018-04-04 12:21:53.221 [http-nio-8081-exec-8] INFO  o.s.j.support.SQLErrorCodesFactory -SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
