@@ -1,0 +1,81 @@
+
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header>
+    <div th:replace="~{header :: header}"></div>
+</header>
+
+<body>
+<form class="layui-form" >
+    <div class="layui-form-item">
+        <label class="layui-form-label">平台id</label>
+        <div class="layui-input-block">
+            <input name="disPlatformId" lay-verify="required" autocomplete="off" placeholder="请输入" class="layui-input" type="text">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">注册会员id</label>
+        <div class="layui-input-block">
+            <input name="disUserId" lay-verify="required" autocomplete="off" placeholder="请输入" class="layui-input" type="text">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">上级会员id</label>
+        <div class="layui-input-block">
+            <input name="disModelId" lay-verify="" placeholder="请输入" autocomplete="off" class="layui-input" type="text">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">注册会员姓名</label>
+        <div class="layui-input-block">
+            <input name="disUserName" lay-verify="required" class="layui-input" type="text">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">会员类型</label>
+        <div class="layui-input-inline">
+            <select name="disUserType" lay-filter="" lay-search>
+                <div th:each="mode:${disUserType}">
+                    <option th:value="${mode.disType}" th:text="${mode.disValue}"></option>
+                </div>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <textarea name="disNote" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+<div th:replace="~{footer :: footer}"></div>
+<script>
+    layui.use(['form', 'layedit', 'laydate','layer'],function(){
+        var form = layui.form()
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate;
+        //监听提交
+        form.on('submit(demo1)', function(data){
+           // var loadIndex = layer.load(1);
+           $.post("/dismember/insert",data.field,function (res) {
+                if (res.code==0){
+                    alert("成功")
+                }else{
+                    alert("失败");
+                }
+            })
+
+            return false;
+        });
+
+    });
+</script>
+</html>

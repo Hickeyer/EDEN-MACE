@@ -1,0 +1,121 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>详细信息</title>
+    <script th:src="@{/lib/esl.js}"></script>
+</head>
+<body>
+<input th:value="${node}" id="node" type="hidden">
+<input th:value="${link}" id="link" type="hidden">
+<input th:value="@{/}" type="hidden" id="baseUrl">
+<div id = "demo1" style="height:800px;border:1px solid #ccc;padding:1px;" ></div>
+</body>
+<div th:replace="~{footer :: footer}"></div>
+<script>
+    require.config({
+        packages:[{
+            name:'echarts',
+            location:'/lib/echarts/src',
+            main:'echarts'
+        },{
+            name:'zrender',
+            location:'/lib/zrender/src',
+            main:'zrender'
+        }]
+    });
+
+
+    var  option = {
+        title : {
+            text: '分销关系人脉网',
+            subtext: '分析数据专家',
+            x:'right',
+            y:'bottom'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: '{a} : {b}'
+        },
+
+        legend: {
+            x: 'left',
+            selected:{'平台':true,'会员':true},
+            data:['平台','会员']
+        },
+        isShowScrollBar:false,
+        series: [
+            {
+                type:'kforce',
+                categories : [
+                    {
+                        name: 'one',
+                        itemStyle: {
+                            normal: {
+                                color : '#ff7f50'
+                            }
+                        }
+                    },
+                    {
+                        name: '平台',
+                        itemStyle: {
+                            normal: {
+                                color : '#ff7f50'
+                            }
+                        }
+                    },
+                    {
+                        name:'会员',
+                        itemStyle: {
+                            normal: {
+                                color : '#87cdfa'
+                            }
+                        }
+                    }
+                ],
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true,
+                            textStyle: {
+                                color: '#000000'
+                            }
+                        },
+                        nodeStyle : {
+                            brushType : 'both',
+                            strokeColor : 'rgba(255,215,0,0.4)',
+                            lineWidth : 2
+                        }
+                    },emphasis:{
+                        linkStyle : { strokeColor : '#5182AB'}
+                    }
+                },
+                minRadius : 15,
+                maxRadius : 25,
+                density : 0.8,
+                attractiveness: 0.8,
+                nodes:(function () {
+                    var node=$("#node").val();
+                    var nodeObj=JSON.parse(node);
+                    return nodeObj;
+                })(),
+                links :(function () {
+                    var link=$("#link").val();
+                    var linkObj=JSON.parse(link);
+                    console.log(linkObj[0].source)
+                    return linkObj;
+                })(),
+            }
+        ]
+    };
+    require(
+            [
+                'echarts',
+                'echarts/chart/kforce',
+            ],
+            function(ec) {
+                var myChart = ec.init(document.getElementById('demo1'));
+                myChart.setOption(option);
+            }
+    )
+</script>
+</html>

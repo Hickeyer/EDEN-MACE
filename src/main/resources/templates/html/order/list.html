@@ -1,0 +1,100 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header>
+    <div th:replace="~{header :: header}"></div>
+</header>
+
+<body>
+
+<div class="layui-form">
+    <table class="layui-table">
+        <colgroup>
+            <col width="50">
+            <col width="150">
+            <col width="150">
+            <col width="150">
+            <col width="150">
+            <col width="150">
+            <col width="150">
+            <col width="150">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th><input name="" lay-skin="primary" lay-filter="allChoose" type="checkbox"></th>
+            <th>获取分润人员</th>
+            <th>下级会员</th>
+            <th>金额</th>
+            <th>备注</th>
+            <th>订单号</th>
+            <th>交易类型</th>
+            <th>平台类型</th>
+            <th>添加时间</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+    <div id="demo1"></div>
+
+</div>
+
+</body>
+<div th:replace="~{footer :: footer}"></div>
+<script>
+    layui.use(['form','laypage','layer'],function(){
+        var  form = layui.form(),
+                laypage = layui.laypage
+                ,layer = layui.layer;
+        //全选
+        form.on('checkbox(allChoose)', function(data){
+            var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+            child.each(function(index, item){
+                item.checked = data.elem.checked;
+            });
+            form.render('checkbox');
+        });
+
+        laypage({
+            cont: 'demo1'
+            ,pages: 100 //总页数
+            ,groups: 5 //连续显示分页数
+        });
+        var rendInfo=function (data) {
+            var content='';
+
+            for(var i=0;i<data.length;i++){
+                content+='  <tr>   <td><input name="" lay-skin="primary" type="checkbox"></td>'
+                content=content
+                        +'<td>'+data[i].disGetUserId+'</td>'
+                        +'<td>'+data[i].disSetUserId+'</td>'
+                        +'<td>'+data[i].disAmount+'</td>'
+                        +'<td>'+data[i].disNote+'</td>'
+                        +'<td>'+data[i].disOrderId+'</td>'
+                        +'<td>'+data[i].disProType+'</td>'
+                        +'<td>'+data[i].disUserType+'</td>'
+                        +'<td>'+data[i].addTime+'</td>';
+                content=content+"</tr>"
+            }
+
+            return content;
+        }
+        //调用分页
+        laypage({
+            cont: 'demo1'
+            ,pages: 100 //得到总页数
+            ,jump: function(obj){
+                $.post("/disProfit/list",{pageNo:obj.curr,pageSize:obj.groups},function (data) {
+                    if(data.code==0){
+                        if(data.data!=null){
+                            var info=rendInfo(data.data);
+                            console.log(info);
+                            $("#tbody").html(info);
+                        }
+                    }
+                })
+            }
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,58 @@
+2017-12-15 20:16:34.465 [restartedMain] INFO  c.d.DistributionApplication -Starting DistributionApplication on DESKTOP-group1 with PID 5228 (E:\workspace\history\distribution\target\classes started by huangpu in E:\workspace\history\distribution)
+2017-12-15 20:16:34.475 [restartedMain] INFO  c.d.DistributionApplication -The following profiles are active: dev
+2017-12-15 20:16:35.008 [restartedMain] INFO  o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext -Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@2ebaf851: startup date [Fri Dec 15 20:16:35 CST 2017]; root of context hierarchy
+2017-12-15 20:16:37.317 [restartedMain] WARN  o.s.c.a.ConfigurationClassPostProcessor -Cannot enhance @Configuration bean definition 'dataSourceConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2017-12-15 20:16:38.118 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$41ac5451] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-15 20:16:39.079 [restartedMain] INFO  o.s.b.c.e.t.TomcatEmbeddedServletContainer -Tomcat initialized with port(s): 8081 (http)
+2017-12-15 20:16:39.089 [restartedMain] INFO  o.a.catalina.core.StandardService -Starting service Tomcat
+2017-12-15 20:16:39.099 [restartedMain] INFO  o.a.catalina.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/8.5.11
+2017-12-15 20:16:39.230 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -Initializing Spring embedded WebApplicationContext
+2017-12-15 20:16:39.230 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader -Root WebApplicationContext: initialization completed in 4222 ms
+2017-12-15 20:16:39.540 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean -Mapping servlet: 'dispatcherServlet' to [/]
+2017-12-15 20:16:39.560 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-12-15 20:16:39.560 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-12-15 20:16:39.560 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-12-15 20:16:39.560 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2017-12-15 20:16:39.800 [restartedMain] INFO  c.alibaba.druid.pool.DruidDataSource -{dataSource-1} inited
+2017-12-15 20:16:40.340 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-12-15 20:16:40.376 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-12-15 20:16:40.640 [restartedMain] INFO  org.hibernate.Version -HHH000412: Hibernate Core {5.0.12.Final}
+2017-12-15 20:16:40.640 [restartedMain] INFO  org.hibernate.cfg.Environment -HHH000206: hibernate.properties not found
+2017-12-15 20:16:40.650 [restartedMain] INFO  org.hibernate.cfg.Environment -HHH000021: Bytecode provider name : javassist
+2017-12-15 20:16:40.811 [restartedMain] INFO  o.h.annotations.common.Version -HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-12-15 20:16:41.550 [restartedMain] INFO  org.hibernate.dialect.Dialect -HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-12-15 20:16:42.002 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-12-15 20:16:42.702 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter -Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@2ebaf851: startup date [Fri Dec 15 20:16:35 CST 2017]; root of context hierarchy
+2017-12-15 20:16:42.872 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/dismember/list],methods=[GET]}" onto public java.lang.String com.distribution.controller.DisMemberInfoController.list()
+2017-12-15 20:16:42.882 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/dismember/insert],methods=[GET]}" onto public java.lang.String com.distribution.controller.DisMemberInfoController.insert(javax.servlet.http.HttpServletRequest)
+2017-12-15 20:16:42.882 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/dismember/detail/{id}],methods=[GET]}" onto public java.lang.String com.distribution.controller.DisMemberInfoController.detail(javax.servlet.http.HttpServletRequest,java.lang.String)
+2017-12-15 20:16:42.882 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/dismember/nodeList],methods=[POST]}" onto public java.lang.String com.distribution.controller.DisMemberInfoController.nodeList(java.lang.String)
+2017-12-15 20:16:42.882 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/dismember/insert],methods=[POST]}" onto public com.distribution.common.util.InvokeResult com.distribution.controller.DisMemberInfoController.insertpost(com.distribution.common.model.DisMemberInfo)
+2017-12-15 20:16:42.882 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/dismember/list],methods=[POST]}" onto public com.distribution.common.util.InvokeResult com.distribution.controller.DisMemberInfoController.listPost(com.distribution.common.model.DisMemberInfo)
+2017-12-15 20:16:42.882 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/dispro/add],methods=[GET]}" onto public java.lang.String com.distribution.controller.DisProfiParamController.add(javax.servlet.http.HttpServletRequest)
+2017-12-15 20:16:42.882 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/dispro/list],methods=[GET]}" onto public java.lang.String com.distribution.controller.DisProfiParamController.list()
+2017-12-15 20:16:42.882 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/dispro/add],methods=[POST]}" onto public com.distribution.common.util.InvokeResult com.distribution.controller.DisProfiParamController.addPost(com.distribution.common.model.DisProfiParam)
+2017-12-15 20:16:42.882 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/dispro/list],methods=[POST]}" onto public com.distribution.common.util.InvokeResult com.distribution.controller.DisProfiParamController.listPost(javax.servlet.http.HttpServletRequest,com.distribution.common.model.DisProfiParam)
+2017-12-15 20:16:42.892 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/disProfit/add],methods=[GET]}" onto public java.lang.String com.distribution.controller.DisProfitRecordController.add(javax.servlet.http.HttpServletRequest)
+2017-12-15 20:16:42.892 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/disProfit/list],methods=[GET]}" onto public java.lang.String com.distribution.controller.DisProfitRecordController.list()
+2017-12-15 20:16:42.892 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/disProfit/add],methods=[POST]}" onto public com.distribution.common.util.InvokeResult com.distribution.controller.DisProfitRecordController.addPost(com.distribution.model.DisProfitRecordVo)
+2017-12-15 20:16:42.892 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/disProfit/list],methods=[POST]}" onto public com.distribution.common.util.InvokeResult com.distribution.controller.DisProfitRecordController.listPost(com.distribution.common.model.DisProfitRecord)
+2017-12-15 20:16:42.892 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/index || ],methods=[GET]}" onto public java.lang.String com.distribution.controller.IndexController.index()
+2017-12-15 20:16:42.892 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/test],methods=[GET]}" onto public java.lang.String com.distribution.controller.IndexController.test()
+2017-12-15 20:16:42.902 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-12-15 20:16:42.902 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-12-15 20:16:43.051 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping -Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-12-15 20:16:43.051 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping -Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-12-15 20:16:43.119 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping -Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-12-15 20:16:43.211 [restartedMain] WARN  o.t.templatemode.TemplateMode -[THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2017-12-15 20:16:44.398 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -LiveReload server is running on port 35729
+2017-12-15 20:16:44.795 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter -Registering beans for JMX exposure on startup
+2017-12-15 20:16:44.799 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter -Bean with name 'getDataSource' has been autodetected for JMX exposure
+2017-12-15 20:16:44.809 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter -Located MBean 'getDataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=getDataSource,type=DruidDataSource]
+2017-12-15 20:16:44.926 [restartedMain] INFO  o.s.b.c.e.t.TomcatEmbeddedServletContainer -Tomcat started on port(s): 8081 (http)
+2017-12-15 20:16:44.936 [restartedMain] INFO  c.d.DistributionApplication -Started DistributionApplication in 11.501 seconds (JVM running for 13.528)
+2017-12-15 20:17:42.482 [http-nio-8081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-12-15 20:17:42.482 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet -FrameworkServlet 'dispatcherServlet': initialization started
+2017-12-15 20:17:42.527 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet -FrameworkServlet 'dispatcherServlet': initialization completed in 45 ms
