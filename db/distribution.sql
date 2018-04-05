@@ -1,8 +1,8 @@
 /*
-SQLyog Ultimate v11.11 (64 bit)
+SQLyog Ultimate v10.00 Beta1
 MySQL - 5.7.20-log : Database - distribution
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -68,11 +68,11 @@ CREATE TABLE `dis_dictionary` (
   `add_time` varchar(100) DEFAULT NULL,
   `update_time` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8 COMMENT='字典表';
+) ENGINE=InnoDB AUTO_INCREMENT=1009 DEFAULT CHARSET=utf8 COMMENT='字典表';
 
 /*Data for the table `dis_dictionary` */
 
-insert  into `dis_dictionary`(`id`,`dis_code`,`dis_type`,`dis_value`,`dis_sort`,`dis_sys_id`,`is_delete`,`add_time`,`update_time`) values (1000,'disUserType','1','会员',NULL,NULL,'N',NULL,NULL),(1001,'disUserType','0','代理商',NULL,NULL,'N',NULL,NULL);
+insert  into `dis_dictionary`(`id`,`dis_code`,`dis_type`,`dis_value`,`dis_sort`,`dis_sys_id`,`is_delete`,`add_time`,`update_time`) values (1000,'disUserType','1','会员',NULL,NULL,'N',NULL,NULL),(1001,'disUserType','0','代理商',NULL,NULL,'N',NULL,NULL),(1002,'disProMode','0','百分比',NULL,NULL,'N',NULL,NULL),(1003,'disProMode','1','金额',NULL,NULL,'N',NULL,NULL),(1004,'disProType','0','交易分润',NULL,NULL,'N',NULL,NULL),(1005,'disProType','1','上下级分润',NULL,NULL,'N',NULL,NULL),(1006,'disProLevel','1','一级',NULL,NULL,'N',NULL,NULL),(1007,'disProLevel','2','二级',NULL,NULL,'N',NULL,NULL),(1008,'disProLevel','3','三级',NULL,NULL,'N',NULL,NULL);
 
 /*Table structure for table `dis_member_info` */
 
@@ -92,18 +92,18 @@ CREATE TABLE `dis_member_info` (
   `update_time` varchar(20) DEFAULT NULL COMMENT '更新时间',
   `is_delete` varchar(1) DEFAULT 'N' COMMENT '删除状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 /*Data for the table `dis_member_info` */
 
-insert  into `dis_member_info`(`id`,`dis_platform_id`,`dis_user_id`,`dis_model_id`,`dis_full_index`,`dis_user_name`,`dis_level`,`dis_user_type`,`dis_note`,`add_time`,`update_time`,`is_delete`) values (1,'8009','1111','','1111','11',0,'1','11','2018-03-01 19:16:11','2018-03-01 19:16:11','N');
+insert  into `dis_member_info`(`id`,`dis_platform_id`,`dis_user_id`,`dis_model_id`,`dis_full_index`,`dis_user_name`,`dis_level`,`dis_user_type`,`dis_note`,`add_time`,`update_time`,`is_delete`) values (1,'8009','1111','','1111','11',0,'1','11','2018-03-01 19:16:11','2018-03-01 19:16:11','N'),(2,'8009','111111','1111','1111.111111','11',1,'1','11','2018-04-04 12:21:21','2018-04-04 12:21:21','N'),(3,'8009','12312','111111','1111.111111.12312','aaa',2,'0','aa','2018-04-05 15:56:15','2018-04-05 15:56:15','N');
 
 /*Table structure for table `dis_profi_param` */
 
 DROP TABLE IF EXISTS `dis_profi_param`;
 
 CREATE TABLE `dis_profi_param` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `dis_platform_id` varchar(100) DEFAULT NULL COMMENT '平台id',
   `dis_pro_mode` varchar(100) NOT NULL COMMENT '分润模型，如 百分比和固定金额',
   `dis_pro_type` varchar(100) DEFAULT NULL COMMENT '分润类别，如上级发展下级分润 ，交易分润。。。。',
@@ -114,30 +114,35 @@ CREATE TABLE `dis_profi_param` (
   `update_time` varchar(20) DEFAULT NULL,
   `add_time` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分润参数设置';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='分润参数设置';
 
 /*Data for the table `dis_profi_param` */
+
+insert  into `dis_profi_param`(`id`,`dis_platform_id`,`dis_pro_mode`,`dis_pro_type`,`dis_pro_value`,`dis_pro_level`,`dis_user_type`,`is_delete`,`update_time`,`add_time`) values (1,'8009','0','1','12','1','1','N','2018-04-05 16:24:04','2018-04-05 16:24:04'),(2,'8009','0','0','0.1','2','1','N','2018-04-05 16:30:21','2018-04-05 16:30:21'),(3,'8009','0','0','0.1','2','1','N','2018-04-05 16:32:52','2018-04-05 16:32:52');
 
 /*Table structure for table `dis_profit_record` */
 
 DROP TABLE IF EXISTS `dis_profit_record`;
 
 CREATE TABLE `dis_profit_record` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `dis_platform_id` varchar(100) DEFAULT NULL,
   `dis_get_user_id` varchar(100) DEFAULT NULL,
   `dis_set_user_id` varchar(100) DEFAULT NULL,
   `dis_amount` decimal(12,2) DEFAULT NULL,
   `dis_pro_type` varchar(100) DEFAULT NULL COMMENT '交易类型',
   `dis_note` varchar(400) DEFAULT NULL COMMENT '备注',
+  `dis_user_type` varchar(400) DEFAULT NULL,
   `dis_order_id` varchar(20) DEFAULT NULL COMMENT '对应第三方订单编号',
   `is_delete` varchar(1) DEFAULT NULL,
   `add_time` varchar(20) DEFAULT NULL,
   `update_time` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分润记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='分润记录表';
 
 /*Data for the table `dis_profit_record` */
+
+insert  into `dis_profit_record`(`id`,`dis_platform_id`,`dis_get_user_id`,`dis_set_user_id`,`dis_amount`,`dis_pro_type`,`dis_note`,`dis_user_type`,`dis_order_id`,`is_delete`,`add_time`,`update_time`) values (18,NULL,'1111','12312','10.00','0','1','1','123','N','2018-04-05 16:44:10','2018-04-05 16:44:10'),(19,NULL,'1111','12312','10.00','0','1','1','123','N','2018-04-05 16:44:10','2018-04-05 16:44:10'),(20,NULL,'111111','12312','1200.00','1','1','1','123','N','2018-04-05 16:44:42','2018-04-05 16:44:42');
 
 /*Table structure for table `member_amount` */
 

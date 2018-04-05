@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController extends CommonController {
 
     @GetMapping(value = {"index",""})
-    public String index(){
-        return "index";
-    }
-    @GetMapping(value = {"test"})
     public String test(){
         return "test";
     }

@@ -66,6 +66,9 @@
     <if test="disPlatformId!=null">
       and dis_platform_id=#{disPlatformId,jdbcType=VARCHAR}
     </if>
+    <if test="disProType!=null">
+      and dis_pro_type=#{disProType,jdbcType=VARCHAR}
+    </if>
     <if test="pageStart!=null">
       <if test="pageSize!=null">
         limit #{pageStart},#{pageSize}
