@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.dist.dao.DisDictionaryDao">
+
+    <resultMap id="BaseResultMap" type="map">
+        <id column="id" property="id" />
+        <result column="dis_code" property="disCode" />
+        <result column="dis_type" property="disType" />
+        <result column="dis_value" property="disValue" />
+        <result column="dis_sort" property="disSort" />
+        <result column="dis_sys_id" property="disSysId" />
+        <result column="is_delete" property="isDelete" />
+        <result column="add_time" property="addTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, dis_code, dis_type, dis_value, dis_sort, dis_sys_id, is_delete, add_time, update_time
+    </sql>
+    <select id="selectListByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from dis_dictionary
+        where dis_code = #{disCode,jdbcType=VARCHAR}
+        and is_delete='N' ORDER BY dis_sort ASC
+    </select>
+</mapper>

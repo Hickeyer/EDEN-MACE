@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.dist.dao.DisProfiParamDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="map">
+        <id column="id" property="id" />
+        <result column="dis_platform_id" property="disPlatformId" />
+        <result column="dis_pro_mode" property="disProMode" />
+        <result column="dis_pro_type" property="disProType" />
+        <result column="dis_pro_value" property="disProValue" />
+        <result column="dis_pro_level" property="disProLevel" />
+        <result column="dis_user_type" property="disUserType" />
+        <result column="is_delete" property="isDelete" />
+        <result column="update_time" property="updateTime" />
+        <result column="add_time" property="addTime" />
+    </resultMap>
+
+    <select id="selectList" resultMap="BaseResultMap">
+             SELECT p.`id`,p.`dis_platform_id`,
+    e.`dis_value` AS dis_pro_mode,d.`dis_value` AS  dis_pro_level,f.`dis_value` AS dis_pro_type ,p.`add_time`,p.`dis_pro_value`,g.`dis_value` dis_user_type
+    FROM  `dis_profi_param` p
+    LEFT JOIN `dis_dictionary` d ON  d.`dis_type`=p.`dis_pro_level` AND d.`dis_code`='disProLevel'
+    LEFT JOIN `dis_dictionary` e ON  e.`dis_type`=p.`dis_pro_mode` AND e.`dis_code`='disProMode'
+    LEFT JOIN `dis_dictionary` f ON  f.`dis_type`=p.`dis_pro_type` AND f.`dis_code`='disProType'
+    LEFT JOIN `dis_dictionary` g ON  g.`dis_type`=p.`dis_user_type` AND g.`dis_code`='disUserType'
+    WHERE p.is_delete='N' and p.dis_platform_id=#{account}
+    </select>
+
+
+</mapper>

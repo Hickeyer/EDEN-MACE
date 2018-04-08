@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.dist.dao.DisMemberInfoDao">
+
+
+    <resultMap id="BaseResultMap" type="map">
+        <id column="id" property="id" />
+        <result column="dis_platform_id" property="disPlatformId" />
+        <result column="dis_user_id" property="disUserId" />
+        <result column="dis_model_id" property="disModelId" />
+        <result column="dis_full_index" property="disFullIndex" />
+        <result column="dis_user_name" property="disUserName" />
+        <result column="dis_level" property="disLevel" />
+        <result column="dis_user_type" property="disUserType" />
+        <result column="dis_note" property="disNote" />
+        <result column="add_time" property="addTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_delete" property="isDelete" />
+    </resultMap>
+
+    <select id="selectList" resultMap="BaseResultMap">
+         SELECT m.`id`,m.`dis_platform_id`,m.`dis_user_id`,m.`dis_model_id`,m.`dis_full_index`,m.`dis_user_name`,m.`dis_level`,m.`update_time`
+    ,m.`dis_note`,m.`add_time`,d.`dis_value` AS dis_user_type
+    FROM  `dis_member_info` m
+    LEFT JOIN `dis_dictionary` d ON m.`dis_user_type`=d.`dis_type` AND d.`dis_code`='disUserType' AND d.`is_delete`='N'
+    where m.is_delete='N' and
+   m.dis_platform_id=#{account}
+    </select>
+
+</mapper>

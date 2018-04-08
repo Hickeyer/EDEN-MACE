@@ -7,3 +7,8 @@ target/
 .settings/
 .classpath
 LOG_PATH_IS_UNDEFINED/
+*/logs
+
+*.jar
+*.war
+*.ear

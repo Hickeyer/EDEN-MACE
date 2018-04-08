@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.DisDictionaryMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.DisDictionary">
+		<id column="id" property="id" />
+		<result column="dis_code" property="disCode" />
+		<result column="dis_type" property="disType" />
+		<result column="dis_value" property="disValue" />
+		<result column="dis_sort" property="disSort" />
+		<result column="dis_sys_id" property="disSysId" />
+		<result column="is_delete" property="isDelete" />
+		<result column="add_time" property="addTime" />
+		<result column="update_time" property="updateTime" />
+	</resultMap>
+
+</mapper>

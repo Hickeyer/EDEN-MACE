@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.DisProfitRecordMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.DisProfitRecord">
+		<id column="id" property="id" />
+		<result column="dis_platform_id" property="disPlatformId" />
+		<result column="dis_get_user_id" property="disGetUserId" />
+		<result column="dis_set_user_id" property="disSetUserId" />
+		<result column="dis_amount" property="disAmount" />
+		<result column="dis_pro_type" property="disProType" />
+		<result column="dis_note" property="disNote" />
+		<result column="dis_user_type" property="disUserType" />
+		<result column="dis_order_id" property="disOrderId" />
+		<result column="is_delete" property="isDelete" />
+		<result column="add_time" property="addTime" />
+		<result column="update_time" property="updateTime" />
+	</resultMap>
+
+</mapper>
