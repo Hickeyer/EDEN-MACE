@@ -17,6 +17,7 @@ import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -42,6 +43,11 @@ public class DisMemberInfoController extends BaseController {
 
     @Autowired
     UserMgrDao userMgrDao;
+
+    @Value("${dist.jwt.secret}")
+    private  String secret;
+    @Value("${dist.jwt.account}")
+    private  String account;
 
     /**
      * 跳转到分销首页
@@ -98,9 +104,10 @@ public class DisMemberInfoController extends BaseController {
         if(user==null){
             throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
         }
-        String secret= Jwt.sign(ShiroKit.getUser().getAccount(),user.getSecret(),30L * 24L * 3600L * 1000L);
-        String account=Jwt.unsign(memberInfoVo.getSecret(),user.getSecret(),String.class);
-        if(account.equals(memberInfoVo.getDisPlatformId())){
+//        String secret= Jwt.sign(ShiroKit.getUser().getAccount(),user.getSecret(),30L * 24L * 3600L * 1000L);
+//        String account=Jwt.unsign(memberInfoVo.getSecret(),user.getSecret(),String.class);
+        String acc= Jwt.unsign(memberInfoVo.getSecret(),secret,String.class);
+        if(acc.equals(account)){
             DisMemberInfo memberInfo=new DisMemberInfo();
             BeanUtils.copyProperties(memberInfoVo,memberInfo);
             disMemberInfoService.save(memberInfo);

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.google.gson.Gson;
 import com.stylefeng.guns.common.annotion.DataSource;
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
@@ -46,6 +47,9 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
     public List<Map<String, Object>> selectList() {
         System.out.println(DataSourceContextHolder.getDataSourceType());
         String account= ShiroKit.getUser().getAccount();
+        if(ShiroKit.hasRole(Const.ADMIN_NAME)){
+            account=null;
+        }
         List<Map<String, Object>> list=disMemberInfoDao.selectList(account);
         return list;
     }

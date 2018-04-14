@@ -1,5 +1,7 @@
 package com.stylefeng.guns.modular.dist.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +13,6 @@ import java.util.Map;
  */
 public interface DisProfiParamDao {
 
-    List<Map<String, Object>> selectList(String account);
+    List<Map<String, Object>> selectList(@Param("account") String account);
 
 }

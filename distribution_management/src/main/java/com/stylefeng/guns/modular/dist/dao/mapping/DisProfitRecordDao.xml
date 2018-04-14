@@ -23,7 +23,11 @@
     FROM   `dis_profit_record` r
     LEFT JOIN `dis_dictionary` d ON d.`dis_type`=r.`dis_pro_type` AND d.`dis_code`='disProType'
     LEFT JOIN `dis_dictionary` u ON u.`dis_type`=r.`dis_user_type` AND u.`dis_code`='disUserType'
-    where r.is_delete='N' and r.dis_platform_id=#{account}
+    where r.is_delete='N'
+        <if test="account != null and account != ''">
+            and r.dis_platform_id=#{account}
+        </if>
+
     </select>
 
 </mapper>

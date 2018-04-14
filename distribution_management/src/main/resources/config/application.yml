@@ -13,6 +13,7 @@ guns:
   session-invalidate-time: 1800 #session失效时间(只在单机环境下生效，多机环境在SpringSessionConfig类中配置) 单位：秒
   session-validation-interval: 900 #多久检测一次失效的session(只在单机环境下生效) 单位：秒
 
+
 ###################  项目启动端口  ###################
 server:
   port: 80
@@ -65,7 +66,10 @@ mybatis-plus:
     multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
 
+
+  #################################  分销配置#####################################
+
 dist:
   jwt:
-    exp: EXP
-    payload: 'payload'
+    secret: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    account: xiaojiang

@@ -1,6 +1,7 @@
 package com.stylefeng.guns.modular.dist.service.impl;
 
 import com.stylefeng.guns.common.annotion.DataSource;
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.persistence.dao.DisProfiParamMapper;
 import com.stylefeng.guns.common.persistence.model.DisProfiParam;
@@ -33,6 +34,10 @@ public class DisProfiParamServiceImpl implements IDisProfiParamService {
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public List<Map<String, Object>> selectList() {
         String account= ShiroKit.getUser().getAccount();
+        if(ShiroKit.hasRole(Const.ADMIN_NAME)){
+            account=null;
+        }
+
         List<Map<String, Object>> list=disProfiParamDao.selectList(account);
         return list;
     }
@@ -42,7 +47,9 @@ public class DisProfiParamServiceImpl implements IDisProfiParamService {
     public void save(DisProfiParam param) {
         String account= ShiroKit.getUser().getAccount();
         param.setIsDelete("N");
-        param.setDisPlatformId(account);
+        if(!ShiroKit.hasRole(Const.ADMIN_NAME)){
+            param.setDisPlatformId(account);
+        }
         disProfiParamMapper.insert(param);
     }
 }

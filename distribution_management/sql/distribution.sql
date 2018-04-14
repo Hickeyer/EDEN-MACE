@@ -2,7 +2,7 @@
 SQLyog Ultimate v10.00 Beta1
 MySQL - 5.7.20-log : Database - distribution
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -114,11 +114,11 @@ CREATE TABLE `dis_profi_param` (
   `update_time` varchar(20) DEFAULT NULL,
   `add_time` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='分润参数设置';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='分润参数设置';
 
 /*Data for the table `dis_profi_param` */
 
-insert  into `dis_profi_param`(`id`,`dis_platform_id`,`dis_pro_mode`,`dis_pro_type`,`dis_pro_value`,`dis_pro_level`,`dis_user_type`,`is_delete`,`update_time`,`add_time`) values (1,'admin','0','1','12','1','1','N','2018-04-05 16:24:04','2018-04-05 16:24:04'),(2,'admin','0','0','0.1','2','1','N','2018-04-05 16:30:21','2018-04-05 16:30:21'),(3,'admin','0','0','0.1','2','1','N','2018-04-05 16:32:52','2018-04-05 16:32:52'),(6,'admin','0','0','12','1','1','N',NULL,NULL);
+insert  into `dis_profi_param`(`id`,`dis_platform_id`,`dis_pro_mode`,`dis_pro_type`,`dis_pro_value`,`dis_pro_level`,`dis_user_type`,`is_delete`,`update_time`,`add_time`) values (1,'admin','0','1','12','1','1','N','2018-04-05 16:24:04','2018-04-05 16:24:04'),(2,'admin','0','0','0.1','2','1','N','2018-04-05 16:30:21','2018-04-05 16:30:21'),(3,'admin','0','0','0.1','2','1','N','2018-04-05 16:32:52','2018-04-05 16:32:52'),(6,'admin','0','0','12','1','1','N',NULL,NULL),(7,'admin','0','0','12','1','1','N',NULL,NULL),(8,'admin','0','0','11','1','1','N',NULL,NULL),(9,'admin','0','0','11','1','1','N',NULL,NULL),(10,'dist','0','0','1','1','1','N',NULL,NULL),(11,'dist','0','0','112','1','1','N',NULL,NULL),(12,'dist','0','0','12','1','1','N',NULL,NULL),(13,'dist','0','0','1','1','1','N',NULL,NULL);
 
 /*Table structure for table `dis_profit_record` */
 

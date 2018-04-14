@@ -15,6 +15,7 @@ DisProfiParam.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
+        {title: '平台id', field: 'disPlatformId', visible: true, align: 'center', valign: 'middle'},
         {title: '分润模型', field: 'disProMode', visible: true, align: 'center', valign: 'middle'},
         {title: '分润类别', field: 'disProType', visible: true, align: 'center', valign: 'middle'},
         {title: '分润值', field: 'disProValue', visible: true, align: 'center', valign: 'middle'},

@@ -24,7 +24,10 @@
     LEFT JOIN `dis_dictionary` e ON  e.`dis_type`=p.`dis_pro_mode` AND e.`dis_code`='disProMode'
     LEFT JOIN `dis_dictionary` f ON  f.`dis_type`=p.`dis_pro_type` AND f.`dis_code`='disProType'
     LEFT JOIN `dis_dictionary` g ON  g.`dis_type`=p.`dis_user_type` AND g.`dis_code`='disUserType'
-    WHERE p.is_delete='N' and p.dis_platform_id=#{account}
+    WHERE p.is_delete='N'
+        <if test="account != null and account != ''">
+            and p.dis_platform_id=#{account}
+        </if>
     </select>
 
 

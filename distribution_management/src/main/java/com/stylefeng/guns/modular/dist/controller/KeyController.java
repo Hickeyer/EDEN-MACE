@@ -3,6 +3,8 @@ package com.stylefeng.guns.modular.dist.controller;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.util.Jwt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,14 +23,18 @@ public class KeyController extends BaseController {
 
     private String PREFIX = "/dist/key/";
 
+    @Value("${dist.jwt.secret}")
+    private  String secret;
+    @Value("${dist.jwt.account}")
+    private  String account;
     /**
      * 跳转到秘钥生成首页
      */
     @RequestMapping("")
     public String index(Model model) {
-
-        String secret= ShiroKit.getUser().getSecret();
-        String key= Jwt.sign(ShiroKit.getUser().getAccount(),secret,30L * 24L * 3600L * 1000L);
+       // String secret= ShiroKit.getUser().getSecret();
+      //  String key= Jwt.sign(ShiroKit.getUser().getAccount(),secret,30L * 24L * 3600L * 1000L);
+        String key= Jwt.sign(account,secret,30L * 24L * 3600L * 1000L);
         model.addAttribute("key",key);
         return PREFIX + "key.html";
     }
