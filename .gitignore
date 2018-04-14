@@ -12,3 +12,4 @@ LOG_PATH_IS_UNDEFINED/
 *.jar
 *.war
 *.ear
+*.log
