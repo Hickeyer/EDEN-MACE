@@ -44,5 +44,19 @@ plug用来调试接口，调试完成后，可以直接使用
 
 每个分销商只能看到自己名下的会员。并且可以看到自己的交易明细，这个就减少原有的系统的开发。
 
+会员管理用于查看分销的会员，并且支持图形化查看其关系
 
+![输入图片说明](https://gitee.com/uploads/images/2018/0414/155612_90c66fff_1497609.jpeg "1.jpg")
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0414/155641_9d426b81_1497609.jpeg "2.jpg")
+
+接口管理用于提供对接的接口文档
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0414/155749_cff31c2c_1497609.jpeg "3.jpg")
+分润设置用于设置分销商的分润 
+![输入图片说明](https://gitee.com/uploads/images/2018/0414/160010_69264fa1_1497609.jpeg "5.jpg")
+
+交易查询 ，用于查询相关交易分润
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0414/155829_4f4d13ad_1497609.jpeg "4.jpg")
 
