@@ -3,6 +3,7 @@ package com.stylefeng.guns.common.constant.factory;
 import com.stylefeng.guns.common.constant.cache.Cache;
 import com.stylefeng.guns.common.constant.cache.CacheKey;
 import com.stylefeng.guns.common.persistence.model.Dict;
+import com.stylefeng.guns.common.persistence.model.SysDic;
 import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
@@ -109,5 +110,12 @@ public interface IConstantFactory {
      * 获取被缓存的对象(用户删除业务)
      */
     String getCacheObject(String para);
+
+    /**
+     * 根据字典类型查询字典信息
+     * @param typeNo
+     * @return
+     */
+    List<SysDic> findDicList(String typeNo);
 
 }

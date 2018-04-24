@@ -1,0 +1,90 @@
+package com.stylefeng.guns.modular.system.service.impl;
+
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.stylefeng.guns.common.annotion.DataSource;
+import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.exception.BizExceptionEnum;
+import com.stylefeng.guns.common.exception.BussinessException;
+import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
+import com.stylefeng.guns.common.persistence.dao.SysDicTypeMapper;
+import com.stylefeng.guns.common.persistence.model.SysDic;
+import com.stylefeng.guns.common.persistence.model.SysDicType;
+import com.stylefeng.guns.common.util.PinYinUtil;
+import com.stylefeng.guns.modular.system.service.ISysDicService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
+
+import static com.stylefeng.guns.common.constant.factory.MutiStrFactory.*;
+
+@Service
+@Transactional
+public class SysDicServiceImpl implements ISysDicService {
+
+
+    @Resource
+    SysDicTypeMapper sysDicTypeMapper;
+
+    @Resource
+    SysDicMapper sysDicMapper;
+
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public void addDict(String dictName, String dictValues) {
+        String typeNo= PinYinUtil.getFullSpell(dictName);
+        //判断有没有该字典
+        List<SysDicType> dicts = sysDicTypeMapper.selectList(new EntityWrapper<SysDicType>().eq("dic_type_no", typeNo));
+        if(dicts != null && dicts.size() > 0){
+            throw new BussinessException(BizExceptionEnum.DICT_EXISTED);
+        }
+
+        //解析dictValues
+        List<Map<String, String>> items = parseKeyValue(dictValues);
+
+        //添加字典
+        SysDicType dicType=new SysDicType();
+        dicType.setDicTypeName(dictName);
+        dicType.setDicTypeNo(typeNo);
+        dicType.setSystemNo("pc");
+        this.sysDicTypeMapper.insert(dicType);
+
+        //添加字典条目
+        for (Map<String, String> item : items) {
+            String num = item.get(MUTI_STR_KEY);
+            String name = item.get(MUTI_STR_VALUE);
+            SysDic sysDic=new SysDic();
+            sysDic.setDicTypeNo(typeNo);
+            sysDic.setDicNo(num);
+            sysDic.setDicValue(name);
+            this.sysDicMapper.insert(sysDic);
+        }
+    }
+
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public void editDict(Integer dictId, String dictName, String dicts) {
+        //删除之前的字典
+        this.delteDict(dictId);
+
+        //重新添加新的字典
+        this.addDict(dictName,dicts);
+    }
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public void delteDict(Integer dictId) {
+
+        SysDicType dict = sysDicTypeMapper.selectById(dictId);
+        //删除这个字典的子词典
+        Wrapper<SysDic> dicEntityWrapper = new EntityWrapper<>();
+        dicEntityWrapper = dicEntityWrapper.eq("dic_type_no", dict.getDicTypeNo());
+        sysDicMapper.delete(dicEntityWrapper);
+
+        //删除这个词典
+
+        sysDicTypeMapper.deleteById(dictId);
+    }
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.SysDicTypeDao">
+
+
+    <resultMap id="BaseResultMap" type="Map">
+        <id column="dic_type_id" property="dicTypeId" />
+        <result column="system_no" property="systemNo" />
+        <result column="dic_type_no" property="dicTypeNo" />
+        <result column="dic_type_name" property="dicTypeName" />
+        <result column="dic_type_notes" property="dicTypeNotes" />
+        <result column="dic_type_order" property="dicTypeOrder" />
+        <result column="creator" property="creator" />
+        <result column="creation_time" property="creationTime" />
+        <result column="modified_by" property="modifiedBy" />
+        <result column="last_modify_time" property="lastModifyTime" />
+        <result column="last_modified_by" property="lastModifiedBy" />
+    </resultMap>
+
+
+    <select id="list" resultMap="BaseResultMap">
+        select * from sys_dic_type
+        where 1=1
+        <if test="condition != null and condition != ''">
+            AND dic_type_name like CONCAT('%',#{condition},'%')
+        </if>
+        order by dic_type_order ASC
+    </select>
+
+
+</mapper>

@@ -36,6 +36,7 @@
         <swagger.version>2.2.2</swagger.version>
         <gson.version>2.2.4</gson.version>
         <jwt.version>2.2.0</jwt.version>
+        <pinyin.version>2.5.1</pinyin.version>
     </properties>
 
     <dependencies>
@@ -187,6 +188,12 @@
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>${jwt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>${pinyin.version}</version>
         </dependency>
     </dependencies>
 

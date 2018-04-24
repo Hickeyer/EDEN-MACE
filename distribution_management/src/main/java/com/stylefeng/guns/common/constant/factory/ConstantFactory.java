@@ -32,6 +32,7 @@ public class ConstantFactory implements IConstantFactory {
     private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
     private MenuMapper menuMapper = SpringContextHolder.getBean(MenuMapper.class);
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
+    private SysDicMapper sysDicMapper = SpringContextHolder.getBean(SysDicMapper.class);
 
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -284,6 +285,22 @@ public class ConstantFactory implements IConstantFactory {
     @Override
     public String getCacheObject(String para) {
         return LogObjectHolder.me().get().toString();
+    }
+
+
+    @Override
+    public List<SysDic> findDicList(String typeNo) {
+        if (ToolUtil.isEmpty(typeNo)) {
+            return null;
+        } else {
+            EntityWrapper<SysDic> wrapper = new EntityWrapper<>();
+            List<SysDic> dicts = sysDicMapper.selectList(wrapper.eq("dic_type_no", typeNo));
+            if (dicts == null || dicts.size() == 0) {
+                return null;
+            } else {
+                return dicts;
+            }
+        }
     }
 
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.SysDicMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.SysDic">
+		<id column="dic_id" property="dicId" />
+		<result column="dic_type_no" property="dicTypeNo" />
+		<result column="dic_order" property="dicOrder" />
+		<result column="dic_no" property="dicNo" />
+		<result column="dic_value" property="dicValue" />
+		<result column="dic_notes" property="dicNotes" />
+		<result column="creator" property="creator" />
+		<result column="creation_time" property="creationTime" />
+		<result column="modified_by" property="modifiedBy" />
+		<result column="last_modify_time" property="lastModifyTime" />
+		<result column="last_modified_by" property="lastModifiedBy" />
+	</resultMap>
+
+</mapper>
