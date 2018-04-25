@@ -141,11 +141,11 @@ CREATE TABLE `sys_dic` (
   `add_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `update_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`dic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 /*Data for the table `sys_dic` */
 
-insert  into `sys_dic`(`dic_id`,`dic_no`,`dic_notes`,`dic_order`,`dic_type_no`,`dic_value`,`is_delete`,`add_time`,`update_time`) values (1,'1',NULL,NULL,'12','1','N',NULL,NULL),(2,'a',NULL,NULL,'213','b','N',NULL,NULL),(3,'c',NULL,NULL,'213','d','N',NULL,NULL),(4,'f',NULL,NULL,'213','g','N',NULL,NULL);
+insert  into `sys_dic`(`dic_id`,`dic_no`,`dic_notes`,`dic_order`,`dic_type_no`,`dic_value`,`is_delete`,`add_time`,`update_time`) values (1,'1',NULL,NULL,'12','1','N',NULL,NULL),(2,'a',NULL,NULL,'213','b','N',NULL,NULL),(3,'c',NULL,NULL,'213','d','N',NULL,NULL),(4,'f',NULL,NULL,'213','g','N',NULL,NULL),(5,'1',NULL,NULL,'huiyuanleixing','会员','N',NULL,NULL),(6,'2',NULL,NULL,'huiyuanleixing','代理商','N',NULL,NULL);
 
 /*Table structure for table `sys_dic_type` */
 
@@ -162,11 +162,11 @@ CREATE TABLE `sys_dic_type` (
   `add_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `update_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`dic_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 /*Data for the table `sys_dic_type` */
 
-insert  into `sys_dic_type`(`dic_type_id`,`dic_type_name`,`dic_type_no`,`dic_type_notes`,`dic_type_order`,`system_no`,`is_delete`,`add_time`,`update_time`) values (1,'12','12',NULL,NULL,'pc','N',NULL,NULL),(2,'213','213',NULL,NULL,'pc','N',NULL,NULL);
+insert  into `sys_dic_type`(`dic_type_id`,`dic_type_name`,`dic_type_no`,`dic_type_notes`,`dic_type_order`,`system_no`,`is_delete`,`add_time`,`update_time`) values (1,'12','12',NULL,NULL,'pc','N',NULL,NULL),(2,'213','213',NULL,NULL,'pc','N',NULL,NULL),(3,'会员类型','huiyuanleixing',NULL,NULL,'pc','N',NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
