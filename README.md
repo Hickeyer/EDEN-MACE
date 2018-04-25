@@ -66,6 +66,10 @@ plug用来调试接口，调试完成后，可以直接使用
 
 ![输入图片说明](https://gitee.com/uploads/images/2018/0414/155829_4f4d13ad_1497609.jpeg "4.jpg")
 
+维护相关分销字典
+![输入图片说明](https://gitee.com/uploads/images/2018/0425/222344_946c3f4a_1497609.jpeg "QQ截图20180425222254.jpg")
+
+
 产品后续规划：
    账户管理
    提现管理
