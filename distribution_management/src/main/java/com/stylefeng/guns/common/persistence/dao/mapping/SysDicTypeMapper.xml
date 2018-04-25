@@ -5,16 +5,14 @@
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.SysDicType">
 		<id column="dic_type_id" property="dicTypeId" />
-		<result column="system_no" property="systemNo" />
-		<result column="dic_type_no" property="dicTypeNo" />
 		<result column="dic_type_name" property="dicTypeName" />
+		<result column="dic_type_no" property="dicTypeNo" />
 		<result column="dic_type_notes" property="dicTypeNotes" />
 		<result column="dic_type_order" property="dicTypeOrder" />
-		<result column="creator" property="creator" />
-		<result column="creation_time" property="creationTime" />
-		<result column="modified_by" property="modifiedBy" />
-		<result column="last_modify_time" property="lastModifyTime" />
-		<result column="last_modified_by" property="lastModifiedBy" />
+		<result column="system_no" property="systemNo" />
+		<result column="is_delete" property="isDelete" />
+		<result column="add_time" property="addTime" />
+		<result column="update_time" property="updateTime" />
 	</resultMap>
 
 </mapper>

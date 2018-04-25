@@ -1,66 +1,43 @@
 package com.stylefeng.guns.common.persistence.model;
 
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>
- * 代码类型表
+ * 
  * </p>
  *
  * @author huangpu
- * @since 2018-02-24
+ * @since 2018-04-25
  */
 @TableName("sys_dic_type")
 public class SysDicType extends Model<SysDicType> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 类型ID
-     */
 	@TableId(value="dic_type_id", type= IdType.AUTO)
 	private Integer dicTypeId;
-    /**
-     * 系统编码
-     */
-	@TableField("system_no")
-	private String systemNo;
-    /**
-     * 类型编码
-     */
-	@TableField("dic_type_no")
-	private String dicTypeNo;
-    /**
-     * 类型名称
-     */
 	@TableField("dic_type_name")
 	private String dicTypeName;
-    /**
-     * 类型备注
-     */
+	@TableField("dic_type_no")
+	private String dicTypeNo;
 	@TableField("dic_type_notes")
 	private String dicTypeNotes;
-    /**
-     * 类型序号
-     */
 	@TableField("dic_type_order")
 	private Integer dicTypeOrder;
-	private String creator;
-	@TableField("creation_time")
-	private Date creationTime;
-	@TableField("modified_by")
-	private String modifiedBy;
-	@TableField("last_modify_time")
-	private Date lastModifyTime;
-	@TableField("last_modified_by")
-	private String lastModifiedBy;
+	@TableField("system_no")
+	private String systemNo;
+	@TableField("is_delete")
+	private String isDelete;
+	@TableField("add_time")
+	private String addTime;
+	@TableField("update_time")
+	private String updateTime;
 
 
 	public Integer getDicTypeId() {
@@ -71,12 +48,12 @@ public class SysDicType extends Model<SysDicType> {
 		this.dicTypeId = dicTypeId;
 	}
 
-	public String getSystemNo() {
-		return systemNo;
+	public String getDicTypeName() {
+		return dicTypeName;
 	}
 
-	public void setSystemNo(String systemNo) {
-		this.systemNo = systemNo;
+	public void setDicTypeName(String dicTypeName) {
+		this.dicTypeName = dicTypeName;
 	}
 
 	public String getDicTypeNo() {
@@ -85,14 +62,6 @@ public class SysDicType extends Model<SysDicType> {
 
 	public void setDicTypeNo(String dicTypeNo) {
 		this.dicTypeNo = dicTypeNo;
-	}
-
-	public String getDicTypeName() {
-		return dicTypeName;
-	}
-
-	public void setDicTypeName(String dicTypeName) {
-		this.dicTypeName = dicTypeName;
 	}
 
 	public String getDicTypeNotes() {
@@ -111,44 +80,36 @@ public class SysDicType extends Model<SysDicType> {
 		this.dicTypeOrder = dicTypeOrder;
 	}
 
-	public String getCreator() {
-		return creator;
+	public String getSystemNo() {
+		return systemNo;
 	}
 
-	public void setCreator(String creator) {
-		this.creator = creator;
+	public void setSystemNo(String systemNo) {
+		this.systemNo = systemNo;
 	}
 
-	public Date getCreationTime() {
-		return creationTime;
+	public String getIsDelete() {
+		return isDelete;
 	}
 
-	public void setCreationTime(Date creationTime) {
-		this.creationTime = creationTime;
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
 	}
 
-	public String getModifiedBy() {
-		return modifiedBy;
+	public String getAddTime() {
+		return addTime;
 	}
 
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
+	public void setAddTime(String addTime) {
+		this.addTime = addTime;
 	}
 
-	public Date getLastModifyTime() {
-		return lastModifyTime;
+	public String getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setLastModifyTime(Date lastModifyTime) {
-		this.lastModifyTime = lastModifyTime;
-	}
-
-	public String getLastModifiedBy() {
-		return lastModifiedBy;
-	}
-
-	public void setLastModifiedBy(String lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	@Override
@@ -160,16 +121,14 @@ public class SysDicType extends Model<SysDicType> {
 	public String toString() {
 		return "SysDicType{" +
 			"dicTypeId=" + dicTypeId +
-			", systemNo=" + systemNo +
-			", dicTypeNo=" + dicTypeNo +
 			", dicTypeName=" + dicTypeName +
+			", dicTypeNo=" + dicTypeNo +
 			", dicTypeNotes=" + dicTypeNotes +
 			", dicTypeOrder=" + dicTypeOrder +
-			", creator=" + creator +
-			", creationTime=" + creationTime +
-			", modifiedBy=" + modifiedBy +
-			", lastModifyTime=" + lastModifyTime +
-			", lastModifiedBy=" + lastModifiedBy +
+			", systemNo=" + systemNo +
+			", isDelete=" + isDelete +
+			", addTime=" + addTime +
+			", updateTime=" + updateTime +
 			"}";
 	}
 }

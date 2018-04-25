@@ -2,7 +2,7 @@
 SQLyog Ultimate v10.00 Beta1
 MySQL - 5.7.20-log : Database - distribution
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -15,43 +15,6 @@ MySQL - 5.7.20-log : Database - distribution
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`distribution` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `distribution`;
-
-/*Table structure for table `card_info` */
-
-DROP TABLE IF EXISTS `card_info`;
-
-CREATE TABLE `card_info` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `bank_num` varchar(100) DEFAULT NULL,
-  `card_num` varchar(100) DEFAULT NULL,
-  `card_name` varchar(100) DEFAULT NULL,
-  `card_img` varchar(100) DEFAULT NULL,
-  `card_info` varchar(800) DEFAULT NULL,
-  `is_delete` varchar(1) DEFAULT NULL,
-  `add_time` varchar(20) DEFAULT NULL,
-  `update_time` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='可办信用卡信息表';
-
-/*Data for the table `card_info` */
-
-/*Table structure for table `card_order_info` */
-
-DROP TABLE IF EXISTS `card_order_info`;
-
-CREATE TABLE `card_order_info` (
-  `id` int(11) DEFAULT NULL,
-  `order_name` varchar(100) DEFAULT NULL,
-  `order_id` varchar(100) DEFAULT NULL,
-  `order_mobile` varchar(100) DEFAULT NULL,
-  `order_idcardno` varchar(100) DEFAULT NULL,
-  `order_email` varchar(100) DEFAULT NULL,
-  `is_delete` varchar(1) DEFAULT NULL,
-  `add_time` varchar(20) DEFAULT NULL,
-  `update_time` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='办卡订单信息表';
-
-/*Data for the table `card_order_info` */
 
 /*Table structure for table `dis_dictionary` */
 
@@ -73,6 +36,25 @@ CREATE TABLE `dis_dictionary` (
 /*Data for the table `dis_dictionary` */
 
 insert  into `dis_dictionary`(`id`,`dis_code`,`dis_type`,`dis_value`,`dis_sort`,`dis_sys_id`,`is_delete`,`add_time`,`update_time`) values (1000,'disUserType','1','会员',NULL,NULL,'N',NULL,NULL),(1001,'disUserType','0','代理商',NULL,NULL,'N',NULL,NULL),(1002,'disProMode','0','百分比',NULL,NULL,'N',NULL,NULL),(1003,'disProMode','1','金额',NULL,NULL,'N',NULL,NULL),(1004,'disProType','0','交易分润',NULL,NULL,'N',NULL,NULL),(1005,'disProType','1','上下级分润',NULL,NULL,'N',NULL,NULL),(1006,'disProLevel','1','一级',NULL,NULL,'N',NULL,NULL),(1007,'disProLevel','2','二级',NULL,NULL,'N',NULL,NULL),(1008,'disProLevel','3','三级',NULL,NULL,'N',NULL,NULL);
+
+/*Table structure for table `dis_dictionary_type` */
+
+DROP TABLE IF EXISTS `dis_dictionary_type`;
+
+CREATE TABLE `dis_dictionary_type` (
+  `dic_type_id` int(11) NOT NULL,
+  `dic_type_name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `dis_code` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `dic_type_notes` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `dic_type_order` int(11) DEFAULT NULL,
+  `system_no` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `is_delete` varchar(20) COLLATE utf8_bin DEFAULT 'N',
+  `add_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `update_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`dic_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+/*Data for the table `dis_dictionary_type` */
 
 /*Table structure for table `dis_member_info` */
 
@@ -144,94 +126,47 @@ CREATE TABLE `dis_profit_record` (
 
 insert  into `dis_profit_record`(`id`,`dis_platform_id`,`dis_get_user_id`,`dis_set_user_id`,`dis_amount`,`dis_pro_type`,`dis_note`,`dis_user_type`,`dis_order_id`,`is_delete`,`add_time`,`update_time`) values (18,'admin','1111','12312','10.00','0','1','1','123','N','2018-04-05 16:44:10','2018-04-05 16:44:10'),(19,'admin','1111','12312','10.00','0','1','1','123','N','2018-04-05 16:44:10','2018-04-05 16:44:10'),(20,'admin','111111','12312','1200.00','1','1','1','123','N','2018-04-05 16:44:42','2018-04-05 16:44:42');
 
-/*Table structure for table `member_amount` */
+/*Table structure for table `sys_dic` */
 
-DROP TABLE IF EXISTS `member_amount`;
+DROP TABLE IF EXISTS `sys_dic`;
 
-CREATE TABLE `member_amount` (
-  `id` int(11) DEFAULT NULL,
-  `member_code` varchar(100) DEFAULT NULL,
-  `member_type` varchar(10) DEFAULT NULL COMMENT '账户类型',
-  `member_amount` decimal(12,2) DEFAULT NULL,
-  `is_delete` varchar(1) DEFAULT NULL,
-  `add_time` varchar(20) DEFAULT NULL,
-  `update_time` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用金额表';
+CREATE TABLE `sys_dic` (
+  `dic_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dic_no` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `dic_notes` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `dic_order` int(11) DEFAULT NULL,
+  `dic_type_no` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `dic_value` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `is_delete` varchar(20) COLLATE utf8_bin DEFAULT 'N',
+  `add_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `update_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`dic_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-/*Data for the table `member_amount` */
+/*Data for the table `sys_dic` */
 
-/*Table structure for table `member_amount_histroy` */
+insert  into `sys_dic`(`dic_id`,`dic_no`,`dic_notes`,`dic_order`,`dic_type_no`,`dic_value`,`is_delete`,`add_time`,`update_time`) values (1,'1',NULL,NULL,'12','1','N',NULL,NULL),(2,'a',NULL,NULL,'213','b','N',NULL,NULL),(3,'c',NULL,NULL,'213','d','N',NULL,NULL),(4,'f',NULL,NULL,'213','g','N',NULL,NULL);
 
-DROP TABLE IF EXISTS `member_amount_histroy`;
+/*Table structure for table `sys_dic_type` */
 
-CREATE TABLE `member_amount_histroy` (
-  `id` int(11) DEFAULT NULL,
-  `his_type` varchar(10) DEFAULT NULL COMMENT '收入类型，支出或者收入',
-  `his_order` varchar(500) DEFAULT NULL,
-  `his_amount` decimal(12,2) DEFAULT NULL,
-  `his_note` varchar(800) DEFAULT NULL,
-  `is_delete` varchar(1) DEFAULT NULL,
-  `add_time` varchar(20) DEFAULT NULL,
-  `update_time` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户金额变化表';
+DROP TABLE IF EXISTS `sys_dic_type`;
 
-/*Data for the table `member_amount_histroy` */
+CREATE TABLE `sys_dic_type` (
+  `dic_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dic_type_name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `dic_type_no` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `dic_type_notes` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `dic_type_order` int(11) DEFAULT NULL,
+  `system_no` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `is_delete` varchar(20) COLLATE utf8_bin DEFAULT 'N',
+  `add_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `update_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`dic_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-/*Table structure for table `memeber_info` */
+/*Data for the table `sys_dic_type` */
 
-DROP TABLE IF EXISTS `memeber_info`;
-
-CREATE TABLE `memeber_info` (
-  `id` int(11) DEFAULT NULL,
-  `member_code` varchar(100) DEFAULT NULL,
-  `open_id` varchar(100) DEFAULT NULL,
-  `member_name` varchar(100) DEFAULT NULL,
-  `member_pwd` varchar(100) DEFAULT NULL,
-  `member_source` varchar(100) DEFAULT NULL,
-  `is_delete` varchar(1) DEFAULT NULL,
-  `add_time` varchar(20) DEFAULT NULL,
-  `update_time` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会员信息表';
-
-/*Data for the table `memeber_info` */
-
-/*Table structure for table `mobile_message` */
-
-DROP TABLE IF EXISTS `mobile_message`;
-
-CREATE TABLE `mobile_message` (
-  `id` int(11) DEFAULT NULL,
-  `mobile` varchar(12) DEFAULT NULL,
-  `code` varchar(20) DEFAULT NULL,
-  `send_time` varchar(20) DEFAULT NULL,
-  `count` int(11) DEFAULT NULL,
-  `add_time` varchar(100) DEFAULT NULL,
-  `is_delete` varchar(20) DEFAULT NULL,
-  `update_time` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='发送短信信息表';
-
-/*Data for the table `mobile_message` */
-
-/*Table structure for table `withdrawal_info` */
-
-DROP TABLE IF EXISTS `withdrawal_info`;
-
-CREATE TABLE `withdrawal_info` (
-  `id` int(11) DEFAULT NULL,
-  `withdraw_num` varchar(100) DEFAULT NULL,
-  `withdraw_type` varchar(20) DEFAULT NULL,
-  `withdraw_name` varchar(100) DEFAULT NULL,
-  `withdraw_mobile` varchar(20) DEFAULT NULL,
-  `withdraw_card` varchar(20) DEFAULT NULL,
-  `withdraw_amount` decimal(12,2) DEFAULT NULL,
-  `withdraw_poundage` decimal(12,2) DEFAULT NULL,
-  `real_amount` decimal(12,2) DEFAULT NULL,
-  `is_delete` varchar(1) DEFAULT NULL,
-  `add_time` varchar(20) DEFAULT NULL,
-  `update_time` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='提现信息表';
-
-/*Data for the table `withdrawal_info` */
+insert  into `sys_dic_type`(`dic_type_id`,`dic_type_name`,`dic_type_no`,`dic_type_notes`,`dic_type_order`,`system_no`,`is_delete`,`add_time`,`update_time`) values (1,'12','12',NULL,NULL,'pc','N',NULL,NULL),(2,'213','213',NULL,NULL,'pc','N',NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
