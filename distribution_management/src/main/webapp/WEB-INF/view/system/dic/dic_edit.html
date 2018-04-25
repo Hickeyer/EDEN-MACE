@@ -25,15 +25,19 @@
                     <div class="hr-line-dashed"></div>
                     @for(item in subDicts){
                         <div class="form-group" name="dictItem" id="dictItem${itemLP.index}">
-                            <label class="col-sm-2 control-label">值</label>
+                            <label class="col-sm-1 control-label">值</label>
                             <div class="col-sm-2">
                                 <input class="form-control" type="text" name="itemNum" value="${item.dicNo}">
                             </div>
-                            <label class="col-sm-2 control-label" style="width: 8%;">名称</label>
+                            <label class="col-sm-1 control-label" style="width: 8%;">名称</label>
                             <div class="col-sm-2">
                                 <input class="form-control" type="text" name="itemName" value="${item.dicValue}">
                             </div>
-                            <div class="col-sm-4">
+                            <label class="col-sm-1 control-label" style="width: 8%;">备注</label>
+                            <div class="col-sm-2">
+                                <input class="form-control" type="text" name="itemNotes" value="${item.dicNotes}">
+                            </div>
+                            <div class="col-sm-2">
                                 <#button btnCss="danger" name="删除" id="cancel" icon="fa-remove" clickFun="DictInfoDlg.deleteItem(event)"/>
                             </div>
                         </div>
@@ -51,15 +55,19 @@
 
     <script type="text/template" id="itemTemplate">
         <div class="form-group" name="dictItem" id="dictItem">
-            <label class="col-sm-2 control-label">值</label>
+            <label class="col-sm-1 control-label">值</label>
             <div class="col-sm-2">
                 <input class="form-control" type="text" name="itemNum">
             </div>
-            <label class="col-sm-2 control-label" style="width: 8%;">名称</label>
+            <label class="col-sm-1 control-label" style="width: 8%;">名称</label>
             <div class="col-sm-2">
                 <input class="form-control" type="text" name="itemName">
             </div>
-            <div class="col-sm-4">
+            <label class="col-sm-1 control-label" style="width: 8%;">备注</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="text" name="itemNotes">
+            </div>
+            <div class="col-sm-2">
                 <#button btnCss="danger" name="删除" id="cancel" icon="fa-remove" clickFun="DictInfoDlg.deleteItem(event)"/>
             </div>
         </div>

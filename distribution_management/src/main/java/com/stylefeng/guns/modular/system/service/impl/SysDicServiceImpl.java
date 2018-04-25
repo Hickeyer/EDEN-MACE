@@ -12,6 +12,7 @@ import com.stylefeng.guns.common.persistence.model.SysDic;
 import com.stylefeng.guns.common.persistence.model.SysDicType;
 import com.stylefeng.guns.common.util.PinYinUtil;
 import com.stylefeng.guns.modular.system.service.ISysDicService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,8 +35,13 @@ public class SysDicServiceImpl implements ISysDicService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public void addDict(String dictName, String dictValues) {
-        String typeNo= PinYinUtil.getFullSpell(dictName);
+    public void addDict(String dictName,String disTypeNo, String dictValues) {
+        String typeNo="";
+        if(StringUtils.isNotEmpty(disTypeNo)){
+           typeNo=disTypeNo;
+        }else {
+            typeNo= PinYinUtil.getFullSpell(dictName);
+        }
         //判断有没有该字典
         List<SysDicType> dicts = sysDicTypeMapper.selectList(new EntityWrapper<SysDicType>().eq("dic_type_no", typeNo));
         if(dicts != null && dicts.size() > 0){
@@ -43,7 +49,7 @@ public class SysDicServiceImpl implements ISysDicService {
         }
 
         //解析dictValues
-        List<Map<String, String>> items = parseKeyValue(dictValues);
+        List<Map<String, String>> items = parseThreeKeyValue(dictValues);
 
         //添加字典
         SysDicType dicType=new SysDicType();
@@ -56,22 +62,24 @@ public class SysDicServiceImpl implements ISysDicService {
         for (Map<String, String> item : items) {
             String num = item.get(MUTI_STR_KEY);
             String name = item.get(MUTI_STR_VALUE);
+            String notes = item.get(MUTI_STR_NOTES);
             SysDic sysDic=new SysDic();
             sysDic.setDicTypeNo(typeNo);
             sysDic.setDicNo(num);
             sysDic.setDicValue(name);
+            sysDic.setDicNotes(notes);
             this.sysDicMapper.insert(sysDic);
         }
     }
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public void editDict(Integer dictId, String dictName, String dicts) {
+    public void editDict(Integer dictId, String dictName,String disTypeNo, String dicts) {
         //删除之前的字典
         this.delteDict(dictId);
 
         //重新添加新的字典
-        this.addDict(dictName,dicts);
+        this.addDict(dictName,disTypeNo,dicts);
     }
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)

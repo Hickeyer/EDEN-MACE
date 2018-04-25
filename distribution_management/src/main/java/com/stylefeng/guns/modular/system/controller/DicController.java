@@ -89,11 +89,11 @@ public class DicController extends BaseController {
     @RequestMapping(value = "/add")
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Object add(String dictName, String dictValues) {
+    public Object add(String dictName,String disTypeNo, String dictValues) {
         if (ToolUtil.isOneEmpty(dictName, dictValues)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
-        this.sysDicService.addDict(dictName, dictValues);
+        this.sysDicService.addDict(dictName,disTypeNo, dictValues);
         return SUCCESS_TIP;
     }
 
@@ -119,11 +119,11 @@ public class DicController extends BaseController {
     @RequestMapping(value = "/update")
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Object update(Integer dictId, String dictName, String dictValues) {
+    public Object update(Integer dictId, String dictName,String disTypeNo, String dictValues) {
         if (ToolUtil.isOneEmpty(dictId, dictName, dictValues)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
-        sysDicService.editDict(dictId, dictName, dictValues);
+        sysDicService.editDict(dictId, dictName,disTypeNo, dictValues);
         return super.SUCCESS_TIP;
     }
 

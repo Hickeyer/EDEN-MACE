@@ -65,7 +65,8 @@ DictInfoDlg.collectData = function () {
     $("[name='dictItem']").each(function(){
         var num = $(this).find("[name='itemNum']").val();
         var name = $(this).find("[name='itemName']").val();
-        mutiString = mutiString + (num + ":" + name + ";");
+        var notes = $(this).find("[name='itemNotes']").val();
+        mutiString = mutiString + (num + ":" + name +":"+notes+ ";");
     });
     this.dictName = $("#dictName").val();
     this.disTypeNo = $("#disTypeNo").val();
@@ -87,6 +88,7 @@ DictInfoDlg.addSubmit = function () {
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
     ajax.set('dictName',this.dictName);
+    ajax.set('disTypeNo',this.disTypeNo );
     ajax.set('dictValues',this.mutiString);
     ajax.start();
 };
@@ -105,6 +107,7 @@ DictInfoDlg.editSubmit = function () {
     });
     ajax.set('dictId',$("#dictId").val());
     ajax.set('dictName',this.dictName);
+    ajax.set('disTypeNo',this.disTypeNo);
     ajax.set('dictValues',this.mutiString);
     ajax.start();
 };
