@@ -1,5 +1,8 @@
 package com.stylefeng.guns.modular.system.service;
 
+import java.util.List;
+import java.util.Map;
+
 public interface ISysDicService {
 
 
@@ -8,6 +11,9 @@ public interface ISysDicService {
     void editDict(Integer dictId, String dictName,String disTypeNo, String dicts);
 
     void delteDict(Integer dictId);
+
+
+    public List<Map<String, Object>> selectListByCode(String code);
 
 
 

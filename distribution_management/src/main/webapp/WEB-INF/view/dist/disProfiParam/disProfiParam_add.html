@@ -10,12 +10,12 @@
                     <#input id="disProValue" name="分润值" underline="true"/>
                     <#select id="disProMode" name="分润模型 ">
                     @for(dis in disProMode){
-                    <option value="${dis.disType}">${dis.disValue}</option>
+                    <option value="${dis.dicNo}">${dis.dicValue}</option>
                 @}
                 </#select>
                     <#select id="disProType" name="分润类别 ">
                     @for(dis in disProType){
-                    <option value="${dis.disType}">${dis.disValue}</option>
+                    <option value="${dis.dicNo}">${dis.dicValue}</option>
                 @}
                 </#select>
 
@@ -25,12 +25,12 @@
                     <#input id="disPlatformId" name="平台id" underline="true"/>
                     <#select id="disProLevel" name="分润级别 ">
                     @for(dis in disProLevel){
-                    <option value="${dis.disType}">${dis.disValue}</option>
+                    <option value="${dis.dicNo}">${dis.dicValue}</option>
                     @}
                 </#select>
                     <#select id="disUserType" name="用户类型 ">
                     @for(dis in disUserType){
-                    <option value="${dis.disType}">${dis.disValue}</option>
+                    <option value="${dis.dicNo}">${dis.dicValue}</option>
                     @}
                 </#select>
                 </div>

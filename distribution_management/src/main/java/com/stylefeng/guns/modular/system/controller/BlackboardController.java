@@ -1,7 +1,6 @@
 package com.stylefeng.guns.modular.system.controller;
 
 import com.stylefeng.guns.common.controller.BaseController;
-import com.stylefeng.guns.modular.dist.service.IDisDictionaryService;
 import com.stylefeng.guns.modular.system.dao.NoticeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,15 +23,11 @@ public class BlackboardController extends BaseController {
     @Autowired
     NoticeDao noticeDao;
 
-    @Autowired
-    IDisDictionaryService disDictionaryService;
-
     /**
      * 跳转到黑板
      */
     @RequestMapping("")
     public String blackboard(Model model) {
-        model.addAttribute("disProMode",disDictionaryService.selectListByCode("disProMode"));
         List<Map<String, Object>> notices = noticeDao.list(null);
         model.addAttribute("noticeList",notices);
         model.addAttribute("a","bb");

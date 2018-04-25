@@ -11,6 +11,7 @@ import com.stylefeng.guns.common.persistence.dao.SysDicTypeMapper;
 import com.stylefeng.guns.common.persistence.model.SysDic;
 import com.stylefeng.guns.common.persistence.model.SysDicType;
 import com.stylefeng.guns.common.util.PinYinUtil;
+import com.stylefeng.guns.modular.system.dao.SysDicDao;
 import com.stylefeng.guns.modular.system.service.ISysDicService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,9 @@ public class SysDicServiceImpl implements ISysDicService {
 
     @Resource
     SysDicMapper sysDicMapper;
+
+    @Resource
+    SysDicDao sysDicDao;
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
@@ -94,5 +98,12 @@ public class SysDicServiceImpl implements ISysDicService {
         //删除这个词典
 
         sysDicTypeMapper.deleteById(dictId);
+    }
+
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public List<Map<String, Object>> selectListByCode(String code) {
+        List<Map<String, Object>> list=  sysDicDao.selectListByCode(code);
+        return list;
     }
 }

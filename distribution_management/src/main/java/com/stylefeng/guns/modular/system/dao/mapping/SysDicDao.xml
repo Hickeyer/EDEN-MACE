@@ -3,6 +3,26 @@
 <mapper namespace="com.stylefeng.guns.modular.system.dao.SysDicDao">
 
 
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap"  type="map">
+        <id column="dic_id" property="dicId" />
+        <result column="dic_no" property="dicNo" />
+        <result column="dic_notes" property="dicNotes" />
+        <result column="dic_order" property="dicOrder" />
+        <result column="dic_type_no" property="dicTypeNo" />
+        <result column="dic_value" property="dicValue" />
+        <result column="is_delete" property="isDelete" />
+        <result column="add_time" property="addTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
 
+
+    <select id="selectListByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        *
+        from sys_dic
+        where dic_type_no = #{code,jdbcType=VARCHAR}
+        and is_delete='N' ORDER BY dic_order ASC
+    </select>
 
 </mapper>

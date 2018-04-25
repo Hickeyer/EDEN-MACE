@@ -17,4 +17,6 @@ public interface IDisProfiParamService {
 
     public void save(DisProfiParam param);
 
+    public void delete(int id);
+
 }

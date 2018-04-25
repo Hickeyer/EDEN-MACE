@@ -1,5 +1,8 @@
 package com.stylefeng.guns.modular.system.dao;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * sysDicDao
  *
@@ -8,5 +11,5 @@ package com.stylefeng.guns.modular.system.dao;
  */
 public interface SysDicDao {
 
-
+    public List<Map<String, Object>> selectListByCode(String code);
 }

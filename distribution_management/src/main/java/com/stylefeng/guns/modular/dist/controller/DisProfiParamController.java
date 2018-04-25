@@ -2,17 +2,17 @@ package com.stylefeng.guns.modular.dist.controller;
 
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.persistence.model.DisProfiParam;
-import com.stylefeng.guns.modular.dist.service.IDisDictionaryService;
 import com.stylefeng.guns.modular.dist.service.IDisProfiParamService;
 import com.stylefeng.guns.modular.dist.wapper.ProfiParamWarpper;
+import com.stylefeng.guns.modular.system.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +31,7 @@ public class DisProfiParamController extends BaseController {
     IDisProfiParamService disProfiParamService;
 
     @Autowired
-    IDisDictionaryService disDictionaryService;
+    ISysDicService sysDicService;
 
     private String PREFIX = "/dist/disProfiParam/";
 
@@ -48,10 +48,10 @@ public class DisProfiParamController extends BaseController {
      */
     @RequestMapping("/disProfiParam_add")
     public String disProfiParamAdd(Model model) {
-        model.addAttribute("disProMode",disDictionaryService.selectListByCode("disProMode"));
-        model.addAttribute("disProType",disDictionaryService.selectListByCode("disProType"));
-        model.addAttribute("disProLevel",disDictionaryService.selectListByCode("disProLevel"));
-        model.addAttribute("disUserType",disDictionaryService.selectListByCode("disUserType"));
+        model.addAttribute("disProMode",sysDicService.selectListByCode("disProMode"));
+        model.addAttribute("disProType",sysDicService.selectListByCode("disProType"));
+        model.addAttribute("disProLevel",sysDicService.selectListByCode("disProLevel"));
+        model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
         return PREFIX + "disProfiParam_add.html";
     }
 
@@ -88,7 +88,8 @@ public class DisProfiParamController extends BaseController {
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public Object delete() {
+    public Object delete(@RequestParam int id) {
+        disProfiParamService.delete(id);
         return SUCCESS_TIP;
     }
 

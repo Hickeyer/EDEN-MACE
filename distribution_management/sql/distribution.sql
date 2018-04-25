@@ -16,46 +16,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`distribution` /*!40100 DEFAULT CHARACTE
 
 USE `distribution`;
 
-/*Table structure for table `dis_dictionary` */
-
-DROP TABLE IF EXISTS `dis_dictionary`;
-
-CREATE TABLE `dis_dictionary` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `dis_code` varchar(20) DEFAULT NULL COMMENT '字典编码',
-  `dis_type` varchar(100) DEFAULT NULL COMMENT '字典隐藏字段',
-  `dis_value` varchar(100) DEFAULT NULL COMMENT '字典值，为前台显示用',
-  `dis_sort` int(11) DEFAULT NULL COMMENT '排序',
-  `dis_sys_id` varchar(1) DEFAULT NULL,
-  `is_delete` varchar(1) DEFAULT NULL,
-  `add_time` varchar(100) DEFAULT NULL,
-  `update_time` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1009 DEFAULT CHARSET=utf8 COMMENT='字典表';
-
-/*Data for the table `dis_dictionary` */
-
-insert  into `dis_dictionary`(`id`,`dis_code`,`dis_type`,`dis_value`,`dis_sort`,`dis_sys_id`,`is_delete`,`add_time`,`update_time`) values (1000,'disUserType','1','会员',NULL,NULL,'N',NULL,NULL),(1001,'disUserType','0','代理商',NULL,NULL,'N',NULL,NULL),(1002,'disProMode','0','百分比',NULL,NULL,'N',NULL,NULL),(1003,'disProMode','1','金额',NULL,NULL,'N',NULL,NULL),(1004,'disProType','0','交易分润',NULL,NULL,'N',NULL,NULL),(1005,'disProType','1','上下级分润',NULL,NULL,'N',NULL,NULL),(1006,'disProLevel','1','一级',NULL,NULL,'N',NULL,NULL),(1007,'disProLevel','2','二级',NULL,NULL,'N',NULL,NULL),(1008,'disProLevel','3','三级',NULL,NULL,'N',NULL,NULL);
-
-/*Table structure for table `dis_dictionary_type` */
-
-DROP TABLE IF EXISTS `dis_dictionary_type`;
-
-CREATE TABLE `dis_dictionary_type` (
-  `dic_type_id` int(11) NOT NULL,
-  `dic_type_name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `dis_code` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `dic_type_notes` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `dic_type_order` int(11) DEFAULT NULL,
-  `system_no` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `is_delete` varchar(20) COLLATE utf8_bin DEFAULT 'N',
-  `add_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
-  `update_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`dic_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-/*Data for the table `dis_dictionary_type` */
-
 /*Table structure for table `dis_member_info` */
 
 DROP TABLE IF EXISTS `dis_member_info`;
@@ -96,11 +56,11 @@ CREATE TABLE `dis_profi_param` (
   `update_time` varchar(20) DEFAULT NULL,
   `add_time` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='分润参数设置';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='分润参数设置';
 
 /*Data for the table `dis_profi_param` */
 
-insert  into `dis_profi_param`(`id`,`dis_platform_id`,`dis_pro_mode`,`dis_pro_type`,`dis_pro_value`,`dis_pro_level`,`dis_user_type`,`is_delete`,`update_time`,`add_time`) values (1,'admin','0','1','12','1','1','N','2018-04-05 16:24:04','2018-04-05 16:24:04'),(2,'admin','0','0','0.1','2','1','N','2018-04-05 16:30:21','2018-04-05 16:30:21'),(3,'admin','0','0','0.1','2','1','N','2018-04-05 16:32:52','2018-04-05 16:32:52'),(6,'admin','0','0','12','1','1','N',NULL,NULL),(7,'admin','0','0','12','1','1','N',NULL,NULL),(8,'admin','0','0','11','1','1','N',NULL,NULL),(9,'admin','0','0','11','1','1','N',NULL,NULL),(10,'dist','0','0','1','1','1','N',NULL,NULL),(11,'dist','0','0','112','1','1','N',NULL,NULL),(12,'dist','0','0','12','1','1','N',NULL,NULL),(13,'dist','0','0','1','1','1','N',NULL,NULL);
+insert  into `dis_profi_param`(`id`,`dis_platform_id`,`dis_pro_mode`,`dis_pro_type`,`dis_pro_value`,`dis_pro_level`,`dis_user_type`,`is_delete`,`update_time`,`add_time`) values (1,'admin','0','1','12','1','1','N','2018-04-05 16:24:04','2018-04-05 16:24:04'),(2,'admin','0','0','0.1','2','1','N','2018-04-05 16:30:21','2018-04-05 16:30:21'),(3,'admin','0','0','0.1','2','1','N','2018-04-05 16:32:52','2018-04-05 16:32:52');
 
 /*Table structure for table `dis_profit_record` */
 
@@ -141,11 +101,11 @@ CREATE TABLE `sys_dic` (
   `add_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `update_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`dic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 /*Data for the table `sys_dic` */
 
-insert  into `sys_dic`(`dic_id`,`dic_no`,`dic_notes`,`dic_order`,`dic_type_no`,`dic_value`,`is_delete`,`add_time`,`update_time`) values (1,'1',NULL,NULL,'12','1','N',NULL,NULL),(2,'a',NULL,NULL,'213','b','N',NULL,NULL),(3,'c',NULL,NULL,'213','d','N',NULL,NULL),(4,'f',NULL,NULL,'213','g','N',NULL,NULL),(5,'1',NULL,NULL,'huiyuanleixing','会员','N',NULL,NULL),(6,'2',NULL,NULL,'huiyuanleixing','代理商','N',NULL,NULL);
+insert  into `sys_dic`(`dic_id`,`dic_no`,`dic_notes`,`dic_order`,`dic_type_no`,`dic_value`,`is_delete`,`add_time`,`update_time`) values (38,'0',NULL,NULL,'disUserType','代理商','N',NULL,NULL),(39,'1',NULL,NULL,'disUserType','会员','N',NULL,NULL),(43,'0','trade',NULL,'disProType','交易分润','N',NULL,NULL),(44,'1','level',NULL,'disProType','上下级分润','N',NULL,NULL),(45,'1',NULL,NULL,'disProLevel','一级','N',NULL,NULL),(46,'2',NULL,NULL,'disProLevel','二级','N',NULL,NULL),(47,'3',NULL,NULL,'disProLevel','三级','N',NULL,NULL),(48,'4',NULL,NULL,'disProLevel','四级','N',NULL,NULL),(49,'0','即总金额*百分之比',NULL,'disProMode','百分比','N',NULL,NULL),(50,'1','固定金额',NULL,'disProMode','固定金额','N',NULL,NULL);
 
 /*Table structure for table `sys_dic_type` */
 
@@ -162,11 +122,11 @@ CREATE TABLE `sys_dic_type` (
   `add_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `update_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`dic_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 /*Data for the table `sys_dic_type` */
 
-insert  into `sys_dic_type`(`dic_type_id`,`dic_type_name`,`dic_type_no`,`dic_type_notes`,`dic_type_order`,`system_no`,`is_delete`,`add_time`,`update_time`) values (1,'12','12',NULL,NULL,'pc','N',NULL,NULL),(2,'213','213',NULL,NULL,'pc','N',NULL,NULL),(3,'会员类型','huiyuanleixing',NULL,NULL,'pc','N',NULL,NULL);
+insert  into `sys_dic_type`(`dic_type_id`,`dic_type_name`,`dic_type_no`,`dic_type_notes`,`dic_type_order`,`system_no`,`is_delete`,`add_time`,`update_time`) values (24,'用户类型','disUserType',NULL,NULL,'pc','N',NULL,NULL),(27,'分润类别','disProType',NULL,NULL,'pc','N',NULL,NULL),(28,'用户等级','disProLevel',NULL,NULL,'pc','N',NULL,NULL),(29,'分润模型','disProMode',NULL,NULL,'pc','N',NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
