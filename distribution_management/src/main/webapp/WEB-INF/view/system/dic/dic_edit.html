@@ -14,6 +14,10 @@
                             <input class="form-control" id="dictName" type="text" value="${dict.dicTypeName}">
                             <input type="hidden" id="dictId" value="${dict.dicTypeId}">
                         </div>
+                        <label class="col-sm-2 control-label">字典编号</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" id="disTypeNo" type="text" value="${dict.dicTypeNo}">
+                        </div>
                         <div class="col-sm-2">
                             <#button btnCss="info" name="增加" icon="fa-plus" clickFun="DictInfoDlg.addItem()"/>
                         </div>

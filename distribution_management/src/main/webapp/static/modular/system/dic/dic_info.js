@@ -4,6 +4,7 @@
 var DictInfoDlg = {
     count: $("#itemSize").val(),
     dictName: '',			//字典的名称
+    disTypeNo:'',
     mutiString: '',		//拼接字符串内容(拼接字典条目)
     itemTemplate: $("#itemTemplate").html()
 };
@@ -67,6 +68,7 @@ DictInfoDlg.collectData = function () {
         mutiString = mutiString + (num + ":" + name + ";");
     });
     this.dictName = $("#dictName").val();
+    this.disTypeNo = $("#disTypeNo").val();
     this.mutiString = mutiString;
 };
 
