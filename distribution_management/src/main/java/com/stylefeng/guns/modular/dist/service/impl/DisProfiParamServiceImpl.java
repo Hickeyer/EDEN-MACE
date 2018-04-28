@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisProfiParamService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +56,10 @@ public class DisProfiParamServiceImpl implements IDisProfiParamService {
         }
         param.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         disProfiParamMapper.insert(param);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(DateUtils.getNowDateTime() );
     }
 
     @Override
