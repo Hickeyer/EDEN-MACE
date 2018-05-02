@@ -25,7 +25,7 @@ CREATE TABLE `dis_member_info` (
   `dis_platform_id` varchar(100) DEFAULT NULL,
   `dis_user_id` varchar(100) DEFAULT NULL COMMENT '用户id',
   `dis_model_id` varchar(100) DEFAULT NULL COMMENT '上级id',
-  `dis_full_index` varchar(100) DEFAULT NULL COMMENT '全路径',
+  `dis_full_index` varchar(4000) DEFAULT NULL COMMENT '全路径',
   `dis_user_name` varchar(100) DEFAULT NULL,
   `dis_level` int(11) DEFAULT NULL COMMENT '级别',
   `dis_user_type` varchar(10) DEFAULT NULL COMMENT '身份类型(0 代理商 1会员)',
@@ -34,11 +34,11 @@ CREATE TABLE `dis_member_info` (
   `update_time` varchar(20) DEFAULT NULL COMMENT '更新时间',
   `is_delete` varchar(1) DEFAULT 'N' COMMENT '删除状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 /*Data for the table `dis_member_info` */
 
-insert  into `dis_member_info`(`id`,`dis_platform_id`,`dis_user_id`,`dis_model_id`,`dis_full_index`,`dis_user_name`,`dis_level`,`dis_user_type`,`dis_note`,`add_time`,`update_time`,`is_delete`) values (1,'admin','1111','','1111','11',0,'1','11','2018-03-01 19:16:11','2018-03-01 19:16:11','N'),(2,'admin','111111','1111','1111.111111','11',1,'1','11','2018-04-04 12:21:21','2018-04-04 12:21:21','N'),(3,'admin','12312','111111','1111.111111.12312','aaa',2,'0','aa','2018-04-05 15:56:15','2018-04-05 15:56:15','N'),(4,'admin','12abc','12312','1111.111111.12312.12abc','aabbcc',3,'0','111','2018-04-05 22:12:12','2018-04-05 22:12:12','N'),(5,'admin','12abcsss','111111','1111.111111.12abcsss','aabbccdddd',2,'0','111','2018-04-05 22:12:45','2018-04-05 22:12:45','N'),(6,'admin','asdfsadf','111111','1111.111111.asdfsadf','112321',2,'0','111','2018-04-05 22:12:53','2018-04-05 22:12:53','N'),(7,'admin','ssss','1111','1111.ssss','test',1,'1','string','2018-04-07 20:35:57','2018-04-07 20:35:57','N');
+insert  into `dis_member_info`(`id`,`dis_platform_id`,`dis_user_id`,`dis_model_id`,`dis_full_index`,`dis_user_name`,`dis_level`,`dis_user_type`,`dis_note`,`add_time`,`update_time`,`is_delete`) values (9,'dist','qinshihuang','','qinshihuang','秦始皇',0,'1','','2018-05-02 20:41:49','2018-05-02 20:41:49','N'),(10,'dist','qinershi','qinshihuang','qinshihuang.qinershi','秦二世',1,'1','','2018-05-02 20:42:48','2018-05-02 20:42:48','N'),(11,'dist','liubang','qinershi','qinshihuang.qinershi.liubang','刘邦',2,'0','','2018-05-02 20:43:58','2018-05-02 20:43:58','N'),(12,'dist','xiangyu','qinershi','qinshihuang.qinershi.xiangyu','项羽',2,'1','','2018-05-02 20:44:27','2018-05-02 20:44:27','N'),(13,'dist','hanwudi','liubang','qinshihuang.qinershi.liubang.hanwudi','汉武帝',3,'1','','2018-05-02 20:45:18','2018-05-02 20:45:18','N'),(14,'dist','liuxiug','hanwudi','qinshihuang.qinershi.liubang.hanwudi.liuxiug','刘秀',4,'1','','2018-05-02 20:45:59','2018-05-02 20:45:59','N'),(15,'dist','liubei','liuxiug','qinshihuang.qinershi.liubang.hanwudi.liuxiug.liubei','刘备',5,'1','','2018-05-02 20:46:36','2018-05-02 20:46:36','N'),(16,'dist','caocao','liuxiug','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao','曹操',5,'1','','2018-05-02 20:46:52','2018-05-02 20:46:52','N'),(17,'dist','sunquan','liuxiug','qinshihuang.qinershi.liubang.hanwudi.liuxiug.sunquan','孙权',5,'1','','2018-05-02 20:47:05','2018-05-02 20:47:05','N'),(18,'dist','weichao','caocao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao','魏朝',6,'1','','2018-05-02 20:47:45','2018-05-02 20:47:45','N'),(19,'dist','suichao','weichao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao','隋朝',7,'1','','2018-05-02 20:48:06','2018-05-02 20:48:06','N'),(20,'dist','tangchao','suichao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao','唐朝',8,'1','','2018-05-02 20:48:25','2018-05-02 20:48:25','N'),(21,'dist','songchao','tangchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao','宋朝',9,'1','','2018-05-02 20:48:46','2018-05-02 20:48:46','N'),(22,'dist','yuanchao','songchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao.yuanchao','元朝',10,'1','','2018-05-02 20:49:07','2018-05-02 20:49:07','N'),(23,'dist','mingchao','yuanchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao.yuanchao.mingchao','明朝',11,'1','','2018-05-02 20:53:26','2018-05-02 20:53:26','N'),(24,'dist','qingchao','mingchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao.yuanchao.mingchao.qingchao','清朝',12,'1','','2018-05-02 20:53:46','2018-05-02 20:53:46','N');
 
 /*Table structure for table `dis_profi_param` */
 
@@ -56,7 +56,7 @@ CREATE TABLE `dis_profi_param` (
   `update_time` varchar(20) DEFAULT NULL,
   `add_time` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='分润参数设置';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='分润参数设置';
 
 /*Data for the table `dis_profi_param` */
 

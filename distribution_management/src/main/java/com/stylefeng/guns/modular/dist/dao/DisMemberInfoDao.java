@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 分销Dao
  *
- * @author fengshuonan
+ * @author huangpu
  * @Date 2018-04-05 21:49:44
  */
 public interface DisMemberInfoDao {

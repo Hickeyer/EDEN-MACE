@@ -3,7 +3,7 @@ package ${dao.packageName};
 /**
  * ${context.bizChName}Dao
  *
- * @author fengshuonan
+ * @author xiaojiang
  * @Date ${tool.currentTime()}
  */
 public interface ${context.bizEnBigName}Dao {

@@ -3,7 +3,7 @@ package ${service.packageName};
 /**
  * ${context.bizChName}Service
  *
- * @author fengshuonan
+ * @author xiaojiang
  * @Date ${tool.currentTime()}
  */
 public interface I${context.bizEnBigName}Service {

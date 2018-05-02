@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,9 +36,18 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public void save(String param) {
-        Map<String,String> amount=initAmount("11","sss","admin");
-        mongoTemplate.save(amount,"amount");
+    public void save(String userId,String userName,String disPlatformId) {
+        Query query=new Query();
+        Criteria criteria1=Criteria.where("disUserId").is(userId);
+        Criteria criteria2=Criteria.where("disPlatformId").is(disPlatformId);
+        query.addCriteria(criteria1);
+        query.addCriteria(criteria2);
+        long count= mongoTemplate.count(query, "amount");
+        if(count==0){
+            Map<String,String> amount=initAmount(userId,userName,disPlatformId);
+            mongoTemplate.save(amount,"amount");
+        }
+
     }
 
     @Override
@@ -58,6 +68,25 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         }
         List<Object> vo=mongoTemplate.find(query,Object.class,"amount");
         return vo;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectList() {
+        Query query=new Query();
+        if(!ShiroKit.hasRole(Const.ADMIN_NAME)){
+            String account= ShiroKit.getUser().getAccount();
+            Criteria criteria=Criteria.where("disPlatformId").is(account);
+            query.addCriteria(criteria);
+        }
+        List<Object> vo=mongoTemplate.find(query,Object.class,"amount");
+        List<Map<String, Object>> result=new ArrayList<>();
+        if(vo.size()>0){
+            vo.forEach(info->{
+                Map<String,Object> map= (Map<String, Object>) info;
+                result.add(map);
+            });
+        }
+        return result;
     }
 
 

@@ -1,0 +1,40 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>会员账户管理管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="condition" name="名称" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="DisMemberAmount.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="DisMemberAmountTableToolbar" role="group">
+
+                            <#button name="同步会员账户" icon="fa-plus" clickFun="DisMemberAmount.setAmount()" space="true"/>
+                            @if(shiro.hasPermission("/disMemberAmount/add")){
+                                <#button name="添加" icon="fa-plus" clickFun="DisMemberAmount.openAddDisMemberAmount()"/>
+                            @}
+                            @if(shiro.hasPermission("/disMemberAmount/update")){
+                                <#button name="修改" icon="fa-plus" clickFun="DisMemberAmount.openDisMemberAmountDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/disMemberAmount/delete")){
+                                <#button name="删除" icon="fa-plus" clickFun="DisMemberAmount.delete()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="DisMemberAmountTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/dist/disMemberAmount/disMemberAmount.js"></script>
+@}

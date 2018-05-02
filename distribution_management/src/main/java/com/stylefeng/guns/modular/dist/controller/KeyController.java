@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * 秘钥生成控制器
  *
- * @author fengshuonan
+ * @author huangpu
  * @Date 2018-04-07 15:10:32
  */
 @Controller

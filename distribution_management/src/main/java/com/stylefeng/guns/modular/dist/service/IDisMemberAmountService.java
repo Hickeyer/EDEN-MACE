@@ -5,8 +5,11 @@ import java.util.Map;
 
 public interface IDisMemberAmountService {
 
-    public void save(String param);
+    public void save(String userId,String userName,String disPlatformId);
 
 
     public List<Object> list(String param);
+
+
+    List<Map<String, Object>> selectList();
 }

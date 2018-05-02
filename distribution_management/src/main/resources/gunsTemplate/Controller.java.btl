@@ -7,7 +7,7 @@ import ${import};
 /**
  * ${context.bizChName}控制器
  *
- * @author fengshuonan
+ * @author xiaojiang
  * @Date ${tool.currentTime()}
  */
 @Controller
