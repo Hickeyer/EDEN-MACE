@@ -64,6 +64,10 @@ plug用来调试接口，调试完成后，可以直接使用
 
 ![输入图片说明](https://gitee.com/uploads/images/2018/0414/155641_9d426b81_1497609.jpeg "2.jpg")
 
+如图很明白的看到了 中国朝代的关系
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0502/205806_11435b20_1497609.jpeg "QQ截图20180502205455.jpg")
+
 接口管理用于提供对接的接口文档
 
 ![输入图片说明](https://gitee.com/uploads/images/2018/0414/155749_cff31c2c_1497609.jpeg "3.jpg")
