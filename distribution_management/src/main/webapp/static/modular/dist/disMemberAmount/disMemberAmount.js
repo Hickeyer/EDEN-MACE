@@ -16,7 +16,7 @@ DisMemberAmount.initColumn = function () {
         {field: 'selectItem', radio: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
         {title: '平台id', field: 'disPlatformId', visible: true, align: 'center', valign: 'middle'},
-        {title: 'disUserId', field: '用户id', visible: true, align: 'center', valign: 'middle'},
+        {title: '用户id', field: 'disUserId', visible: true, align: 'center', valign: 'middle'},
         {title: '用户名称', field: 'disUserName', visible: true, align: 'center', valign: 'middle'},
         {title: '状态', field: 'amountStatus', visible: true, align: 'center', valign: 'middle'},
         {title: '总金额', field: 'totalAmount', visible: true, align: 'center', valign: 'middle'},

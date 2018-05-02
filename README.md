@@ -22,7 +22,7 @@ plug用来调试接口，调试完成后，可以直接使用
 
 下载此项目后，将sql中的 两个数据库初始化到本地数据库，然后根据实际情况更新数据库账户和密码。
 
-启动mongodb，mongodb在doc/soft里有分享的软件
+启动mongodb，mongodb在doc/soft里有分享的软件（启动MongoDB  mongod --dbpath  "D:\greensoft\mongodb-win32-x86_64\data"）
 
 运行项目即可。
 
