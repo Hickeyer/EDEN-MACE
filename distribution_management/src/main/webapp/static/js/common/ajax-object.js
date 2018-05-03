@@ -18,7 +18,6 @@
 			} else {
 				this.url = this.url + "&jstime=" + new Date().getTime();
 			}
-			alert(this.async)
 			$.ajax({
 		        type: this.type,
 		        url: this.url,

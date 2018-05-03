@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.google.gson.Gson;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.controller.BaseController;
@@ -11,9 +12,11 @@ import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.dao.DisMemberInfoDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.util.Jwt;
+import com.stylefeng.guns.modular.dist.vo.Categories;
 import com.stylefeng.guns.modular.dist.vo.DisMemberInfoVo;
 import com.stylefeng.guns.modular.dist.wapper.MemberWarpper;
 import com.stylefeng.guns.modular.system.dao.UserMgrDao;
+import com.stylefeng.guns.modular.system.service.ISysDicService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 会员表控制器
@@ -43,6 +45,9 @@ public class DisMemberInfoController extends BaseController {
 
     @Autowired
     UserMgrDao userMgrDao;
+
+    @Autowired
+    ISysDicService sysDicService;
 
     @Value("${dist.jwt.secret}")
     private  String secret;
@@ -80,6 +85,32 @@ public class DisMemberInfoController extends BaseController {
         model.addAttribute("link",detailInfo[1]);
         request.setAttribute("node",detailInfo[0]);
         request.setAttribute("link",detailInfo[1]);
+        Map<String,Object> selecteds=new LinkedHashMap<>();
+        List<String> datas=new ArrayList<>();
+        List<Map<String, Object>> list=  sysDicService.selectListByCode("disUserType");
+        List<String> colors= Arrays.asList("#ff7f50","#87cefa","#da70d6","#32cd32","#6495ed",
+                "#ff69b4","#ba55d3","#cd5c5c","#ffa500","#40e0d0",
+                "#1e90ff","#ff6347","#7b68ee","#00fa9a","#ffd700",
+                "#6699FF","#ff6666","#3cb371","#b8860b","#30e0e0");
+        String listCategories="[";
+        if(list.size()>0){
+            for (int i=0;i<list.size();i++){
+                Categories categories=new Categories();
+                categories.setColor(colors.get(i));
+                categories.setName((String) list.get(i).get("dicValue"));
+                listCategories=listCategories+categories.toString();
+                if(i!=list.size()-1){
+                    listCategories+=",";
+                }
+                selecteds.put(list.get(i).get("dicValue").toString(),true);
+                datas.add(list.get(i).get("dicValue").toString());
+            }
+        }
+        listCategories+="]";
+        Gson gson=new Gson();
+        request.setAttribute("listCategories",listCategories);
+        request.setAttribute("selecteds",gson.toJson(selecteds));
+        request.setAttribute("datas",gson.toJson(datas));
         return PREFIX + "detail.html";
     }
 

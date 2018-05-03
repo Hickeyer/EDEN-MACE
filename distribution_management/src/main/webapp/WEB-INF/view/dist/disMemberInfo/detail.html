@@ -40,31 +40,26 @@
 
         legend: {
             x: 'left',
-            selected:{'平台':true,'会员':true},
-            data:['平台','会员']
+            selected:(function () {
+                var selecteds=${selecteds};
+                return selecteds;
+            })(),
+            data:(function () {
+                var datas=${datas};
+                console.log(datas)
+                return datas;
+            })()
         },
         isShowScrollBar:false,
         series: [
             {
                 type:'kforce',
-                categories : [
-                    {
-                        name: '平台',
-                        itemStyle: {
-                            normal: {
-                                color : '#ff7f50'
-                            }
-                        }
-                    },
-                    {
-                        name:'会员',
-                        itemStyle: {
-                            normal: {
-                                color : '#87cdfa'
-                            }
-                        }
-                    }
-                ],
+                categories :(function () {
+                    var listCategories=${listCategories};
+                    console.log(listCategories)
+                    //var nodeObj=JSON.parse(node);
+                    return listCategories;
+                })(),
                 itemStyle: {
                     normal: {
                         label: {
