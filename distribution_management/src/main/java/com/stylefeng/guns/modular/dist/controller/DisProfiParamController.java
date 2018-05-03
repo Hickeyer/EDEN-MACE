@@ -82,6 +82,11 @@ public class DisProfiParamController extends BaseController {
         disProfiParamService.save(param);
         return super.SUCCESS_TIP;
     }
+    @RequestMapping(value = "/protype")
+    @ResponseBody
+    public Object protype() {
+        return sysDicService.selectListByCode("disProType");
+    }
 
     /**
      * 删除参数设置

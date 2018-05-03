@@ -12,7 +12,7 @@ var DisMemberAmount = {
  * 初始化表格的列
  */
 DisMemberAmount.initColumn = function () {
-    return [
+    var  col= [
         {field: 'selectItem', radio: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
         {title: '平台id', field: 'disPlatformId', visible: true, align: 'center', valign: 'middle'},
@@ -22,10 +22,22 @@ DisMemberAmount.initColumn = function () {
         {title: '总金额', field: 'totalAmount', visible: true, align: 'center', valign: 'middle'},
         {title: '可用金额', field: 'avaibleAmount', visible: true, align: 'center', valign: 'middle'},
         {title: '冻结金额', field: 'frozenAmount', visible: true, align: 'center', valign: 'middle'},
-        {title: '交易金额', field: 'trade', visible: true, align: 'center', valign: 'middle'},
-        {title: '等级金额', field: 'level', visible: true, align: 'center', valign: 'middle'},
-        {title: '修改时间', field: 'updateTime', visible: true, align: 'center', valign: 'middle'},
-    ];
+        {title: '修改时间', field: 'updateTime', visible: true, align: 'center', valign: 'middle'},]
+
+    $.ajax({
+        type: "post",
+        url: Feng.ctxPath + "/disProfiParam/protype",
+        async: false,
+        success: function(data) {
+            if(data.length>0){
+                for (var i=0;i<data.length;i++){
+                  var sub= {title: ''+data[i].dicValue+'', field: ''+data[i].dicNotes+'', visible: true, align: 'center', valign: 'middle'}
+                  col.push(sub);
+                }
+            }
+        }
+    });
+    return  col ;
 };
 
 /**
@@ -95,7 +107,7 @@ DisMemberAmount.setAmount = function () {
             DisMemberAmount.table.refresh();
         }, function (data) {
             Feng.error("同步失败!" + data.responseJSON.message + "!");
-        });
+        },true);
         ajax.start();
 };
 

@@ -8,7 +8,7 @@
 		this.success = success;
 		this.error = error;
 	};
-	
+
 	$ax.prototype = {
 		start : function () {	
 			var me = this;
@@ -18,7 +18,7 @@
 			} else {
 				this.url = this.url + "&jstime=" + new Date().getTime();
 			}
-			
+			alert(this.async)
 			$.ajax({
 		        type: this.type,
 		        url: this.url,
