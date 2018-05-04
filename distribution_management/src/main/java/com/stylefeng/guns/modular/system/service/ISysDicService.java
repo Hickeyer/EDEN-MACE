@@ -14,6 +14,7 @@ public interface ISysDicService {
 
 
     public List<Map<String, Object>> selectListByCode(String code);
+    public Map<String, Object> selectListByCodeNo(String code,String no);
 
 
 

@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-04-05
+ * @since 2018-05-05
  */
 @TableName("dis_member_info")
 public class DisMemberInfo extends Model<DisMemberInfo> {
@@ -50,7 +50,7 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 	@TableField("dis_level")
 	private Integer disLevel;
     /**
-     * 身份类型(0 代理商 1会员)
+     * 身份类型
      */
 	@TableField("dis_user_type")
 	private String disUserType;
@@ -74,6 +74,21 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
      */
 	@TableField("is_delete")
 	private String isDelete;
+    /**
+     * 上级代理商id
+     */
+	@TableField("dis_plat_super")
+	private String disPlatSuper;
+    /**
+     * 代理商全路径
+     */
+	@TableField("dis_plat_full_index")
+	private String disPlatFullIndex;
+    /**
+     * 代理商等级
+     */
+	@TableField("dis_plat_level")
+	private Integer disPlatLevel;
 
 
 	public Integer getId() {
@@ -172,6 +187,30 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 		this.isDelete = isDelete;
 	}
 
+	public String getDisPlatSuper() {
+		return disPlatSuper;
+	}
+
+	public void setDisPlatSuper(String disPlatSuper) {
+		this.disPlatSuper = disPlatSuper;
+	}
+
+	public String getDisPlatFullIndex() {
+		return disPlatFullIndex;
+	}
+
+	public void setDisPlatFullIndex(String disPlatFullIndex) {
+		this.disPlatFullIndex = disPlatFullIndex;
+	}
+
+	public Integer getDisPlatLevel() {
+		return disPlatLevel;
+	}
+
+	public void setDisPlatLevel(Integer disPlatLevel) {
+		this.disPlatLevel = disPlatLevel;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -192,6 +231,9 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 			", addTime=" + addTime +
 			", updateTime=" + updateTime +
 			", isDelete=" + isDelete +
+			", disPlatSuper=" + disPlatSuper +
+			", disPlatFullIndex=" + disPlatFullIndex +
+			", disPlatLevel=" + disPlatLevel +
 			"}";
 	}
 }

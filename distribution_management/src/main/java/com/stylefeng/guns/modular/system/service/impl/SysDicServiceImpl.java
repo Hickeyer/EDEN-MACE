@@ -109,4 +109,10 @@ public class SysDicServiceImpl implements ISysDicService {
         List<Map<String, Object>> list=  sysDicDao.selectListByCode(code);
         return list;
     }
+
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public Map<String, Object> selectListByCodeNo(String code, String no) {
+        return sysDicDao.selectListByCodeNo(code,no);
+    }
 }

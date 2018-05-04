@@ -1,19 +1,18 @@
 package com.stylefeng.guns.common.persistence.model;
 
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
-
-import java.io.Serializable;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.activerecord.Model;
+import java.io.Serializable;
 
 /**
  * <p>
  * 管理员表
  * </p>
  *
- * @author stylefeng
- * @since 2017-07-11
+ * @author huangpu
+ * @since 2018-05-04
  */
 public class User extends Model<User> {
 
@@ -80,18 +79,25 @@ public class User extends Model<User> {
      * 保留字段
      */
 	private Integer version;
-
+    /**
+     * 分销商key
+     */
 	private String secret;
+    /**
+     * 上级key
+     */
+	private String superaccount;
+    /**
+     * 全路径
+     */
+	private String fullindex;
+    /**
+     * 等级
+     */
+	private String level;
 
-    public String getSecret() {
-        return secret;
-    }
 
-    public void setSecret(String secret) {
-        this.secret = secret;
-    }
-
-    public Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -211,6 +217,38 @@ public class User extends Model<User> {
 		this.version = version;
 	}
 
+	public String getSecret() {
+		return secret;
+	}
+
+	public void setSecret(String secret) {
+		this.secret = secret;
+	}
+
+	public String getSuperaccount() {
+		return superaccount;
+	}
+
+	public void setSuperaccount(String superaccount) {
+		this.superaccount = superaccount;
+	}
+
+	public String getFullindex() {
+		return fullindex;
+	}
+
+	public void setFullindex(String fullindex) {
+		this.fullindex = fullindex;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -234,6 +272,10 @@ public class User extends Model<User> {
 			", status=" + status +
 			", createtime=" + createtime +
 			", version=" + version +
+			", secret=" + secret +
+			", superaccount=" + superaccount +
+			", fullindex=" + fullindex +
+			", level=" + level +
 			"}";
 	}
 }

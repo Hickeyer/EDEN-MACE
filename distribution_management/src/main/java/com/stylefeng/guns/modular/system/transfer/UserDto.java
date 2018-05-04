@@ -30,6 +30,9 @@ public class UserDto{
 	private Integer version;
 	private String avatar;
 	private String secret;
+	private String superaccount;
+	private String fullindex;
+	private String level;
 
 	public String getSecret() {
 		return secret;
@@ -157,5 +160,29 @@ public class UserDto{
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public String getSuperaccount() {
+		return superaccount;
+	}
+
+	public void setSuperaccount(String superaccount) {
+		this.superaccount = superaccount;
+	}
+
+	public String getFullindex() {
+		return fullindex;
+	}
+
+	public void setFullindex(String fullindex) {
+		this.fullindex = fullindex;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 }

@@ -20,8 +20,10 @@ import com.stylefeng.guns.core.shiro.ShiroUser;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import com.stylefeng.guns.modular.system.factory.UserFactory;
+import com.stylefeng.guns.modular.system.service.ISysDicService;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
 import com.stylefeng.guns.modular.system.warpper.UserWarpper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,6 +59,9 @@ public class UserMgrController extends BaseController {
 
     @Resource
     private UserMapper userMapper;
+
+    @Autowired
+    ISysDicService sysDicService;
 
     /**
      * 跳转到查看管理员列表的页面
@@ -160,7 +165,12 @@ public class UserMgrController extends BaseController {
     @Permission
     @ResponseBody
     public Object list(@RequestParam(required = false) String name, @RequestParam(required = false) String beginTime, @RequestParam(required = false) String endTime, @RequestParam(required = false) Integer deptid) {
-        List<Map<String, Object>> users = managerDao.selectUsers(name, beginTime, endTime, deptid);
+        String account= ShiroKit.getUser().getAccount();
+        String superAccount="";
+        if(!"admin".equals(account)){
+            superAccount=account;
+        }
+        List<Map<String, Object>> users = managerDao.selectUsers(name, beginTime, endTime, deptid,superAccount);
         return new UserWarpper(users).warp();
     }
 
@@ -169,7 +179,6 @@ public class UserMgrController extends BaseController {
      */
     @RequestMapping("/add")
     @BussinessLog(value = "添加管理员", key = "account", dict = Dict.UserDict)
-    @Permission(Const.ADMIN_NAME)
     @ResponseBody
     public Tip add(@Valid UserDto user, BindingResult result) {
         if (result.hasErrors()) {
@@ -181,12 +190,19 @@ public class UserMgrController extends BaseController {
         if (theUser != null) {
             throw new BussinessException(BizExceptionEnum.USER_ALREADY_REG);
         }
-
+        String account= ShiroKit.getUser().getAccount();
+        User currentUser= managerDao.getByAccount(account);
+        Integer level= Integer.parseInt(currentUser.getLevel())+1;
+        Map<String, Object> map= sysDicService.selectListByCodeNo("quanxianid",level.toString());
         // 完善账号信息
         user.setSalt(ShiroKit.getRandomSalt(5));
         user.setPassword(ShiroKit.md5(user.getPassword(), user.getSalt()));
         user.setStatus(ManagerStatus.OK.getCode());
         user.setCreatetime(new Date());
+        user.setSuperaccount(account);
+        user.setFullindex(currentUser.getFullindex()+"."+account);
+        user.setLevel(level.toString());
+        user.setRoleid(map.get("dicValue").toString());
         this.userMapper.insert(UserFactory.createUser(user));
         return SUCCESS_TIP;
     }

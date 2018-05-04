@@ -16,6 +16,9 @@
 		<result column="add_time" property="addTime" />
 		<result column="update_time" property="updateTime" />
 		<result column="is_delete" property="isDelete" />
+		<result column="dis_plat_super" property="disPlatSuper" />
+		<result column="dis_plat_full_index" property="disPlatFullIndex" />
+		<result column="dis_plat_level" property="disPlatLevel" />
 	</resultMap>
 
 </mapper>

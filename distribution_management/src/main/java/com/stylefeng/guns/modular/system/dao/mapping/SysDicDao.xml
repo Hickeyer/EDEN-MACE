@@ -24,5 +24,12 @@
         where dic_type_no = #{code,jdbcType=VARCHAR}
         and is_delete='N' ORDER BY dic_order ASC
     </select>
+    <select id="selectListByCodeNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        *
+        from sys_dic
+        where dic_type_no = #{code,jdbcType=VARCHAR} and dic_no= #{no,jdbcType=VARCHAR}
+        and is_delete='N' ORDER BY dic_order ASC
+    </select>
 
 </mapper>
