@@ -72,6 +72,9 @@ public class SysDicServiceImpl implements ISysDicService {
             sysDic.setDicNo(num);
             sysDic.setDicValue(name);
             sysDic.setDicNotes(notes);
+            if("disUserType".equals(name)){
+                sysDic.setDicOrder(Integer.parseInt(typeNo));
+            }
             this.sysDicMapper.insert(sysDic);
         }
     }
