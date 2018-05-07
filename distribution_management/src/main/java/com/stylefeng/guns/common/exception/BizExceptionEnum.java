@@ -39,6 +39,8 @@ public enum BizExceptionEnum {
 	USER_ALREADY_REG(401,"该用户已经注册"),
 	NO_THIS_USER(400,"没有此用户"),
 	USER_NOT_EXISTED(400, "没有此用户"),
+	USERMEM_NOT_EXISTED(406, "邀请用户不存在"),
+	USER_IS_EXISTED(407, "用户已存在"),
 	ACCOUNT_FREEZED(401, "账号被冻结"),
 	OLD_PWD_NOT_RIGHT(402, "原密码不正确"),
 	TWO_PWD_NOT_MATCH(405, "两次输入密码不一致"),

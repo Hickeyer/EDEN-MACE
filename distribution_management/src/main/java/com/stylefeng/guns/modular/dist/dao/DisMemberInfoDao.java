@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.dist.dao;
 
+import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -14,4 +15,6 @@ import java.util.Map;
 public interface DisMemberInfoDao {
 
     List<Map<String, Object>> selectList(@Param("account")  String account);
+
+    DisMemberInfo selectListByUserId(@Param("account")  String account);
 }

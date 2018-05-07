@@ -3,8 +3,10 @@ package com.stylefeng.guns.modular.dist.controller;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
+import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.core.shiro.ShiroKit;
+import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.service.IDisProfitRecordService;
 import com.stylefeng.guns.modular.dist.util.Jwt;
 import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
@@ -13,6 +15,7 @@ import com.stylefeng.guns.modular.dist.wapper.ProfitRecordWarpper;
 import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -36,7 +39,17 @@ public class DisProfitRecordController extends BaseController {
     @Autowired
     UserMgrDao userMgrDao;
 
+    @Autowired
+    IDisMemberInfoService disMemberInfoService;
+
     private String PREFIX = "/dist/disProfitRecord/";
+
+
+    @Value("${dist.jwt.secret}")
+    private  String secret;
+    @Value("${dist.jwt.account}")
+    private  String account;
+
 
     /**
      * 跳转到交易首页
@@ -79,14 +92,14 @@ public class DisProfitRecordController extends BaseController {
     @ResponseBody
     @ApiOperation(value = "新增交易", notes = "")
     public Object add(@RequestBody DisProfitRecordVo disProfitRecordVo) {
-
-        User user=userMgrDao.getByAccount(disProfitRecordVo.getDisPlatformId());
-        if(user==null){
+        //根据直属上级查询到所属平台id
+        DisMemberInfo memberInfo=disMemberInfoService.selectListByUserId(disProfitRecordVo.getDisSetUserId());
+        if(memberInfo==null){
             throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
         }
-        String secret= Jwt.sign(ShiroKit.getUser().getAccount(),user.getSecret(),30L * 24L * 3600L * 1000L);
-        String account=Jwt.unsign(disProfitRecordVo.getSecret(),user.getSecret(),String.class);
-        if(account.equals(disProfitRecordVo.getDisPlatformId())) {
+        String account=Jwt.unsign(disProfitRecordVo.getSecret(),secret,String.class);
+        if(account.equals(account)) {
+            disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
             disProfitRecordService.save(disProfitRecordVo);
         }else {
             throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);

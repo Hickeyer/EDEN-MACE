@@ -56,6 +56,13 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public DisMemberInfo selectListByUserId(String userId) {
+        DisMemberInfo memberInfo= disMemberInfoDao.selectListByUserId(userId);
+        return memberInfo;
+    }
+
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public String[] getDetaiCanvas(String id) {
         String[] returnStr=new String[2];
         //获取当前用户节点
@@ -94,6 +101,10 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         return returnStr;
     }
 
+    /**
+     * 增加平台属性
+     * @param param
+     */
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void save(DisMemberInfo param) {

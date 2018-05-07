@@ -23,6 +23,8 @@ public class DisProfitRecordVo {
 
     private  String orderId;
 
+    private String disPlatSuper;
+
     public String getSecret() {
         return secret;
     }
@@ -85,5 +87,13 @@ public class DisProfitRecordVo {
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
+    }
+
+    public String getDisPlatSuper() {
+        return disPlatSuper;
+    }
+
+    public void setDisPlatSuper(String disPlatSuper) {
+        this.disPlatSuper = disPlatSuper;
     }
 }

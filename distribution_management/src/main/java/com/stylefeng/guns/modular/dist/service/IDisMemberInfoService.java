@@ -15,6 +15,12 @@ public interface IDisMemberInfoService {
 
     List<Map<String, Object>> selectList();
 
+    /**
+     * 根据用户名查询用户
+     * @return
+     */
+    DisMemberInfo selectListByUserId(String userId);
+
     String[] getDetaiCanvas(String id);
 
     public void save(DisMemberInfo param);

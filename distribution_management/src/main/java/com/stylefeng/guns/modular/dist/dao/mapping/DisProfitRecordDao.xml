@@ -16,6 +16,7 @@
         <result column="is_delete" property="isDelete" />
         <result column="add_time" property="addTime" />
         <result column="update_time" property="updateTime" />
+        <result column="type" property="type" />
     </resultMap>
     <select id="selectList" resultMap="BaseResultMap">
         SELECT r.`dis_get_user_id`,r.`dis_set_user_id`,r.`dis_amount`,r.`dis_note`,r.`dis_order_id`,
@@ -27,6 +28,7 @@
         <if test="account != null and account != ''">
             and r.dis_platform_id=#{account}
         </if>
+            and r.type= '0'
 
     </select>
 

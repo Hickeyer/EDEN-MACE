@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-04-05
+ * @since 2018-05-07
  */
 @TableName("dis_profit_record")
 public class DisProfitRecord extends Model<DisProfitRecord> {
@@ -54,6 +54,10 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 	private String addTime;
 	@TableField("update_time")
 	private String updateTime;
+    /**
+     * 分类（0：用户分润 1:平台分润）
+     */
+	private String type;
 
 
 	public Integer getId() {
@@ -152,6 +156,14 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 		this.updateTime = updateTime;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -172,6 +184,7 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 			", isDelete=" + isDelete +
 			", addTime=" + addTime +
 			", updateTime=" + updateTime +
+			", type=" + type +
 			"}";
 	}
 }

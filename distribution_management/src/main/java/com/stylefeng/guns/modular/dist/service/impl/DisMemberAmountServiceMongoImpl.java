@@ -4,11 +4,10 @@ import com.google.gson.Gson;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
-import com.stylefeng.guns.common.persistence.model.SysDic;
 import com.stylefeng.guns.core.shiro.ShiroKit;
-import com.stylefeng.guns.core.util.DateUtil;
-import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
+import com.stylefeng.guns.modular.dist.service.IDisMemberAmountMongoService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
+import com.stylefeng.guns.modular.dist.vo.TradeAmountVo;
 import com.stylefeng.guns.modular.system.dao.SysDicDao;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +17,13 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
+public class DisMemberAmountServiceMongoImpl implements IDisMemberAmountMongoService {
 
 
     @Autowired
@@ -36,7 +34,7 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public void save(String userId,String userName,String disPlatformId) {
+    public void save(String userId,String userName,String disPlatformId,String type) {
         Query query=new Query();
         Criteria criteria1=Criteria.where("disUserId").is(userId);
         Criteria criteria2=Criteria.where("disPlatformId").is(disPlatformId);
@@ -44,7 +42,7 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         query.addCriteria(criteria2);
         long count= mongoTemplate.count(query, "amount");
         if(count==0){
-            Map<String,String> amount=initAmount(userId,userName,disPlatformId);
+            Map<String,String> amount=initAmount(userId,userName,disPlatformId,"0");
             mongoTemplate.save(amount,"amount");
         }
 
@@ -89,6 +87,23 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         return result;
     }
 
+    @Override
+    public void tradeAmount(TradeAmountVo tradeAmountVo) {
+        if("1".equals(tradeAmountVo.getType())){
+        Query query=new Query();
+        Criteria disPlatformId=Criteria.where("disPlatformId").is(tradeAmountVo.getDisPlatformId());
+        Criteria disUserId= Criteria.where("disUserId").is(tradeAmountVo.getUserId());
+        Criteria type= Criteria.where("type").is(tradeAmountVo.getType());
+
+        query.addCriteria(disPlatformId);
+        query.addCriteria(disUserId);
+        query.addCriteria(type);
+        Object vo=mongoTemplate.find(query,Object.class,"amount");
+        }else if("0".equals(tradeAmountVo.getType())){
+
+        }
+    }
+
 
     /**
      * 初始化账户信息
@@ -96,7 +111,7 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
      * @param userName
      * @return
      */
-    public Map<String,String> initAmount(String userId,String userName,String disPlatformId){
+    public Map<String,String> initAmount(String userId,String userName,String disPlatformId,String type){
         Map<String,String> map=new HashMap<>();
         map.put("disUserId",userId);
         map.put("disUserName",userName);
@@ -107,6 +122,7 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         map.put("addTime", DateUtils.getNowDateTime());
         map.put("updateTime",DateUtils.getNowDateTime());
         map.put("amountStatus","0");
+        map.put("type",type);
 
         List<Map<String, Object>> list=  sysDicDao.selectListByCode("disProType");
         if(list.size()>0){

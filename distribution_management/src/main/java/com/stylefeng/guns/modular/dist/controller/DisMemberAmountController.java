@@ -1,9 +1,7 @@
 package com.stylefeng.guns.modular.dist.controller;
 
-import com.google.gson.Gson;
 import com.stylefeng.guns.common.controller.BaseController;
-import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
-import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
+import com.stylefeng.guns.modular.dist.service.IDisMemberAmountMongoService;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +24,7 @@ import java.util.Map;
 public class DisMemberAmountController extends BaseController {
 
     @Autowired
-    IDisMemberAmountService disMemberAmountService;
+    IDisMemberAmountMongoService disMemberAmountMongoService;
 
     @Autowired
     IDisMemberInfoService disMemberInfoService;
@@ -63,7 +61,7 @@ public class DisMemberAmountController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        List<Map<String, Object>> list=disMemberAmountService.selectList();
+        List<Map<String, Object>> list=disMemberAmountMongoService.selectList();
         return list;
     }
 
@@ -77,8 +75,9 @@ public class DisMemberAmountController extends BaseController {
         List<Map<String, Object>>  list=disMemberInfoService.selectList();
         if(list.size()>0){
             list.forEach(map->{
-                disMemberAmountService.save(map.get("disUserId").toString()
-                        ,map.get("disUserName").toString(),map.get("disPlatformId").toString());
+                disMemberAmountMongoService.save(map.get("disUserId").toString()
+                        ,map.get("disUserName").toString(),
+                        map.get("disPlatformId").toString(),"1");
             });
         }
         return list;

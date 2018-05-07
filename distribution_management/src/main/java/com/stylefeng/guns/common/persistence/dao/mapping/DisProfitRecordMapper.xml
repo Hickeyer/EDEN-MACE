@@ -16,6 +16,7 @@
 		<result column="is_delete" property="isDelete" />
 		<result column="add_time" property="addTime" />
 		<result column="update_time" property="updateTime" />
+		<result column="type" property="type" />
 	</resultMap>
 
 </mapper>

@@ -200,7 +200,7 @@ public class UserMgrController extends BaseController {
         user.setStatus(ManagerStatus.OK.getCode());
         user.setCreatetime(new Date());
         user.setSuperaccount(account);
-        user.setFullindex(currentUser.getFullindex()+"."+account);
+        user.setFullindex(currentUser.getFullindex()+"."+user.getAccount());
         user.setLevel(level.toString());
         user.setRoleid(map.get("dicValue").toString());
         this.userMapper.insert(UserFactory.createUser(user));

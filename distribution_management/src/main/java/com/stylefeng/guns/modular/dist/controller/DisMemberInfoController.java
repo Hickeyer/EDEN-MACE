@@ -1,15 +1,12 @@
 package com.stylefeng.guns.modular.dist.controller;
 
 import com.google.gson.Gson;
-import com.stylefeng.guns.common.annotion.DataSource;
-import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.User;
-import com.stylefeng.guns.core.shiro.ShiroKit;
-import com.stylefeng.guns.modular.dist.dao.DisMemberInfoDao;
+import com.stylefeng.guns.modular.dist.service.IDisMemberAmountMongoService;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.util.Jwt;
 import com.stylefeng.guns.modular.dist.vo.Categories;
@@ -18,6 +15,7 @@ import com.stylefeng.guns.modular.dist.wapper.MemberWarpper;
 import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import com.stylefeng.guns.modular.system.service.ISysDicService;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,10 +47,15 @@ public class DisMemberInfoController extends BaseController {
     @Autowired
     ISysDicService sysDicService;
 
+    @Autowired
+    IDisMemberAmountMongoService disMemberAmountService;
+
     @Value("${dist.jwt.secret}")
     private  String secret;
     @Value("${dist.jwt.account}")
     private  String account;
+
+
 
     /**
      * 跳转到分销首页
@@ -130,18 +133,32 @@ public class DisMemberInfoController extends BaseController {
     @PostMapping(value = "/add")
     @ResponseBody
     @ApiOperation(value = "新增会员", notes = "")
-    public Object add(@RequestBody DisMemberInfoVo memberInfoVo) {
-        User user=userMgrDao.getByAccount(memberInfoVo.getDisPlatformId());
+    public Object add(DisMemberInfoVo memberInfoVo) {
+        User user=userMgrDao.getByAccount(memberInfoVo.getDisPlatSuper());
         if(user==null){
             throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
         }
-//        String secret= Jwt.sign(ShiroKit.getUser().getAccount(),user.getSecret(),30L * 24L * 3600L * 1000L);
-//        String account=Jwt.unsign(memberInfoVo.getSecret(),user.getSecret(),String.class);
+        if(StringUtils.isNotEmpty(memberInfoVo.getDisModelId())){
+            DisMemberInfo param= disMemberInfoService.selectListByUserId(memberInfoVo.getDisModelId());
+            if(param==null){
+                throw  new BussinessException(BizExceptionEnum.USERMEM_NOT_EXISTED);
+            }
+        }
+        DisMemberInfo param= disMemberInfoService.selectListByUserId(memberInfoVo.getDisUserId());
+        if(param!=null){
+            throw  new BussinessException(BizExceptionEnum.USER_IS_EXISTED);
+        }
         String acc= Jwt.unsign(memberInfoVo.getSecret(),secret,String.class);
         if(acc.equals(account)){
             DisMemberInfo memberInfo=new DisMemberInfo();
             BeanUtils.copyProperties(memberInfoVo,memberInfo);
+            memberInfo.setDisUserType("0");
+            memberInfo.setDisPlatSuper(memberInfoVo.getDisPlatSuper());
+            memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
+            memberInfo.setDisPlatFullIndex(user.getFullindex());
+            memberInfo.setDisPlatformId(user.getFullindex().split("\\.")[1]);
             disMemberInfoService.save(memberInfo);
+            //disMemberAmountService.save(memberInfo.getDisUserId(),memberInfo.getDisUserName(),memberInfo.getDisPlatformId(),"1");
         }else {
             throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
         }
