@@ -12,6 +12,9 @@
 
 3、对接多个系统，需要对多个账户进行控制的系统
 
+### 项目总览
+![输入图片说明](https://gitee.com/uploads/images/2018/0510/085941_47511fa1_1497609.png "未命名文件.png")
+
 ### 项目说明
 
 distribution_management  用来运行分销管理系统
