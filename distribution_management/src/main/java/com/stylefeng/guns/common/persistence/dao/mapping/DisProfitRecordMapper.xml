@@ -17,6 +17,10 @@
 		<result column="add_time" property="addTime" />
 		<result column="update_time" property="updateTime" />
 		<result column="type" property="type" />
+		<result column="before_amount" property="beforeAmount" />
+		<result column="after_amount" property="afterAmount" />
+		<result column="before_pro_amount" property="beforeProAmount" />
+		<result column="after_pro_amount" property="afterProAmount" />
 	</resultMap>
 
 </mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.dist.dao.DisMemberAmountDao">
+
+    <resultMap id="BaseResultMap" type="map">
+        <id column="id" property="id" />
+        <result column="dis_platform_id" property="disPlatformId" />
+        <result column="dis_user_id" property="disUserId" />
+        <result column="dis_user_name" property="disUserName" />
+        <result column="total_amount" property="totalAmount" />
+        <result column="frozen_amount" property="frozenAmount" />
+        <result column="avaible_amount" property="avaibleAmount" />
+        <result column="type" property="type" />
+        <result column="add_time" property="addTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="amount_status" property="amountStatus" />
+        <result column="trade_total_amount" property="tradeTotalAmount" />
+        <result column="trade_frozen_amount" property="tradeFrozenAmount" />
+        <result column="trade_avaible_amount" property="tradeAvaibleAmount" />
+        <result column="level_total_amount" property="levelTotalAmount" />
+        <result column="level_frozen_amount" property="levelFrozenAmount" />
+        <result column="level_avaible_amount" property="levelAvaibleAmount" />
+    </resultMap>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select a.*,m.dis_platform_id from `dis_member_amount` a
+        left join `dis_member_info` m on a.`dis_user_id`=m.`dis_user_id`
+        where 1=1
+        <if test="platformId != null and platformId != ''">
+            and    m.dis_platform_id=#{platformId}
+        </if>
+    </select>
+
+</mapper>

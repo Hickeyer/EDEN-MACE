@@ -19,6 +19,7 @@
 		<result column="dis_plat_super" property="disPlatSuper" />
 		<result column="dis_plat_full_index" property="disPlatFullIndex" />
 		<result column="dis_plat_level" property="disPlatLevel" />
+		<result column="type" property="type" />
 	</resultMap>
 
 </mapper>

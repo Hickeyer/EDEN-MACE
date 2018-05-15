@@ -15,15 +15,12 @@ public class DisProfitRecordVo {
 
     private String disPlatformId;
 
-    private String disProMode;
-
     private String disProType;
 
     private String note;
 
     private  String orderId;
 
-    private String disPlatSuper;
 
     public String getSecret() {
         return secret;
@@ -57,13 +54,6 @@ public class DisProfitRecordVo {
         this.disPlatformId = disPlatformId;
     }
 
-    public String getDisProMode() {
-        return disProMode;
-    }
-
-    public void setDisProMode(String disProMode) {
-        this.disProMode = disProMode;
-    }
 
     public String getDisProType() {
         return disProType;
@@ -89,11 +79,4 @@ public class DisProfitRecordVo {
         this.orderId = orderId;
     }
 
-    public String getDisPlatSuper() {
-        return disPlatSuper;
-    }
-
-    public void setDisPlatSuper(String disPlatSuper) {
-        this.disPlatSuper = disPlatSuper;
-    }
 }

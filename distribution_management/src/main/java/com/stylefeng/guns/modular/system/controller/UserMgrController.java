@@ -11,6 +11,8 @@ import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.dao.UserMapper;
+import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
+import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.config.properties.GunsProperties;
 import com.stylefeng.guns.core.db.Db;
@@ -18,6 +20,7 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.shiro.ShiroUser;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import com.stylefeng.guns.modular.system.factory.UserFactory;
 import com.stylefeng.guns.modular.system.service.ISysDicService;
@@ -62,6 +65,9 @@ public class UserMgrController extends BaseController {
 
     @Autowired
     ISysDicService sysDicService;
+
+    @Autowired
+    IDisMemberInfoService disMemberInfoService;
 
     /**
      * 跳转到查看管理员列表的页面
@@ -204,6 +210,21 @@ public class UserMgrController extends BaseController {
         user.setLevel(level.toString());
         user.setRoleid(map.get("dicValue").toString());
         this.userMapper.insert(UserFactory.createUser(user));
+
+        DisMemberInfo memberInfo=new DisMemberInfo();
+        memberInfo.setDisUserId(user.getAccount());
+        memberInfo.setDisUserName(user.getName());
+        memberInfo.setType("1");
+        memberInfo.setDisPlatformId(user.getFullindex().split("\\.")[1]);
+        memberInfo.setDisPlatSuper(user.getSuperaccount());
+        memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
+        memberInfo.setDisPlatFullIndex(user.getFullindex());
+        memberInfo.setDisFullIndex(user.getFullindex());
+        memberInfo.setDisModelId(user.getSuperaccount());
+        memberInfo.setDisUserType("10000");
+        memberInfo.setDisLevel(Integer.parseInt(user.getLevel()));
+        memberInfo.setIsDelete("N");
+        disMemberInfoService.saveAgent(memberInfo);
         return SUCCESS_TIP;
     }
 

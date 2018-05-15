@@ -46,6 +46,17 @@ SimOper.openMemberAdd = function () {
     });
     this.layerIndex = index;
 };
+SimOper.openOrderAdd = function () {
+    var index = layer.open({
+        type: 2,
+        title: '模拟添加会员',
+        area: ['800px', '420px'], //宽高
+        fix: false, //不固定
+        maxmin: true,
+        content: Feng.ctxPath + '/simOper/order_add'
+    });
+    this.layerIndex = index;
+};
 
 /**
  * 打开查看模拟菜单详情

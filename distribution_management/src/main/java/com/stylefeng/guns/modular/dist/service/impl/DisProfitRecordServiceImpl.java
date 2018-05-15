@@ -69,12 +69,15 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
      * @param param
      */
     @Override
+    @DataSource(name=DSEnum.DATA_SOURCE_BIZ)
     public void save(DisProfitRecordVo param) {
         //根据所属上级和用户id查询会员信息
         DisMemberInfo memberInfoParam=new DisMemberInfo();
         memberInfoParam.setDisUserId(param.getDisSetUserId());
         DisMemberInfo memberInfo=disMemberInfoMapper.selectOne(memberInfoParam);
         saveMember(param,memberInfo);
+        savePlat(param,memberInfo);
+        saveAdmin(param,memberInfo);
     }
     public void saveMember(DisProfitRecordVo param,DisMemberInfo memberInfo){
 
@@ -105,6 +108,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     }
                     //先设置会员分润
                     DisProfitRecord record=new DisProfitRecord();
+                    record.setDisPlatformId(memberInfo.getDisPlatformId());
                     record.setDisUserType(disProfiParam.getDisUserType());
                     record.setDisSetUserId(param.getDisSetUserId());
                     record.setDisNote(param.getNote());

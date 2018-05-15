@@ -1,7 +1,10 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.controller.BaseController;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountMongoService;
+import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,9 @@ public class DisMemberAmountController extends BaseController {
 
     @Autowired
     IDisMemberAmountMongoService disMemberAmountMongoService;
+
+    @Autowired
+    IDisMemberAmountService disMemberAmountService;
 
     @Autowired
     IDisMemberInfoService disMemberInfoService;
@@ -61,7 +67,11 @@ public class DisMemberAmountController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        List<Map<String, Object>> list=disMemberAmountMongoService.selectList();
+        String platformId= ShiroKit.getUser().getAccount();
+        if(ShiroKit.hasRole(Const.ADMIN_NAME)){
+            platformId=null;
+        }
+        List<Map<String, Object>> list=disMemberAmountService.selectList(platformId);
         return list;
     }
 
@@ -72,12 +82,16 @@ public class DisMemberAmountController extends BaseController {
     @RequestMapping(value = "/synchInfo")
     @ResponseBody
     public Object synchInfo() {
-        List<Map<String, Object>>  list=disMemberInfoService.selectList();
+        String account= ShiroKit.getUser().getAccount();
+        if(ShiroKit.hasRole(Const.ADMIN_NAME)){
+            account=null;
+        }
+        List<Map<String, Object>>  list=disMemberInfoService.selectList(account);
         if(list.size()>0){
             list.forEach(map->{
-                disMemberAmountMongoService.save(map.get("disUserId").toString()
-                        ,map.get("disUserName").toString(),
-                        map.get("disPlatformId").toString(),"1");
+                //针对会员同步相关账户
+                disMemberAmountService.save(map.get("disUserId").toString()
+                        ,map.get("disUserName").toString(),"0");
             });
         }
         return list;

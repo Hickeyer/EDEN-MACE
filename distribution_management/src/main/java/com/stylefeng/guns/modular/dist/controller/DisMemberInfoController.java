@@ -1,11 +1,13 @@
 package com.stylefeng.guns.modular.dist.controller;
 
 import com.google.gson.Gson;
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.User;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountMongoService;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.util.Jwt;
@@ -123,7 +125,11 @@ public class DisMemberInfoController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        List<Map<String, Object>>  list=disMemberInfoService.selectList();
+        String account= ShiroKit.getUser().getAccount();
+        if(ShiroKit.hasRole(Const.ADMIN_NAME)){
+            account=null;
+        }
+        List<Map<String, Object>>  list=disMemberInfoService.selectList(account);
         return super.warpObject(new MemberWarpper(list));
     }
 
@@ -157,6 +163,7 @@ public class DisMemberInfoController extends BaseController {
             memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
             memberInfo.setDisPlatFullIndex(user.getFullindex());
             memberInfo.setDisPlatformId(user.getFullindex().split("\\.")[1]);
+            memberInfo.setType("0");
             disMemberInfoService.save(memberInfo);
             //disMemberAmountService.save(memberInfo.getDisUserId(),memberInfo.getDisUserName(),memberInfo.getDisPlatformId(),"1");
         }else {

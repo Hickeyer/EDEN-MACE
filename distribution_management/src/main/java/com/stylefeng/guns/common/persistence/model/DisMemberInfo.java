@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-05-05
+ * @since 2018-05-15
  */
 @TableName("dis_member_info")
 public class DisMemberInfo extends Model<DisMemberInfo> {
@@ -25,6 +25,9 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
      */
 	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;
+    /**
+     * 平台
+     */
 	@TableField("dis_platform_id")
 	private String disPlatformId;
     /**
@@ -42,6 +45,9 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
      */
 	@TableField("dis_full_index")
 	private String disFullIndex;
+    /**
+     * 用户名
+     */
 	@TableField("dis_user_name")
 	private String disUserName;
     /**
@@ -89,6 +95,10 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
      */
 	@TableField("dis_plat_level")
 	private Integer disPlatLevel;
+    /**
+     * 账户类型(0,会员，1：代理商)
+     */
+	private String type;
 
 
 	public Integer getId() {
@@ -211,6 +221,14 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 		this.disPlatLevel = disPlatLevel;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -234,6 +252,7 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 			", disPlatSuper=" + disPlatSuper +
 			", disPlatFullIndex=" + disPlatFullIndex +
 			", disPlatLevel=" + disPlatLevel +
+			", type=" + type +
 			"}";
 	}
 }

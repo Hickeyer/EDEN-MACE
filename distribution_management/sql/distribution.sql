@@ -16,17 +16,45 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`distribution` /*!40100 DEFAULT CHARACTE
 
 USE `distribution`;
 
+/*Table structure for table `dis_member_amount` */
+
+DROP TABLE IF EXISTS `dis_member_amount`;
+
+CREATE TABLE `dis_member_amount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dis_user_id` varchar(50) DEFAULT NULL COMMENT '用户标示id',
+  `dis_user_name` varchar(20) DEFAULT NULL COMMENT '用户名称',
+  `total_amount` decimal(12,2) DEFAULT NULL COMMENT '总金额',
+  `frozen_amount` decimal(12,2) DEFAULT NULL COMMENT '冻结金额',
+  `avaible_amount` decimal(12,2) DEFAULT NULL COMMENT '可用金额',
+  `type` varchar(20) DEFAULT '0' COMMENT '类型（0会员 1 代理商）',
+  `add_time` varchar(20) DEFAULT NULL COMMENT '添加时间',
+  `update_time` varchar(20) DEFAULT NULL COMMENT '修改时间',
+  `amount_status` varchar(10) DEFAULT NULL COMMENT '状态（0正常 1冻结）',
+  `trade_total_amount` decimal(12,2) DEFAULT NULL COMMENT '扩展字段，交易账户总金额',
+  `trade_frozen_amount` decimal(12,2) DEFAULT NULL COMMENT '扩展字段，交易账户冻结金额',
+  `trade_avaible_amount` decimal(12,2) DEFAULT NULL COMMENT '扩展字段，交易账户可用金额',
+  `level_total_amount` decimal(12,2) DEFAULT NULL COMMENT '扩展字段，等级账户总金额',
+  `level_frozen_amount` decimal(12,2) DEFAULT NULL COMMENT '扩展字段，等级账户冻结金额',
+  `level_avaible_amount` decimal(12,2) DEFAULT NULL COMMENT '扩展字段，等级账户可用金额',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+
+/*Data for the table `dis_member_amount` */
+
+insert  into `dis_member_amount`(`id`,`dis_user_id`,`dis_user_name`,`total_amount`,`frozen_amount`,`avaible_amount`,`type`,`add_time`,`update_time`,`amount_status`,`trade_total_amount`,`trade_frozen_amount`,`trade_avaible_amount`,`level_total_amount`,`level_frozen_amount`,`level_avaible_amount`) values (31,'songchao','宋朝','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(32,'yuanchao','元朝','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(33,'mingchao','明朝','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(34,'qingchao','清朝','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(35,'qinershi','秦二世','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(36,'liubang','刘邦','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(37,'xiangyu','项羽','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(38,'hanwudi','汉武帝','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(39,'liuxiug','刘秀','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(40,'minguo','民国','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(41,'qinshihuang','秦始皇','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(42,'liubei','刘备','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(43,'caocao','曹操','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(44,'sunquan','孙权','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(45,'weichao','魏朝','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(46,'suichao','隋朝','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(47,'tangchao','唐朝','0.00','0.00','0.00','0',NULL,NULL,'0','0.00','0.00','0.00','0.00','0.00','0.00'),(48,'admin','admin','0.00','0.00','0.00','1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(49,'zhangsan','张三','0.00','0.00','0.00','1','2018-05-16 00:06:52','2018-05-16 00:06:52','0','0.00','0.00','0.00','0.00','0.00','0.00');
+
 /*Table structure for table `dis_member_info` */
 
 DROP TABLE IF EXISTS `dis_member_info`;
 
 CREATE TABLE `dis_member_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `dis_platform_id` varchar(100) DEFAULT NULL,
+  `dis_platform_id` varchar(100) DEFAULT NULL COMMENT '平台',
   `dis_user_id` varchar(100) DEFAULT NULL COMMENT '用户id',
   `dis_model_id` varchar(100) DEFAULT NULL COMMENT '上级id',
   `dis_full_index` varchar(4000) DEFAULT NULL COMMENT '全路径',
-  `dis_user_name` varchar(100) DEFAULT NULL,
+  `dis_user_name` varchar(100) DEFAULT NULL COMMENT '用户名',
   `dis_level` int(11) DEFAULT NULL COMMENT '级别',
   `dis_user_type` varchar(10) DEFAULT NULL COMMENT '身份类型',
   `dis_note` varchar(100) DEFAULT NULL COMMENT '备注',
@@ -36,12 +64,13 @@ CREATE TABLE `dis_member_info` (
   `dis_plat_super` varchar(100) DEFAULT NULL COMMENT '上级代理商id',
   `dis_plat_full_index` varchar(4000) DEFAULT NULL COMMENT '代理商全路径',
   `dis_plat_level` int(11) DEFAULT NULL COMMENT '代理商等级',
+  `type` varchar(10) DEFAULT '0' COMMENT '账户类型(0,会员，1：代理商)',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 /*Data for the table `dis_member_info` */
 
-insert  into `dis_member_info`(`id`,`dis_platform_id`,`dis_user_id`,`dis_model_id`,`dis_full_index`,`dis_user_name`,`dis_level`,`dis_user_type`,`dis_note`,`add_time`,`update_time`,`is_delete`,`dis_plat_super`,`dis_plat_full_index`,`dis_plat_level`) values (9,'dist','qinshihuang','','qinshihuang','秦始皇',0,'1','','2018-05-02 20:41:49','2018-05-02 20:41:49','N','dist','admin.dist',1),(10,'dist','qinershi','qinshihuang','qinshihuang.qinershi','秦二世',1,'1','','2018-05-02 20:42:48','2018-05-02 20:42:48','N','dist','admin.dist',1),(11,'dist','liubang','qinershi','qinshihuang.qinershi.liubang','刘邦',2,'1','','2018-05-02 20:43:58','2018-05-02 20:43:58','N','dist','admin.dist',1),(12,'dist','xiangyu','qinershi','qinshihuang.qinershi.xiangyu','项羽',2,'1','','2018-05-02 20:44:27','2018-05-02 20:44:27','N','dist','admin.dist',1),(13,'dist','hanwudi','liubang','qinshihuang.qinershi.liubang.hanwudi','汉武帝',3,'1','','2018-05-02 20:45:18','2018-05-02 20:45:18','N','dist','admin.dist',1),(14,'dist','liuxiug','hanwudi','qinshihuang.qinershi.liubang.hanwudi.liuxiug','刘秀',4,'1','','2018-05-02 20:45:59','2018-05-02 20:45:59','N','dist','admin.dist',1),(15,'dist','liubei','liuxiug','qinshihuang.qinershi.liubang.hanwudi.liuxiug.liubei','刘备',5,'1','','2018-05-02 20:46:36','2018-05-02 20:46:36','N','dist','admin.dist',1),(16,'dist','caocao','liuxiug','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao','曹操',5,'1','','2018-05-02 20:46:52','2018-05-02 20:46:52','N','dist','admin.dist',1),(17,'dist','sunquan','liuxiug','qinshihuang.qinershi.liubang.hanwudi.liuxiug.sunquan','孙权',5,'1','','2018-05-02 20:47:05','2018-05-02 20:47:05','N','dist','admin.dist',1),(18,'dist','weichao','caocao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao','魏朝',6,'1','','2018-05-02 20:47:45','2018-05-02 20:47:45','N','dist','admin.dist',1),(19,'dist','suichao','weichao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao','隋朝',7,'1','','2018-05-02 20:48:06','2018-05-02 20:48:06','N','dist','admin.dist',1),(20,'dist','tangchao','suichao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao','唐朝',8,'1','','2018-05-02 20:48:25','2018-05-02 20:48:25','N','dist','admin.dist',1),(21,'dist','songchao','tangchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao','宋朝',9,'1','','2018-05-02 20:48:46','2018-05-02 20:48:46','N','dist','admin.dist',1),(22,'dist','yuanchao','songchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao.yuanchao','元朝',10,'1','','2018-05-02 20:49:07','2018-05-02 20:49:07','N','dist','admin.dist',1),(23,'dist','mingchao','yuanchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao.yuanchao.mingchao','明朝',11,'0','','2018-05-02 20:53:26','2018-05-02 20:53:26','N','dist','admin.dist',1),(24,'dist','qingchao','mingchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao.yuanchao.mingchao.qingchao','清朝',12,'3','','2018-05-02 20:53:46','2018-05-02 20:53:46','N','dist','admin.dist',1),(29,'dist','minguo','qingchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao.yuanchao.mingchao.qingchao.minguo','民国',13,'0','sss','2018-05-08 00:28:05','2018-05-08 00:28:05','N','yiji','admin.dist.yiji',2);
+insert  into `dis_member_info`(`id`,`dis_platform_id`,`dis_user_id`,`dis_model_id`,`dis_full_index`,`dis_user_name`,`dis_level`,`dis_user_type`,`dis_note`,`add_time`,`update_time`,`is_delete`,`dis_plat_super`,`dis_plat_full_index`,`dis_plat_level`,`type`) values (9,'dist','qinshihuang','','qinshihuang','秦始皇',0,'1','','2018-05-02 20:41:49','2018-05-02 20:41:49','N','dist','admin.dist',1,'0'),(10,'dist','qinershi','qinshihuang','qinshihuang.qinershi','秦二世',1,'1','','2018-05-02 20:42:48','2018-05-02 20:42:48','N','dist','admin.dist',1,'0'),(11,'dist','liubang','qinershi','qinshihuang.qinershi.liubang','刘邦',2,'1','','2018-05-02 20:43:58','2018-05-02 20:43:58','N','dist','admin.dist',1,'0'),(12,'dist','xiangyu','qinershi','qinshihuang.qinershi.xiangyu','项羽',2,'1','','2018-05-02 20:44:27','2018-05-02 20:44:27','N','dist','admin.dist',1,'0'),(13,'dist','hanwudi','liubang','qinshihuang.qinershi.liubang.hanwudi','汉武帝',3,'1','','2018-05-02 20:45:18','2018-05-02 20:45:18','N','dist','admin.dist',1,'0'),(14,'dist','liuxiug','hanwudi','qinshihuang.qinershi.liubang.hanwudi.liuxiug','刘秀',4,'1','','2018-05-02 20:45:59','2018-05-02 20:45:59','N','dist','admin.dist',1,'0'),(15,'dist','liubei','liuxiug','qinshihuang.qinershi.liubang.hanwudi.liuxiug.liubei','刘备',5,'1','','2018-05-02 20:46:36','2018-05-02 20:46:36','N','dist','admin.dist',1,'0'),(16,'dist','caocao','liuxiug','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao','曹操',5,'1','','2018-05-02 20:46:52','2018-05-02 20:46:52','N','dist','admin.dist',1,'0'),(17,'dist','sunquan','liuxiug','qinshihuang.qinershi.liubang.hanwudi.liuxiug.sunquan','孙权',5,'1','','2018-05-02 20:47:05','2018-05-02 20:47:05','N','dist','admin.dist',1,'0'),(18,'dist','weichao','caocao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao','魏朝',6,'1','','2018-05-02 20:47:45','2018-05-02 20:47:45','N','dist','admin.dist',1,'0'),(19,'dist','suichao','weichao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao','隋朝',7,'1','','2018-05-02 20:48:06','2018-05-02 20:48:06','N','dist','admin.dist',1,'0'),(20,'dist','tangchao','suichao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao','唐朝',8,'1','','2018-05-02 20:48:25','2018-05-02 20:48:25','N','dist','admin.dist',1,'0'),(21,'dist','songchao','tangchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao','宋朝',9,'1','','2018-05-02 20:48:46','2018-05-02 20:48:46','N','dist','admin.dist',1,'0'),(22,'dist','yuanchao','songchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao.yuanchao','元朝',10,'1','','2018-05-02 20:49:07','2018-05-02 20:49:07','N','dist','admin.dist',1,'0'),(23,'dist','mingchao','yuanchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao.yuanchao.mingchao','明朝',11,'1','','2018-05-02 20:53:26','2018-05-02 20:53:26','N','dist','admin.dist',1,'0'),(24,'dist','qingchao','mingchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao.yuanchao.mingchao.qingchao','清朝',12,'3','','2018-05-02 20:53:46','2018-05-02 20:53:46','N','dist','admin.dist',1,'0'),(29,'dist','minguo','qingchao','qinshihuang.qinershi.liubang.hanwudi.liuxiug.caocao.weichao.suichao.tangchao.songchao.yuanchao.mingchao.qingchao.minguo','民国',13,'0','sss','2018-05-08 00:28:05','2018-05-08 00:28:05','N','yiji','admin.dist.yiji',2,'0'),(30,'admin','admin',NULL,'admin','系统管理员',0,'10000',NULL,NULL,NULL,'N',NULL,'admin',0,'1'),(31,'dist','dist','admin','admin.dist','平台商',1,'10000',NULL,NULL,NULL,'N','admin','admin.dist',1,'1'),(32,'dist','yiji','dist','admin.dist.yiji','一级代理',2,'10000',NULL,NULL,NULL,'N','dist','admin.dist.yiji',2,'1'),(33,'zhangsan','zhangsan','admin','admin.zhangsan','张三',1,'10000',NULL,'2018-05-16 00:06:52','2018-05-16 00:06:52','N','admin','admin.zhangsan',1,'1');
 
 /*Table structure for table `dis_profi_param` */
 
@@ -63,7 +92,7 @@ CREATE TABLE `dis_profi_param` (
 
 /*Data for the table `dis_profi_param` */
 
-insert  into `dis_profi_param`(`id`,`dis_platform_id`,`dis_pro_mode`,`dis_pro_type`,`dis_pro_value`,`dis_pro_level`,`dis_user_type`,`is_delete`,`update_time`,`add_time`) values (2,'admin','0','0','0.1','2','1','N','2018-04-05 16:30:21','2018-04-05 16:30:21'),(3,'admin','0','0','0.1','2','1','N','2018-04-05 16:32:52','2018-04-05 16:32:52');
+insert  into `dis_profi_param`(`id`,`dis_platform_id`,`dis_pro_mode`,`dis_pro_type`,`dis_pro_value`,`dis_pro_level`,`dis_user_type`,`is_delete`,`update_time`,`add_time`) values (2,'dist','0','0','0.1','2','1','N','2018-04-05 16:30:21','2018-04-05 16:30:21'),(3,'admin','0','0','0.1','2','1','N','2018-04-05 16:32:52','2018-04-05 16:32:52');
 
 /*Table structure for table `dis_profit_record` */
 
@@ -109,7 +138,7 @@ CREATE TABLE `sys_dic` (
   `add_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `update_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`dic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 /*Data for the table `sys_dic` */
 

@@ -21,8 +21,7 @@ DisMemberAmount.initColumn = function () {
         {title: '状态', field: 'amountStatus', visible: true, align: 'center', valign: 'middle'},
         {title: '总金额', field: 'totalAmount', visible: true, align: 'center', valign: 'middle'},
         {title: '可用金额', field: 'avaibleAmount', visible: true, align: 'center', valign: 'middle'},
-        {title: '冻结金额', field: 'frozenAmount', visible: true, align: 'center', valign: 'middle'},
-        {title: '修改时间', field: 'updateTime', visible: true, align: 'center', valign: 'middle'},]
+        {title: '冻结金额', field: 'frozenAmount', visible: true, align: 'center', valign: 'middle'},]
 
     $.ajax({
         type: "post",
@@ -31,8 +30,12 @@ DisMemberAmount.initColumn = function () {
         success: function(data) {
             if(data.length>0){
                 for (var i=0;i<data.length;i++){
-                  var sub= {title: ''+data[i].dicValue+'', field: ''+data[i].dicNotes+'', visible: true, align: 'center', valign: 'middle'}
+                  var sub= {title: ''+data[i].dicValue+'(总)'+'', field: ''+data[i].dicNotes+"TotalAmount"+'', visible: true, align: 'center', valign: 'middle'}
+                  var sub1= {title: ''+data[i].dicValue+'(冻结)'+'', field: ''+data[i].dicNotes+"FrozenAmount"+'', visible: true, align: 'center', valign: 'middle'}
+                  var sub2= {title: ''+data[i].dicValue+'(可用)'+'', field: ''+data[i].dicNotes+"AvaibleAmount"+'', visible: true, align: 'center', valign: 'middle'}
                   col.push(sub);
+                  col.push(sub1);
+                  col.push(sub2);
                 }
             }
         }

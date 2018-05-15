@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author huangpu
- * @since 2018-04-05
+ * @since 2018-05-08
  */
 public interface DisMemberInfoMapper extends BaseMapper<DisMemberInfo> {
 

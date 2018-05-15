@@ -7,10 +7,12 @@ import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
+import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.core.mutidatesource.DataSourceContextHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.dao.DisMemberInfoDao;
+import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.vo.LinksVo;
 import com.stylefeng.guns.modular.dist.vo.MemberRecordVo;
@@ -19,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,14 +45,13 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
     @Autowired
     DisMemberInfoMapper disMemberInfoMapper;
 
+    @Autowired
+    IDisMemberAmountService disMemberAmountService;
+
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public List<Map<String, Object>> selectList() {
-        System.out.println(DataSourceContextHolder.getDataSourceType());
-        String account= ShiroKit.getUser().getAccount();
-        if(ShiroKit.hasRole(Const.ADMIN_NAME)){
-            account=null;
-        }
+    public List<Map<String, Object>> selectList(String account) {
+
         List<Map<String, Object>> list=disMemberInfoDao.selectList(account);
         return list;
     }
@@ -123,6 +125,16 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         param.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         param.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         disMemberInfoMapper.insert(param);
+        disMemberAmountService.save(param.getDisUserId(),param.getDisUserName(),"0");
+    }
+
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public void saveAgent(DisMemberInfo param) {
+        param.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
+        param.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
+        disMemberInfoMapper.insert(param);
+        disMemberAmountService.save(param.getDisUserId(),param.getDisUserName(),"1");
     }
 
 

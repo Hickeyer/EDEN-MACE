@@ -24,7 +24,7 @@
         FROM  `dis_member_info` m
         LEFT JOIN `sys_dic` d ON m.`dis_user_type`=d.`dic_no` AND d.`dic_type_no`='disUserType' AND d.`is_delete`='N'
         LEFT JOIN `sys_dic` e ON m.`dis_level`=e.`dic_no` AND e.`dic_type_no`='disProLevel' AND e.`is_delete`='N'
-        WHERE m.is_delete='N'
+        WHERE m.is_delete='N' and m.type='0'
 
         <if test="account != null and account != ''">
             and    m.dis_platform_id=#{account}

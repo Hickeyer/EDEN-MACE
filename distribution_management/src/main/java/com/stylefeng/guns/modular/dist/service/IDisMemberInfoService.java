@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface IDisMemberInfoService {
 
-    List<Map<String, Object>> selectList();
+    List<Map<String, Object>> selectList(String account);
 
     /**
      * 根据用户名查询用户
@@ -24,5 +24,7 @@ public interface IDisMemberInfoService {
     String[] getDetaiCanvas(String id);
 
     public void save(DisMemberInfo param);
+
+    public void saveAgent(DisMemberInfo param);
 
 }

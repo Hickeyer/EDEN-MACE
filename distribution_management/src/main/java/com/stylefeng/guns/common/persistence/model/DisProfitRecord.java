@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-05-07
+ * @since 2018-05-08
  */
 @TableName("dis_profit_record")
 public class DisProfitRecord extends Model<DisProfitRecord> {
@@ -58,6 +58,26 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
      * 分类（0：用户分润 1:平台分润）
      */
 	private String type;
+    /**
+     * 交易前金额
+     */
+	@TableField("before_amount")
+	private BigDecimal beforeAmount;
+    /**
+     * 交易后金额
+     */
+	@TableField("after_amount")
+	private BigDecimal afterAmount;
+    /**
+     * 交易类型交易前金额
+     */
+	@TableField("before_pro_amount")
+	private BigDecimal beforeProAmount;
+    /**
+     * 交易类型交易后金额
+     */
+	@TableField("after_pro_amount")
+	private BigDecimal afterProAmount;
 
 
 	public Integer getId() {
@@ -164,6 +184,38 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 		this.type = type;
 	}
 
+	public BigDecimal getBeforeAmount() {
+		return beforeAmount;
+	}
+
+	public void setBeforeAmount(BigDecimal beforeAmount) {
+		this.beforeAmount = beforeAmount;
+	}
+
+	public BigDecimal getAfterAmount() {
+		return afterAmount;
+	}
+
+	public void setAfterAmount(BigDecimal afterAmount) {
+		this.afterAmount = afterAmount;
+	}
+
+	public BigDecimal getBeforeProAmount() {
+		return beforeProAmount;
+	}
+
+	public void setBeforeProAmount(BigDecimal beforeProAmount) {
+		this.beforeProAmount = beforeProAmount;
+	}
+
+	public BigDecimal getAfterProAmount() {
+		return afterProAmount;
+	}
+
+	public void setAfterProAmount(BigDecimal afterProAmount) {
+		this.afterProAmount = afterProAmount;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -185,6 +237,10 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 			", addTime=" + addTime +
 			", updateTime=" + updateTime +
 			", type=" + type +
+			", beforeAmount=" + beforeAmount +
+			", afterAmount=" + afterAmount +
+			", beforeProAmount=" + beforeProAmount +
+			", afterProAmount=" + afterProAmount +
 			"}";
 	}
 }
