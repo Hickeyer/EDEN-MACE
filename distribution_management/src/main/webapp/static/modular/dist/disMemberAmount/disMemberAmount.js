@@ -15,6 +15,7 @@ DisMemberAmount.initColumn = function () {
     var  col= [
         {field: 'selectItem', radio: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
+        {title: '用户类型', field: 'typeDetail', visible: true, align: 'center', valign: 'middle'},
         {title: '平台id', field: 'disPlatformId', visible: true, align: 'center', valign: 'middle'},
         {title: '用户id', field: 'disUserId', visible: true, align: 'center', valign: 'middle'},
         {title: '用户名称', field: 'disUserName', visible: true, align: 'center', valign: 'middle'},

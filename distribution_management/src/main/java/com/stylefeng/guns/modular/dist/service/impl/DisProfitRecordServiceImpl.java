@@ -3,6 +3,7 @@ package com.stylefeng.guns.modular.dist.service.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
 import com.stylefeng.guns.common.persistence.dao.DisProfiParamMapper;
@@ -12,10 +13,13 @@ import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.DisProfiParam;
 import com.stylefeng.guns.common.persistence.model.DisProfitRecord;
 import com.stylefeng.guns.common.persistence.model.User;
+import com.stylefeng.guns.core.mutidatesource.DataSourceContextHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.dao.DisProfitRecordDao;
+import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
+import com.stylefeng.guns.modular.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisProfitRecordService;
@@ -49,12 +53,11 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
     DisProfitRecordMapper disProfitRecordMapper;
 
     @Autowired
-    UserMapper userMapper;
+    IDisMemberAmountService disMemberAmountService;
 
     @Override
     @DataSource(name=DSEnum.DATA_SOURCE_BIZ)
-    public List<Map<String, Object>> selectList() {
-        String account= ShiroKit.getUser().getAccount();
+    public List<Map<String, Object>> selectList(String account) {
         List<Map<String, Object>> list=disProfitRecordDao.selectList(account);
         return list;
     }
@@ -115,12 +118,16 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     record.setDisOrderId(param.getOrderId());
                     record.setDisProType(param.getDisProType());
                     BigDecimal value=new BigDecimal(disProfiParam.getDisProValue());
+                    BigDecimal newAmount=new BigDecimal(0);
+                    String accountType="";
                     if("0".equals(disProfiParam.getDisProMode())){
-                        record.setDisAmount(param.getDisAmount().multiply(value));
+                        newAmount=param.getDisAmount().multiply(value);
+                        accountType="trade";
                     }else{
-                        record.setDisAmount(value);
+                        newAmount=value;
+                        accountType="level";
                     }
-
+                    record.setDisAmount(newAmount);
                     record.setDisGetUserId(userId);
                     record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
                     record.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
@@ -129,7 +136,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     disProfitRecordMapper.insert(record);
 
                     //增加会员金额信息
-
+                    disMemberAmountService.addMoney(userId,newAmount,accountType);
                 }
             }
         }
@@ -143,7 +150,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
     public  void  savePlat(DisProfitRecordVo param,DisMemberInfo memberInfo){
         Wrapper<DisProfiParam> profiParamP=new EntityWrapper<>();
         profiParamP.eq("dis_platform_id",param.getDisPlatformId())
-                .eq("dis_pro_type","10000");
+                .eq("dis_user_type","10000");
         List<DisProfiParam> profiParamList=disProfiParamMapper.selectList(profiParamP);
         if(profiParamList.size()>0){
             String levelInfo[]=memberInfo.getDisPlatFullIndex().split("\\.");
@@ -151,9 +158,6 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                 Integer level=Integer.parseInt(disProfiParam.getDisProLevel());
                 if(level<=levelInfo.length-1) {
                     String userId = levelInfo[levelInfo.length - (level + 1)];
-                    User userParam=new User();
-                    userParam.setAccount(userId);
-                    User subUser=userMapper.selectOne(userParam);
                     //设置分润
                     DisProfitRecord record = new DisProfitRecord();
                     record.setDisUserType(disProfiParam.getDisUserType());
@@ -162,12 +166,16 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     record.setDisOrderId(param.getOrderId());
                     record.setDisProType(param.getDisProType());
                     BigDecimal value = new BigDecimal(disProfiParam.getDisProValue());
-                    if ("0".equals(disProfiParam.getDisProMode())) {
-                        record.setDisAmount(param.getDisAmount().multiply(value));
-                    } else {
-                        record.setDisAmount(value);
+                    BigDecimal newAmount=new BigDecimal(0);
+                    String accountType="";
+                    if("0".equals(disProfiParam.getDisProMode())){
+                        newAmount=param.getDisAmount().multiply(value);
+                        accountType="trade";
+                    }else{
+                        newAmount=value;
+                        accountType="level";
                     }
-
+                    record.setDisAmount(newAmount);
                     record.setDisGetUserId(userId);
                     record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
                     record.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
@@ -176,6 +184,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     disProfitRecordMapper.insert(record);
 
                     //增加平台金额信息
+                    disMemberAmountService.addMoney(userId,newAmount,accountType);
                 }
             });
         }
@@ -189,7 +198,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
     public  void  saveAdmin(DisProfitRecordVo param,DisMemberInfo memberInfo){
         Wrapper<DisProfiParam> profiParamP=new EntityWrapper<>();
         profiParamP.eq("dis_platform_id","admin")
-                .eq("dis_pro_type","10000");
+                .eq("dis_user_type","10000");
         List<DisProfiParam> profiParamList=disProfiParamMapper.selectList(profiParamP);
         if(profiParamList.size()>0){
             String levelInfo[]=memberInfo.getDisPlatFullIndex().split("\\.");
@@ -205,19 +214,26 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     record.setDisOrderId(param.getOrderId());
                     record.setDisProType(param.getDisProType());
                     BigDecimal value = new BigDecimal(disProfiParam.getDisProValue());
-                    if ("0".equals(disProfiParam.getDisProMode())) {
-                        record.setDisAmount(param.getDisAmount().multiply(value));
-                    } else {
-                        record.setDisAmount(value);
+                    BigDecimal newAmount=new BigDecimal(0);
+                    String accountType="";
+                    if("0".equals(disProfiParam.getDisProMode())){
+                        newAmount=param.getDisAmount().multiply(value);
+                        accountType="trade";
+                    }else{
+                        newAmount=value;
+                        accountType="level";
                     }
+                    record.setDisAmount(newAmount);
 
                     record.setDisGetUserId(userId);
                     record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
                     record.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
                     record.setIsDelete("N");
+                    record.setType("1");
                     disProfitRecordMapper.insert(record);
 
                     //增加平台金额信息
+                    disMemberAmountService.addMoney(userId,newAmount,accountType);
                 }
             });
         }

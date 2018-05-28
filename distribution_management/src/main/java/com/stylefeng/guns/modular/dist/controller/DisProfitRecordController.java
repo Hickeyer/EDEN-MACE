@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
@@ -81,7 +82,11 @@ public class DisProfitRecordController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        List<Map<String, Object>> list=disProfitRecordService.selectList();
+        String account= ShiroKit.getUser().getAccount();
+        if(ShiroKit.hasRole(Const.ADMIN_NAME)){
+            account=null;
+        }
+        List<Map<String, Object>> list=disProfitRecordService.selectList(account);
         return super.warpObject(new ProfitRecordWarpper(list));
     }
 

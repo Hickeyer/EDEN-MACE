@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.dist.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -14,4 +15,6 @@ public interface IDisMemberAmountService {
     public void save(String userId,String userName,String type);
 
     List<Map<String, Object>> selectList(String platformId);
+
+    public void  addMoney(String userId, BigDecimal amount, String accountType);
 }

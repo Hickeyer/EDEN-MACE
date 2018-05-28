@@ -20,7 +20,7 @@
     </resultMap>
     <select id="selectList" resultMap="BaseResultMap">
         SELECT r.`dis_get_user_id`,r.`dis_set_user_id`,r.`dis_amount`,r.`dis_note`,r.`dis_order_id`,
-        r.`add_time`, d.`dic_value` AS dis_pro_type ,u.dic_value AS dis_user_type
+        r.`add_time`, d.`dic_value` AS dis_pro_type ,u.dic_value AS dis_user_type,r.type
         FROM   `dis_profit_record` r
         LEFT JOIN `sys_dic` d ON d.`dic_no`=r.`dis_pro_type` AND d.`dic_type_no`='disProType'
         LEFT JOIN `sys_dic` u ON u.`dic_no`=r.`dis_user_type` AND u.`dic_type_no`='disUserType'
@@ -28,7 +28,6 @@
         <if test="account != null and account != ''">
             and r.dis_platform_id=#{account}
         </if>
-            and r.type= '0'
 
     </select>
 

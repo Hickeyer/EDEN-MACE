@@ -15,6 +15,7 @@ DisProfitRecord.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
+        {title: '分润类型', field: 'typeDetail', visible: true, align: 'center', valign: 'middle'},
         {title: '收益账户', field: 'disGetUserId', visible: true, align: 'center', valign: 'middle'},
         {title: '交易账户', field: 'disSetUserId', visible: true, align: 'center', valign: 'middle'},
         {title: '收益', field: 'disAmount', visible: true, align: 'center', valign: 'middle'},

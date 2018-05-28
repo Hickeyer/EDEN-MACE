@@ -58,6 +58,25 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         return list;
     }
 
+    @Override
+    public void addMoney(String userId, BigDecimal amount, String accountType) {
+        DisMemberAmount disMemberAmount=new DisMemberAmount();
+        disMemberAmount.setDisUserId(userId);
+        DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
+        BigDecimal avaibleAmount=memberAmount.getAvaibleAmount();
+        BigDecimal totalAmount=memberAmount.getTotalAmount();
+        memberAmount.setAvaibleAmount(avaibleAmount.add(amount));
+        memberAmount.setTotalAmount(totalAmount.add(amount));
+        if("trade".equals(accountType)){
+            memberAmount.setTradeTotalAmount(memberAmount.getTotalAmount().add(amount));
+            memberAmount.setTradeAvaibleAmount(memberAmount.getTradeAvaibleAmount().add(amount));
+        }else if("level".equals(accountType)){
+            memberAmount.setLevelTotalAmount(memberAmount.getLevelTotalAmount().add(amount));
+            memberAmount.setLevelAvaibleAmount(memberAmount.getLevelAvaibleAmount().add(amount));
+        }
+        disMemberAmountMapper.updateById(memberAmount);
+    }
+
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public DisMemberAmount initAmount(String userId, String userName, String type){
         DisMemberAmount amount=new DisMemberAmount();

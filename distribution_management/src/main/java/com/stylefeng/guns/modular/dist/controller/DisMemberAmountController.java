@@ -6,6 +6,7 @@ import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountMongoService;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
+import com.stylefeng.guns.modular.dist.wapper.MemberAmountWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,6 +73,16 @@ public class DisMemberAmountController extends BaseController {
             platformId=null;
         }
         List<Map<String, Object>> list=disMemberAmountService.selectList(platformId);
+        list.forEach((map)->{
+            String type = (String) map.get("type");
+            String typeDetail="未知";
+            if("0".equals(type)){
+                typeDetail="用户分润";
+            }else if("1".equals(type)){
+                typeDetail="平台分润";
+            }
+            map.put("typeDetail",typeDetail);
+        });
         return list;
     }
 

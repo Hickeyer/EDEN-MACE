@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface IDisProfitRecordService {
 
-    List<Map<String, Object>> selectList();
+    List<Map<String, Object>> selectList(String account);
 
     public void save(DisProfitRecordVo param);
 
