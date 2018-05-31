@@ -1,6 +1,6 @@
 package com.stylefeng.guns.modular.dist.service;
 
-import com.stylefeng.guns.common.persistence.model.DisProfiParam;
+import com.stylefeng.guns.common.persistence.model.DisProfitParam;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,7 @@ public interface IDisProfiParamService {
 
     public List<Map<String, Object>> selectList();
 
-    public void save(DisProfiParam param);
+    public void save(DisProfitParam param);
 
     public void delete(int id);
 

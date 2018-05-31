@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.dist.dao.DistWithdrawParamDao">
+    <resultMap id="BaseResultMap" type="map">
+        <id column="id" property="id" />
+        <result column="begin_amount" property="beginAmount" />
+        <result column="end_amount" property="endAmount" />
+        <result column="dis_pro_mode" property="disProMode" />
+        <result column="dis_withdraw_value" property="disWithdrawValue" />
+        <result column="is_delete" property="isDelete" />
+        <result column="add_time" property="addTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <resultMap id="BaseResultMapParam" type="com.stylefeng.guns.common.persistence.model.DistWithdrawParam">
+        <id column="id" property="id" />
+        <result column="begin_amount" property="beginAmount" />
+        <result column="end_amount" property="endAmount" />
+        <result column="dis_pro_mode" property="disProMode" />
+        <result column="dis_withdraw_value" property="disWithdrawValue" />
+        <result column="is_delete" property="isDelete" />
+        <result column="add_time" property="addTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT d.begin_amount,d.end_amount,d.dis_withdraw_value,d.id,
+        d.is_delete,d.add_time,d.update_time ,e.`dic_value` AS dis_pro_mode
+        FROM  `dist_withdraw_param` d
+        LEFT JOIN `sys_dic` e ON  e.`dic_no`=d.`dis_pro_mode` AND e.`dic_type_no`='disProMode'
+        WHERE d.`is_delete`='N'
+        <if test="beginAmount!=null and beginAmount !=''">
+            <![CDATA[ and begin_amount > = #{beginAmount}]]>
+        </if>
+        <if test="endAmount != null and endAmount !=''">
+            <![CDATA[ AND end_amount< #{endAmount}]]>
+        </if>
+    </select>
+    <select id="selectOneParam" resultMap="BaseResultMapParam">
+        SELECT *  FROM  `dist_withdraw_param`
+        WHERE `is_delete`='N'
+        <if test="amount!=null and amount !=''">
+            <![CDATA[ and begin_amount <= #{amount}]]>
+        </if>
+        <if test="amount != null and amount !=''">
+            <![CDATA[ AND end_amount > #{amount}]]>
+        </if>
+    </select>
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT d.begin_amount,d.end_amount,d.dis_withdraw_value,d.id,
+        d.is_delete,d.add_time,d.update_time ,e.`dic_value` AS dis_pro_mode
+        FROM  `dist_withdraw_param` d
+        LEFT JOIN `sys_dic` e ON  e.`dic_no`=d.`dis_pro_mode` AND e.`dic_type_no`='disProMode'
+        WHERE d.`is_delete`='N'
+        <if test="beginAmount!=null and beginAmount !=''">
+            <![CDATA[ and begin_amount > = #{beginAmount}]]>
+        </if>
+        <if test="endAmount != null and endAmount !=''">
+            <![CDATA[ AND end_amount< #{endAmount}]]>
+        </if>
+    </select>
+
+    <select id="count" resultType="Integer">
+        SELECT COUNT(*) FROM  `dist_withdraw_param`
+        WHERE 1=1
+        <if test="beginAmount!=null and beginAmount !=''">
+           <![CDATA[ and begin_amount > = #{beginAmount}]]>
+        </if>
+        <if test="endAmount != null and endAmount !=''">
+            <![CDATA[ AND end_amount< #{endAmount}]]>
+        </if>
+
+
+    </select>
+
+</mapper>

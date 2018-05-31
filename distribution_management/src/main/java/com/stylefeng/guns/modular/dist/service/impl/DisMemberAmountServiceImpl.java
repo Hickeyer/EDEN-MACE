@@ -5,15 +5,24 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.exception.BizExceptionEnum;
+import com.stylefeng.guns.common.exception.BussinessException;
+import com.stylefeng.guns.common.persistence.dao.DisAmountSituationMapper;
 import com.stylefeng.guns.common.persistence.dao.DisMemberAmountMapper;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
+import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
+import com.stylefeng.guns.common.persistence.model.DisAmountSituation;
 import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
+import com.stylefeng.guns.common.persistence.model.SysDic;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.dao.DisMemberAmountDao;
+import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -27,16 +36,24 @@ import java.util.Map;
  * @Date 2018-05-08 21:16:47
  */
 @Service
+@Transactional
 public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
 
-    @Resource
-    DisMemberInfoMapper disMemberInfoMapper;
 
     @Resource
     DisMemberAmountMapper disMemberAmountMapper;
 
     @Resource
     DisMemberAmountDao disMemberAmountDao;
+
+    @Resource
+    DisAmountSituationMapper disAmountSituationMapper;
+
+    @Resource
+    SysDicMapper sysDicMapper;
+
+    @Autowired
+    IDisMemberInfoService disMemberInfoService;
 
 
     @Override
@@ -63,16 +80,88 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         DisMemberAmount disMemberAmount=new DisMemberAmount();
         disMemberAmount.setDisUserId(userId);
         DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
+
+        //记录金额
+        DisAmountSituation situation=new DisAmountSituation();
+        situation.setDisUserId(userId);
+        situation.setBeforeChangeAmount(memberAmount.getTotalAmount());
+        situation.setChangeAmount(amount);
+
+
         BigDecimal avaibleAmount=memberAmount.getAvaibleAmount();
         BigDecimal totalAmount=memberAmount.getTotalAmount();
         memberAmount.setAvaibleAmount(avaibleAmount.add(amount));
         memberAmount.setTotalAmount(totalAmount.add(amount));
+
+        situation.setAfterChangeAmount(memberAmount.getTotalAmount());
+        BigDecimal afterThirdAmount=new BigDecimal(0);
+        BigDecimal beforeThirdAmount=new BigDecimal(0);
         if("trade".equals(accountType)){
-            memberAmount.setTradeTotalAmount(memberAmount.getTotalAmount().add(amount));
+            afterThirdAmount=memberAmount.getTradeTotalAmount().add(amount);
+            beforeThirdAmount=memberAmount.getTradeTotalAmount();
+            memberAmount.setTradeTotalAmount(memberAmount.getTradeTotalAmount().add(amount));
             memberAmount.setTradeAvaibleAmount(memberAmount.getTradeAvaibleAmount().add(amount));
         }else if("level".equals(accountType)){
+            afterThirdAmount=memberAmount.getLevelTotalAmount().add(amount);
+            beforeThirdAmount=memberAmount.getLevelTotalAmount();
             memberAmount.setLevelTotalAmount(memberAmount.getLevelTotalAmount().add(amount));
             memberAmount.setLevelAvaibleAmount(memberAmount.getLevelAvaibleAmount().add(amount));
+        }
+        situation.setSpecificBeforeChangeAmount(beforeThirdAmount);
+        situation.setSpecificAfterChangeAmount(afterThirdAmount);
+        situation.setType("0");
+        situation.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
+        SysDic sysDicParam=new SysDic();
+        sysDicParam.setDicTypeNo("disProType");
+        sysDicParam.setDicNotes(accountType);
+        SysDic sysDic=sysDicMapper.selectOne(sysDicParam);
+        situation.setDisProType(sysDic.getDicNo());
+        disMemberAmountMapper.updateById(memberAmount);
+        Wrapper<DisAmountSituation> situationWrapper=new EntityWrapper<>();
+        situationWrapper.eq("dis_user_id",userId)
+                .eq("dis_pro_type",sysDic.getDicNo());
+        Integer count=disAmountSituationMapper.selectCount(situationWrapper);
+        if(count==0){
+            DisMemberInfo memberInfo= disMemberInfoService.selectListByUserId(userId);
+            DisAmountSituation initSituation=new DisAmountSituation();
+            initSituation.setDisProType(sysDic.getDicNo());
+            initSituation.setDisUserId(userId);
+            initSituation.setAddTime(memberAmount.getAddTime());
+            disAmountSituationMapper.insert(initSituation);
+        }
+        disAmountSituationMapper.insert(situation);
+    }
+
+    /**
+     * 冻结用户金额，用于提现，首先判断用户可用金额是否足够，
+     * 如果用户金额足够则执行
+     * @param userId
+     * @param amount
+     * @param accountType
+     */
+    @Override
+    public void reduceMoney(String userId, BigDecimal amount, String accountType) {
+        DisMemberAmount disMemberAmount=new DisMemberAmount();
+        disMemberAmount.setDisUserId(userId);
+        DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
+        BigDecimal  avaibleThirdAmount=new BigDecimal(0);
+        if("trade".equals(accountType)){
+            avaibleThirdAmount=memberAmount.getTradeAvaibleAmount();
+        }else if("level".equals(accountType)){
+            avaibleThirdAmount=memberAmount.getLevelAvaibleAmount();
+        }
+        if(avaibleThirdAmount.compareTo(amount)==-1){
+            throw  new BussinessException(BizExceptionEnum.LOW_MONEY);
+        }
+        /*开始扣除金额*/
+        memberAmount.setAvaibleAmount(memberAmount.getAvaibleAmount().subtract(amount));
+        memberAmount.setFrozenAmount(memberAmount.getFrozenAmount().add(amount));
+        if("trade".equals(accountType)){
+            memberAmount.setTradeAvaibleAmount(memberAmount.getTradeAvaibleAmount().subtract(amount));
+            memberAmount.setTradeFrozenAmount(memberAmount.getTradeFrozenAmount().add(amount));
+        }else if("level".equals(accountType)){
+            memberAmount.setLevelAvaibleAmount(memberAmount.getLevelAvaibleAmount().subtract(amount));
+            memberAmount.setLevelFrozenAmount(memberAmount.getLevelFrozenAmount().add(amount));
         }
         disMemberAmountMapper.updateById(memberAmount);
     }

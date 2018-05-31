@@ -150,6 +150,7 @@ public class ShiroConfig {
         hashMap.put("/login", "anon");
         hashMap.put("/disMemberInfo/add", "anon");
         hashMap.put("/disProfitRecord/add", "anon");
+        hashMap.put("/DisWithdrawRecord/add", "anon");
         hashMap.put("/global/sessionError", "anon");
         hashMap.put("/kaptcha", "anon");
         hashMap.put("/**", "user");

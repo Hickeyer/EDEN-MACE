@@ -49,11 +49,22 @@ SimOper.openMemberAdd = function () {
 SimOper.openOrderAdd = function () {
     var index = layer.open({
         type: 2,
-        title: '模拟添加会员',
+        title: '模拟交易',
         area: ['800px', '420px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/simOper/order_add'
+    });
+    this.layerIndex = index;
+};
+SimOper.openWithdrawAdd = function () {
+    var index = layer.open({
+        type: 2,
+        title: '模拟提现',
+        area: ['800px', '420px'], //宽高
+        fix: false, //不固定
+        maxmin: true,
+        content: Feng.ctxPath + '/simOper/withdraw_add'
     });
     this.layerIndex = index;
 };

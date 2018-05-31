@@ -39,6 +39,11 @@ public class SimOperController extends BaseController {
     public String simOperAdd() {
         return PREFIX + "simOper_add.html";
     }
+    @RequestMapping("/withdraw_add")
+    public String withdraw_add(Model model) {
+        model.addAttribute("disProType",sysDicService.selectListByCode("disProType"));
+        return PREFIX + "withdraw_add.html";
+    }
 
     /**
      * 会员增加页面

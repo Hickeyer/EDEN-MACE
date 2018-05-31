@@ -3,23 +3,17 @@ package com.stylefeng.guns.modular.dist.service.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
-import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
-import com.stylefeng.guns.common.persistence.dao.DisProfiParamMapper;
+import com.stylefeng.guns.common.persistence.dao.DisProfitParamMapper;
 import com.stylefeng.guns.common.persistence.dao.DisProfitRecordMapper;
-import com.stylefeng.guns.common.persistence.dao.UserMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
-import com.stylefeng.guns.common.persistence.model.DisProfiParam;
+import com.stylefeng.guns.common.persistence.model.DisProfitParam;
 import com.stylefeng.guns.common.persistence.model.DisProfitRecord;
-import com.stylefeng.guns.common.persistence.model.User;
-import com.stylefeng.guns.core.mutidatesource.DataSourceContextHolder;
-import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.dao.DisProfitRecordDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
-import com.stylefeng.guns.modular.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisProfitRecordService;
@@ -44,7 +38,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
     DisProfitRecordDao disProfitRecordDao;
 
     @Autowired
-    DisProfiParamMapper disProfiParamMapper;
+    DisProfitParamMapper disProfiParamMapper;
 
     @Autowired
     DisMemberInfoMapper disMemberInfoMapper;
@@ -88,16 +82,16 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         //根据平台id和平台属性查询对应的分润信息，如交易分润，开始计算交易分润对应的数据
         //对会员级别的数据进行分润分配，并且加入到余额中去
         //对平台级别的数据进行分润分配，并且加入到余额中去
-        Wrapper<DisProfiParam> profiParamP=new EntityWrapper<>();
+        Wrapper<DisProfitParam> profiParamP=new EntityWrapper<>();
         profiParamP.eq("dis_platform_id",param.getDisPlatformId())
                 .eq("dis_pro_type",param.getDisProType());
-        List<DisProfiParam> profiParamList=disProfiParamMapper.selectList(profiParamP);
+        List<DisProfitParam> profiParamList=disProfiParamMapper.selectList(profiParamP);
         if(profiParamList.size()>0){
             if(memberInfo==null){
                 return ;
             }
             String levelInfo[]=memberInfo.getDisFullIndex().split("\\.");
-            for (DisProfiParam disProfiParam:profiParamList){
+            for (DisProfitParam disProfiParam:profiParamList){
                 Integer level=Integer.parseInt(disProfiParam.getDisProLevel());
                 if(level<=levelInfo.length-1){
                     //如果等级不对也无需计算分润
@@ -148,13 +142,13 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
      * @param memberInfo
      */
     public  void  savePlat(DisProfitRecordVo param,DisMemberInfo memberInfo){
-        Wrapper<DisProfiParam> profiParamP=new EntityWrapper<>();
+        Wrapper<DisProfitParam> profiParamP=new EntityWrapper<>();
         profiParamP.eq("dis_platform_id",param.getDisPlatformId())
                 .eq("dis_user_type","10000");
-        List<DisProfiParam> profiParamList=disProfiParamMapper.selectList(profiParamP);
+        List<DisProfitParam> profiParamList=disProfiParamMapper.selectList(profiParamP);
         if(profiParamList.size()>0){
             String levelInfo[]=memberInfo.getDisPlatFullIndex().split("\\.");
-            profiParamList.forEach((DisProfiParam disProfiParam) ->{
+            profiParamList.forEach((DisProfitParam disProfiParam) ->{
                 Integer level=Integer.parseInt(disProfiParam.getDisProLevel());
                 if(level<=levelInfo.length-1) {
                     String userId = levelInfo[levelInfo.length - (level + 1)];
@@ -196,13 +190,13 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
      * @param memberInfo
      */
     public  void  saveAdmin(DisProfitRecordVo param,DisMemberInfo memberInfo){
-        Wrapper<DisProfiParam> profiParamP=new EntityWrapper<>();
+        Wrapper<DisProfitParam> profiParamP=new EntityWrapper<>();
         profiParamP.eq("dis_platform_id","admin")
                 .eq("dis_user_type","10000");
-        List<DisProfiParam> profiParamList=disProfiParamMapper.selectList(profiParamP);
+        List<DisProfitParam> profiParamList=disProfiParamMapper.selectList(profiParamP);
         if(profiParamList.size()>0){
             String levelInfo[]=memberInfo.getDisPlatFullIndex().split("\\.");
-            profiParamList.forEach((DisProfiParam disProfiParam) ->{
+            profiParamList.forEach((DisProfitParam disProfiParam) ->{
                 Integer level=Integer.parseInt(disProfiParam.getDisProLevel());
                 if(level<=levelInfo.length-1) {
                     String userId = "admin";

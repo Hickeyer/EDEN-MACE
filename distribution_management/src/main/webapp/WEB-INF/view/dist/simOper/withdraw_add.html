@@ -1,0 +1,36 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="secret" name="秘钥" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjgxODk2Nzk2NTgsInBheWxvYWQiOiJcInhpYW9qaWFuZ1wiIn0.IgSivW25QtgDZ3D-Hgybc-AmxCuPfhw8QaG31p6NvgU" underline="true"/>
+                    <#input id="userId" name="交易人id" underline="true"/>
+
+                </div>
+
+                <div class="col-sm-6">
+                    <#input id="amount" name="提现金额" underline="true"/>
+                    <#select id="disProType" name="交易账户 ">
+                    @for(dis in disProType){
+                    <option value="${dis.dicNo}">${dis.dicValue}</option>
+                    @}
+                </#select>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="SimOperInfoDlg.addWithdrawSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="SimOperInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/dist/simOper/withdraw_add.js"></script>
+@}

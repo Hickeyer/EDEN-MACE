@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.DisWithdrawRecordMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.DisWithdrawRecord">
+		<id column="id" property="id" />
+		<result column="dis_user_id" property="disUserId" />
+		<result column="withdraw_num" property="withdrawNum" />
+		<result column="total_amount" property="totalAmount" />
+		<result column="fee_amount" property="feeAmount" />
+		<result column="real_amount" property="realAmount" />
+		<result column="withdraw_time" property="withdrawTime" />
+		<result column="handle_time" property="handleTime" />
+		<result column="withdraw_status" property="withdrawStatus" />
+	</resultMap>
+
+</mapper>

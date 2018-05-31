@@ -9,10 +9,10 @@
                 <div class="col-sm-6 b-r">
                     <#input id="disProValue" name="分润值" underline="true"/>
                     <#select id="disProMode" name="分润模型 ">
-                    @for(dis in disProMode){
-                    <option value="${dis.dicNo}">${dis.dicValue}</option>
-                @}
-                </#select>
+                        @for(dis in disProMode){
+                        <option value="${dis.dicNo}">${dis.dicValue}</option>
+                        @}
+                    </#select>
                     <#select id="disProType" name="分润类别 ">
                     @for(dis in disProType){
                     <option value="${dis.dicNo}">${dis.dicValue}</option>
