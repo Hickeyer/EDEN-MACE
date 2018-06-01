@@ -68,31 +68,20 @@ plug用来调试接口，调试完成后，可以直接使用
 
 每个分销商只能看到自己名下的会员。并且可以看到自己的交易明细，这个就减少原有的系统的开发。
 
-会员管理用于查看分销的会员，并且支持图形化查看其关系
+### 平台简介
+对接参考，用来对系统进行对接，并且已经写好了的模拟接口，可以模仿使用
+![输入图片说明](https://gitee.com/uploads/images/2018/0531/232723_3195cc5d_1497609.jpeg "1.jpg")
 
-![输入图片说明](https://gitee.com/uploads/images/2018/0414/155612_90c66fff_1497609.jpeg "1.jpg")
+会员信息对会员账号和会员资金进行管理
+![输入图片说明](https://gitee.com/uploads/images/2018/0531/232930_a2b39ed8_1497609.jpeg "2.jpg")
+![输入图片说明](https://gitee.com/uploads/images/2018/0531/233008_65b79616_1497609.jpeg "3.jpg")
+![输入图片说明](https://gitee.com/uploads/images/2018/0531/233016_a1f5825b_1497609.jpeg "4.jpg")
 
-![输入图片说明](https://gitee.com/uploads/images/2018/0414/155641_9d426b81_1497609.jpeg "2.jpg")
+分销配置用来配置分润等信息
+![输入图片说明](https://gitee.com/uploads/images/2018/0531/233057_0ec35361_1497609.jpeg "5.jpg")
+![输入图片说明](https://gitee.com/uploads/images/2018/0531/233120_47801737_1497609.jpeg "6.jpg")
+![输入图片说明](https://gitee.com/uploads/images/2018/0531/233110_36d91f83_1497609.jpeg "7.jpg")
 
-如图很明白的看到了 中国朝代的关系
-
-![输入图片说明](https://gitee.com/uploads/images/2018/0502/205806_11435b20_1497609.jpeg "QQ截图20180502205455.jpg")
-
-接口管理用于提供对接的接口文档
-
-![输入图片说明](https://gitee.com/uploads/images/2018/0414/155749_cff31c2c_1497609.jpeg "3.jpg")
-分润设置用于设置分销商的分润 
-![输入图片说明](https://gitee.com/uploads/images/2018/0414/160010_69264fa1_1497609.jpeg "5.jpg")
-
-交易查询 ，用于查询相关交易分润
-
-![输入图片说明](https://gitee.com/uploads/images/2018/0414/155829_4f4d13ad_1497609.jpeg "4.jpg")
-
-维护相关分销字典
-![输入图片说明](https://gitee.com/uploads/images/2018/0425/222344_946c3f4a_1497609.jpeg "QQ截图20180425222254.jpg")
-
-
-产品后续规划：
-   账户管理（mongodb）
-   提现管理(mysql)
-   图形界面统计(echarts)
+交易中心 集中对收入和支出进行管理
+![输入图片说明](https://gitee.com/uploads/images/2018/0531/233149_4a1d658e_1497609.jpeg "8.jpg")
+![输入图片说明](https://gitee.com/uploads/images/2018/0531/233201_d8fb5542_1497609.jpeg "9.jpg")
