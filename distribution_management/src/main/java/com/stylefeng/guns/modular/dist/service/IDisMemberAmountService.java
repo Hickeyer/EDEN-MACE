@@ -18,5 +18,29 @@ public interface IDisMemberAmountService {
 
     public void  addMoney(String userId, BigDecimal amount, String accountType);
 
-    public void  reduceMoney(String userId, BigDecimal amount, String accountType);
+    /**
+     * 冻结金额
+     * @param userId
+     * @param amount
+     * @param accountType
+     */
+    public void  frozenAmount(String userId, BigDecimal amount, String accountType);
+
+
+    /**
+     * 最终处理
+     * @param userId
+     * @param amount
+     * @param accountType
+     */
+    public  void reduceMoney(String userId, BigDecimal amount, String accountType);
+
+    /**
+     * 退回冻结金额，可用金额
+     * @param userId
+     * @param amount
+     * @param accountType
+     */
+    public  void returnMoney(String userId, BigDecimal amount, String accountType);
+
 }

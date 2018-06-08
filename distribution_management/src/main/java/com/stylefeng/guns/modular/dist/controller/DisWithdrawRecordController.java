@@ -1,9 +1,13 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.stylefeng.guns.common.annotion.DataSource;
+import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
+import com.stylefeng.guns.common.persistence.dao.DisWithdrawRecordMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
+import com.stylefeng.guns.common.persistence.model.DisWithdrawRecord;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.service.IDisWithdrawRecordService;
 import com.stylefeng.guns.modular.dist.util.Jwt;
@@ -38,6 +42,9 @@ public class DisWithdrawRecordController extends BaseController {
     @Autowired
     IDisWithdrawRecordService disWithdrawRecordService;
 
+    @Autowired
+    DisWithdrawRecordMapper disWithdrawRecordMapper;
+
     @Value("${dist.jwt.account}")
     private  String account;
 
@@ -58,6 +65,13 @@ public class DisWithdrawRecordController extends BaseController {
      */
     @RequestMapping("/DisWithdrawRecord_add")
     public String DisWithdrawRecordAdd() {
+        return PREFIX + "DisWithdrawRecord_add.html";
+    }
+    @RequestMapping("/DisWithdrawRecord_audit/{id}")
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public String DisWithdrawRecordAudit(@PathVariable Integer id,Model model) {
+        DisWithdrawRecord record= disWithdrawRecordMapper.selectById(id);
+        model.addAttribute("record",record);
         return PREFIX + "DisWithdrawRecord_add.html";
     }
 
@@ -115,6 +129,12 @@ public class DisWithdrawRecordController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update() {
+        return super.SUCCESS_TIP;
+    }
+    @RequestMapping(value = "/audit")
+    @ResponseBody
+    public Object audit(Integer id,String type) {
+        disWithdrawRecordService.dealWithdrawl(id,type);
         return super.SUCCESS_TIP;
     }
 

@@ -44,15 +44,18 @@ DisWithdrawRecord.check = function () {
  * 点击添加提现记录
  */
 DisWithdrawRecord.openAddDisWithdrawRecord = function () {
-    var index = layer.open({
-        type: 2,
-        title: '添加提现记录',
-        area: ['800px', '420px'], //宽高
-        fix: false, //不固定
-        maxmin: true,
-        content: Feng.ctxPath + '/DisWithdrawRecord/DisWithdrawRecord_add'
-    });
-    this.layerIndex = index;
+    if (this.check()) {
+        var index = layer.open({
+            type: 2,
+            title: '提现审核',
+            area: ['800px', '420px'], //宽高
+            fix: false, //不固定
+            maxmin: true,
+            content: Feng.ctxPath + '/DisWithdrawRecord/DisWithdrawRecord_audit/'+DisWithdrawRecord.seItem.id
+        });
+        this.layerIndex = index;
+    }
+
 };
 
 /**

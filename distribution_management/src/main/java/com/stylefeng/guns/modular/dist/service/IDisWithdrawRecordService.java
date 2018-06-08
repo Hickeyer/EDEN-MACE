@@ -17,4 +17,6 @@ public interface IDisWithdrawRecordService {
 
     public List<Map<String, Object>> selectList();
 
+    public void dealWithdrawl(Integer id,String type);
+
 }

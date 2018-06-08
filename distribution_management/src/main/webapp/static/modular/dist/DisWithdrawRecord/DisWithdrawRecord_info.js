@@ -50,20 +50,20 @@ DisWithdrawRecordInfoDlg.collectData = function() {
 /**
  * 提交添加
  */
-DisWithdrawRecordInfoDlg.addSubmit = function() {
+DisWithdrawRecordInfoDlg.addSubmit = function(type) {
 
-    this.clearData();
-    this.collectData();
-
+    var id=$("#id").val();
     //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/DisWithdrawRecord/add", function(data){
+    var ajax = new $ax(Feng.ctxPath + "/DisWithdrawRecord/audit", function(data){
         Feng.success("添加成功!");
         window.parent.DisWithdrawRecord.table.refresh();
         DisWithdrawRecordInfoDlg.close();
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
-    ajax.set(this.DisWithdrawRecordInfoData);
+    alert(type);
+    ajax.set("id",id);
+    ajax.set("type",type);
     ajax.start();
 }
 

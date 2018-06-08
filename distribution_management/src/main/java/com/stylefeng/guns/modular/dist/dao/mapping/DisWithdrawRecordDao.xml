@@ -13,13 +13,16 @@
         <result column="withdraw_time" property="withdrawTime" />
         <result column="handle_time" property="handleTime" />
         <result column="withdraw_status" property="withdrawStatus" />
+        <result column="dis_pro_mode" property="disProMode" />
     </resultMap>
 
     <select id="selectList" resultMap="BaseResultMap">
         SELECT d.dis_user_id,d.`id`,d.withdraw_num,d.total_amount,
         d.fee_amount,d.real_amount,d.withdraw_time,d.handle_time,e.dic_value  withdraw_status
+        ,f.dic_value dis_pro_mode
         FROM `dis_withdraw_record` d
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=d.`withdraw_status` AND e.`dic_type_no`='withdrawStatus'
+        LEFT JOIN `sys_dic` f ON  f.`dic_no`=d.`dis_pro_mode` AND f.`dic_type_no`='disProMode'
     </select>
 
 

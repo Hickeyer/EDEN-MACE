@@ -13,6 +13,7 @@
 		<result column="withdraw_time" property="withdrawTime" />
 		<result column="handle_time" property="handleTime" />
 		<result column="withdraw_status" property="withdrawStatus" />
+		<result column="dis_pro_mode" property="disProMode" />
 	</resultMap>
 
 </mapper>

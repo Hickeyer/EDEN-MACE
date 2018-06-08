@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-05-30
+ * @since 2018-06-09
  */
 @TableName("dis_withdraw_record")
 public class DisWithdrawRecord extends Model<DisWithdrawRecord> {
@@ -63,6 +63,11 @@ public class DisWithdrawRecord extends Model<DisWithdrawRecord> {
      */
 	@TableField("withdraw_status")
 	private String withdrawStatus;
+    /**
+     * 提现账户
+     */
+	@TableField("dis_pro_mode")
+	private String disProMode;
 
 
 	public Integer getId() {
@@ -137,6 +142,14 @@ public class DisWithdrawRecord extends Model<DisWithdrawRecord> {
 		this.withdrawStatus = withdrawStatus;
 	}
 
+	public String getDisProMode() {
+		return disProMode;
+	}
+
+	public void setDisProMode(String disProMode) {
+		this.disProMode = disProMode;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -154,6 +167,7 @@ public class DisWithdrawRecord extends Model<DisWithdrawRecord> {
 			", withdrawTime=" + withdrawTime +
 			", handleTime=" + handleTime +
 			", withdrawStatus=" + withdrawStatus +
+			", disProMode=" + disProMode +
 			"}";
 	}
 }

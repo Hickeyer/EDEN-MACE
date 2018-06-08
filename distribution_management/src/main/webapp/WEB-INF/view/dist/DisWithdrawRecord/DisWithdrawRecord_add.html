@@ -3,21 +3,26 @@
     <div class="ibox-content">
         <div class="form-horizontal">
 
-            <input type="hidden" id="id" value="">
+            <input type="hidden" id="id" value="${record.id}">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-
+                    <#input id="disUserId" name="用户编号" value="${record.disUserId}" underline="true"/>
+                    <#input id="disUserId" name="提现编号" value="${record.withdrawNum}" underline="true"/>
+                    <#input id="totalAmount" name="提现总金额" value="${record.totalAmount}" underline="true"/>
                 </div>
 
                 <div class="col-sm-6">
-
+                    <#input id="feeAmount" name="提现手续费" value="${record.feeAmount}" underline="true"/>
+                    <#input id="realAmount" name="实际到账金额" value="${record.realAmount}" underline="true"/>
+                    <#input id="withdrawTime" name="申请时间" value="${record.withdrawTime}" underline="true"/>
                 </div>
             </div>
 
             <div class="row btn-group-m-t">
                 <div class="col-sm-10">
-                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="DisWithdrawRecordInfoDlg.addSubmit()"/>
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="DisWithdrawRecordInfoDlg.addSubmit(2)"/>
+                    <#button btnCss="info" name="拒绝" id="resue" icon="fa-check" clickFun="DisWithdrawRecordInfoDlg.addSubmit(3)"/>
                     <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="DisWithdrawRecordInfoDlg.close()"/>
                 </div>
             </div>

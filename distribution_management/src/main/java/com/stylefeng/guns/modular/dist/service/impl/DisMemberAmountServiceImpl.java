@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.constant.dist.SituationStatus;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.dao.DisAmountSituationMapper;
@@ -109,7 +110,7 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         }
         situation.setSpecificBeforeChangeAmount(beforeThirdAmount);
         situation.setSpecificAfterChangeAmount(afterThirdAmount);
-        situation.setType("0");
+        situation.setType(SituationStatus.INCOME_STATUS.getStatus());
         situation.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         SysDic sysDicParam=new SysDic();
         sysDicParam.setDicTypeNo("disProType");
@@ -140,7 +141,7 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
      * @param accountType
      */
     @Override
-    public void reduceMoney(String userId, BigDecimal amount, String accountType) {
+    public void frozenAmount(String userId, BigDecimal amount, String accountType) {
         DisMemberAmount disMemberAmount=new DisMemberAmount();
         disMemberAmount.setDisUserId(userId);
         DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
@@ -162,6 +163,82 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         }else if("level".equals(accountType)){
             memberAmount.setLevelAvaibleAmount(memberAmount.getLevelAvaibleAmount().subtract(amount));
             memberAmount.setLevelFrozenAmount(memberAmount.getLevelFrozenAmount().add(amount));
+        }
+        disMemberAmountMapper.updateById(memberAmount);
+    }
+
+    @Override
+    public void reduceMoney(String userId, BigDecimal amount, String accountType) {
+
+        //记录金额
+        DisAmountSituation situation=new DisAmountSituation();
+        situation.setDisUserId(userId);
+        situation.setChangeAmount(amount);
+
+        DisMemberAmount disMemberAmount=new DisMemberAmount();
+        disMemberAmount.setDisUserId(userId);
+        DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
+        situation.setBeforeChangeAmount(memberAmount.getTotalAmount());
+        situation.setAfterChangeAmount(memberAmount.getTotalAmount().subtract(amount));
+        BigDecimal  avaibleThirdAmount=new BigDecimal(0);
+        if("trade".equals(accountType)){
+            avaibleThirdAmount=memberAmount.getTradeFrozenAmount();
+        }else if("level".equals(accountType)){
+            avaibleThirdAmount=memberAmount.getLevelFrozenAmount();
+        }
+        if(avaibleThirdAmount.compareTo(amount)==-1){
+            throw  new BussinessException(BizExceptionEnum.LOW_MONEY);
+        }
+        /*开始扣除金额*/
+        memberAmount.setTotalAmount(memberAmount.getTotalAmount().subtract(amount));
+        memberAmount.setFrozenAmount(memberAmount.getFrozenAmount().subtract(amount));
+        BigDecimal beforeThirdAmount=new BigDecimal(0);
+        if("trade".equals(accountType)){
+            beforeThirdAmount=memberAmount.getTradeTotalAmount();
+            memberAmount.setTradeFrozenAmount(memberAmount.getTradeFrozenAmount().subtract(amount));
+            memberAmount.setTradeTotalAmount(beforeThirdAmount.subtract(amount));
+        }else if("level".equals(accountType)){
+            beforeThirdAmount=memberAmount.getLevelTotalAmount();
+            memberAmount.setTradeFrozenAmount(memberAmount.getTradeFrozenAmount().subtract(amount));
+            memberAmount.setLevelTotalAmount(beforeThirdAmount.subtract(amount));
+        }
+
+        situation.setSpecificBeforeChangeAmount(beforeThirdAmount);
+        situation.setSpecificAfterChangeAmount(beforeThirdAmount.subtract(amount));
+        situation.setType(SituationStatus.PAY_STATUS.getStatus());
+        situation.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
+        SysDic sysDicParam=new SysDic();
+        sysDicParam.setDicTypeNo("disProType");
+        sysDicParam.setDicNotes(accountType);
+        SysDic sysDic=sysDicMapper.selectOne(sysDicParam);
+        situation.setDisProType(sysDic.getDicNo());
+        disMemberAmountMapper.updateById(memberAmount);
+        disAmountSituationMapper.insert(situation);
+    }
+
+    @Override
+    public void returnMoney(String userId, BigDecimal amount, String accountType) {
+        DisMemberAmount disMemberAmount=new DisMemberAmount();
+        disMemberAmount.setDisUserId(userId);
+        DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
+        BigDecimal  avaibleThirdAmount=new BigDecimal(0);
+        if("trade".equals(accountType)){
+            avaibleThirdAmount=memberAmount.getTradeFrozenAmount();
+        }else if("level".equals(accountType)){
+            avaibleThirdAmount=memberAmount.getLevelFrozenAmount();
+        }
+        if(avaibleThirdAmount.compareTo(amount)==-1){
+            throw  new BussinessException(BizExceptionEnum.LOW_MONEY);
+        }
+        /*开始增加金额*/
+        memberAmount.setAvaibleAmount(memberAmount.getAvaibleAmount().add(amount));
+        memberAmount.setFrozenAmount(memberAmount.getFrozenAmount().subtract(amount));
+        if("trade".equals(accountType)){
+            memberAmount.setTradeAvaibleAmount(memberAmount.getTradeAvaibleAmount().add(amount));
+            memberAmount.setTradeFrozenAmount(memberAmount.getTradeFrozenAmount().subtract(amount));
+        }else if("level".equals(accountType)){
+            memberAmount.setLevelAvaibleAmount(memberAmount.getLevelAvaibleAmount().add(amount));
+            memberAmount.setLevelFrozenAmount(memberAmount.getLevelFrozenAmount().subtract(amount));
         }
         disMemberAmountMapper.updateById(memberAmount);
     }

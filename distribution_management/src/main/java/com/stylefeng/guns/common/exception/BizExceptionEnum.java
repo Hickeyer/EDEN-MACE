@@ -34,6 +34,7 @@ public enum BizExceptionEnum {
 	CANT_FREEZE_ADMIN(600,"不能冻结超级管理员"),
 	CANT_CHANGE_ADMIN(600,"不能修改超级管理员角色"),
 	LOW_MONEY(700,"余额不足"),
+	WITHDRAWL_STATUS(800,"提现状态不对！"),
 
 	/**
 	 * 账户问题

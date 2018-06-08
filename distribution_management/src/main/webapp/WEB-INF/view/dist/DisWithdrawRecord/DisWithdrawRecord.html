@@ -18,7 +18,7 @@
                         </div>
                         <div class="hidden-xs" id="DisWithdrawRecordTableToolbar" role="group">
                             @if(shiro.hasPermission("/DisWithdrawRecord/add")){
-                                <#button name="添加" icon="fa-plus" clickFun="DisWithdrawRecord.openAddDisWithdrawRecord()"/>
+                                <#button name="审核" icon="fa-plus" clickFun="DisWithdrawRecord.openAddDisWithdrawRecord()"/>
                             @}
                             @if(shiro.hasPermission("/DisWithdrawRecord/update")){
                                 <#button name="修改" icon="fa-plus" clickFun="DisWithdrawRecord.openDisWithdrawRecordDetail()" space="true"/>
