@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
@@ -96,7 +97,7 @@ public class DisWithdrawRecordController extends BaseController {
     /**
      * 新增提现记录
      */
-    @RequestMapping(value = "/add")
+    @PostMapping(value = "/add")
     @ResponseBody
     @ApiOperation(value = "新增提现接口", notes = "此接口是用用户提现")
     public Object add(DisWithdrawVo withdrawVo) {
