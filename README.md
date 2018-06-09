@@ -85,3 +85,6 @@ plug用来调试接口，调试完成后，可以直接使用
 交易中心 集中对收入和支出进行管理
 ![输入图片说明](https://gitee.com/uploads/images/2018/0531/233149_4a1d658e_1497609.jpeg "8.jpg")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0531/233201_d8fb5542_1497609.jpeg "9.jpg")
+统计中心 对数据进行统计
+交易动态，可以查看最新的交易成功的动态
+![输入图片说明](https://gitee.com/uploads/images/2018/0609/143627_87c48977_1497609.jpeg "111.jpg")
