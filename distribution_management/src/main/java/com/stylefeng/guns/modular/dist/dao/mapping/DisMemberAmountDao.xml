@@ -27,7 +27,7 @@
         left join `dis_member_info` m on a.`dis_user_id`=m.`dis_user_id`
         where 1=1
         <if test="platformId != null and platformId != ''">
-            and    m.dis_platform_id=#{platformId}
+            and    m.dis_plat_super=#{platformId}
         </if>
     </select>
 

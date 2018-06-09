@@ -27,7 +27,7 @@
         WHERE m.is_delete='N' and m.type='0'
 
         <if test="account != null and account != ''">
-            and    m.dis_platform_id=#{account}
+            and    m.dis_plat_super=#{account}
         </if>
     </select>
 
