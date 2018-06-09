@@ -1,6 +1,8 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.controller.BaseController;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisAmountSituationService;
 import com.stylefeng.guns.modular.dist.util.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,11 @@ public class DynamicController extends BaseController {
 
     @RequestMapping("")
     public String index(Model model) {
-        model.addAttribute("model",disAmountSituationService.getDynamicInfo());
+        String account= ShiroKit.getUser().getAccount();
+        if(ShiroKit.hasRole(Const.ADMIN_NAME)){
+            account=null;
+        }
+        model.addAttribute("model",disAmountSituationService.getDynamicInfo(account));
         return PREFIX + "dynamic.html";
     }
 }

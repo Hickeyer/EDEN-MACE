@@ -29,14 +29,19 @@ public class DisAmountSituationServiceImpl implements IDisAmountSituationService
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public List<DynamicVo> getDynamicInfo() {
-        List<DisAmountSituation>  list= disAmountSituationDao.selectDynamic();
+    public List<DynamicVo> getDynamicInfo(String account) {
+        List<DisAmountSituation>  list= disAmountSituationDao.selectDynamic(account);
         List<DynamicVo> listDy=new ArrayList<>();
         list.forEach((disAmountSituation)->{
             DynamicVo vo=new DynamicVo();
             vo.setDes(disAmountSituation.getDescribe());
             vo.setTimeMounth(disAmountSituation.getAddTime().substring(0,10));
             vo.setTimeDate(disAmountSituation.getAddTime().substring(10));
+            System.out.println(disAmountSituation.getId()+"------------------------------");
+            System.out.println(disAmountSituation.getType());
+            System.out.println(disAmountSituation.getDisUserId());
+            System.out.println(disAmountSituation.getChangeAmount());
+
             vo.setTitle(disAmountSituation.getDisUserId()+":"+
                     SituationStatus.getMethod(disAmountSituation.getType()).getMes()
                     +":"+disAmountSituation.getChangeAmount());

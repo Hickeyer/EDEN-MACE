@@ -5,6 +5,7 @@
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.DisProfitRecord">
 		<id column="id" property="id" />
+		<result column="profit_num" property="profitNum" />
 		<result column="dis_platform_id" property="disPlatformId" />
 		<result column="dis_get_user_id" property="disGetUserId" />
 		<result column="dis_set_user_id" property="disSetUserId" />

@@ -2,6 +2,7 @@ package com.stylefeng.guns.modular.dist.dao;
 
 import com.stylefeng.guns.common.persistence.model.DisAmountSituation;
 import com.stylefeng.guns.modular.dist.vo.DynamicVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,6 +14,6 @@ import java.util.List;
  */
 public interface DisAmountSituationDao {
 
-    public List<DisAmountSituation> selectDynamic();
+    public List<DisAmountSituation> selectDynamic(@Param("account") String account);
 
 }

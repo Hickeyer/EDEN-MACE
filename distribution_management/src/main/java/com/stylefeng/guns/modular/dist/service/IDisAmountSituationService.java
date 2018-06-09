@@ -12,6 +12,6 @@ import java.util.List;
  */
 public interface IDisAmountSituationService {
 
-    public List<DynamicVo> getDynamicInfo();
+    public List<DynamicVo> getDynamicInfo(String account);
 
 }

@@ -16,5 +16,4 @@ public interface DisMemberInfoDao {
 
     List<Map<String, Object>> selectList(@Param("account")  String account);
 
-    DisMemberInfo selectListByUserId(@Param("account")  String account);
 }

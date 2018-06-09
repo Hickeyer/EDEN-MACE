@@ -8,6 +8,7 @@ import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
 import com.stylefeng.guns.common.persistence.dao.SysDicTypeMapper;
+import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
 import com.stylefeng.guns.common.persistence.model.SysDic;
 import com.stylefeng.guns.common.persistence.model.SysDicType;
 import com.stylefeng.guns.common.util.PinYinUtil;
@@ -18,8 +19,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import static com.stylefeng.guns.common.constant.factory.MutiStrFactory.*;
 
@@ -115,4 +119,23 @@ public class SysDicServiceImpl implements ISysDicService {
     public Map<String, Object> selectListByCodeNo(String code, String no) {
         return sysDicDao.selectListByCodeNo(code,no);
     }
+
+    @Override
+    public synchronized String getOrderNo(String codeNo) {
+        String orderNo="";
+        SysDic param=new SysDic();
+        param.setDicNo(codeNo);
+        param.setDicTypeNo("orderPrefix");
+        SysDic sysDic=sysDicMapper.selectOne(param);
+        SimpleDateFormat sdff = new SimpleDateFormat("yyyyMMddHHmmss");
+        String snow = sdff.format(new Date()).substring(7,14);
+        orderNo=sysDic.getDicValue()+snow;
+        for(int i=0;i<4;i++){
+            Random random = new Random();
+            orderNo +=  String.valueOf(random.nextInt(10));
+        }
+        return orderNo;
+    }
+
+
 }

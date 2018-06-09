@@ -59,7 +59,9 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public DisMemberInfo selectListByUserId(String userId) {
-        DisMemberInfo memberInfo= disMemberInfoDao.selectListByUserId(userId);
+        DisMemberInfo disMemberInfo=new DisMemberInfo();
+        disMemberInfo.setDisUserId(userId);
+        DisMemberInfo memberInfo= disMemberInfoMapper.selectOne(disMemberInfo);
         return memberInfo;
     }
 

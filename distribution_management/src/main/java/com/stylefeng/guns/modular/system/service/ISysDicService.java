@@ -17,5 +17,7 @@ public interface ISysDicService {
     public Map<String, Object> selectListByCodeNo(String code,String no);
 
 
+    public String getOrderNo(String codeNo);
+
 
 }

@@ -61,7 +61,6 @@ DisWithdrawRecordInfoDlg.addSubmit = function(type) {
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
-    alert(type);
     ajax.set("id",id);
     ajax.set("type",type);
     ajax.start();

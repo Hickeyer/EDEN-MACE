@@ -130,6 +130,8 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
             initSituation.setDisUserId(userId);
             initSituation.setAddTime(memberAmount.getAddTime());
             initSituation.setDescribe(SituationDescribe.AMOUNT_STATUS_INIT.getMes());
+            initSituation.setType(SituationStatus.AMOUNT_INIT.getStatus());
+            initSituation.setChangeAmount(new BigDecimal(0));
             disAmountSituationMapper.insert(initSituation);
         }
         String des=SituationDescribe.INCOME_STATUS_DES.getMes();

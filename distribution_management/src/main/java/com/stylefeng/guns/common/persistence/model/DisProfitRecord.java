@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-05-08
+ * @since 2018-06-09
  */
 @TableName("dis_profit_record")
 public class DisProfitRecord extends Model<DisProfitRecord> {
@@ -23,6 +23,11 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 
 	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;
+    /**
+     * 收入编号
+     */
+	@TableField("profit_num")
+	private String profitNum;
 	@TableField("dis_platform_id")
 	private String disPlatformId;
 	@TableField("dis_get_user_id")
@@ -86,6 +91,14 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getProfitNum() {
+		return profitNum;
+	}
+
+	public void setProfitNum(String profitNum) {
+		this.profitNum = profitNum;
 	}
 
 	public String getDisPlatformId() {
@@ -225,6 +238,7 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 	public String toString() {
 		return "DisProfitRecord{" +
 			"id=" + id +
+			", profitNum=" + profitNum +
 			", disPlatformId=" + disPlatformId +
 			", disGetUserId=" + disGetUserId +
 			", disSetUserId=" + disSetUserId +

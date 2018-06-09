@@ -5,7 +5,8 @@ import java.util.Map;
 
 public enum  SituationStatus {
     INCOME_STATUS("0","收入"),
-    PAY_STATUS("1","支出");
+    PAY_STATUS("1","支出"),
+    AMOUNT_INIT("2","初始化账户");
     private String status;
     private String mes;
 

@@ -18,10 +18,13 @@
     </resultMap>
 
     <select id="selectDynamic" resultMap="BaseResultMap">
-
-
-      SELECT * FROM `dis_amount_situation` ORDER BY add_time DESC
-
+        SELECT s.*  FROM `dis_amount_situation` s
+        LEFT JOIN `dis_member_info` m ON  s.`dis_user_id`=m.`dis_user_id`
+        WHERE  1=1
+        <if test="account != null and account != ''">
+           AND m.`dis_plat_super` =#{account}
+        </if>
+        ORDER BY s.add_time DESC
     </select>
 
 </mapper>

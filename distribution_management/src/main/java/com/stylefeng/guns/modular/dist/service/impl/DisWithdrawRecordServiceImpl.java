@@ -11,6 +11,7 @@ import com.stylefeng.guns.modular.dist.dao.DisWithdrawRecordDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDistWithdrawParamService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
+import com.stylefeng.guns.modular.system.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisWithdrawRecordService;
@@ -44,6 +45,9 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
     @Resource
     DisWithdrawRecordDao disWithdrawRecordDao;
 
+    @Autowired
+    ISysDicService sysDicService;
+
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void withdrawMoney(String userId, BigDecimal amount, String disProMode) {
@@ -64,6 +68,7 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
         record.setFeeAmount((BigDecimal)map.get("feeAmount"));
         record.setWithdrawStatus(WithdrawStatus.FIRST_STATUS.getStatus());
         record.setDisProMode(disProMode);
+        record.setWithdrawNum(sysDicService.getOrderNo("withdrawl"));
         disWithdrawRecordMapper.insert(record);
     }
 

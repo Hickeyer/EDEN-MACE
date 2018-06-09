@@ -14,6 +14,7 @@ import com.stylefeng.guns.modular.dist.dao.DisProfitRecordDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
+import com.stylefeng.guns.modular.system.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisProfitRecordService;
@@ -48,6 +49,9 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
 
     @Autowired
     IDisMemberAmountService disMemberAmountService;
+
+    @Autowired
+    ISysDicService sysDicService;
 
     @Override
     @DataSource(name=DSEnum.DATA_SOURCE_BIZ)
@@ -127,6 +131,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     record.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
                     record.setIsDelete("N");
                     record.setType("0");
+                    record.setProfitNum(sysDicService.getOrderNo("profit"));
                     disProfitRecordMapper.insert(record);
 
                     //增加会员金额信息
@@ -175,6 +180,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     record.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
                     record.setIsDelete("N");
                     record.setType("1");
+                    record.setProfitNum(sysDicService.getOrderNo("profit"));
                     disProfitRecordMapper.insert(record);
 
                     //增加平台金额信息
@@ -224,6 +230,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     record.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
                     record.setIsDelete("N");
                     record.setType("1");
+                    record.setProfitNum(sysDicService.getOrderNo("profit"));
                     disProfitRecordMapper.insert(record);
 
                     //增加平台金额信息
