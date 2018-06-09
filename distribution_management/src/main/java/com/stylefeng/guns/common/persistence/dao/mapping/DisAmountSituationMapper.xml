@@ -14,6 +14,7 @@
 		<result column="specific_after_change_amount" property="specificAfterChangeAmount" />
 		<result column="dis_pro_type" property="disProType" />
 		<result column="change_amount" property="changeAmount" />
+		<result column="describe" property="describe" />
 	</resultMap>
 
 </mapper>

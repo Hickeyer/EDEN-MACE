@@ -130,7 +130,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     disProfitRecordMapper.insert(record);
 
                     //增加会员金额信息
-                    disMemberAmountService.addMoney(userId,newAmount,accountType);
+                    disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId());
                 }
             }
         }
@@ -178,7 +178,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     disProfitRecordMapper.insert(record);
 
                     //增加平台金额信息
-                    disMemberAmountService.addMoney(userId,newAmount,accountType);
+                    disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId());
                 }
             });
         }
@@ -227,7 +227,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     disProfitRecordMapper.insert(record);
 
                     //增加平台金额信息
-                    disMemberAmountService.addMoney(userId,newAmount,accountType);
+                    disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId());
                 }
             });
         }

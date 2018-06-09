@@ -1,5 +1,10 @@
 package com.stylefeng.guns.modular.dist.dao;
 
+import com.stylefeng.guns.common.persistence.model.DisAmountSituation;
+import com.stylefeng.guns.modular.dist.vo.DynamicVo;
+
+import java.util.List;
+
 /**
  * 记账表Dao
  *
@@ -8,5 +13,6 @@ package com.stylefeng.guns.modular.dist.dao;
  */
 public interface DisAmountSituationDao {
 
+    public List<DisAmountSituation> selectDynamic();
 
 }

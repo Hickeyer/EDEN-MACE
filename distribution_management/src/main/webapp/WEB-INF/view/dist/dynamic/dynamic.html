@@ -1,0 +1,21 @@
+<link href="${ctxPath}/static/lib/time/css/jq22.css" rel="stylesheet">
+<script src="${ctxPath}/static/js/jquery.min.js?v=2.1.4"></script>
+<div class="demo">
+    <div class="history">
+        <div class="history-date">
+            <ul>
+                <h2 class="first"> <a href="#nogo">分销系统</a>分销动态 </h2>
+                @for(info in model){
+                <li class="green">
+                    <h3>${info.timeDate}<span>${info.timeMounth}</span></h3>
+                    <dl>
+                        <dt>${info.title}<span>${info.des}</span></dt>
+                    </dl>
+                </li>
+                @}
+
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/lib/time/js/jq22.js"></script>

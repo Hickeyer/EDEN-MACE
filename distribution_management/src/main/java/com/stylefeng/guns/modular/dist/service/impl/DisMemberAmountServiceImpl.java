@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.constant.dist.SituationDescribe;
 import com.stylefeng.guns.common.constant.dist.SituationStatus;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
@@ -77,7 +78,7 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
     }
 
     @Override
-    public void addMoney(String userId, BigDecimal amount, String accountType) {
+    public void addMoney(String userId, BigDecimal amount, String accountType,String sourceId) {
         DisMemberAmount disMemberAmount=new DisMemberAmount();
         disMemberAmount.setDisUserId(userId);
         DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
@@ -128,8 +129,11 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
             initSituation.setDisProType(sysDic.getDicNo());
             initSituation.setDisUserId(userId);
             initSituation.setAddTime(memberAmount.getAddTime());
+            initSituation.setDescribe(SituationDescribe.AMOUNT_STATUS_INIT.getMes());
             disAmountSituationMapper.insert(initSituation);
         }
+        String des=SituationDescribe.INCOME_STATUS_DES.getMes();
+        situation.setDescribe(String.format(des,sourceId,accountType,userId,amount.toString()));
         disAmountSituationMapper.insert(situation);
     }
 
@@ -213,6 +217,8 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         SysDic sysDic=sysDicMapper.selectOne(sysDicParam);
         situation.setDisProType(sysDic.getDicNo());
         disMemberAmountMapper.updateById(memberAmount);
+        String des=SituationDescribe.PAY_STATUS_DES.getMes();
+        situation.setDescribe(String.format(des,userId,accountType));
         disAmountSituationMapper.insert(situation);
     }
 

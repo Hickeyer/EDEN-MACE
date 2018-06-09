@@ -2,4 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.stylefeng.guns.modular.dist.dao.DisAmountSituationDao">
 
+
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.DisAmountSituation">
+        <id column="id" property="id" />
+        <result column="dis_user_id" property="disUserId" />
+        <result column="type" property="type" />
+        <result column="before_change_amount" property="beforeChangeAmount" />
+        <result column="after_change_amount" property="afterChangeAmount" />
+        <result column="add_time" property="addTime" />
+        <result column="specific_before_change_amount" property="specificBeforeChangeAmount" />
+        <result column="specific_after_change_amount" property="specificAfterChangeAmount" />
+        <result column="dis_pro_type" property="disProType" />
+        <result column="change_amount" property="changeAmount" />
+        <result column="describe" property="describe" />
+    </resultMap>
+
+    <select id="selectDynamic" resultMap="BaseResultMap">
+
+
+      SELECT * FROM `dis_amount_situation` ORDER BY add_time DESC
+
+    </select>
+
 </mapper>

@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-05-30
+ * @since 2018-06-09
  */
 @TableName("dis_amount_situation")
 public class DisAmountSituation extends Model<DisAmountSituation> {
@@ -67,6 +67,10 @@ public class DisAmountSituation extends Model<DisAmountSituation> {
      */
 	@TableField("change_amount")
 	private BigDecimal changeAmount;
+    /**
+     * 具体变动描述
+     */
+	private String describe;
 
 
 	public Integer getId() {
@@ -149,6 +153,14 @@ public class DisAmountSituation extends Model<DisAmountSituation> {
 		this.changeAmount = changeAmount;
 	}
 
+	public String getDescribe() {
+		return describe;
+	}
+
+	public void setDescribe(String describe) {
+		this.describe = describe;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -167,6 +179,7 @@ public class DisAmountSituation extends Model<DisAmountSituation> {
 			", specificAfterChangeAmount=" + specificAfterChangeAmount +
 			", disProType=" + disProType +
 			", changeAmount=" + changeAmount +
+			", describe=" + describe +
 			"}";
 	}
 }
