@@ -8,7 +8,6 @@ import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.core.shiro.ShiroKit;
-import com.stylefeng.guns.modular.dist.service.IDisMemberAmountMongoService;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.util.Jwt;
 import com.stylefeng.guns.modular.dist.vo.Categories;
@@ -49,8 +48,6 @@ public class DisMemberInfoController extends BaseController {
     @Autowired
     ISysDicService sysDicService;
 
-    @Autowired
-    IDisMemberAmountMongoService disMemberAmountService;
 
     @Value("${dist.jwt.secret}")
     private  String secret;

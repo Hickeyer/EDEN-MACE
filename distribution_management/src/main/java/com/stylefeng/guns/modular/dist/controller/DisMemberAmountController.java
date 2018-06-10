@@ -3,10 +3,8 @@ package com.stylefeng.guns.modular.dist.controller;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.core.shiro.ShiroKit;
-import com.stylefeng.guns.modular.dist.service.IDisMemberAmountMongoService;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
-import com.stylefeng.guns.modular.dist.wapper.MemberAmountWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +25,6 @@ import java.util.Map;
 @RequestMapping("/disMemberAmount")
 public class DisMemberAmountController extends BaseController {
 
-    @Autowired
-    IDisMemberAmountMongoService disMemberAmountMongoService;
 
     @Autowired
     IDisMemberAmountService disMemberAmountService;
