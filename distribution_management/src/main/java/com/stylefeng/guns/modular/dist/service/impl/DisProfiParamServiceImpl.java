@@ -33,12 +33,7 @@ public class DisProfiParamServiceImpl implements IDisProfiParamService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public List<Map<String, Object>> selectList() {
-        String account= ShiroKit.getUser().getAccount();
-        if(ShiroKit.hasRole(Const.ADMIN_NAME)){
-            account=null;
-        }
-
+    public List<Map<String, Object>> selectList(String account) {
         List<Map<String, Object>> list=disProfiParamDao.selectList(account);
         return list;
     }

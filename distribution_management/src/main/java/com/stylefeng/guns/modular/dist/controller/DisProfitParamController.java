@@ -1,7 +1,9 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.persistence.model.DisProfitParam;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisProfiParamService;
 import com.stylefeng.guns.modular.dist.wapper.ProfiParamWarpper;
 import com.stylefeng.guns.modular.system.service.ISysDicService;
@@ -69,7 +71,11 @@ public class DisProfitParamController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        List<Map<String, Object>> list=disProfiParamService.selectList();
+        String account= ShiroKit.getUser().getAccount();
+        if(ShiroKit.hasRole(Const.ADMIN_NAME)){
+            account=null;
+        }
+        List<Map<String, Object>> list=disProfiParamService.selectList(account);
         return super.warpObject(new ProfiParamWarpper(list));
     }
 
