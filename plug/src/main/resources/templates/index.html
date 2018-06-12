@@ -11,81 +11,19 @@
     <script th:src="@{/js/jquery.mobile-1.4.5.min.js}"></script>
 </head>
 <body style="background-color: #f2f2f2;">
-<div class="loading"><img th:src="@{/images/ajax-loader.gif}"/></div>
-<div data-role="page" class="index" id="index">
-    <header data-role="header">
-        <h3>赚不停</h3>
-    </header>
-    <div class="ui-content" data-role="content">
-        <ul class="slick">
-            <li><a href="#"><img th:src="@{images/ban01.png}"/></a></li>
-            <li><a href="#"><img th:src="@{images/ban02.png}"/></a></li>
-            <li><a href="#"><img th:src="@{images/ban03.png}"/></a></li>
-            <li><a href="#"><img th:src="@{images/ban04.png}"/></a></li>
-        </ul>
-        <ul class="index-menu">
-            <li>
-                <img src="images/icon01.png"/>
-                <p>保险承保</p>
-            </li>
-            <li>
-                <img th:src="@{images/icon02.png}"/>
-                <p>当日计息</p>
-            </li>
-            <li>
-                <img th:src="@{images/icon03.png}"/>
-                <p>续投加息</p>
-            </li>
-        </ul>
-        <dl class="index-year">
-            <a href="month.html" data-transition="slide" data-ajax="false">
-                <dd>
-                    <h4>月月盈</h4>
-                    <p><small>年化</small>6.0%起</p>
-                </dd>
-                <dt>支持续投，次月起年化收益增加0.1%</dt>
-            </a>
-        </dl>
-        <dl class="index-year">
-            <a href="month.html" data-transition="slide" data-ajax="false">
-                <dd>
-                    <h4>季度丰</h4>
-                    <p><small>年化</small>6.3%起</p>
-                </dd>
-                <dt>支持续投，次月起年化收益增加0.1%</dt>
-            </a>
-        </dl>
-        <dl class="index-year">
-            <a href="month.html" data-transition="slide" data-ajax="false">
-                <dd>
-                    <h4>半年享</h4>
-                    <p><small>年化</small>6.6%起</p>
-                </dd>
-                <dt>支持续投，次月起年化收益增加0.1%</dt>
-            </a>
-        </dl>
-    </div>
-    <footer data-role="footer" data-position="fixed">
-        <ul>
-            <li><a href="index.html"  rel="external">理财</a></li>
-            <li><a href="self.html"  rel="external">我的</a></li>
-        </ul>
-    </footer>
-    <script th:src="@{/js/slick.min.js}" ></script>
-    <script type="text/javascript">
-        $(document).on("pagecreate","#index",function(){
-            $('.slick').slick({
-                dots:true,
-                autoplay:true,
-                autoplaySpeed:2000,
-                arrows:false,
-            });
-
-        });
-        $(window).load(function(){
-            $(".loading").fadeOut()
-        })
-    </script>
-</div>
+   <div style="margin-top: 50px">
+       <input th:value="@{/}" id="path" type="hidden">
+       <form>
+           <input type="text" class="form-control" id="userId" placeholder="请输入分销系统的id账号">
+           <button type="button" class="btn btn-primary btn-lg btn-block" onclick="login()">确定进入系统</button>
+       </form>
+   </div>
 </body>
+<script>
+    function  login() {
+        var userId=$("#userId").val();
+        var path=$("#path").val()
+        window.location.href=path+"main?userId="+userId;
+    }
+</script>
 </html>

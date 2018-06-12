@@ -71,3 +71,4 @@ dist:
   jwt:
     secret: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
     account: xiaojiang
+    isUse: false

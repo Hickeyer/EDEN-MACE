@@ -19,6 +19,8 @@ logging:
   config: classpath:logback.xml
   path: "/plug.log"
   level: debug
-
+dist:
+  server:
+    prefix: http://localhost/
 
 
