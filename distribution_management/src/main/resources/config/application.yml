@@ -29,6 +29,8 @@ beetl:
 
 ###################  spring配置  ###################
 spring:
+  session:
+    store-type: none
   profiles:
     active: dev
   mvc:
