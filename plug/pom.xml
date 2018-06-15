@@ -26,6 +26,7 @@
 		<thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version>
 		<httpclient.version>4.5.2</httpclient.version>
 		<guava.version>19.0</guava.version>
+		<gson.version>2.2.4</gson.version>
 	</properties>
 
 	<dependencies>
@@ -58,6 +59,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
 		</dependency>
 
 	</dependencies>

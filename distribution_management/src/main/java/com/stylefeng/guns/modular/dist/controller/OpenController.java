@@ -2,6 +2,7 @@ package com.stylefeng.guns.modular.dist.controller;
 
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.constant.tips.DistResult;
 import com.stylefeng.guns.common.persistence.dao.DisMemberAmountMapper;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
@@ -36,8 +37,10 @@ public class OpenController  {
     @RequestMapping("/getUserInfo")
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     @ResponseBody
-    public Map<String ,Object> getUserInfo(String userId){
-        System.out.println(jwtUse);
+    public DistResult getUserInfo(String userId){
+        if(jwtUse){
+            System.out.println("开启验证");
+        }
         DisMemberInfo memberInfoParam=new DisMemberInfo();
         memberInfoParam.setDisUserId(userId);
         DisMemberInfo  memberInfo=disMemberInfoMapper.selectOne(memberInfoParam);
@@ -50,9 +53,10 @@ public class OpenController  {
         if(memberInfo!=null){
             map.put("member",memberInfo);
             map.put("amount",disMemberAmount);
-            return map;
+            DisMemberInfo sss= (DisMemberInfo) map.get("member");
+            return DistResult.success(map);
         }else{
-            return null;
+            return DistResult.failure("没有此用户");
         }
 
     }

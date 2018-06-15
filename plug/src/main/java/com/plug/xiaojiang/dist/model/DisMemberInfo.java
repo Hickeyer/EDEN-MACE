@@ -1,10 +1,6 @@
-package com.stylefeng.guns.common.persistence.model;
+package com.plug.xiaojiang.dist.model;
 
-import com.baomidou.mybatisplus.enums.IdType;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
 
 /**
@@ -15,85 +11,69 @@ import java.io.Serializable;
  * @author huangpu
  * @since 2018-05-15
  */
-@TableName("dis_member_info")
-public class DisMemberInfo extends Model<DisMemberInfo> {
+public class DisMemberInfo implements Serializable {
 
-    private static final long serialVersionUID = 11222;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 主键
      */
-	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;
     /**
      * 平台
      */
-	@TableField("dis_platform_id")
 	private String disPlatformId;
     /**
      * 用户id
      */
-	@TableField("dis_user_id")
 	private String disUserId;
     /**
      * 上级id
      */
-	@TableField("dis_model_id")
 	private String disModelId;
     /**
      * 全路径
      */
-	@TableField("dis_full_index")
 	private String disFullIndex;
     /**
      * 用户名
      */
-	@TableField("dis_user_name")
 	private String disUserName;
     /**
      * 级别
      */
-	@TableField("dis_level")
 	private Integer disLevel;
     /**
      * 身份类型
      */
-	@TableField("dis_user_type")
 	private String disUserType;
     /**
      * 备注
      */
-	@TableField("dis_note")
 	private String disNote;
     /**
      * 添加时间
      */
-	@TableField("add_time")
 	private String addTime;
     /**
      * 更新时间
      */
-	@TableField("update_time")
 	private String updateTime;
     /**
      * 删除状态
      */
-	@TableField("is_delete")
 	private String isDelete;
     /**
      * 上级代理商id
      */
-	@TableField("dis_plat_super")
 	private String disPlatSuper;
     /**
      * 代理商全路径
      */
-	@TableField("dis_plat_full_index")
 	private String disPlatFullIndex;
     /**
      * 代理商等级
      */
-	@TableField("dis_plat_level")
 	private Integer disPlatLevel;
     /**
      * 账户类型(0,会员，1：代理商)
@@ -229,10 +209,6 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 		this.type = type;
 	}
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
 
 	@Override
 	public String toString() {

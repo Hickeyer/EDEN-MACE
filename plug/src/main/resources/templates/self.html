@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>赚不停</title>
+     <link rel="stylesheet" th:href="@{css/jquery.mobile-1.4.5.min.css}"/>
+   		 <link rel="stylesheet" th:href="@{css/style.css}"/>
+</head>
+<body style="background-color: #f2f2f2;">
+	<div class="loading"><img th:src="@{images/ajax-loader.gif}"/></div>
+	<div data-role="page" class="index self" id="self">
+		<header data-role="header">
+			<h3>赚不停</h3>
+		</header>
+		<div class="ui-content" data-role="content"> 
+			<section class="self-header">
+				<p th:text="${session.member.getDisUserName()}">当前帐户：[...]</p>
+				<h5>总资产</h5>
+				<h2 th:text="${session.amount.getTotalAmount()}">￥[...]</h2>
+				<ul>
+					<li>昨日收益<br>xxx元</li>
+					<li>累计收益<br>xxx元</li>
+				</ul>
+			</section>
+			<div class="self-tixian">
+				<p>可用余额（元）<b th:text="${session.amount.getAvaibleAmount()}">[...]</b></p>
+				<a href="chongzhi.html" data-role="none" data-transition="slide" class="chong">充值</a>
+				<a href="tixian.html" data-role="none" data-transition="slide" class="tixian">提现</a>
+			</div>
+			<dl>
+				<dd>
+					<a href="jilu.html" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-appright ui-nodisc-icon">交易记录</a>
+				<a>自动投资<input type="checkbox" data-role="flipswitch" name="switch"  data-on-text="开" data-off-text="关"></a>
+				</dd>
+				<dt><a href="set.html" data-ajax="false" class="ui-btn ui-btn-icon-right ui-icon-appright ui-nodisc-icon">设置</a></dt>
+			</dl>
+		</div>
+		<footer data-role="footer" data-position="fixed">  
+			<ul>
+				<li><a href="index.html"  rel="external">理财</a></li>
+				<li><a href="self.html"  rel="external">我的</a></li>
+			</ul>
+		</footer>
+		 <script th:src="@{js/jquery.min.js}"></script>
+     	<script th:src="@{js/jquery.mobile-1.4.5.min.js}"></script>
+	    <script type="text/javascript">
+					$(window).load(function(){
+						$(".loading").fadeOut();
+					})
+	    </script>
+	</div>
+	
+</body>
+</html>
