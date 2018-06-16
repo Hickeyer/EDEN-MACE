@@ -17,7 +17,7 @@
 			<section class="self-header">
 				<p th:text="${session.member.getDisUserName()}">当前帐户：[...]</p>
 				<h5>总资产</h5>
-				<h2 th:text="${session.amount.getTotalAmount()}">￥[...]</h2>
+				<h2 th:text="${session.amount.getTotalAmount()}">[...]</h2>
 				<ul>
 					<li>昨日收益<br>xxx元</li>
 					<li>累计收益<br>xxx元</li>
@@ -38,8 +38,8 @@
 		</div>
 		<footer data-role="footer" data-position="fixed">  
 			<ul>
-				<li><a href="index.html"  rel="external">理财</a></li>
-				<li><a href="self.html"  rel="external">我的</a></li>
+				<li><a th:href="@{/main}"  rel="external">理财</a></li>
+				<li><a th:href="@{/home}"  rel="external">我的</a></li>
 			</ul>
 		</footer>
 		 <script th:src="@{js/jquery.min.js}"></script>

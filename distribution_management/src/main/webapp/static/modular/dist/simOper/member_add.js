@@ -56,17 +56,25 @@ SimOperInfoDlg.addMemeberSubmit = function() {
 
     this.clearData();
     this.collectData();
+    $.ajax({
+        url:Feng.ctxPath + "/disMemberInfo/add",
+        data:JSON.stringify(this.simOperInfoData),
+        dataType :  'json',
+        contentType : 'application/json',
+        type:"POST",
+        success:function (data) {
+            if(data.success){
+                Feng.success("添加成功!");
+            }else {
+                Feng.error("添加失败!" + data.errorMessage+ "!");
+            }
 
-    //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/disMemberInfo/add", function(data){
-        Feng.success("添加成功!");
-        window.parent.SimOper.table.refresh();
-        SimOperInfoDlg.close();
-    },function(data){
-        Feng.error("添加失败!" + data.responseJSON.message + "!");
+        },
+        error:function (data) {
+            Feng.error("添加失败!" + data.responseJSON.message + "!");
+        }
     });
-    ajax.set(this.simOperInfoData);
-    ajax.start();
+
 }
 
 /**

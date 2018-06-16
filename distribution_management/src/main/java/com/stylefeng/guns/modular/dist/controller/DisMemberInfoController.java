@@ -2,6 +2,7 @@ package com.stylefeng.guns.modular.dist.controller;
 
 import com.google.gson.Gson;
 import com.stylefeng.guns.common.constant.Const;
+import com.stylefeng.guns.common.constant.tips.DistResult;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
@@ -136,20 +137,23 @@ public class DisMemberInfoController extends BaseController {
     @PostMapping(value = "/add")
     @ResponseBody
     @ApiOperation(value = "新增会员", notes = "")
-    public Object add(DisMemberInfoVo memberInfoVo) {
+    public DistResult add(@RequestBody DisMemberInfoVo memberInfoVo) {
         User user=userMgrDao.getByAccount(memberInfoVo.getDisPlatSuper());
         if(user==null){
-            throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
+           // throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
+            return DistResult.failure("平台不存在");
         }
         if(StringUtils.isNotEmpty(memberInfoVo.getDisModelId())){
             DisMemberInfo param= disMemberInfoService.selectListByUserId(memberInfoVo.getDisModelId());
             if(param==null){
-                throw  new BussinessException(BizExceptionEnum.USERMEM_NOT_EXISTED);
+               // throw  new BussinessException(BizExceptionEnum.USERMEM_NOT_EXISTED);
+                return DistResult.failure("邀请用户不存在");
             }
         }
         DisMemberInfo param= disMemberInfoService.selectListByUserId(memberInfoVo.getDisUserId());
         if(param!=null){
-            throw  new BussinessException(BizExceptionEnum.USER_IS_EXISTED);
+            return DistResult.failure("用户已存在");
+            //throw  new BussinessException(BizExceptionEnum.USER_IS_EXISTED);
         }
         String acc= Jwt.unsign(memberInfoVo.getSecret(),secret,String.class);
         if(acc.equals(account)){
@@ -164,9 +168,10 @@ public class DisMemberInfoController extends BaseController {
             disMemberInfoService.save(memberInfo);
             //disMemberAmountService.save(memberInfo.getDisUserId(),memberInfo.getDisUserName(),memberInfo.getDisPlatformId(),"1");
         }else {
-            throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
+           // throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
+            return DistResult.failure("非法访问");
         }
-        return super.SUCCESS_TIP;
+        return DistResult.success();
     }
 
     /**

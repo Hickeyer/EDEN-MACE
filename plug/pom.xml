@@ -27,6 +27,7 @@
 		<httpclient.version>4.5.2</httpclient.version>
 		<guava.version>19.0</guava.version>
 		<gson.version>2.2.4</gson.version>
+		<pinyin.version>2.5.1</pinyin.version>
 	</properties>
 
 	<dependencies>
@@ -66,7 +67,11 @@
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>${pinyin.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

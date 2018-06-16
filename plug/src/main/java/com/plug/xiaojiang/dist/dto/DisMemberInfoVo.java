@@ -1,11 +1,7 @@
 package com.plug.xiaojiang.dist.dto;
 
+public class DisMemberInfoVo {
 
-import java.io.Serializable;
-
-public class DisMemberInfoDto implements Serializable {
-
-    private static final long serialVersionUID = 504070797656490510L;
     private String  secret;
 
     private String disPlatformId;
@@ -19,6 +15,8 @@ public class DisMemberInfoDto implements Serializable {
     private String disUserType;
 
     private String disNote;
+
+    private String disPlatSuper;
 
     public String getSecret() {
         return secret;
@@ -74,5 +72,13 @@ public class DisMemberInfoDto implements Serializable {
 
     public void setDisNote(String disNote) {
         this.disNote = disNote;
+    }
+
+    public String getDisPlatSuper() {
+        return disPlatSuper;
+    }
+
+    public void setDisPlatSuper(String disPlatSuper) {
+        this.disPlatSuper = disPlatSuper;
     }
 }
