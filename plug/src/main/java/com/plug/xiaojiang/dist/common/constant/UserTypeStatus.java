@@ -10,9 +10,9 @@ public enum UserTypeStatus {
     private String status;
     private String mes;
 
-    private static Map<String, SituationStatus> map = new HashMap<String, SituationStatus>();
+    private static Map<String, UserTypeStatus> map = new HashMap<String, UserTypeStatus>();
     static {
-        for (SituationStatus legEnum : SituationStatus.values()) {
+        for (UserTypeStatus legEnum : UserTypeStatus.values()) {
             map.put(legEnum.getStatus(), legEnum);
         }
     }
@@ -22,7 +22,7 @@ public enum UserTypeStatus {
         this.mes=mes;
     }
 
-    public static SituationStatus getMethod(String symbol) {
+    public static UserTypeStatus getMethod(String symbol) {
         return map.get(symbol);
     }
 
