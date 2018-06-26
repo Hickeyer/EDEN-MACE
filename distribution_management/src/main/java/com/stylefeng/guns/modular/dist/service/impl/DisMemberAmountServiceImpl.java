@@ -78,11 +78,14 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
     }
 
     @Override
-    public void addMoney(String userId, BigDecimal amount, String accountType,String sourceId) {
+    public void addMoney(String userId, BigDecimal amount, String accountType,String sourceId,String type) {
         DisMemberAmount disMemberAmount=new DisMemberAmount();
         disMemberAmount.setDisUserId(userId);
         DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
-
+        if(memberAmount==null){
+            memberAmount=initAmount(userId,userId,type);
+            disMemberAmountMapper.insert(memberAmount);
+        }
         //记录金额
         DisAmountSituation situation=new DisAmountSituation();
         situation.setDisUserId(userId);

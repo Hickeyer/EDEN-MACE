@@ -16,7 +16,7 @@ public interface IDisMemberAmountService {
 
     List<Map<String, Object>> selectList(String platformId);
 
-    public void  addMoney(String userId, BigDecimal amount, String accountType,String sourceName);
+    public void  addMoney(String userId, BigDecimal amount, String accountType,String sourceName,String type);
 
     /**
      * 冻结金额

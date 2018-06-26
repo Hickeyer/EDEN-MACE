@@ -56,7 +56,12 @@
 					url:path+"inviteUser",
 					data:{"userName":userName},
                     success:function (result) {
-						alert(result.errorMessage);
+					    if(result.success){
+                            alert("邀请成功");
+						}else{
+                            alert(result.errorMessage);
+						}
+
                     }
 				});
             }

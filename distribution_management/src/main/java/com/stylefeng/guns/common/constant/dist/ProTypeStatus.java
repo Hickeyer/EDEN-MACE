@@ -3,27 +3,23 @@ package com.stylefeng.guns.common.constant.dist;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum  UserTypeStatus {
-    ZERO_STATUS("0","游客"),
-    ONE_STATUS("1","经理"),
-    TWO_STATUS("2","老板");
+public enum  ProTypeStatus {
+
+    ZERO_STATUS("0","交易分润"),
+    ONE_STATUS("1","上下级分润");
     private String status;
     private String mes;
 
-    private static Map<String, UserTypeStatus> map = new HashMap<String, UserTypeStatus>();
+    private static Map<String, ProTypeStatus> map = new HashMap<String, ProTypeStatus>();
     static {
-        for (UserTypeStatus legEnum : UserTypeStatus.values()) {
+        for (ProTypeStatus legEnum : ProTypeStatus.values()) {
             map.put(legEnum.getStatus(), legEnum);
         }
     }
 
-    UserTypeStatus(String status, String mes) {
+    ProTypeStatus(String status, String mes) {
         this.status=status;
         this.mes=mes;
-    }
-
-    public static UserTypeStatus getMethod(String symbol) {
-        return map.get(symbol);
     }
 
     public String getStatus() {
@@ -41,4 +37,6 @@ public enum  UserTypeStatus {
     public void setMes(String mes) {
         this.mes = mes;
     }
+
+
 }
