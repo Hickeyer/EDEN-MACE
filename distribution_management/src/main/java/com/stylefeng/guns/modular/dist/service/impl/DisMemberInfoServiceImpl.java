@@ -139,6 +139,12 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         disMemberAmountService.save(param.getDisUserId(),param.getDisUserName(),"1");
     }
 
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public void updateLevel(DisMemberInfo param) {
+        disMemberInfoMapper.updateAllColumnById(param);
+    }
+
 
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public  List<MemberRecordVo> getSource(List<NodesVo> nodelist, List<LinksVo> linkList,List<MemberRecordVo> listParam){

@@ -131,48 +131,7 @@ public class DisMemberInfoController extends BaseController {
         return super.warpObject(new MemberWarpper(list));
     }
 
-    /**
-     * 新增分销
-     */
-    @PostMapping(value = "/add")
-    @ResponseBody
-    @ApiOperation(value = "新增会员", notes = "")
-    public DistResult add(@RequestBody DisMemberInfoVo memberInfoVo) {
-        User user=userMgrDao.getByAccount(memberInfoVo.getDisPlatSuper());
-        if(user==null){
-           // throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
-            return DistResult.failure("平台不存在");
-        }
-        if(StringUtils.isNotEmpty(memberInfoVo.getDisModelId())){
-            DisMemberInfo param= disMemberInfoService.selectListByUserId(memberInfoVo.getDisModelId());
-            if(param==null){
-               // throw  new BussinessException(BizExceptionEnum.USERMEM_NOT_EXISTED);
-                return DistResult.failure("邀请用户不存在");
-            }
-        }
-        DisMemberInfo param= disMemberInfoService.selectListByUserId(memberInfoVo.getDisUserId());
-        if(param!=null){
-            return DistResult.failure("用户已存在");
-            //throw  new BussinessException(BizExceptionEnum.USER_IS_EXISTED);
-        }
-        String acc= Jwt.unsign(memberInfoVo.getSecret(),secret,String.class);
-        if(acc.equals(account)){
-            DisMemberInfo memberInfo=new DisMemberInfo();
-            BeanUtils.copyProperties(memberInfoVo,memberInfo);
-            memberInfo.setDisUserType("0");
-            memberInfo.setDisPlatSuper(memberInfoVo.getDisPlatSuper());
-            memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
-            memberInfo.setDisPlatFullIndex(user.getFullindex());
-            memberInfo.setDisPlatformId(user.getFullindex().split("\\.")[1]);
-            memberInfo.setType("0");
-            disMemberInfoService.save(memberInfo);
-            //disMemberAmountService.save(memberInfo.getDisUserId(),memberInfo.getDisUserName(),memberInfo.getDisPlatformId(),"1");
-        }else {
-           // throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
-            return DistResult.failure("非法访问");
-        }
-        return DistResult.success();
-    }
+
 
     /**
      * 删除分销

@@ -45,7 +45,7 @@ SimOperInfoDlg.close = function() {
  */
 SimOperInfoDlg.collectData = function() {
     this.set('secret').set("disSetUserId")
-        .set("disProType").set("orderId").set("disAmount");
+        .set("disProType").set("orderId").set("disAmount").set("upgradeLevel");
 }
 
 /**
@@ -55,17 +55,32 @@ SimOperInfoDlg.addMemeberSubmit = function() {
 
     this.clearData();
     this.collectData();
+    var path="";
+    if("0"==this.simOperInfoData.disProType){
+        path="/disProfitRecord/add";
+    }else{
+        path="/upgrade";
+    }
 
-    //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/disProfitRecord/add", function(data){
-        Feng.success("添加成功!");
-        window.parent.SimOper.table.refresh();
-        SimOperInfoDlg.close();
-    },function(data){
-        Feng.error("添加失败!" + data.responseJSON.message + "!");
+    $.ajax({
+        url:Feng.ctxPath +path,
+        data:JSON.stringify(this.simOperInfoData),
+        dataType :  'json',
+        contentType : 'application/json',
+        type:"POST",
+        success:function (data) {
+            if(data.success){
+                Feng.success("添加成功!");
+            }else {
+                Feng.error("添加失败!" + data.errorMessage+ "!");
+            }
+
+        },
+        error:function (data) {
+            Feng.error("添加失败!" + data.responseJSON.message + "!");
+        }
     });
-    ajax.set(this.simOperInfoData);
-    ajax.start();
+
 }
 
 /**

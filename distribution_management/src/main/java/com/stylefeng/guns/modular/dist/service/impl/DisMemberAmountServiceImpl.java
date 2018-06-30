@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
-import com.stylefeng.guns.common.constant.dist.SituationDescribe;
 import com.stylefeng.guns.common.constant.dist.SituationStatus;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
@@ -132,12 +131,12 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
             initSituation.setDisProType(sysDic.getDicNo());
             initSituation.setDisUserId(userId);
             initSituation.setAddTime(memberAmount.getAddTime());
-            initSituation.setDescribe(SituationDescribe.AMOUNT_STATUS_INIT.getMes());
+            initSituation.setDescribe(SituationStatus.AMOUNT_INIT.getDes());
             initSituation.setType(SituationStatus.AMOUNT_INIT.getStatus());
             initSituation.setChangeAmount(new BigDecimal(0));
             disAmountSituationMapper.insert(initSituation);
         }
-        String des=SituationDescribe.INCOME_STATUS_DES.getMes();
+        String des=SituationStatus.INCOME_STATUS.getDes();
         situation.setDescribe(String.format(des,sourceId,accountType,userId,amount.toString()));
         disAmountSituationMapper.insert(situation);
     }
@@ -222,7 +221,7 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         SysDic sysDic=sysDicMapper.selectOne(sysDicParam);
         situation.setDisProType(sysDic.getDicNo());
         disMemberAmountMapper.updateById(memberAmount);
-        String des=SituationDescribe.PAY_STATUS_DES.getMes();
+        String des=SituationStatus.PAY_STATUS.getDes();
         situation.setDescribe(String.format(des,userId,accountType));
         disAmountSituationMapper.insert(situation);
     }

@@ -21,6 +21,15 @@ public class DisProfitRecordVo {
 
     private  String orderId;
 
+    private String upgradeLevel;
+
+    public String getUpgradeLevel() {
+        return upgradeLevel;
+    }
+
+    public void setUpgradeLevel(String upgradeLevel) {
+        this.upgradeLevel = upgradeLevel;
+    }
 
     public String getSecret() {
         return secret;

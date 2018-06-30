@@ -56,16 +56,24 @@ SimOperInfoDlg.addWithdrawSubmit = function() {
     this.clearData();
     this.collectData();
 
-    //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/DisWithdrawRecord/add", function(data){
-        Feng.success("添加成功!");
-        window.parent.SimOper.table.refresh();
-        SimOperInfoDlg.close();
-    },function(data){
-        Feng.error("添加失败!" + data.responseJSON.message + "!");
+    $.ajax({
+        url:Feng.ctxPath + "/withdraw",
+        data:JSON.stringify(this.simOperInfoData),
+        dataType :  'json',
+        contentType : 'application/json',
+        type:"POST",
+        success:function (data) {
+            if(data.success){
+                Feng.success("添加成功!");
+            }else {
+                Feng.error("添加失败!" + data.errorMessage+ "!");
+            }
+
+        },
+        error:function (data) {
+            Feng.error("添加失败!" + data.responseJSON.message + "!");
+        }
     });
-    ajax.set(this.simOperInfoData);
-    ajax.start();
 }
 
 /**

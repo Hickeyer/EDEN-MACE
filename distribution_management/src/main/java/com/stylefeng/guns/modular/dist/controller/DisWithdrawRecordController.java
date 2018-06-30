@@ -99,7 +99,6 @@ public class DisWithdrawRecordController extends BaseController {
      */
     @PostMapping(value = "/add")
     @ResponseBody
-    @ApiOperation(value = "新增提现接口", notes = "此接口是用用户提现")
     public Object add(DisWithdrawVo withdrawVo) {
         DisMemberInfo memberInfo=disMemberInfoService.selectListByUserId(withdrawVo.getUserId());
         if(memberInfo==null){

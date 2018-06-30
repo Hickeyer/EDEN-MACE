@@ -27,4 +27,6 @@ public interface IDisMemberInfoService {
 
     public void saveAgent(DisMemberInfo param);
 
+    public void updateLevel(DisMemberInfo param);
+
 }

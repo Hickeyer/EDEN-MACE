@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum  SituationStatus {
-    INCOME_STATUS("0","收入"),
-    PAY_STATUS("1","支出"),
-    AMOUNT_INIT("2","初始化账户");
+    INCOME_STATUS("0","收入","%s的%s账户交易，根据当前费率，%s获得%s元，"),
+    PAY_STATUS("1","支出","%s的%s账户提现"),
+    AMOUNT_INIT("2","初始化账户","账户初始化");
     private String status;
     private String mes;
+    private String des;
 
     private static Map<String, SituationStatus> map = new HashMap<String, SituationStatus>();
     static {
@@ -17,9 +18,10 @@ public enum  SituationStatus {
         }
     }
 
-    SituationStatus(String status, String mes) {
+    SituationStatus(String status, String mes,String des) {
         this.status=status;
         this.mes=mes;
+        this.des=des;
     }
 
     public static SituationStatus getMethod(String symbol) {
@@ -40,5 +42,13 @@ public enum  SituationStatus {
 
     public void setMes(String mes) {
         this.mes = mes;
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
     }
 }

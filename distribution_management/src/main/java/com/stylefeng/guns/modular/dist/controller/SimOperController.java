@@ -63,6 +63,7 @@ public class SimOperController extends BaseController {
     @RequestMapping("/order_add")
     public String order_add(Model model) {
         model.addAttribute("disProType",sysDicService.selectListByCode("disProType"));
+        model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
         return PREFIX + "order_add.html";
     }
 

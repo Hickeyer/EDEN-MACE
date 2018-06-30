@@ -90,27 +90,7 @@ public class DisProfitRecordController extends BaseController {
         return super.warpObject(new ProfitRecordWarpper(list));
     }
 
-    /**
-     * 新增交易
-     */
-    @PostMapping(value = "/add")
-    @ResponseBody
-    @ApiOperation(value = "新增交易奖励", notes = "此接口是用于交易奖励的接口，及关注有相关分润的数据，并不只是指交易")
-    public Object add(DisProfitRecordVo disProfitRecordVo) {
-        //根据直属上级查询到所属平台id
-        DisMemberInfo memberInfo=disMemberInfoService.selectListByUserId(disProfitRecordVo.getDisSetUserId());
-        if(memberInfo==null){
-            throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
-        }
-        String acc=Jwt.unsign(disProfitRecordVo.getSecret(),secret,String.class);
-        if(account.equals(acc)) {
-            disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
-            disProfitRecordService.save(disProfitRecordVo);
-        }else {
-            throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
-        }
-        return super.SUCCESS_TIP;
-    }
+
 
     /**
      * 删除交易
