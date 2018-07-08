@@ -141,7 +141,6 @@ public class OpenController  {
            // throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
             DistResult.failure("用户不存在！");
         }
-        String acc=Jwt.unsign(disProfitRecordVo.getSecret(),secret,String.class);
         if(isAccountVer(disProfitRecordVo.getSecret())) {
             disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
             disProfitRecordService.save(disProfitRecordVo);
@@ -167,7 +166,6 @@ public class OpenController  {
         if(disProfitRecordVo.getUpgradeLevel()==null){
             return DistResult.failure("请提供要升级的等级");
         }
-        String acc=Jwt.unsign(disProfitRecordVo.getSecret(),secret,String.class);
         if(isAccountVer(disProfitRecordVo.getSecret())) {
             memberInfo.setDisUserType(disProfitRecordVo.getUpgradeLevel());
             disMemberInfoService.updateLevel(memberInfo);
