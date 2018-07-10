@@ -22,6 +22,7 @@
  ![输入图片说明](https://gitee.com/uploads/images/2018/0609/190905_38816529_1497609.png "分销场景.png")
 
 分销功能架构图
+
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/0710/224752_26c20ef5_1497609.jpeg "分销系统总体架构.jpg")
 
 分销内部设计图
