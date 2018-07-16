@@ -41,11 +41,7 @@ public class DisProfiParamServiceImpl implements IDisProfiParamService {
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void save(DisProfitParam param) {
-        String account= ShiroKit.getUser().getAccount();
         param.setIsDelete("N");
-        if(!ShiroKit.hasRole(Const.ADMIN_NAME)){
-            param.setDisPlatformId(account);
-        }
         param.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         disProfiParamMapper.insert(param);
     }

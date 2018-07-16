@@ -85,6 +85,10 @@ public class DisProfitParamController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(DisProfitParam param) {
+        String account= ShiroKit.getUser().getAccount();
+        if(!ShiroKit.hasRole(Const.ADMIN_NAME)){
+            param.setDisPlatformId(account);
+        }
         disProfiParamService.save(param);
         return super.SUCCESS_TIP;
     }
