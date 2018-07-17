@@ -7,8 +7,10 @@ import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
+import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
+import com.stylefeng.guns.common.persistence.model.SysDic;
 import com.stylefeng.guns.core.mutidatesource.DataSourceContextHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.dao.DisMemberInfoDao;
@@ -17,6 +19,7 @@ import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.vo.LinksVo;
 import com.stylefeng.guns.modular.dist.vo.MemberRecordVo;
 import com.stylefeng.guns.modular.dist.vo.NodesVo;
+import com.stylefeng.guns.modular.system.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
@@ -47,6 +50,12 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
 
     @Autowired
     IDisMemberAmountService disMemberAmountService;
+
+    @Autowired
+    ISysDicService sysDicService;
+
+    @Autowired
+    SysDicMapper sysDicMapper;
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
@@ -118,8 +127,34 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
             DisMemberInfo parentMemberParam=new DisMemberInfo();
             parentMemberParam.setDisUserId(param.getDisModelId());
             DisMemberInfo parentMember=disMemberInfoMapper.selectOne(parentMemberParam);
-            param.setDisLevel(parentMember.getDisLevel()+1);
-            param.setDisFullIndex(parentMember.getDisFullIndex()+"."+param.getDisUserId());
+
+            //级别限制 主要对dislevel和 disfullindex进行限制
+            SysDic dicParam=new SysDic();
+            dicParam.setDicTypeNo("maxLevel");
+            SysDic dis=sysDicMapper.selectOne(dicParam);
+            if(dis!=null){
+                Integer maxLevel=Integer.parseInt(dis.getDicNo());
+                Integer factLevel=parentMember.getDisLevel()+1;
+                if(factLevel>=maxLevel){
+                    //截取
+                    param.setDisLevel(maxLevel);
+                    String[] indexArr=parentMember.getDisFullIndex().split("\\.");
+                    String fullIndex="";
+                    //取倒数最大值-1位数据
+                    int indexSize=indexArr.length;
+                    for(int i=maxLevel-1;i>0;i--){
+                        fullIndex+=indexArr[indexSize-i]+".";
+                    }
+                    param.setDisFullIndex(fullIndex+param.getDisUserId());
+                }else{
+                    //正常执行
+                    param.setDisLevel(parentMember.getDisLevel()+1);
+                    param.setDisFullIndex(parentMember.getDisFullIndex()+"."+param.getDisUserId());
+                }
+            }else{
+                param.setDisLevel(parentMember.getDisLevel()+1);
+                param.setDisFullIndex(parentMember.getDisFullIndex()+"."+param.getDisUserId());
+            }
         }else {
             param.setDisFullIndex(param.getDisUserId().toString());
             param.setDisLevel(0);
