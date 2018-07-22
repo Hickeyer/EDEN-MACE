@@ -16,8 +16,13 @@
                     <#select id="disProType" name="分润类别 ">
                     @for(dis in disProType){
                     <option value="${dis.dicNo}">${dis.dicValue}</option>
-                @}
-                </#select>
+                    @}
+                    </#select>
+                    <#select id="disUserRank" name="用户段位 ">
+                    @for(dis in disUserRank){
+                        <option value="${dis.dicNo}">${dis.dicValue}</option>
+                    @}
+                    </#select>
 
                 </div>
 

@@ -20,6 +20,8 @@ DisMemberInfo.initColumn = function () {
         {title: '用户名称', field: 'disUserName', visible: true, align: 'center', valign: 'middle'},
         {title: '用户级别', field: 'disLevel', visible: true, align: 'center', valign: 'middle'},
         {title: '用户类型', field: 'disUserType', visible: true, align: 'center', valign: 'middle'},
+        {title: '用户段位', field: 'disUserRank', visible: true, align: 'center', valign: 'middle'},
+        {title: '段位积分', field: 'rankIntegral', visible: true, align: 'center', valign: 'middle'},
         {title: '创建时间', field: 'addTime', visible: true, align: 'center', valign: 'middle'},
     ];
 };

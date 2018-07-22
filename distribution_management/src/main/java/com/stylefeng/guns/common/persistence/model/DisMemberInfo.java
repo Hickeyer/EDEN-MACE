@@ -13,12 +13,12 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-05-15
+ * @since 2018-07-19
  */
 @TableName("dis_member_info")
 public class DisMemberInfo extends Model<DisMemberInfo> {
 
-    private static final long serialVersionUID = 11222;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 主键
@@ -61,6 +61,11 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 	@TableField("dis_user_type")
 	private String disUserType;
     /**
+     * 用户段位(青铜、黄金、白银等)
+     */
+	@TableField("dis_user_rank")
+	private String disUserRank;
+    /**
      * 备注
      */
 	@TableField("dis_note")
@@ -99,6 +104,11 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
      * 账户类型(0,会员，1：代理商)
      */
 	private String type;
+    /**
+     * 段位积分
+     */
+	@TableField("rank_integral")
+	private Integer rankIntegral;
 
 
 	public Integer getId() {
@@ -165,6 +175,14 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 		this.disUserType = disUserType;
 	}
 
+	public String getDisUserRank() {
+		return disUserRank;
+	}
+
+	public void setDisUserRank(String disUserRank) {
+		this.disUserRank = disUserRank;
+	}
+
 	public String getDisNote() {
 		return disNote;
 	}
@@ -229,6 +247,14 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 		this.type = type;
 	}
 
+	public Integer getRankIntegral() {
+		return rankIntegral;
+	}
+
+	public void setRankIntegral(Integer rankIntegral) {
+		this.rankIntegral = rankIntegral;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -245,6 +271,7 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 			", disUserName=" + disUserName +
 			", disLevel=" + disLevel +
 			", disUserType=" + disUserType +
+			", disUserRank=" + disUserRank +
 			", disNote=" + disNote +
 			", addTime=" + addTime +
 			", updateTime=" + updateTime +
@@ -253,6 +280,7 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 			", disPlatFullIndex=" + disPlatFullIndex +
 			", disPlatLevel=" + disPlatLevel +
 			", type=" + type +
+			", rankIntegral=" + rankIntegral +
 			"}";
 	}
 }

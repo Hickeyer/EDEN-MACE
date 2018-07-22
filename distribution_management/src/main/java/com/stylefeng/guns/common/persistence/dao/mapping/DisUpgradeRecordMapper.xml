@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.DisUpgradeRecordMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.DisUpgradeRecord">
+		<id column="id" property="id" />
+		<result column="dis_user_id" property="disUserId" />
+		<result column="before_upgrade_level" property="beforeUpgradeLevel" />
+		<result column="after_upgrade_level" property="afterUpgradeLevel" />
+		<result column="level_differ" property="levelDiffer" />
+		<result column="upgrade_time" property="upgradeTime" />
+		<result column="level_type" property="levelType" />
+	</resultMap>
+
+</mapper>

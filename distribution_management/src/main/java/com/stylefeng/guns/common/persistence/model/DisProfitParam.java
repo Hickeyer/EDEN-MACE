@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-05-30
+ * @since 2018-07-19
  */
 @TableName("dis_profit_param")
 public class DisProfitParam extends Model<DisProfitParam> {
@@ -48,16 +48,36 @@ public class DisProfitParam extends Model<DisProfitParam> {
 	@TableField("dis_pro_level")
 	private String disProLevel;
     /**
-     * 会员类型（0:代理商 1：会员）
+     * 会员类型（1000：平台标示，其他为用户类型）
      */
 	@TableField("dis_user_type")
 	private String disUserType;
+    /**
+     * 是否删除
+     */
 	@TableField("is_delete")
 	private String isDelete;
+    /**
+     * 更新时间
+     */
 	@TableField("update_time")
 	private String updateTime;
+    /**
+     * 添加时间
+     */
 	@TableField("add_time")
 	private String addTime;
+    /**
+     * 交易方式(分润或者提现)
+     */
+	@TableField("dist_trade_mode")
+	private String distTradeMode;
+    /**
+     * 用户段位（青铜等）
+     */
+	@TableField("dis_user_rank")
+	private String disUserRank;
+
 
 	public Integer getId() {
 		return id;
@@ -139,6 +159,21 @@ public class DisProfitParam extends Model<DisProfitParam> {
 		this.addTime = addTime;
 	}
 
+	public String getDistTradeMode() {
+		return distTradeMode;
+	}
+
+	public void setDistTradeMode(String distTradeMode) {
+		this.distTradeMode = distTradeMode;
+	}
+
+	public String getDisUserRank() {
+		return disUserRank;
+	}
+
+	public void setDisUserRank(String disUserRank) {
+		this.disUserRank = disUserRank;
+	}
 
 	@Override
 	protected Serializable pkVal() {
@@ -158,6 +193,8 @@ public class DisProfitParam extends Model<DisProfitParam> {
 			", isDelete=" + isDelete +
 			", updateTime=" + updateTime +
 			", addTime=" + addTime +
+			", distTradeMode=" + distTradeMode +
+			", disUserRank=" + disUserRank +
 			"}";
 	}
 }

@@ -21,6 +21,7 @@ DisProfiParam.initColumn = function () {
         {title: '分润值', field: 'disProValue', visible: true, align: 'center', valign: 'middle'},
         {title: '分润级别', field: 'disProLevel', visible: true, align: 'center', valign: 'middle'},
         {title: '用户类型', field: 'disUserType', visible: true, align: 'center', valign: 'middle'},
+        {title: '用户段位', field: 'disUserRank', visible: true, align: 'center', valign: 'middle'},
         {title: '添加时间', field: 'addTime', visible: true, align: 'center', valign: 'middle'},
     ];
 };

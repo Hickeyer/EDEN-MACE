@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.DisRankParamMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.DisRankParam">
+		<id column="id" property="id" />
+		<result column="dis_platform_id" property="disPlatformId" />
+		<result column="dis_pro_mode" property="disProMode" />
+		<result column="dis_pro_type" property="disProType" />
+		<result column="dis_integral_value" property="disIntegralValue" />
+		<result column="dis_pro_level" property="disProLevel" />
+		<result column="dis_user_type" property="disUserType" />
+		<result column="is_delete" property="isDelete" />
+		<result column="update_time" property="updateTime" />
+		<result column="add_time" property="addTime" />
+		<result column="dis_user_rank" property="disUserRank" />
+		<result column="dis_rank_name" property="disRankName" />
+	</resultMap>
+
+</mapper>

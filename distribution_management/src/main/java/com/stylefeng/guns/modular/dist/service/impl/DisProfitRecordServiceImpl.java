@@ -13,6 +13,7 @@ import com.stylefeng.guns.common.persistence.model.DisProfitParam;
 import com.stylefeng.guns.common.persistence.model.DisProfitRecord;
 import com.stylefeng.guns.modular.dist.dao.DisProfitRecordDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
+import com.stylefeng.guns.modular.dist.service.IDisSysIntegralRecordService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
 import com.stylefeng.guns.modular.system.service.ISysDicService;
@@ -54,6 +55,9 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
     @Autowired
     ISysDicService sysDicService;
 
+    @Autowired
+    IDisSysIntegralRecordService disSysIntegralRecordService;
+
     @Override
     @DataSource(name=DSEnum.DATA_SOURCE_BIZ)
     public List<Map<String, Object>> selectList(String account) {
@@ -68,6 +72,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
      *  3、根据发起交易人员信息获取上级人员信息
      *  4、根据分润列表和上级人员信息进行匹配，进行分润
      *  5、计算平台分润
+     *  6、计算积分
      * @param param
      */
     @Override
@@ -80,6 +85,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         saveMember(param,memberInfo);
         savePlat(param,memberInfo);
         saveAdmin(param,memberInfo);
+        disSysIntegralRecordService.saveMember(param,memberInfo);
     }
     public void saveMember(DisProfitRecordVo param,DisMemberInfo memberInfo){
 

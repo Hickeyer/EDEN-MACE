@@ -14,6 +14,8 @@
 		<result column="is_delete" property="isDelete" />
 		<result column="update_time" property="updateTime" />
 		<result column="add_time" property="addTime" />
+		<result column="dist_trade_mode" property="distTradeMode" />
+		<result column="dis_user_rank" property="disUserRank" />
 	</resultMap>
 
 </mapper>

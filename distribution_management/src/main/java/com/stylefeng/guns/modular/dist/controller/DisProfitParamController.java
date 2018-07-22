@@ -54,6 +54,7 @@ public class DisProfitParamController extends BaseController {
         model.addAttribute("disProType",sysDicService.selectListByCode("disProType"));
         model.addAttribute("disProLevel",sysDicService.selectListByCode("disProLevel"));
         model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
+        model.addAttribute("disUserRank",sysDicService.selectListByCode("disUserRank"));
         return PREFIX + "disProfiParam_add.html";
     }
 

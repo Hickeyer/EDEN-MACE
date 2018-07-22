@@ -3,6 +3,8 @@ package com.stylefeng.guns.modular.dist.service.impl;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.exception.BizExceptionEnum;
+import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.dao.DisProfitParamMapper;
 import com.stylefeng.guns.common.persistence.model.DisProfitParam;
 import com.stylefeng.guns.core.shiro.ShiroKit;
@@ -41,6 +43,9 @@ public class DisProfiParamServiceImpl implements IDisProfiParamService {
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void save(DisProfitParam param) {
+        if(param.getDisProLevel().equals("0")){
+            throw  new BussinessException(BizExceptionEnum.PROFIT_LEVLE_ERROR);
+        }
         param.setIsDelete("N");
         param.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         disProfiParamMapper.insert(param);
