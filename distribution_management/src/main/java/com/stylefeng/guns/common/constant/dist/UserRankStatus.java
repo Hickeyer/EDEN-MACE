@@ -5,12 +5,14 @@ import java.util.Map;
 
 public enum  UserRankStatus {
 
-    A_STATUS("A","青铜"),
-    B_STATUS("B","黄金"),
-    C_STATUS("C","铂金"),
-    D_STATUS("D","钻石");
+    A_STATUS("A","青铜",1),
+    B_STATUS("B","黄金",2),
+    C_STATUS("C","铂金",3),
+    D_STATUS("D","钻石",4);
     private String status;
     private String mes;
+
+    private int order;
 
     private static Map<String, UserRankStatus> map = new HashMap<String, UserRankStatus>();
     static {
@@ -19,9 +21,10 @@ public enum  UserRankStatus {
         }
     }
 
-    UserRankStatus(String status, String mes) {
+    UserRankStatus(String status, String mes,int order) {
         this.status=status;
         this.mes=mes;
+        this.order=order;
     }
 
     public static UserRankStatus getMethod(String symbol) {
@@ -42,5 +45,13 @@ public enum  UserRankStatus {
 
     public void setMes(String mes) {
         this.mes = mes;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }

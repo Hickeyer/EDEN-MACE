@@ -5,12 +5,9 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.constant.dist.IdentityStatus;
-import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
-import com.stylefeng.guns.common.persistence.dao.DisProfitParamMapper;
-import com.stylefeng.guns.common.persistence.dao.DisProfitRecordMapper;
-import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
-import com.stylefeng.guns.common.persistence.model.DisProfitParam;
-import com.stylefeng.guns.common.persistence.model.DisProfitRecord;
+import com.stylefeng.guns.common.constant.dist.UserTypeStatus;
+import com.stylefeng.guns.common.persistence.dao.*;
+import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.modular.dist.dao.DisProfitRecordDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDisSysIntegralRecordService;
@@ -58,6 +55,12 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
     @Autowired
     IDisSysIntegralRecordService disSysIntegralRecordService;
 
+    @Autowired
+    DisTradeRecordMapper disTradeRecordMapper;
+
+    @Autowired
+    DisUpgradeRecordMapper disUpgradeRecordMapper;
+
     @Override
     @DataSource(name=DSEnum.DATA_SOURCE_BIZ)
     public List<Map<String, Object>> selectList(String account) {
@@ -73,6 +76,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
      *  4、根据分润列表和上级人员信息进行匹配，进行分润
      *  5、计算平台分润
      *  6、计算积分
+     *  7、记录交易金额
      * @param param
      */
     @Override
@@ -86,6 +90,33 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         savePlat(param,memberInfo);
         saveAdmin(param,memberInfo);
         disSysIntegralRecordService.saveMember(param,memberInfo);
+        if("0".equals(param.getDisProType())){
+            //记录交易金额
+            saveTradeRecord(param);
+        }else if("1".equals(param.getDisProType())){
+            //记录升级接口
+            saveVerticalLevel(memberInfo.getDisUserType(),param.getUpgradeLevel(),param.getDisSetUserId());
+        }
+    }
+
+    public  void saveVerticalLevel(String beforeLevel,String afterLevel,String userId){
+        DisUpgradeRecord upgradeRecord=new DisUpgradeRecord();
+        upgradeRecord.setBeforeUpgradeLevel(beforeLevel);
+        upgradeRecord.setAfterUpgradeLevel(afterLevel);
+        upgradeRecord.setUpgradeTime(DateUtils.longToDateAll(System.currentTimeMillis()));
+        upgradeRecord.setDisUserId(userId);
+        int differ=UserTypeStatus.getMethod(afterLevel).getOrder()-
+                UserTypeStatus.getMethod(beforeLevel).getOrder();
+        upgradeRecord.setLevelDiffer(String.valueOf(differ));
+        disUpgradeRecordMapper.insert(upgradeRecord);
+    }
+    public  void saveTradeRecord(DisProfitRecordVo param){
+        DisTradeRecord tradeRecord=new DisTradeRecord();
+        tradeRecord.setDisUserId(param.getDisSetUserId());
+        tradeRecord.setTradeAmount(param.getDisAmount());
+        tradeRecord.setTradeNum(param.getOrderId());
+        tradeRecord.setTradeTime(DateUtils.longToDateAll(System.currentTimeMillis()));
+        disTradeRecordMapper.insert(tradeRecord);
     }
     public void saveMember(DisProfitRecordVo param,DisMemberInfo memberInfo){
 

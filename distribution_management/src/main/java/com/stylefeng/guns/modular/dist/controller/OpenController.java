@@ -167,11 +167,13 @@ public class OpenController  {
             return DistResult.failure("请提供要升级的等级");
         }
         if(isAccountVer(disProfitRecordVo.getSecret())) {
-            memberInfo.setDisUserType(disProfitRecordVo.getUpgradeLevel());
-            disMemberInfoService.updateLevel(memberInfo);
+
 
             disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
             disProfitRecordService.save(disProfitRecordVo);
+
+            memberInfo.setDisUserType(disProfitRecordVo.getUpgradeLevel());
+            disMemberInfoService.updateLevel(memberInfo);
         }else {
             //throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
             DistResult.failure("非法访问！");
