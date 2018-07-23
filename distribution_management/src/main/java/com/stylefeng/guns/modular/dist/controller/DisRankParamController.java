@@ -50,7 +50,7 @@ public class DisRankParamController extends BaseController {
     @RequestMapping("/DisRankParam_add")
     public String DisRankParamAdd(Model model) {
         model.addAttribute("disProMode",sysDicService.selectListByCode("disProMode"));
-        model.addAttribute("disProType",sysDicService.selectListByCode("disProType"));
+        model.addAttribute("disProType",sysDicService.selectListByCode("disProRankType"));
         model.addAttribute("disProLevel",sysDicService.selectListByCode("disProLevel"));
         model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
         model.addAttribute("disUserRank",sysDicService.selectListByCode("disUserRank"));

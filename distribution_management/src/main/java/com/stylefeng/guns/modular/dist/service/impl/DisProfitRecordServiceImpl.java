@@ -89,7 +89,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         saveMember(param,memberInfo);
         savePlat(param,memberInfo);
         saveAdmin(param,memberInfo);
-        disSysIntegralRecordService.saveMember(param,memberInfo);
+        disSysIntegralRecordService.saveMember(param.getDisProType(),param.getDisAmount(),memberInfo);
         if("0".equals(param.getDisProType())){
             //记录交易金额
             saveTradeRecord(param);

@@ -28,7 +28,7 @@
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=p.`dis_pro_mode` AND e.`dic_type_no`='disProMode'
         LEFT JOIN `sys_dic` f ON  f.`dic_no`=p.`dis_pro_type` AND f.`dic_type_no`='disProType'
         LEFT JOIN `sys_dic` g ON  g.`dic_no`=p.`dis_user_type` AND g.`dic_type_no`='disUserType'
-        LEFT JOIN `sys_dic` h ON  h.`dic_no`=p.`dis_user_rank` AND h.`dic_type_no`='disUserRank'
+        LEFT JOIN `sys_dic` h ON  h.`dic_no`=p.`dis_user_rank` AND h.`dic_type_no`='disProRankType'
         WHERE p.is_delete='N'
         <if test="account != null and account != ''">
             and p.dis_platform_id=#{account}

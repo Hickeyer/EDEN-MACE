@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.constant.dist.ProRankTypeStatus;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
 import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
@@ -15,6 +16,7 @@ import com.stylefeng.guns.core.mutidatesource.DataSourceContextHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.dao.DisMemberInfoDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
+import com.stylefeng.guns.modular.dist.service.IDisSysIntegralRecordService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.vo.LinksVo;
 import com.stylefeng.guns.modular.dist.vo.MemberRecordVo;
@@ -24,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +45,10 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
     private int source=1;
     private  int target=0;
 
-    @Autowired
+    @Resource
     DisMemberInfoDao disMemberInfoDao;
 
-    @Autowired
+    @Resource
     DisMemberInfoMapper disMemberInfoMapper;
 
     @Autowired
@@ -54,8 +57,11 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
     @Autowired
     ISysDicService sysDicService;
 
-    @Autowired
+    @Resource
     SysDicMapper sysDicMapper;
+
+    @Autowired
+    IDisSysIntegralRecordService disSysIntegralRecordService;
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
@@ -163,6 +169,7 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         param.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         disMemberInfoMapper.insert(param);
         disMemberAmountService.save(param.getDisUserId(),param.getDisUserName(),"0");
+        disSysIntegralRecordService.saveMember(ProRankTypeStatus.TWO_STATUS.getStatus(),new BigDecimal(0),param);
     }
 
     @Override
