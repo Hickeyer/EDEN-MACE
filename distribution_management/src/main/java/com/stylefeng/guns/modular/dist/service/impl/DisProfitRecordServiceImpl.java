@@ -76,7 +76,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
      *  4、根据分润列表和上级人员信息进行匹配，进行分润
      *  5、计算平台分润
      *  6、计算积分
-     *  7、记录交易金额
+     *  7、记录交易金额/升级信息
      * @param param
      */
     @Override

@@ -61,7 +61,7 @@ CREATE TABLE `dis_member_amount` (
   `level_frozen_amount` decimal(12,2) DEFAULT NULL COMMENT '扩展字段，等级账户冻结金额',
   `level_avaible_amount` decimal(12,2) DEFAULT NULL COMMENT '扩展字段，等级账户可用金额',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8 COMMENT='账户金额表';
 
 /*Data for the table `dis_member_amount` */
 
@@ -194,7 +194,7 @@ CREATE TABLE `dis_sys_integral_record` (
   `use_time` varchar(20) DEFAULT NULL COMMENT '使用时间',
   `use_remark` varchar(100) DEFAULT NULL COMMENT '使用备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='系统积分记录表';
 
 /*Data for the table `dis_sys_integral_record` */
 
@@ -211,9 +211,29 @@ CREATE TABLE `dis_trade_record` (
   `trade_amount` decimal(12,2) DEFAULT '0.00' COMMENT '交易金额',
   `trade_time` varchar(20) DEFAULT NULL COMMENT '交易时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='交易金额记录表';
 
 /*Data for the table `dis_trade_record` */
+
+/*Table structure for table `dis_upgrade_param` */
+
+DROP TABLE IF EXISTS `dis_upgrade_param`;
+
+CREATE TABLE `dis_upgrade_param` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `upgrade_name` varchar(100) DEFAULT NULL COMMENT '名称',
+  `begin_integral` int(10) DEFAULT NULL COMMENT '开始金额',
+  `end_integral` int(10) DEFAULT NULL COMMENT '结束金额',
+  `dis_user_rank` varchar(10) DEFAULT NULL COMMENT '用户水平等级',
+  `is_delete` varchar(2) DEFAULT 'N' COMMENT '是否删除',
+  `add_time` varchar(20) DEFAULT NULL COMMENT '添加时间',
+  `update_time` varchar(20) DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='垂直升级配置表';
+
+/*Data for the table `dis_upgrade_param` */
+
+insert  into `dis_upgrade_param`(`id`,`upgrade_name`,`begin_integral`,`end_integral`,`dis_user_rank`,`is_delete`,`add_time`,`update_time`) values (2,'11',12,12,'A','N','2018-07-23 17:08:13',NULL);
 
 /*Table structure for table `dis_upgrade_record` */
 
@@ -228,7 +248,7 @@ CREATE TABLE `dis_upgrade_record` (
   `upgrade_time` varchar(20) DEFAULT NULL COMMENT '升级时间',
   `level_type` varchar(2) DEFAULT '0' COMMENT '升级类型(0:垂直升级 1：水平升级)',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户升级记录表';
 
 /*Data for the table `dis_upgrade_record` */
 
@@ -248,7 +268,7 @@ CREATE TABLE `dis_withdraw_record` (
   `withdraw_status` varchar(10) DEFAULT NULL COMMENT '处理状态',
   `dis_pro_mode` varchar(10) DEFAULT NULL COMMENT '提现账户',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='提现表';
 
 /*Data for the table `dis_withdraw_record` */
 
@@ -291,7 +311,7 @@ CREATE TABLE `sys_dic` (
   `ext_field` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '扩展字段',
   `ext_field2` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '扩展字段2',
   PRIMARY KEY (`dic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10024 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=10024 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='字典类型表';
 
 /*Data for the table `sys_dic` */
 
@@ -312,7 +332,7 @@ CREATE TABLE `sys_dic_type` (
   `add_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `update_time` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`dic_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='字典表';
 
 /*Data for the table `sys_dic_type` */
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.dist.dao.DisUpgradeParamDao">
+    <resultMap id="BaseResultMap" type="map">
+        <id column="id" property="id" />
+        <result column="upgrade_name" property="upgradeName" />
+        <result column="begin_integral" property="beginIntegral" />
+        <result column="end_integral" property="endIntegral" />
+        <result column="dis_user_rank" property="disUserRank" />
+        <result column="is_delete" property="isDelete" />
+        <result column="add_time" property="addTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT  u.`begin_integral`,u.`id`,u.`end_integral`,u.`add_time`,u.`upgrade_name`,
+        e.`dic_no` dis_user_rank
+        FROM  `dis_upgrade_param` u
+        LEFT JOIN `sys_dic` e ON  e.`dic_no`=u.`dis_user_rank` AND e.`dic_type_no`='disUserRank'
+        WHERE u.`is_delete`='N'
+    </select>
+
+</mapper>
