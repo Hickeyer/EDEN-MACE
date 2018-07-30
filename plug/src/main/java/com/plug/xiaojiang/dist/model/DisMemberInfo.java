@@ -9,7 +9,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-05-15
+ * @since 2018-07-19
  */
 public class DisMemberInfo implements Serializable {
 
@@ -48,6 +48,10 @@ public class DisMemberInfo implements Serializable {
      */
 	private String disUserType;
     /**
+     * 用户段位(青铜、黄金、白银等)
+     */
+	private String disUserRank;
+    /**
      * 备注
      */
 	private String disNote;
@@ -79,6 +83,10 @@ public class DisMemberInfo implements Serializable {
      * 账户类型(0,会员，1：代理商)
      */
 	private String type;
+    /**
+     * 段位积分
+     */
+	private Integer rankIntegral;
 
 
 	public Integer getId() {
@@ -145,6 +153,14 @@ public class DisMemberInfo implements Serializable {
 		this.disUserType = disUserType;
 	}
 
+	public String getDisUserRank() {
+		return disUserRank;
+	}
+
+	public void setDisUserRank(String disUserRank) {
+		this.disUserRank = disUserRank;
+	}
+
 	public String getDisNote() {
 		return disNote;
 	}
@@ -209,6 +225,14 @@ public class DisMemberInfo implements Serializable {
 		this.type = type;
 	}
 
+	public Integer getRankIntegral() {
+		return rankIntegral;
+	}
+
+	public void setRankIntegral(Integer rankIntegral) {
+		this.rankIntegral = rankIntegral;
+	}
+
 
 	@Override
 	public String toString() {
@@ -221,6 +245,7 @@ public class DisMemberInfo implements Serializable {
 			", disUserName=" + disUserName +
 			", disLevel=" + disLevel +
 			", disUserType=" + disUserType +
+			", disUserRank=" + disUserRank +
 			", disNote=" + disNote +
 			", addTime=" + addTime +
 			", updateTime=" + updateTime +
@@ -229,6 +254,7 @@ public class DisMemberInfo implements Serializable {
 			", disPlatFullIndex=" + disPlatFullIndex +
 			", disPlatLevel=" + disPlatLevel +
 			", type=" + type +
+			", rankIntegral=" + rankIntegral +
 			"}";
 	}
 }
