@@ -47,7 +47,7 @@ https://gitee.com/codingdb/distribution_management
 
 分销功能架构图
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/0710/224752_26c20ef5_1497609.jpeg "分销系统总体架构.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0828/101219_4d445e9d_1497609.jpeg "代理分销.jpg")
 
 分销内部设计图
 ![输入图片说明](https://gitee.com/uploads/images/2018/0510/085941_47511fa1_1497609.png "未命名文件.png")
