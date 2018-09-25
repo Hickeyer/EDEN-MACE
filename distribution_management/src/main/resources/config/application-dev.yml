@@ -4,7 +4,7 @@
 spring:
   profiles: dev
   datasource:
-      url: jdbc:mysql://127.0.0.1:3306/authority?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+      url: jdbc:mysql://127.0.0.1:3306/authority?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
       username: root
       password: 123456
       filters: log4j,wall,mergeStat
@@ -12,7 +12,7 @@ spring:
 #多数据源
 biz:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/distribution?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://127.0.0.1:3306/distribution?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
     password: 123456
 

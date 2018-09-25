@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.SysJobMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.SysJob">
+		<id column="id" property="id" />
+		<result column="job_name" property="jobName" />
+		<result column="job_group" property="jobGroup" />
+		<result column="job_cron" property="jobCron" />
+		<result column="job_class_path" property="jobClassPath" />
+		<result column="job_data_map" property="jobDataMap" />
+		<result column="job_status" property="jobStatus" />
+		<result column="job_describe" property="jobDescribe" />
+	</resultMap>
+
+</mapper>

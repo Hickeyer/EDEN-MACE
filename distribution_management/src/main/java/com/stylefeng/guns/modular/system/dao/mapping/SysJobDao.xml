@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.SysJobDao">
+
+
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.SysJob">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="job_describe" jdbcType="VARCHAR" property="jobDescribe" />
+        <result column="job_class_path" jdbcType="VARCHAR" property="jobClassPath" />
+        <result column="job_status" jdbcType="INTEGER" property="jobStatus" />
+        <result column="job_cron" jdbcType="VARCHAR" property="jobCron" />
+        <result column="job_group" jdbcType="VARCHAR" property="jobGroup" />
+        <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+        <result column="job_data_map" jdbcType="VARCHAR" property="jobDataMap" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, job_describe, job_class_path, job_status, job_cron,
+        job_group,
+        job_name,job_data_map
+    </sql>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="ResultMap" type="map">
+        <id column="id" property="id" />
+        <result column="job_name" property="jobName" />
+        <result column="job_group" property="jobGroup" />
+        <result column="job_cron" property="jobCron" />
+        <result column="job_class_path" property="jobClassPath" />
+        <result column="job_data_map" property="jobDataMap" />
+        <result column="job_status" property="jobStatus" />
+        <result column="job_describe" property="jobDescribe" />
+    </resultMap>
+
+    <select id="selectList" resultMap="ResultMap">
+        SELECT * FROM  `sys_job`
+    </select>
+
+    <!-- 获取任务总数-->
+    <select id="getJobCount"   resultType="java.lang.Integer">
+        select count(id) count from sys_job
+    </select>
+
+    <!-- 查询定时任务列表 -->
+    <select id="querySysJobList" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_job where 1=1
+        <if test="id != null">
+            and ID = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="jobDescribe != null">
+            and JOB_DESCRIBE = #{jobDescribe,jdbcType=VARCHAR}
+        </if>
+        <if test="jobClassPath != null">
+            and job_class_path = #{jobClassPath,jdbcType=VARCHAR}
+        </if>
+        <if test="jobStatus != null">
+            and job_status = #{jobStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="jobCron != null">
+            and job_cron like concat('%',#{jobCron},'%')
+        </if>
+        <if test="jobGroup != null">
+            and job_group = #{jobGroup,jdbcType=VARCHAR}
+        </if>
+        <if test="jobName != null">
+            and job_name like concat('%',#{jobName},'%')
+        </if>
+    </select>
+
+    <!-- 根据bean查询定时任务详情  -->
+    <select id="selectByBean" parameterType="com.stylefeng.guns.common.persistence.model.SysJob" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_job where 1=1
+        <if test="id != null">
+            and ID = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="jobDescribe != null">
+            and JOB_DESCRIBE = #{jobDescribe,jdbcType=VARCHAR}
+        </if>
+        <if test="jobClassPath != null">
+            and job_class_path = #{jobClassPath,jdbcType=VARCHAR}
+        </if>
+        <if test="jobStatus != null">
+            and job_status = #{jobStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="jobCron != null">
+            and job_cron like concat('%',#{jobCron},'%')
+        </if>
+        <if test="jobGroup != null">
+            and job_group = #{jobGroup,jdbcType=VARCHAR}
+        </if>
+        <if test="jobName != null">
+            and job_name like concat('%',#{jobName},'%')
+        </if>
+    </select>
+
+    <!-- 根据主键查询定时任务 -->
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_job
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!-- 删除定时任务 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from
+        sys_job
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!-- 新增定时任务 -->
+    <insert id="insertSelective" parameterType="com.stylefeng.guns.common.persistence.model.SysJob">
+        insert into sys_job
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="jobDescribe != null">
+                job_describe,
+            </if>
+            <if test="jobClassPath != null">
+                job_class_path,
+            </if>
+            <if test="jobStatus != null">
+                job_status,
+            </if>
+            <if test="jobCron != null">
+                job_cron,
+            </if>
+            <if test="jobGroup != null">
+                job_group,
+            </if>
+            <if test="jobName != null">
+                job_name,
+            </if>
+            <if test="jobDataMap != null">
+                job_data_map,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="jobDescribe != null">
+                #{jobDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="jobClassPath != null">
+                #{jobClassPath,jdbcType=VARCHAR},
+            </if>
+            <if test="jobStatus != null">
+                #{jobStatus,jdbcType=INTEGER},
+            </if>
+            <if test="jobCron != null">
+                #{jobCron,jdbcType=VARCHAR},
+            </if>
+            <if test="jobGroup != null">
+                #{jobGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="jobName != null">
+                #{jobName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobDataMap != null">
+                #{jobDataMap,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 更新定时任务信息 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.stylefeng.guns.common.persistence.model.SysJob">
+        update sys_job
+        <set>
+            <if test="jobDescribe != null">
+                job_describe = #{jobDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="jobClassPath != null">
+                job_class_path = #{jobClassPath,jdbcType=VARCHAR},
+            </if>
+            <if test="jobStatus != null">
+                job_status = #{jobStatus,jdbcType=INTEGER},
+            </if>
+            <if test="jobCron != null">
+                job_cron = #{jobCron,jdbcType=VARCHAR},
+            </if>
+            <if test="jobGroup != null">
+                job_group = #{jobGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="jobName != null">
+                job_name = #{jobName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobDataMap != null">
+                job_data_map = #{jobDataMap,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+</mapper>

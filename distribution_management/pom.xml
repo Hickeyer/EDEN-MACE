@@ -37,6 +37,10 @@
         <gson.version>2.2.4</gson.version>
         <jwt.version>2.2.0</jwt.version>
         <pinyin.version>2.5.1</pinyin.version>
+        <commons-lang3.version>3.5</commons-lang3.version>
+        <spring-context-support.version>3.2.3.RELEASE</spring-context-support.version>
+        <quartz-jobs.version>2.2.3</quartz-jobs.version>
+        <quartz.version>2.2.3</quartz.version>
     </properties>
 
     <dependencies>
@@ -195,6 +199,30 @@
             <artifactId>pinyin4j</artifactId>
             <version>${pinyin.version}</version>
         </dependency>
+        <!--spring quartz依赖-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>${quartz-jobs.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring-context-support.version}</version>
+        </dependency>
+
+        <!-- 工具类 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
