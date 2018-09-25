@@ -42,7 +42,7 @@ https://gitee.com/codingdb/distribution_management
 
 ###  特别鸣谢
 
-沽泡学院青山老师
+咕泡学院青山老师
 
 ### 项目总览
 项目使用场景图示
