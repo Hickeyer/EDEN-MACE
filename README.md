@@ -64,7 +64,7 @@ plug用来调试接口，调试完成后，可以直接使用
 
 ### 安装方法
 
-下载此项目后，将sql中的 两个数据库初始化到本地数据库，然后根据实际情况更新数据库账户和密码。
+下载此项目后，generator.ExecuSql 修改数据库和密码，可以自动导入sql。
 
 运行/distribution_management 目录下的项目,访问http://localhost/。
 
