@@ -57,7 +57,7 @@ SimOperInfoDlg.addWithdrawSubmit = function() {
     this.collectData();
 
     $.ajax({
-        url:Feng.ctxPath + "/withdraw",
+        url:Feng.ctxPath + "/api/v1/withdraw",
         data:JSON.stringify(this.simOperInfoData),
         dataType :  'json',
         contentType : 'application/json',

@@ -7,6 +7,10 @@ import java.util.Date;
 
 public class DateUtils {
 
+
+    public static void main(String[] args) {
+        System.out.println(DateUtils.getNowDateTime());
+    }
     public static String longToDateAll(Long time) {
         return getDateParser("yyyy-MM-dd HH:mm:ss").format(new Date(time));
     }

@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-07-19
+ * @since 2018-09-26
  */
 @TableName("dis_member_info")
 public class DisMemberInfo extends Model<DisMemberInfo> {
@@ -109,6 +109,11 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
      */
 	@TableField("rank_integral")
 	private Integer rankIntegral;
+    /**
+     * 段位总积分
+     */
+	@TableField("total_rank_integral")
+	private Integer totalRankIntegral;
 
 
 	public Integer getId() {
@@ -255,6 +260,14 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 		this.rankIntegral = rankIntegral;
 	}
 
+	public Integer getTotalRankIntegral() {
+		return totalRankIntegral;
+	}
+
+	public void setTotalRankIntegral(Integer totalRankIntegral) {
+		this.totalRankIntegral = totalRankIntegral;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -281,6 +294,7 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 			", disPlatLevel=" + disPlatLevel +
 			", type=" + type +
 			", rankIntegral=" + rankIntegral +
+			", totalRankIntegral=" + totalRankIntegral +
 			"}";
 	}
 }

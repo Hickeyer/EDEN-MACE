@@ -48,7 +48,7 @@ public class IndexController {
         if(memberInfo!=null){
             return "/self";
         }
-        DistResult result= RestClient.create(prefix+"/getUserInfo")
+        DistResult result= RestClient.create(prefix+"/api/v1/getUserInfo")
                 .contentType(MediaType.APPLICATION_JSON)
                 .acceptableMediaType(MediaType.APPLICATION_JSON)
                 .addParam("userId",userId)
@@ -82,7 +82,7 @@ public class IndexController {
         vo.setDisPlatSuper(memberInfo.getDisPlatSuper());
         vo.setDisNote("来源：plug测试");
         Gson gson=new Gson();
-        DistResult result= RestClient.create(prefix+"/disMemberInfo/add")
+        DistResult result= RestClient.create(prefix+"/api/v1/disMemberInfo/add")
                 .header("content-type", "text/xml,charset=utf-8")
                 .contentType(MediaType.APPLICATION_JSON)
                 .acceptableMediaType(MediaType.APPLICATION_JSON)

@@ -34,7 +34,7 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
     DisMemberInfoMapper disMemberInfoMapper;
 
     @Resource
-    DisSysIntegralRecordMapper disSysIntegralRecordMapper;
+    DisRankIntegralRecordMapper disRankIntegralRecordMapper;
 
     @Resource
     SysDicMapper sysDicMapper;
@@ -80,7 +80,7 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
                     }
                     Integer newIntegral=Integer.parseInt(String.valueOf(newIntegral_bg));
                     Integer totalIntegral=newIntegral+subMember.getRankIntegral();
-                    DisSysIntegralRecord record = new DisSysIntegralRecord();
+                    DisRankIntegralRecord record = new DisRankIntegralRecord();
                     record.setBeforeIntegral(subMember.getRankIntegral());
                     record.setIsUse("N");
                     record.setAfterIntegral(totalIntegral);
@@ -111,8 +111,9 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
                     }
                     record.setSourceRemak(sourceRemark);
                     //新增积分
-                    disSysIntegralRecordMapper.insert(record);
+                    disRankIntegralRecordMapper.insert(record);
                     subMember.setRankIntegral(totalIntegral);
+                    subMember.setTotalRankIntegral(totalIntegral);
                     //更新积分
                     disMemberInfoMapper.updateById(subMember);
                 }

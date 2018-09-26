@@ -31,6 +31,7 @@ public class BussinessException extends RuntimeException{
 		this.friendlyCode = code;
 	}
 
+	@Override
 	public String getMessage() {
 		return friendlyMsg;
 	}

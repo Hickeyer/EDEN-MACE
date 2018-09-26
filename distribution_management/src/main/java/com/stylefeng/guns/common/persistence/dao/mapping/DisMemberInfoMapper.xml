@@ -22,6 +22,7 @@
 		<result column="dis_plat_level" property="disPlatLevel" />
 		<result column="type" property="type" />
 		<result column="rank_integral" property="rankIntegral" />
+		<result column="total_rank_integral" property="totalRankIntegral" />
 	</resultMap>
 
 </mapper>

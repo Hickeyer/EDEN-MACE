@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisProfitRecordService;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -34,16 +35,16 @@ import java.util.Map;
 public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
 
 
-    @Autowired
+    @Resource
     DisProfitRecordDao disProfitRecordDao;
 
-    @Autowired
+    @Resource
     DisProfitParamMapper disProfiParamMapper;
 
-    @Autowired
+    @Resource
     DisMemberInfoMapper disMemberInfoMapper;
 
-    @Autowired
+    @Resource
     DisProfitRecordMapper disProfitRecordMapper;
 
     @Autowired
@@ -55,10 +56,10 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
     @Autowired
     IDisSysIntegralRecordService disSysIntegralRecordService;
 
-    @Autowired
+    @Resource
     DisTradeRecordMapper disTradeRecordMapper;
 
-    @Autowired
+    @Resource
     DisUpgradeRecordMapper disUpgradeRecordMapper;
 
     @Override

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.DisRankIntegralRecordMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.DisRankIntegralRecord">
+		<id column="id" property="id" />
+		<result column="dis_user_id" property="disUserId" />
+		<result column="sys_integral" property="sysIntegral" />
+		<result column="is_use" property="isUse" />
+		<result column="is_expire" property="isExpire" />
+		<result column="before_integral" property="beforeIntegral" />
+		<result column="after_integral" property="afterIntegral" />
+		<result column="expire_time" property="expireTime" />
+		<result column="add_time" property="addTime" />
+		<result column="dis_pro_type" property="disProType" />
+		<result column="source_user_id" property="sourceUserId" />
+		<result column="source_remak" property="sourceRemak" />
+		<result column="use_time" property="useTime" />
+		<result column="use_remark" property="useRemark" />
+	</resultMap>
+
+</mapper>

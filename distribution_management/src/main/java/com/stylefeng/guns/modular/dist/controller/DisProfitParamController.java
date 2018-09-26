@@ -91,7 +91,7 @@ public class DisProfitParamController extends BaseController {
             param.setDisPlatformId(account);
         }
         disProfiParamService.save(param);
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
     @RequestMapping(value = "/protype")
     @ResponseBody

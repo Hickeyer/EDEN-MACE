@@ -57,7 +57,7 @@ SimOperInfoDlg.addMemeberSubmit = function() {
     this.clearData();
     this.collectData();
     $.ajax({
-        url:Feng.ctxPath + "/disMemberInfo/add",
+        url:Feng.ctxPath + "/api/v1/disMemberInfo/add",
         data:JSON.stringify(this.simOperInfoData),
         dataType :  'json',
         contentType : 'application/json',

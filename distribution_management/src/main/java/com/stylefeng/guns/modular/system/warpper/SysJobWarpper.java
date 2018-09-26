@@ -15,7 +15,7 @@ public class SysJobWarpper extends BaseControllerWarpper {
     @Override
     protected void warpTheMap(Map<String, Object> map) {
         Integer jobStatus= (Integer) map.get("jobStatus");
-        if("1".equals(jobStatus)){
+        if(jobStatus==1){
             map.put("statusInfo", JobStatus.FIRST_STATUS.getMes());
         }else {
             map.put("statusInfo", JobStatus.SECOND_STATUS.getMes());

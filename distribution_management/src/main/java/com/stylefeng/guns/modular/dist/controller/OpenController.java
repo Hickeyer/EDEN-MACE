@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,18 +34,19 @@ import java.util.Map;
  * 系统对外开放接口
  */
 @Controller
+@RequestMapping("/api/v1/")
 public class OpenController  {
 
-    @Autowired
+    @Resource
     DisMemberInfoMapper disMemberInfoMapper;
 
-    @Autowired
+    @Resource
     DisMemberAmountMapper disMemberAmountMapper;
 
     @Autowired
     IDisMemberInfoService disMemberInfoService;
 
-    @Autowired
+    @Resource
     UserMgrDao userMgrDao;
 
     @Autowired
@@ -201,12 +203,21 @@ public class OpenController  {
         }
         return DistResult.success();
     }
-
+    @GetMapping("/getSign")
+    @ResponseBody
+    @ApiOperation(value = "获取secret", notes = "获取secret")
+    public DistResult getSign() {
+        String key= Jwt.sign(account,secret,30L * 24L * 3600L * 1000L);
+        return DistResult.success(key);
+    }
     public Boolean isAccountVer(String thirdSecret){
         if(!jwtUse){
             return true;
         }
         String acc= Jwt.unsign(thirdSecret,secret,String.class);
+        if(acc==null){
+            return false;
+        }
         if(acc.equals(account)){
             return true;
         }else {

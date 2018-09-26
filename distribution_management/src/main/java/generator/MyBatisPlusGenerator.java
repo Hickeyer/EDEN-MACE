@@ -50,7 +50,7 @@ public class MyBatisPlusGenerator {
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/authority?characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/distribution?characterEncoding=utf8");
         mpg.setDataSource(dsc);
 
         // 策略配置
