@@ -77,7 +77,7 @@ public class DistWithdrawParamController extends BaseController {
     @ResponseBody
     public Object add(DistWithdrawParam distWithdrawParam) {
         distWithdrawParamService.save(distWithdrawParam);
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**
@@ -97,7 +97,7 @@ public class DistWithdrawParamController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update() {
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**

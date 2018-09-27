@@ -116,7 +116,7 @@ public class DisProfitParamController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update() {
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**

@@ -4,6 +4,7 @@ import com.stylefeng.guns.common.annotion.Permission;
 import com.stylefeng.guns.common.annotion.log.BussinessLog;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.Dict;
+import com.stylefeng.guns.common.constant.dist.SystemUser;
 import com.stylefeng.guns.common.constant.factory.ConstantFactory;
 import com.stylefeng.guns.common.constant.state.ManagerStatus;
 import com.stylefeng.guns.common.constant.tips.Tip;
@@ -173,7 +174,7 @@ public class UserMgrController extends BaseController {
     public Object list(@RequestParam(required = false) String name, @RequestParam(required = false) String beginTime, @RequestParam(required = false) String endTime, @RequestParam(required = false) Integer deptid) {
         String account= ShiroKit.getUser().getAccount();
         String superAccount="";
-        if(!"admin".equals(account)){
+        if(!SystemUser.ADMIN_INFO.getInfo().equals(account)){
             superAccount=account;
         }
         List<Map<String, Object>> users = managerDao.selectUsers(name, beginTime, endTime, deptid,superAccount);

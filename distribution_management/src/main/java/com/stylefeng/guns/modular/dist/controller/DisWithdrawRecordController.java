@@ -110,7 +110,7 @@ public class DisWithdrawRecordController extends BaseController {
         }else {
             throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
         }
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**
@@ -129,13 +129,13 @@ public class DisWithdrawRecordController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update() {
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
     @RequestMapping(value = "/audit")
     @ResponseBody
     public Object audit(Integer id,String type) {
         disWithdrawRecordService.dealWithdrawl(id,type);
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**

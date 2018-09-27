@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
-import com.stylefeng.guns.common.constant.dist.IdentityStatus;
-import com.stylefeng.guns.common.constant.dist.UserTypeStatus;
+import com.stylefeng.guns.common.constant.dist.*;
 import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.modular.dist.dao.DisProfitRecordDao;
@@ -91,10 +90,10 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         savePlat(param,memberInfo);
         saveAdmin(param,memberInfo);
         disSysIntegralRecordService.saveMember(param.getDisProType(),param.getDisAmount(),memberInfo);
-        if("0".equals(param.getDisProType())){
+        if(ProTypeStatus.ZERO_STATUS.getStatus().equals(param.getDisProType())){
             //记录交易金额
             saveTradeRecord(param);
-        }else if("1".equals(param.getDisProType())){
+        }else if(ProTypeStatus.ONE_STATUS.getStatus().equals(param.getDisProType())){
             //记录升级接口
             saveVerticalLevel(memberInfo.getDisUserType(),param.getUpgradeLevel(),param.getDisSetUserId());
         }
@@ -157,13 +156,14 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     BigDecimal value=new BigDecimal(disProfiParam.getDisProValue());
                     BigDecimal newAmount=new BigDecimal(0);
                     String accountType="";
-                    if("0".equals(disProfiParam.getDisProMode())){
+                    if(ProModelStatus.ZERO_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
                         newAmount=param.getDisAmount().multiply(value);
-                        accountType="trade";
-                    }else{
+                        //accountType="trade";
+                    }else if(ProModelStatus.ONE_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
                         newAmount=value;
-                        accountType="level";
+                        //accountType="level";
                     }
+                    accountType = ProTypeStatus.getMethod(disProfiParam.getDisProType()).getCode();
                     record.setDisAmount(newAmount);
                     record.setDisGetUserId(userId);
                     record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
@@ -196,7 +196,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                 Integer level=Integer.parseInt(disProfiParam.getDisProLevel());
                 if(level<=levelInfo.length-1) {
                     String userId = levelInfo[level];
-                    if(!userId.equals("admin")){
+                    if(!userId.equals(SystemUser.ADMIN_INFO.getInfo())){
                         //设置分润
                         DisProfitRecord record = new DisProfitRecord();
                         record.setDisUserType(disProfiParam.getDisUserType());
@@ -207,13 +207,14 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                         BigDecimal value = new BigDecimal(disProfiParam.getDisProValue());
                         BigDecimal newAmount=new BigDecimal(0);
                         String accountType="";
-                        if("0".equals(disProfiParam.getDisProMode())){
+                        if(ProModelStatus.ZERO_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
                             newAmount=param.getDisAmount().multiply(value);
-                            accountType="trade";
-                        }else{
+                            //accountType="trade";
+                        }else if(ProModelStatus.ONE_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
                             newAmount=value;
-                            accountType="level";
+                            //accountType="level";
                         }
+                        accountType = ProTypeStatus.getMethod(disProfiParam.getDisProType()).getCode();
                         record.setDisAmount(newAmount);
                         record.setDisGetUserId(userId);
                         record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
@@ -258,15 +259,15 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     BigDecimal value = new BigDecimal(disProfiParam.getDisProValue());
                     BigDecimal newAmount=new BigDecimal(0);
                     String accountType="";
-                    if("0".equals(disProfiParam.getDisProMode())){
+                    if(ProModelStatus.ZERO_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
                         newAmount=param.getDisAmount().multiply(value);
-                        accountType="trade";
-                    }else{
+                        //accountType="trade";
+                    }else if(ProModelStatus.ONE_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
                         newAmount=value;
-                        accountType="level";
+                        //accountType="level";
                     }
+                    accountType = ProTypeStatus.getMethod(disProfiParam.getDisProType()).getCode();
                     record.setDisAmount(newAmount);
-
                     record.setDisGetUserId(userId);
                     record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
                     record.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));

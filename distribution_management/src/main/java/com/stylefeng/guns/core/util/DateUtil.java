@@ -23,17 +23,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtil {
-	private final static SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
+	private final static SimpleDateFormat SDF_YEAR = new SimpleDateFormat("yyyy");
 
-	private final static SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy-MM-dd");
+	private final static SimpleDateFormat SDF_DAY = new SimpleDateFormat("yyyy-MM-dd");
 
-	private final static SimpleDateFormat sdfDays = new SimpleDateFormat("yyyyMMdd");
+	private final static SimpleDateFormat SDF_DAYS = new SimpleDateFormat("yyyyMMdd");
 
-	private final static SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private final static SimpleDateFormat SDF_TIME = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	private final static SimpleDateFormat sdfmsTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+	private final static SimpleDateFormat SDFMS_TIME = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 	
-	private final static SimpleDateFormat allTime = new SimpleDateFormat("yyyyMMddHHmmss");
+	private final static SimpleDateFormat ALL_TIME = new SimpleDateFormat("yyyyMMddHHmmss");
 
 
 	/**
@@ -42,7 +42,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getYear() {
-		return sdfYear.format(new Date());
+		return SDF_YEAR.format(new Date());
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getYear(Date date) {
-		return sdfYear.format(date);
+		return SDF_YEAR.format(date);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDay() {
-		return sdfDay.format(new Date());
+		return SDF_DAY.format(new Date());
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDay(Date date) {
-		return sdfDay.format(date);
+		return SDF_DAY.format(date);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDays() {
-		return sdfDays.format(new Date());
+		return SDF_DAYS.format(new Date());
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDays(Date date) {
-		return sdfDays.format(date);
+		return SDF_DAYS.format(date);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getTime() {
-		return sdfTime.format(new Date());
+		return SDF_TIME.format(new Date());
 	}
 	
 	/**
@@ -105,7 +105,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getMsTime() {
-		return sdfmsTime.format(new Date());
+		return SDFMS_TIME.format(new Date());
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getAllTime() {
-		return allTime.format(new Date());
+		return ALL_TIME.format(new Date());
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getTime(Date date) {
-		return sdfTime.format(date);
+		return SDF_TIME.format(date);
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class DateUtil {
 	 */
 	public static Date parseDate(String date) {
 		try {
-			return sdfDay.parse(date);
+			return SDF_DAY.parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return null;
@@ -163,7 +163,7 @@ public class DateUtil {
 	 */
 	public static Date parseTime(String date) {
 		try {
-			return sdfTime.parse(date);
+			return SDF_TIME.parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return null;
@@ -212,7 +212,7 @@ public class DateUtil {
 	 */
 	public static boolean isValidDate(String s) {
 		try {
-			sdfTime.parse(s);
+			SDF_TIME.parse(s);
 			return true;
 		} catch (Exception e) {
 			// 如果throw java.text.ParseException或者NullPointerException，就说明格式不对
@@ -313,19 +313,7 @@ public class DateUtil {
 		return dateStr;
 	}
 
-	/**
-	 * 格式化Oracle Date
-	 * @param value
-	 * @return
-	 */
-//	public static String buildDateValue(Object value){
-//		if(Func.isOracle()){
-//			return "to_date('"+ value +"','yyyy-mm-dd HH24:MI:SS')";
-//		}else{
-//			return Func.toStr(value);
-//		}
-//	}
-	
+
 	public static void main(String[] args) {
 		System.out.println(getTime(new Date()));
 		System.out.println(getAfterDayWeek("3"));

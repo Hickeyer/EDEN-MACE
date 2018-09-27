@@ -94,7 +94,7 @@ public class DisRankParamController extends BaseController {
             param.setDisPlatformId(account);
         }
         disRankParamService.save(param);
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**
@@ -115,7 +115,7 @@ public class DisRankParamController extends BaseController {
     @ResponseBody
     public Object update(DisRankParam param) {
         disRankParamService.update(param);
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**

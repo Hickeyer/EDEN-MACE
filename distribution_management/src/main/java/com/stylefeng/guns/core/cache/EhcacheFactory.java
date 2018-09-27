@@ -60,25 +60,30 @@ public class EhcacheFactory extends BaseCacheFactory {
 		return cache;
 	}
 	
+	@Override
 	public void put(String cacheName, Object key, Object value) {
 		getOrAddCache(cacheName).put(new Element(key, value));
 	}
 	
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T get(String cacheName, Object key) {
 		Element element = getOrAddCache(cacheName).get(key);
 		return element != null ? (T)element.getObjectValue() : null;
 	}
 	
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List getKeys(String cacheName) {
 		return getOrAddCache(cacheName).getKeys();
 	}
 	
+	@Override
 	public void remove(String cacheName, Object key) {
 		getOrAddCache(cacheName).remove(key);
 	}
 	
+	@Override
 	public void removeAll(String cacheName) {
 		getOrAddCache(cacheName).removeAll();
 	}

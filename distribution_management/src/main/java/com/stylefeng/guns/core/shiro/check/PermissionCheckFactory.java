@@ -61,7 +61,8 @@ public class PermissionCheckFactory implements ICheck {
         }
         String requestURI = request.getRequestURI().replace(ConfigListener.getConf().get("contextPath"), "");
         String[] str = requestURI.split("/");
-        if (str.length > 3) {
+        int length=3;
+        if (str.length > length) {
             requestURI = "/" + str[1] + "/" + str[2];
         }
         if (ShiroKit.hasPermission(requestURI)) {

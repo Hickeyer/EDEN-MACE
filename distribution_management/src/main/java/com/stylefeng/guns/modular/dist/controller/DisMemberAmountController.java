@@ -117,7 +117,7 @@ public class DisMemberAmountController extends BaseController {
         info.setDisPlatformId("a");
         Gson gson=new Gson();
         disMemberAmountService.save(gson.toJson(info));*/
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**
@@ -136,7 +136,7 @@ public class DisMemberAmountController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update() {
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**

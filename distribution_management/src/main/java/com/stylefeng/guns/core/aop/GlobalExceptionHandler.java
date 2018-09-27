@@ -166,8 +166,10 @@ public class GlobalExceptionHandler {
     }
 
     private void assertAjax(HttpServletRequest request, HttpServletResponse response) {
-        if (request.getHeader("x-requested-with") != null
-                && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+        String requestWith="x-requested-with";
+        String XMLHttpRequest="XMLHttpRequest";
+        if (request.getHeader(requestWith) != null
+                && request.getHeader(requestWith).equalsIgnoreCase(XMLHttpRequest)) {
             //如果是ajax请求响应头会有，x-requested-with
             response.setHeader("sessionstatus", "timeout");//在响应头设置session状态
         }

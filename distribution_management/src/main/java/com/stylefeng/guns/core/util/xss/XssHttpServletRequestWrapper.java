@@ -13,6 +13,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     }
 
+    @Override
     public String[] getParameterValues(String parameter) {
 
         String[] values = super.getParameterValues(parameter);
@@ -37,6 +38,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     }
 
+    @Override
     public String getParameter(String parameter) {
 
         String value = super.getParameter(parameter);
@@ -51,6 +53,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     }
 
+    @Override
     public String getHeader(String name) {
 
         String value = super.getHeader(name);

@@ -62,6 +62,6 @@ public class CodeController extends BaseController {
         gunsTemplateEngine.setContextConfig(contextConfig);
         gunsTemplateEngine.start();
 
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 }

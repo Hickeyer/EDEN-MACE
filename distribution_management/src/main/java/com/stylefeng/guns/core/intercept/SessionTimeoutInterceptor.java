@@ -31,7 +31,7 @@ public class SessionTimeoutInterceptor extends BaseController {
 
         String servletPath = HttpKit.getRequest().getServletPath();
 
-        if (servletPath.equals("/kaptcha") || servletPath.equals("/login") || servletPath.equals("/global/sessionError")) {
+        if ("/kaptcha".equals(servletPath) || "/login".equals(servletPath) || "/global/sessionError".equals(servletPath)) {
             return point.proceed();
         }else{
             if(ShiroKit.getSession().getAttribute("sessionFlag") == null){

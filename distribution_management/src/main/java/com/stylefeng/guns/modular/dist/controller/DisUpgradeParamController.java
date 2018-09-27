@@ -70,7 +70,7 @@ public class DisUpgradeParamController extends BaseController {
     @ResponseBody
     public Object add(DisUpgradeParam param) {
         disUpgradeParamService.save(param);
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**
@@ -90,7 +90,7 @@ public class DisUpgradeParamController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update() {
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**

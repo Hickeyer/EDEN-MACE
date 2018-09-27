@@ -187,7 +187,7 @@ public class HexKit {
 	 * @return
 	 */
 	public static String binary2Hex(String bString) {
-		if (bString == null || bString.equals("") || bString.length() % 8 != 0){
+		if (bString == null || "".equals(bString) || bString.length() % 8 != 0){
 			return null;
 		}
 		StringBuffer tmp = new StringBuffer();

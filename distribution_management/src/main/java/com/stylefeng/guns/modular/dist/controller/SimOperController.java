@@ -90,7 +90,7 @@ public class SimOperController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add() {
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**
@@ -109,7 +109,7 @@ public class SimOperController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update() {
-        return super.SUCCESS_TIP;
+        return SUCCESS_TIP;
     }
 
     /**

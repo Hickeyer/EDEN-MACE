@@ -292,7 +292,7 @@ public class BeanKit {
 			for (PropertyDescriptor property : propertyDescriptors) {
 				String key = property.getName();
 				// 过滤class属性
-				if (false == key.equals("class")) {
+				if (false =="class".equals(key)) {
 					// 得到property对应的getter方法
 					Method getter = property.getReadMethod();
 					Object value = getter.invoke(bean);

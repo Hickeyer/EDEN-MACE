@@ -40,6 +40,7 @@ public class DateTimeKit {
 	/** 标准日期（不含时间）格式化器 */
 	// private final static SimpleDateFormat NORM_DATE_FORMAT = new SimpleDateFormat(NORM_DATE_PATTERN);
 	private static ThreadLocal<SimpleDateFormat> NORM_DATE_FORMAT = new ThreadLocal<SimpleDateFormat>(){
+		@Override
 		synchronized protected SimpleDateFormat initialValue() {
 			return new SimpleDateFormat(NORM_DATE_PATTERN);
 		};
@@ -47,6 +48,7 @@ public class DateTimeKit {
 	/** 标准时间格式化器 */
 	// private final static SimpleDateFormat NORM_TIME_FORMAT = new SimpleDateFormat(NORM_TIME_PATTERN);
 	private static ThreadLocal<SimpleDateFormat> NORM_TIME_FORMAT = new ThreadLocal<SimpleDateFormat>(){
+		@Override
 		synchronized protected SimpleDateFormat initialValue() {
 			return new SimpleDateFormat(NORM_TIME_PATTERN);
 		};
@@ -54,6 +56,7 @@ public class DateTimeKit {
 	/** 标准日期时间格式化器 */
 	// private final static SimpleDateFormat NORM_DATETIME_FORMAT = new SimpleDateFormat(NORM_DATETIME_PATTERN);
 	private static ThreadLocal<SimpleDateFormat> NORM_DATETIME_FORMAT = new ThreadLocal<SimpleDateFormat>(){
+		@Override
 		synchronized protected SimpleDateFormat initialValue() {
 			return new SimpleDateFormat(NORM_DATETIME_PATTERN);
 		};
@@ -61,6 +64,7 @@ public class DateTimeKit {
 	/** HTTP日期时间格式化器 */
 	// private final static SimpleDateFormat HTTP_DATETIME_FORMAT = new SimpleDateFormat(HTTP_DATETIME_PATTERN, Locale.US);
 	private static ThreadLocal<SimpleDateFormat> HTTP_DATETIME_FORMAT = new ThreadLocal<SimpleDateFormat>(){
+		@Override
 		synchronized protected SimpleDateFormat initialValue() {
 			return new SimpleDateFormat(HTTP_DATETIME_PATTERN, Locale.US);
 		};

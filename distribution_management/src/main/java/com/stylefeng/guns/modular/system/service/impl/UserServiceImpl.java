@@ -8,11 +8,16 @@ import com.stylefeng.guns.modular.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
+/**
+ * @author xiaojiang
+ */
 @Service
-public class UserService implements IUserService {
+public class UserServiceImpl implements IUserService {
 
 
-    @Autowired
+    @Resource
     UserMapper userMapper;
     @Override
     @DataSource(name= DSEnum.DATA_SOURCE_GUNS)
