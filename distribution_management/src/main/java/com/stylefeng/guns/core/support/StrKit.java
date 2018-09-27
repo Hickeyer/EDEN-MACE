@@ -1132,7 +1132,9 @@ public class StrKit {
 			}
 			if (Character.isUpperCase(c)) {
 				if (!isPreUpperCase || !isNextUpperCase) {
-					if (i > 0) sb.append(UNDERLINE);
+					if (i > 0){
+						sb.append(UNDERLINE);
+					}
 				}
 				isPreUpperCase = true;
 			} else {
@@ -1172,8 +1174,9 @@ public class StrKit {
 				}
 			}
 			return sb.toString();
-		} else
+		} else{
 			return name;
+		}
 	}
 
 	/**

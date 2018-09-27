@@ -26,8 +26,9 @@ public class MD5Util {
     private static String encodeHex(byte[] bytes) {
         StringBuffer buffer = new StringBuffer(bytes.length * 2);
         for (int i = 0; i < bytes.length; i++) {
-            if (((int) bytes[i] & 0xff) < 0x10)
+            if (((int) bytes[i] & 0xff) < 0x10){
                 buffer.append("0");
+            }
             buffer.append(Long.toString((int) bytes[i] & 0xff, 16));
         }
         return buffer.toString();

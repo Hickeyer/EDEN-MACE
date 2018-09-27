@@ -187,8 +187,9 @@ public class HexKit {
 	 * @return
 	 */
 	public static String binary2Hex(String bString) {
-		if (bString == null || bString.equals("") || bString.length() % 8 != 0)
+		if (bString == null || bString.equals("") || bString.length() % 8 != 0){
 			return null;
+		}
 		StringBuffer tmp = new StringBuffer();
 		int iTmp = 0;
 		for (int i = 0; i < bString.length(); i += 4) {
@@ -207,8 +208,9 @@ public class HexKit {
 	 * @return
 	 */
 	public static String hex2Binary(String hexString) {
-		if (hexString == null || hexString.length() % 2 != 0)
+		if (hexString == null || hexString.length() % 2 != 0){
 			return null;
+		}
 		String bString = "", tmp;
 		for (int i = 0; i < hexString.length(); i++) {
 			tmp = "0000" + Integer.toBinaryString(Integer.parseInt(hexString.substring(i, i + 1), 16));
@@ -240,8 +242,9 @@ public class HexKit {
 	 * @return
 	 */
 	public static byte[] hex2Byte(String hexStr) {
-		if (hexStr.length() < 1)
+		if (hexStr.length() < 1){
 			return null;
+		}
 		byte[] result = new byte[hexStr.length() / 2];
 		for (int i = 0; i < hexStr.length() / 2; i++) {
 			int high = Integer.parseInt(hexStr.substring(i * 2, i * 2 + 1), 16);

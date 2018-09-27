@@ -40,10 +40,11 @@ public class Convert {
 		try {
 			if (clazz.isAssignableFrom(String.class)) {
 				// ----2016-12-19---zhuangqian----防止beetlsql对空字符串不检测导致无法入库的问题----
-				if (StrKit.isBlank(String.valueOf(value)))
+				if (StrKit.isBlank(String.valueOf(value))){
 					return " ";
-				else
+				}else{
 					return String.valueOf(value);
+				}
 			}
 			return clazz.cast(value);
 		} catch (ClassCastException e) {
@@ -86,8 +87,9 @@ public class Convert {
 			return null;
 		}
 
-		if (StrKit.isBlank(valueStr)) return null;
-		
+		if (StrKit.isBlank(valueStr)){
+			return null;
+		}
 		BasicType basicType = null;
 		try {
 			basicType = BasicType.valueOf(clazz.getSimpleName().toUpperCase());
@@ -974,10 +976,11 @@ public class Convert {
 			c = strText.charAt(i);
 			intAsc = (int) c;
 			strHex = Integer.toHexString(intAsc);
-			if (intAsc > 128)
+			if (intAsc > 128){
 				str.append("\\u" + strHex);
-			else // 低位在前面补00
+			}else { // 低位在前面补00
 				str.append("\\u00" + strHex);
+			}
 		}
 		return str.toString();
 	}
