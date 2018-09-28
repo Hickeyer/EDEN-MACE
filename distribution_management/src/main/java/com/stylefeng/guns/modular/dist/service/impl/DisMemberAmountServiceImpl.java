@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.constant.dist.ProTypeStatus;
 import com.stylefeng.guns.common.constant.dist.SituationStatus;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
@@ -100,12 +101,12 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         situation.setAfterChangeAmount(memberAmount.getTotalAmount());
         BigDecimal afterThirdAmount=new BigDecimal(0);
         BigDecimal beforeThirdAmount=new BigDecimal(0);
-        if("trade".equals(accountType)){
+        if(ProTypeStatus.ZERO_STATUS.getCode().equals(accountType)){
             afterThirdAmount=memberAmount.getTradeTotalAmount().add(amount);
             beforeThirdAmount=memberAmount.getTradeTotalAmount();
             memberAmount.setTradeTotalAmount(memberAmount.getTradeTotalAmount().add(amount));
             memberAmount.setTradeAvaibleAmount(memberAmount.getTradeAvaibleAmount().add(amount));
-        }else if("level".equals(accountType)){
+        }else if(ProTypeStatus.ONE_STATUS.getCode().equals(accountType)){
             afterThirdAmount=memberAmount.getLevelTotalAmount().add(amount);
             beforeThirdAmount=memberAmount.getLevelTotalAmount();
             memberAmount.setLevelTotalAmount(memberAmount.getLevelTotalAmount().add(amount));

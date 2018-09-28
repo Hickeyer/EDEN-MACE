@@ -8,8 +8,8 @@ import java.util.Map;
  */
 public enum ProModelStatus {
 
-    ZERO_STATUS("0","交易分润"),
-    ONE_STATUS("1","上下级分润");
+    ZERO_STATUS("0","按照百分比计算"),
+    ONE_STATUS("1","按照固定值结算");
     private String status;
     private String mes;
 

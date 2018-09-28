@@ -116,7 +116,7 @@ CREATE TABLE `dis_profit_param` (
   `dist_trade_mode` varchar(20) DEFAULT NULL COMMENT '交易方式(分润或者提现)',
   `dis_user_rank` varchar(10) DEFAULT 'A' COMMENT '用户段位（青铜等）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='分润参数设置';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='分润参数设置';
 
 /*Data for the table `dis_profit_param` */
 
@@ -232,12 +232,13 @@ CREATE TABLE `dis_upgrade_param` (
   `is_delete` varchar(2) DEFAULT 'N' COMMENT '是否删除',
   `add_time` varchar(20) DEFAULT NULL COMMENT '添加时间',
   `update_time` varchar(20) DEFAULT NULL COMMENT '修改时间',
+  `identity_type` varchar(2) DEFAULT '0' COMMENT '0会员  1代理商',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='垂直升级配置表';
 
 /*Data for the table `dis_upgrade_param` */
 
-insert  into `dis_upgrade_param`(`id`,`upgrade_name`,`begin_integral`,`end_integral`,`dis_user_rank`,`is_delete`,`add_time`,`update_time`) values (2,'11',12,12,'A','N','2018-07-23 17:08:13',NULL);
+insert  into `dis_upgrade_param`(`id`,`upgrade_name`,`begin_integral`,`end_integral`,`dis_user_rank`,`is_delete`,`add_time`,`update_time`,`identity_type`) values (2,'11',12,12,'A','N','2018-07-23 17:08:13',NULL,NULL);
 
 /*Table structure for table `dis_upgrade_record` */
 

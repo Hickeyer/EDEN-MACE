@@ -29,15 +29,15 @@ public class DisProfiParamServiceImpl implements IDisProfiParamService {
 
 
     @Resource
-    DisProfitParamDao disProfiParamDao;
+    DisProfitParamDao disProfitParamDao;
 
     @Resource
-    DisProfitParamMapper disProfiParamMapper;
+    private DisProfitParamMapper disProfitParamMapper;
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public List<Map<String, Object>> selectList(String account) {
-        List<Map<String, Object>> list=disProfiParamDao.selectList(account);
+        List<Map<String, Object>> list=disProfitParamDao.selectList(account);
         return list;
     }
 
@@ -49,7 +49,7 @@ public class DisProfiParamServiceImpl implements IDisProfiParamService {
         }
         param.setIsDelete("N");
         param.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
-        disProfiParamMapper.insert(param);
+        disProfitParamMapper.insert(param);
     }
 
     public static void main(String[] args) {
@@ -59,6 +59,6 @@ public class DisProfiParamServiceImpl implements IDisProfiParamService {
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void delete(int id) {
-        disProfiParamMapper.deleteById(id);
+        disProfitParamMapper.deleteById(id);
     }
 }

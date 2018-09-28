@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-07-23
+ * @since 2018-09-28
  */
 @TableName("dis_upgrade_param")
 public class DisUpgradeParam extends Model<DisUpgradeParam> {
@@ -57,6 +57,11 @@ public class DisUpgradeParam extends Model<DisUpgradeParam> {
      */
 	@TableField("update_time")
 	private String updateTime;
+    /**
+     * 0会员  1代理商
+     */
+	@TableField("identity_type")
+	private String identityType;
 
 
 	public Integer getId() {
@@ -123,6 +128,14 @@ public class DisUpgradeParam extends Model<DisUpgradeParam> {
 		this.updateTime = updateTime;
 	}
 
+	public String getIdentityType() {
+		return identityType;
+	}
+
+	public void setIdentityType(String identityType) {
+		this.identityType = identityType;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -139,6 +152,7 @@ public class DisUpgradeParam extends Model<DisUpgradeParam> {
 			", isDelete=" + isDelete +
 			", addTime=" + addTime +
 			", updateTime=" + updateTime +
+			", identityType=" + identityType +
 			"}";
 	}
 }
