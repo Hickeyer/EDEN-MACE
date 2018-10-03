@@ -70,8 +70,9 @@ public class WebConfig {
     public JdkRegexpMethodPointcut druidStatPointcut(){
         JdkRegexpMethodPointcut druidStatPointcut = new JdkRegexpMethodPointcut();
         String patterns = "com.stylefeng.guns.modular.*.service.*";
+        String p2="com.stylefeng.guns.modular.dist.amountsign.impl.*";
         //可以set多个
-        druidStatPointcut.setPatterns(patterns);
+        druidStatPointcut.setPatterns(patterns,p2);
         return druidStatPointcut;
     }
 

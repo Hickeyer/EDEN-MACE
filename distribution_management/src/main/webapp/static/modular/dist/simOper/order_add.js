@@ -57,7 +57,7 @@ SimOperInfoDlg.addMemeberSubmit = function() {
     this.collectData();
     var path="";
     if("0"==this.simOperInfoData.disProType){
-        path="/api/v1/disProfitRecord/add";
+        path="/api/v1/trade";
     }else{
         path="/api/v1/upgrade";
     }

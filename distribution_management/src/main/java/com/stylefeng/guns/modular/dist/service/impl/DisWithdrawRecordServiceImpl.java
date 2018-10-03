@@ -7,6 +7,7 @@ import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.dao.DisWithdrawRecordMapper;
 import com.stylefeng.guns.common.persistence.model.DisWithdrawRecord;
+import com.stylefeng.guns.modular.dist.amountsign.AmountFactoryContext;
 import com.stylefeng.guns.modular.dist.dao.DisWithdrawRecordDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDistWithdrawParamService;
@@ -51,14 +52,13 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void withdrawMoney(String userId, BigDecimal amount, String disProMode) {
-        String accountType="";
-        if("0".equals(disProMode)){
-            accountType="trade";
-        }else{
-            accountType="level";
-        }
+
+
+        AmountFactoryContext amountFactoryContext = new AmountFactoryContext(disProMode);
+        amountFactoryContext.amountService.frozenAmount(userId,amount);
+        // disMemberAmountService.frozenAmount(userId,amount,accountType);
         Map<String,Object> map= distWithdrawParamService.calAmount(amount);
-        disMemberAmountService.frozenAmount(userId,amount,accountType);
+
 
         DisWithdrawRecord record=new DisWithdrawRecord();
         record.setDisUserId(userId);
@@ -83,22 +83,21 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
     public void dealWithdrawl(Integer id,String type) {
         DisWithdrawRecord record= disWithdrawRecordMapper.selectById(id);
         if(record.getWithdrawStatus().equals(WithdrawStatus.FIRST_STATUS.getStatus())){
-            String accountType="";
-            if("0".equals(record.getDisProMode())){
-                accountType="trade";
-            }else{
-                accountType="level";
-            }
+
             record.setHandleTime(DateUtils.longToDateAll(System.currentTimeMillis()));
+            AmountFactoryContext amountFactoryContext = new  AmountFactoryContext(record.getDisProMode());
             if(type.equals(WithdrawStatus.SECOND_STATUS.getStatus())){
                 record.setWithdrawStatus(WithdrawStatus.SECOND_STATUS.getStatus());
-                disMemberAmountService.reduceMoney(record.getDisUserId(),record.getTotalAmount(),accountType);
+                amountFactoryContext.amountService.reduceMoney(record.getDisUserId(),record.getTotalAmount());
+              //  disMemberAmountService.reduceMoney(record.getDisUserId(),record.getTotalAmount(),accountType);
                 disWithdrawRecordMapper.updateAllColumnById(record);
             }else if(type.equals(WithdrawStatus.THIRD_STATUS.getStatus())){
                 record.setWithdrawStatus(WithdrawStatus.THIRD_STATUS.getStatus());
-                disMemberAmountService.returnMoney(record.getDisUserId(),record.getTotalAmount(),accountType);
+                amountFactoryContext.amountService.returnMoney(record.getDisUserId(),record.getTotalAmount());
+                //disMemberAmountService.returnMoney(record.getDisUserId(),record.getTotalAmount(),accountType);
                 disWithdrawRecordMapper.updateAllColumnById(record);
             }
+
         }else{
             throw  new BussinessException(BizExceptionEnum.WITHDRAWL_STATUS);
         }

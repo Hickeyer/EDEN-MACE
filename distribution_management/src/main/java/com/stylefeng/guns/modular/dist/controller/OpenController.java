@@ -89,116 +89,108 @@ public class OpenController  {
         }
     }
     /**
-     * 新增分销
+     * 新增会员接口
      */
-    @PostMapping(value = "/disMemberInfo/add")
+    @PostMapping(value = "/memberAdd")
     @ResponseBody
     @ApiOperation(value = "新增会员", notes = "")
     public DistResult add(@RequestBody DisMemberInfoVo memberInfoVo) {
-        User user=userMgrDao.getByAccount(memberInfoVo.getDisPlatSuper());
-        if(user==null){
-            // throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
-            return DistResult.failure("平台不存在");
+
+        if(!isAccountVer(memberInfoVo.getSecret())){
+            return DistResult.failure("非法访问");
         }
+        String superPaltId="";
         if(StringUtils.isNotEmpty(memberInfoVo.getDisModelId())){
             DisMemberInfo param= disMemberInfoService.selectListByUserId(memberInfoVo.getDisModelId());
             if(param==null){
-                // throw  new BussinessException(BizExceptionEnum.USERMEM_NOT_EXISTED);
                 return DistResult.failure("邀请用户不存在");
+            }else {
+                superPaltId=param.getDisPlatSuper();
             }
         }
+        User user=userMgrDao.getByAccount(superPaltId);
+        if(user==null){
+            return DistResult.failure("代理商不存在");
+        }
+
         DisMemberInfo param= disMemberInfoService.selectListByUserId(memberInfoVo.getDisUserId());
         if(param!=null){
             return DistResult.failure("用户已存在");
-            //throw  new BussinessException(BizExceptionEnum.USER_IS_EXISTED);
         }
-        if(isAccountVer(memberInfoVo.getSecret())){
-            DisMemberInfo memberInfo=new DisMemberInfo();
-            BeanUtils.copyProperties(memberInfoVo,memberInfo);
-            memberInfo.setDisUserType("0");
-            memberInfo.setDisPlatSuper(memberInfoVo.getDisPlatSuper());
-            memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
-            memberInfo.setDisPlatFullIndex(user.getFullindex());
-            memberInfo.setDisPlatformId(user.getFullindex().split("\\.")[1]);
-            memberInfo.setType("0");
-            disMemberInfoService.save(memberInfo);
-            //disMemberAmountService.save(memberInfo.getDisUserId(),memberInfo.getDisUserName(),memberInfo.getDisPlatformId(),"1");
-        }else {
-            // throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
-            return DistResult.failure("非法访问");
-        }
+        DisMemberInfo memberInfo=new DisMemberInfo();
+        BeanUtils.copyProperties(memberInfoVo,memberInfo);
+        memberInfo.setDisUserType("0");
+        memberInfo.setDisPlatSuper(memberInfoVo.getDisPlatSuper());
+        memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
+        memberInfo.setDisPlatFullIndex(user.getFullindex());
+        memberInfo.setDisPlatformId(user.getFullindex().split("\\.")[1]);
+        memberInfo.setType("0");
+        disMemberInfoService.save(memberInfo);
         return DistResult.success();
     }
 
     /**
      * 新增交易
      */
-    @PostMapping(value = "/disProfitRecord/add")
+    @PostMapping(value = "/trade")
     @ResponseBody
     @ApiOperation(value = "新增交易奖励", notes = "此接口是用于交易奖励的接口，及关注有相关分润的数据")
     public DistResult add(@RequestBody DisProfitRecordVo disProfitRecordVo) {
-        //根据直属上级查询到所属平台id
+        if(!isAccountVer(disProfitRecordVo.getSecret())) {
+           return   DistResult.failure("非法访问！");
+        }
+        // 查询交易人是否存在
         DisMemberInfo memberInfo=disMemberInfoService.selectListByUserId(disProfitRecordVo.getDisSetUserId());
         if(memberInfo==null){
-           // throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
-            DistResult.failure("用户不存在！");
+           return  DistResult.failure("用户不存在！");
         }
-        if(isAccountVer(disProfitRecordVo.getSecret())) {
-            disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
-            disProfitRecordService.save(disProfitRecordVo);
-        }else {
-            //throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
-            DistResult.failure("非法访问！");
-        }
+        disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
+        disProfitRecordService.save(disProfitRecordVo);
         return DistResult.success(disProfitRecordVo);
     }
     /**
-     * 新增交易
+     * 会员升级
      */
     @PostMapping(value = "/upgrade")
     @ResponseBody
     @ApiOperation(value = "升级奖励", notes = "此接口是用于升级奖励的接口")
     public DistResult upgrade(@RequestBody DisProfitRecordVo disProfitRecordVo) {
+        if(!isAccountVer(disProfitRecordVo.getSecret())) {
+            return   DistResult.failure("非法访问！");
+        }
         //根据直属上级查询到所属平台id
         DisMemberInfo memberInfo=disMemberInfoService.selectListByUserId(disProfitRecordVo.getDisSetUserId());
         if(memberInfo==null){
-           // throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
             DistResult.failure("用户不存在！");
         }
         if(disProfitRecordVo.getUpgradeLevel()==null){
             return DistResult.failure("请提供要升级的等级");
         }
-        if(isAccountVer(disProfitRecordVo.getSecret())) {
+        disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
+        disProfitRecordService.save(disProfitRecordVo);
 
-
-            disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
-            disProfitRecordService.save(disProfitRecordVo);
-
-            memberInfo.setDisUserType(disProfitRecordVo.getUpgradeLevel());
-            disMemberInfoService.updateLevel(memberInfo);
-        }else {
-            //throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
-            DistResult.failure("非法访问！");
-        }
+        memberInfo.setDisUserType(disProfitRecordVo.getUpgradeLevel());
+        disMemberInfoService.updateLevel(memberInfo);
         return DistResult.success(disProfitRecordVo);
     }
 
     /**
-     * 新增提现记录
+     * 新增提现
      */
     @PostMapping(value = "/withdraw")
     @ResponseBody
     @ApiOperation(value = "新增提现接口", notes = "此接口是用用户提现")
     public DistResult withdraw(@RequestBody DisWithdrawVo withdrawVo) {
+        if(!isAccountVer(withdrawVo.getSecret())) {
+            return   DistResult.failure("非法访问！");
+        }
         DisMemberInfo memberInfo=disMemberInfoService.selectListByUserId(withdrawVo.getUserId());
         if(memberInfo==null){
-            //throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
             return DistResult.failure("用户不存在");
         }
         if(isAccountVer(withdrawVo.getSecret())) {
             disWithdrawRecordService.withdrawMoney(withdrawVo.getUserId(),withdrawVo.getAmount(),withdrawVo.getDisProType());
         }else {
-            //throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
             return DistResult.failure("非法访问");
         }
         return DistResult.success();

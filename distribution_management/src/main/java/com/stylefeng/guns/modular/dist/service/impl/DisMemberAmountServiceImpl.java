@@ -77,6 +77,14 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         return list;
     }
 
+    /**
+     * 需要做扩展
+     * @param userId
+     * @param amount
+     * @param accountType
+     * @param sourceId
+     * @param type
+     */
     @Override
     public void addMoney(String userId, BigDecimal amount, String accountType,String sourceId,String type) {
         DisMemberAmount disMemberAmount=new DisMemberAmount();
@@ -111,6 +119,8 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
             beforeThirdAmount=memberAmount.getLevelTotalAmount();
             memberAmount.setLevelTotalAmount(memberAmount.getLevelTotalAmount().add(amount));
             memberAmount.setLevelAvaibleAmount(memberAmount.getLevelAvaibleAmount().add(amount));
+        }else{
+            throw  new BussinessException(BizExceptionEnum.STATUS_ERROR);
         }
         situation.setSpecificBeforeChangeAmount(beforeThirdAmount);
         situation.setSpecificAfterChangeAmount(afterThirdAmount);
@@ -155,9 +165,9 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         disMemberAmount.setDisUserId(userId);
         DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
         BigDecimal  avaibleThirdAmount=new BigDecimal(0);
-        if("trade".equals(accountType)){
+        if(ProTypeStatus.ZERO_STATUS.getCode().equals(accountType)){
             avaibleThirdAmount=memberAmount.getTradeAvaibleAmount();
-        }else if("level".equals(accountType)){
+        }else if(ProTypeStatus.ONE_STATUS.getCode().equals(accountType)){
             avaibleThirdAmount=memberAmount.getLevelAvaibleAmount();
         }
         if(avaibleThirdAmount.compareTo(amount)==-1){
@@ -166,10 +176,10 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         /*开始扣除金额*/
         memberAmount.setAvaibleAmount(memberAmount.getAvaibleAmount().subtract(amount));
         memberAmount.setFrozenAmount(memberAmount.getFrozenAmount().add(amount));
-        if("trade".equals(accountType)){
+        if(ProTypeStatus.ZERO_STATUS.getCode().equals(accountType)){
             memberAmount.setTradeAvaibleAmount(memberAmount.getTradeAvaibleAmount().subtract(amount));
             memberAmount.setTradeFrozenAmount(memberAmount.getTradeFrozenAmount().add(amount));
-        }else if("level".equals(accountType)){
+        }else if(ProTypeStatus.ONE_STATUS.getCode().equals(accountType)){
             memberAmount.setLevelAvaibleAmount(memberAmount.getLevelAvaibleAmount().subtract(amount));
             memberAmount.setLevelFrozenAmount(memberAmount.getLevelFrozenAmount().add(amount));
         }
@@ -254,6 +264,14 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         disMemberAmountMapper.updateById(memberAmount);
     }
 
+    /**
+     *
+     * 数据库中所有的值应该为0.00
+     * @param userId
+     * @param userName
+     * @param type
+     * @return
+     */
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public DisMemberAmount initAmount(String userId, String userName, String type){
         DisMemberAmount amount=new DisMemberAmount();
@@ -261,15 +279,6 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         amount.setDisUserName(userName);
         amount.setType(type);
         amount.setAmountStatus("0");
-        amount.setAvaibleAmount(new BigDecimal(0));
-        amount.setFrozenAmount(new BigDecimal(0));
-        amount.setTotalAmount(new BigDecimal(0));
-        amount.setLevelAvaibleAmount(new BigDecimal(0));
-        amount.setLevelFrozenAmount(new BigDecimal(0));
-        amount.setLevelTotalAmount(new BigDecimal(0));
-        amount.setTradeAvaibleAmount(new BigDecimal(0));
-        amount.setTradeFrozenAmount(new BigDecimal(0));
-        amount.setTradeTotalAmount(new BigDecimal(0));
         amount.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         amount.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         return amount;

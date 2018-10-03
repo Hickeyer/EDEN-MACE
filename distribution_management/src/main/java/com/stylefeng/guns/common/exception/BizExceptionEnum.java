@@ -49,6 +49,7 @@ public enum BizExceptionEnum {
 	TWO_PWD_NOT_MATCH(405, "两次输入密码不一致"),
 	ILLEGAL_INFO(1001, "非法访问"),
 	PROFIT_LEVLE_ERROR(1002, "分润级别不能选择0"),
+	STATUS_ERROR(1003,"状态错误"),
 
 	/**
 	 * 错误的请求

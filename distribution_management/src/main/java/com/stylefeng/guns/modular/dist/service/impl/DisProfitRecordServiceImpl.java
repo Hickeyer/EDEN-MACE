@@ -7,6 +7,7 @@ import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.constant.dist.*;
 import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
+import com.stylefeng.guns.modular.dist.amountsign.AmountFactoryContext;
 import com.stylefeng.guns.modular.dist.dao.DisProfitRecordDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDisSysIntegralRecordService;
@@ -155,15 +156,8 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     record.setDisProType(param.getDisProType());
                     BigDecimal value=new BigDecimal(disProfiParam.getDisProValue());
                     BigDecimal newAmount=new BigDecimal(0);
-                    String accountType="";
-                    if(ProModelStatus.ZERO_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
-                        newAmount=param.getDisAmount().multiply(value);
-                        //accountType="trade";
-                    }else if(ProModelStatus.ONE_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
-                        newAmount=value;
-                        //accountType="level";
-                    }
-                    accountType = ProTypeStatus.getMethod(disProfiParam.getDisProType()).getCode();
+                    //根据 计算方式计算 分润
+                    newAmount = ProModelStatus.getMethod(disProfiParam.getDisProMode()).calResult(param.getDisAmount(),value);
                     record.setDisAmount(newAmount);
                     record.setDisGetUserId(userId);
                     record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
@@ -174,7 +168,9 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     disProfitRecordMapper.insert(record);
 
                     //增加会员金额信息
-                    disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId(), IdentityStatus.USER_STATUS.getStatus());
+                    AmountFactoryContext context = new AmountFactoryContext(disProfiParam.getDisProType());
+                    context.amountService.addMoney(userId,newAmount,memberInfo.getDisUserId(), IdentityStatus.USER_STATUS.getStatus());
+                    //disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId(), IdentityStatus.USER_STATUS.getStatus());
                 }
             }
         }
@@ -205,16 +201,8 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                         record.setDisOrderId(param.getOrderId());
                         record.setDisProType(param.getDisProType());
                         BigDecimal value = new BigDecimal(disProfiParam.getDisProValue());
-                        BigDecimal newAmount=new BigDecimal(0);
-                        String accountType="";
-                        if(ProModelStatus.ZERO_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
-                            newAmount=param.getDisAmount().multiply(value);
-                            //accountType="trade";
-                        }else if(ProModelStatus.ONE_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
-                            newAmount=value;
-                            //accountType="level";
-                        }
-                        accountType = ProTypeStatus.getMethod(disProfiParam.getDisProType()).getCode();
+                        //自动计算分润
+                        BigDecimal newAmount = ProModelStatus.getMethod(disProfiParam.getDisProMode()).calResult(param.getDisAmount(),value);
                         record.setDisAmount(newAmount);
                         record.setDisGetUserId(userId);
                         record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
@@ -225,7 +213,9 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                         disProfitRecordMapper.insert(record);
 
                         //增加平台金额信息
-                        disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId(),IdentityStatus.PLAT_STATUS.getStatus());
+                        AmountFactoryContext context = new AmountFactoryContext(disProfiParam.getDisProType());
+                        context.amountService.addMoney(userId,newAmount,memberInfo.getDisUserId(), IdentityStatus.PLAT_STATUS.getStatus());
+                       // disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId(),IdentityStatus.PLAT_STATUS.getStatus());
                     }
 
                 }
@@ -257,16 +247,8 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     record.setDisOrderId(param.getOrderId());
                     record.setDisProType(param.getDisProType());
                     BigDecimal value = new BigDecimal(disProfiParam.getDisProValue());
-                    BigDecimal newAmount=new BigDecimal(0);
-                    String accountType="";
-                    if(ProModelStatus.ZERO_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
-                        newAmount=param.getDisAmount().multiply(value);
-                        //accountType="trade";
-                    }else if(ProModelStatus.ONE_STATUS.getStatus().equals(disProfiParam.getDisProMode())){
-                        newAmount=value;
-                        //accountType="level";
-                    }
-                    accountType = ProTypeStatus.getMethod(disProfiParam.getDisProType()).getCode();
+                    //自动计算分润
+                    BigDecimal newAmount = ProModelStatus.getMethod(disProfiParam.getDisProMode()).calResult(param.getDisAmount(),value);
                     record.setDisAmount(newAmount);
                     record.setDisGetUserId(userId);
                     record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
@@ -277,9 +259,19 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     disProfitRecordMapper.insert(record);
 
                     //增加平台金额信息
-                    disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId(),IdentityStatus.PLAT_STATUS.getStatus());
+                    //增加平台金额信息
+                    AmountFactoryContext context = new AmountFactoryContext(disProfiParam.getDisProType());
+                    context.amountService.addMoney(userId,newAmount,memberInfo.getDisUserId(), IdentityStatus.PLAT_STATUS.getStatus());
+                   // disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId(),IdentityStatus.PLAT_STATUS.getStatus());
                 }
             });
         }
+    }
+
+    public static void main(String[] args) {
+        String promode="0";
+        BigDecimal a=new BigDecimal(100);
+        BigDecimal b = new BigDecimal(1);
+        System.out.println(ProModelStatus.getMethod(promode).calResult(a,b));
     }
 }

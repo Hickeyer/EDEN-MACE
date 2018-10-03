@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class DisWithdrawRecordController extends BaseController {
     @Autowired
     IDisWithdrawRecordService disWithdrawRecordService;
 
-    @Autowired
+    @Resource
     DisWithdrawRecordMapper disWithdrawRecordMapper;
 
     @Value("${dist.jwt.account}")
@@ -94,24 +95,6 @@ public class DisWithdrawRecordController extends BaseController {
         return list;
     }
 
-    /**
-     * 新增提现记录
-     */
-    @PostMapping(value = "/add")
-    @ResponseBody
-    public Object add(DisWithdrawVo withdrawVo) {
-        DisMemberInfo memberInfo=disMemberInfoService.selectListByUserId(withdrawVo.getUserId());
-        if(memberInfo==null){
-            throw  new BussinessException(BizExceptionEnum.USER_NOT_EXISTED);
-        }
-        String acc= Jwt.unsign(withdrawVo.getSecret(),secret,String.class);
-        if(account.equals(acc)) {
-            disWithdrawRecordService.withdrawMoney(withdrawVo.getUserId(),withdrawVo.getAmount(),withdrawVo.getDisProType());
-        }else {
-            throw new BussinessException(BizExceptionEnum.ILLEGAL_INFO);
-        }
-        return SUCCESS_TIP;
-    }
 
     /**
      * 删除提现记录
