@@ -15,6 +15,7 @@ import com.stylefeng.guns.common.persistence.model.DisAmountSituation;
 import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.SysDic;
+import com.stylefeng.guns.core.util.SpringContextHolder;
 import com.stylefeng.guns.modular.dist.amountsign.AmountService;
 import com.stylefeng.guns.modular.dist.dao.DisMemberAmountDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
@@ -25,23 +26,15 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 
-@Service
 public class LevelAmountServiceImpl implements AmountService {
 
-    @Resource
-    DisMemberAmountMapper disMemberAmountMapper;
+    private DisAmountSituationMapper disAmountSituationMapper =  SpringContextHolder.getBean(DisAmountSituationMapper.class);
 
-    @Resource
-    DisMemberAmountDao disMemberAmountDao;
+    private SysDicMapper sysDicMapper =  SpringContextHolder.getBean(SysDicMapper.class);
 
-    @Resource
-    DisAmountSituationMapper disAmountSituationMapper;
+    private DisMemberAmountMapper disMemberAmountMapper = SpringContextHolder.getBean(DisMemberAmountMapper.class);
 
-    @Resource
-    SysDicMapper sysDicMapper;
-
-    @Autowired
-    IDisMemberInfoService disMemberInfoService;
+    IDisMemberInfoService disMemberInfoService  = SpringContextHolder.getBean(IDisMemberInfoService.class) ;
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
