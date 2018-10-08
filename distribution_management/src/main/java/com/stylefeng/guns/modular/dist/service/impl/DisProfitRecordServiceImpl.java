@@ -133,7 +133,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
             if(memberInfo==null){
                 return ;
             }
-            String levelInfo[]=memberInfo.getDisFullIndex().split("\\.");
+            String[] levelInfo=memberInfo.getDisFullIndex().split("\\.");
             for (DisProfitParam disProfiParam:profiParamList){
                 Integer level=Integer.parseInt(disProfiParam.getDisProLevel());
                 if(level<=levelInfo.length-1){
@@ -187,7 +187,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                 .eq("dis_user_type","10000");
         List<DisProfitParam> profiParamList=disProfiParamMapper.selectList(profiParamP);
         if(profiParamList.size()>0){
-            String levelInfo[]=memberInfo.getDisPlatFullIndex().split("\\.");
+            String[] levelInfo=memberInfo.getDisPlatFullIndex().split("\\.");
             profiParamList.forEach((DisProfitParam disProfiParam) ->{
                 Integer level=Integer.parseInt(disProfiParam.getDisProLevel());
                 if(level<=levelInfo.length-1) {
@@ -234,7 +234,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                 .eq("dis_user_type","10000");
         List<DisProfitParam> profiParamList=disProfiParamMapper.selectList(profiParamP);
         if(profiParamList.size()>0){
-            String levelInfo[]=memberInfo.getDisPlatFullIndex().split("\\.");
+            String[] levelInfo=memberInfo.getDisPlatFullIndex().split("\\.");
             profiParamList.forEach((DisProfitParam disProfiParam) ->{
                 Integer level=Integer.parseInt(disProfiParam.getDisProLevel());
                 if(level<=levelInfo.length-1) {
@@ -261,7 +261,8 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     //增加平台金额信息
                     //增加平台金额信息
                     AmountFactoryContext context = new AmountFactoryContext(disProfiParam.getDisProType());
-                    context.amountService.addMoney(userId,newAmount,memberInfo.getDisUserId(), IdentityStatus.PLAT_STATUS.getStatus());
+                    context.amountService.addMoney(userId,newAmount,memberInfo.getDisUserId(),
+                            IdentityStatus.PLAT_STATUS.getStatus());
                    // disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId(),IdentityStatus.PLAT_STATUS.getStatus());
                 }
             });

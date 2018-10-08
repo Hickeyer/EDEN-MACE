@@ -58,7 +58,7 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
             if(memberInfo==null){
                 return ;
             }
-            String levelInfo[]=memberInfo.getDisFullIndex().split("\\.");
+            String[] levelInfo=memberInfo.getDisFullIndex().split("\\.");
             for (DisRankParam disRankParam:profiParamList){
                 Integer level=Integer.parseInt(disRankParam.getDisProLevel());
                 if(level<=levelInfo.length-1){

@@ -29,7 +29,6 @@ public class PageKit {
 
 		if (countPerPage < 1) {
 			countPerPage = 0;
-//			LogKit.warn("Count per page  [" + countPerPage + "] is not valid!");
 		}
 
 		int start = (pageNo - 1) * countPerPage;

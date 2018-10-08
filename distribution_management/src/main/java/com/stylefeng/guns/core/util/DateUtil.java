@@ -270,7 +270,6 @@ public class DateUtil {
 			e.printStackTrace();
 		}
 		day = (endDate.getTime() - beginDate.getTime()) / (24 * 60 * 60 * 1000);
-		// System.out.println("相隔的天数="+day);
 
 		return day;
 	}

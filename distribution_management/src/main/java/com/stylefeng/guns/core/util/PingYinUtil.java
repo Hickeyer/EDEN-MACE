@@ -23,7 +23,7 @@ public class PingYinUtil {
 	public static String getPYIndexStr(String strChinese, boolean bUpCase) {
 		try {
 			StringBuffer buffer = new StringBuffer();
-			byte b[] = strChinese.getBytes("GBK");// 把中文转化成byte数组
+			byte[] b = strChinese.getBytes("GBK");// 把中文转化成byte数组
 			for (int i = 0; i < b.length; i++) {
 				if ((b[i] & 255) > 128) {
 					int char1 = b[i++] & 255;

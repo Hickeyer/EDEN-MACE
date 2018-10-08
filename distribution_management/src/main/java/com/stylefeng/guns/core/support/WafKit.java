@@ -57,7 +57,6 @@ public class WafKit {
 					| Pattern.MULTILINE | Pattern.DOTALL);
 			rlt = scriptPattern.matcher(rlt).replaceAll("");*/
 
-			// Remove any lonesome </script> tag
 			scriptPattern = compile("</script>", CASE_INSENSITIVE);
 			rlt = scriptPattern.matcher(rlt).replaceAll("");
 

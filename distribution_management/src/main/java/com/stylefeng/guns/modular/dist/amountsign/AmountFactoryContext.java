@@ -20,6 +20,8 @@ public class AmountFactoryContext {
             case  "1":
                 amountService = new LevelAmountServiceImpl();
                 break;
+            default:
+                break;
         }
     }
 }
