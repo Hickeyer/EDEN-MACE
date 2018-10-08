@@ -31,7 +31,7 @@ import java.util.Map;
  * @Date 2018-04-06 12:19:23
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
 
 

@@ -23,11 +23,13 @@ public class PingYinUtil {
 	public static String getPYIndexStr(String strChinese, boolean bUpCase) {
 		try {
 			StringBuffer buffer = new StringBuffer();
-			byte[] b = strChinese.getBytes("GBK");// 把中文转化成byte数组
+			// 把中文转化成byte数组
+			byte[] b = strChinese.getBytes("GBK");
 			for (int i = 0; i < b.length; i++) {
 				if ((b[i] & 255) > 128) {
 					int char1 = b[i++] & 255;
-					char1 <<= 8;// 左移运算符用“<<”表示，是将运算符左边的对象，向左移动运算符右边指定的位数，并且在低位补零。其实，向左移n位，就相当于乘上2的n次方
+					// 左移运算符用“<<”表示，是将运算符左边的对象，向左移动运算符右边指定的位数，并且在低位补零。其实，向左移n位，就相当于乘上2的n次方
+					char1 <<= 8;
 					int chart = char1 + (b[i] & 255);
 					buffer.append(getPYIndexChar((char) chart, bUpCase));
 					continue;

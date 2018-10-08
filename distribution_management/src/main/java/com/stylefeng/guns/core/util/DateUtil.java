@@ -282,9 +282,10 @@ public class DateUtil {
 	 */
 	public static String getAfterDayDate(String days) {
 		int daysInt = Integer.parseInt(days);
-
-		Calendar canlendar = Calendar.getInstance(); // java.util包
-		canlendar.add(Calendar.DATE, daysInt); // 日期减 如果不够减会将月变动
+		// java.util包
+		Calendar canlendar = Calendar.getInstance();
+		// 日期减 如果不够减会将月变动
+		canlendar.add(Calendar.DATE, daysInt);
 		Date date = canlendar.getTime();
 
 		SimpleDateFormat sdfd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -302,8 +303,10 @@ public class DateUtil {
 	public static String getAfterDayWeek(String days) {
 		int daysInt = Integer.parseInt(days);
 
-		Calendar canlendar = Calendar.getInstance(); // java.util包
-		canlendar.add(Calendar.DATE, daysInt); // 日期减 如果不够减会将月变动
+		// java.util包
+		Calendar canlendar = Calendar.getInstance();
+		// 日期减 如果不够减会将月变动
+		canlendar.add(Calendar.DATE, daysInt);
 		Date date = canlendar.getTime();
 
 		SimpleDateFormat sdf = new SimpleDateFormat("E");

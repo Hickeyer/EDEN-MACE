@@ -217,8 +217,10 @@ public class MenuNode implements Comparable {
      * @author fengshuonan
      */
     public void recursionFn(List<MenuNode> nodeList, MenuNode node, Integer pId) {
-        List<MenuNode> childList = getChildList(nodeList, node);// 得到子节点列表
-        if (childList.size() > 0) {// 判断是否有子节点
+        // 得到子节点列表
+        List<MenuNode> childList = getChildList(nodeList, node);
+        // 判断是否有子节点
+        if (childList.size() > 0) {
             if (node.getParentId().equals(pId)) {
                 linkedList.add(node);
             }

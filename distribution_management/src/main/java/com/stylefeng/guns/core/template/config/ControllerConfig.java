@@ -14,8 +14,15 @@ public class ControllerConfig {
     private ContextConfig contextConfig;
 
     private String controllerPathTemplate;
-    private String packageName;//包名称
-    private List<String> imports;//所引入的包
+    /**
+     * 包名称
+     */
+    private String packageName;
+
+    /**
+     * 所引入的包
+     */
+    private List<String> imports;
 
     public void init() {
         ArrayList<String> imports = new ArrayList<>();

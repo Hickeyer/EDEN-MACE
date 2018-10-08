@@ -9,15 +9,30 @@ package com.stylefeng.guns.common.node;
  */
 public class ZTreeNode {
 
-	private Integer id;	//节点id
-	
-	private Integer pId;//父节点id
-	
-	private String name;//节点名称
-	
-	private Boolean open;//是否打开节点
-	
-	private Boolean checked;//是否被选中
+	/**
+	 * 节点id
+	 */
+	private Integer id;
+
+	/**
+	 * 父节点id
+	 */
+	private Integer pId;
+
+	/**
+	 * 节点名称
+	 */
+	private String name;
+
+	/**
+	 * 是否打开节点
+	 */
+	private Boolean open;
+
+	/**
+	 * 是否被选中
+	 */
+	private Boolean checked;
 
 	public Integer getId() {
 		return id;

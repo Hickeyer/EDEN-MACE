@@ -8,13 +8,19 @@ package com.stylefeng.guns.common.exception;
 @SuppressWarnings("serial")
 public class BussinessException extends RuntimeException{
 
-	//友好提示的code码
+	/**
+	 * 友好提示的code码
+	 */
 	private int friendlyCode;
-	
-	//友好提示
+
+	/**
+	 * 友好提示
+	 */
 	private String friendlyMsg;
-	
-	//业务异常跳转的页面
+
+	/**
+	 * 业务异常跳转的页面
+	 */
 	private String urlPath;
 	
 	public BussinessException(BizExceptionEnum bizExceptionEnum){

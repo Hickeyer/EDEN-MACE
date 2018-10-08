@@ -12,7 +12,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class LogManager {
 
-    //日志记录操作延时
+    /**
+     * 日志记录操作延时
+     */
     private final int OPERATE_DELAY_TIME = 10;
 
     /**

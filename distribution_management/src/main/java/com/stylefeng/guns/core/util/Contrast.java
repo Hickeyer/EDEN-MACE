@@ -19,7 +19,9 @@ import java.util.Map;
  */
 public class Contrast {
 
-    //记录每个修改字段的分隔符
+    /**
+     * 记录每个修改字段的分隔符
+     */
     public static final String SEPARATOR = ";;;";
 
     /**

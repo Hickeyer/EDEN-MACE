@@ -18,6 +18,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +27,10 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class ShiroFactroy implements IShiro {
 
-    @Autowired
+    @Resource
     private UserMgrDao userMgrDao;
 
-    @Autowired
+    @Resource
     private MenuDao menuDao;
 
     public static IShiro me() {
@@ -55,14 +56,19 @@ public class ShiroFactroy implements IShiro {
     @Override
     public ShiroUser shiroUser(User user) {
         ShiroUser shiroUser = new ShiroUser();
-
-        shiroUser.setId(user.getId());            // 账号id
-        shiroUser.setAccount(user.getAccount());// 账号
-        shiroUser.setDeptId(user.getDeptid());    // 部门id
-        shiroUser.setDeptName(ConstantFactory.me().getDeptName(user.getDeptid()));// 部门名称
-        shiroUser.setName(user.getName());        // 用户名称
+        // 账号id
+        shiroUser.setId(user.getId());
+        // 账号
+        shiroUser.setAccount(user.getAccount());
+        // 部门id
+        shiroUser.setDeptId(user.getDeptid());
+        // 部门名称
+        shiroUser.setDeptName(ConstantFactory.me().getDeptName(user.getDeptid()));
+        // 用户名称
+        shiroUser.setName(user.getName());
         shiroUser.setSecret(user.getSecret());
-        Integer[] roleArray = Convert.toIntArray(user.getRoleid());// 角色集合
+        // 角色集合
+        Integer[] roleArray = Convert.toIntArray(user.getRoleid());
         List<Integer> roleList = new ArrayList<Integer>();
         List<String> roleNameList = new ArrayList<String>();
         for (int roleId : roleArray) {

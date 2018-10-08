@@ -30,13 +30,17 @@ public class ImgQrTool {
 
     private static Logger log = LoggerFactory.getLogger(ImgQrTool.class);
 
-    // 镶嵌的图片宽度的一般
+    /**
+     * 镶嵌的图片宽度的一般
+     */
     private static final int IMAGE_WIDTH = 80;
     private static final int IMAGE_HEIGHT = 80;
     private static final int IMAGE_HALF_WIDTH = IMAGE_WIDTH / 2;
     private static final int FRAME_WIDTH = 2;
 
-    // 二维码写码器
+    /**
+     * 二维码写码器
+     */
     private static MultiFormatWriter mutiWriter = new MultiFormatWriter();
 
     /**
@@ -92,13 +96,16 @@ public class ImgQrTool {
         FileOutputStream output = null;
 
         try {
-            String format = "jpg";// 图像类型
+            // 图像类型
+            String format = "jpg";
             Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
             hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-            BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints);// 生成矩阵
+            // 生成矩阵
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints);
             File dest = new File(destImagePath);
             output = new FileOutputStream(dest);
-            MatrixToImageWriter.writeToStream(bitMatrix, format, output);// 输出图像
+            // 输出图像
+            MatrixToImageWriter.writeToStream(bitMatrix, format, output);
         } catch (Exception e) {
             log.error("生成二维码出错！ImgQrTool：createSimpleQr()", e);
         } finally {
@@ -124,7 +131,8 @@ public class ImgQrTool {
         Map<EncodeHintType, Object> hint = new HashMap<EncodeHintType, Object>();
         hint.put(EncodeHintType.CHARACTER_SET, "utf-8");
         hint.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
-        hint.put(EncodeHintType.MARGIN, 1);// 二维码整体白框
+        // 二维码整体白框
+        hint.put(EncodeHintType.MARGIN, 1);
 
         // 生成二维码
         BitMatrix matrix = mutiWriter.encode(content, BarcodeFormat.QR_CODE, width, height, hint);
@@ -178,7 +186,8 @@ public class ImgQrTool {
      */
     private static BufferedImage scale(String srcImageFile, int height, int width, boolean hasFiller)
             throws IOException {
-        double ratio = 0.0; // 缩放比例
+        // 缩放比例
+        double ratio = 0.0;
         File file = new File(srcImageFile);
         BufferedImage srcImage = ImageIO.read(file);
         Image destImage = srcImage.getScaledInstance(width, height, BufferedImage.SCALE_SMOOTH);
@@ -192,7 +201,8 @@ public class ImgQrTool {
             AffineTransformOp op = new AffineTransformOp(AffineTransform.getScaleInstance(ratio, ratio), null);
             destImage = op.filter(srcImage, null);
         }
-        if (hasFiller) {// 补白
+        // 补白
+        if (hasFiller) {
             BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
             Graphics2D graphic = image.createGraphics();
             graphic.setColor(Color.white);
@@ -223,7 +233,8 @@ public class ImgQrTool {
 
             String[] splitStrLines = null;
             splitStrLines = splitStrLines(para.getWordContent(), qrImageWidth / para.getWordSize());
-            int fontsImageHeight = splitStrLines.length * para.getWordSize() + 10; //防止文字遮挡
+            //防止文字遮挡
+            int fontsImageHeight = splitStrLines.length * para.getWordSize() + 10;
 
             //创建顶部文字的图片
             BufferedImage imageWithFonts = new BufferedImage(qrImageWidth, fontsImageHeight, BufferedImage.TYPE_4BYTE_ABGR);
@@ -233,14 +244,16 @@ public class ImgQrTool {
             fontsImageGraphics.setFont(new Font("宋体", Font.PLAIN, para.getWordSize()));
 
             //文字长度大于一行的长度，进行分行
-            if (para.getWordContent().length() > qrImageWidth / para.getWordSize()) {//每行限制的文字个数
+            //每行限制的文字个数
+            if (para.getWordContent().length() > qrImageWidth / para.getWordSize()) {
                 for (int i = 0; i < splitStrLines.length; i++) {
                     fontsImageGraphics.drawString(splitStrLines[i], 0, para.getWordSize() * (i + 1));
                 }
             } else {
                 fontsImageGraphics.drawString(
                         para.getWordContent(),
-                        ((qrImageWidth / para.getWordSize() - para.getWordContent().length()) / 2) * para.getWordSize() + 20, //总长度减去字长度除以2为向右偏移长度
+                        //总长度减去字长度除以2为向右偏移长度
+                        ((qrImageWidth / para.getWordSize() - para.getWordContent().length()) / 2) * para.getWordSize() + 20,
                         para.getWordSize());
             }
 
@@ -253,8 +266,10 @@ public class ImgQrTool {
 
             // 生成新图片
             BufferedImage imageNew = new BufferedImage(qrImageWidth, qrImageHeight + fontsImageHeight, BufferedImage.TYPE_INT_RGB);
-            imageNew.setRGB(0, 0, qrImageWidth, fontsImageHeight, imageArrayFonts, 0, qrImageWidth);// 设置上半部分的RGB
-            imageNew.setRGB(0, fontsImageHeight, qrImageWidth, qrImageHeight, imageArrayQr, 0, qrImageWidth);// 设置下半部分的RGB
+            // 设置上半部分的RGB
+            imageNew.setRGB(0, 0, qrImageWidth, fontsImageHeight, imageArrayFonts, 0, qrImageWidth);
+            // 设置下半部分的RGB
+            imageNew.setRGB(0, fontsImageHeight, qrImageWidth, qrImageHeight, imageArrayQr, 0, qrImageWidth);
 
             File outFile = new File(para.getFileOutputPath());
             ImageIO.write(imageNew, "jpg", outFile);

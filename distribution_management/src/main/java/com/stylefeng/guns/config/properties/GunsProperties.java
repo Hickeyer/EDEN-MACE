@@ -30,9 +30,15 @@ public class GunsProperties {
 
     private Boolean springSessionOpen = false;
 
-    private Integer sessionInvalidateTime = 30 * 60;  //session 失效时间（默认为30分钟 单位：秒）
+    /**
+     * session 失效时间（默认为30分钟 单位：秒）
+     */
+    private Integer sessionInvalidateTime = 30 * 60;
 
-    private Integer sessionValidationInterval = 15 * 60;  //session 验证失效时间（默认为15分钟 单位：秒）
+    /**
+     * session 验证失效时间（默认为15分钟 单位：秒）
+     */
+    private Integer sessionValidationInterval = 15 * 60;
 
     public String getFileUploadPath() {
         //如果没有写文件上传路径,保存到临时目录

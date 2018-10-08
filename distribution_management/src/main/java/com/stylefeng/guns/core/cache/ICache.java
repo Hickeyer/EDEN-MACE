@@ -21,7 +21,13 @@ import java.util.List;
  * 通用缓存接口
  */
 public interface ICache {
-	
+
+	/**
+	 *
+	 * @param cacheName
+	 * @param key
+	 * @param value
+	 */
 	void put(String cacheName, Object key, Object value);
 	
 	<T> T get(String cacheName, Object key);

@@ -671,7 +671,8 @@ public class StrKit {
 			return list;
 		}
 
-		boolean isNotEnd = true; // 未结束切分的标志
+		// 未结束切分的标志
+		boolean isNotEnd = true;
 		int strLen = str.length();
 		StringBuilder sb = new StringBuilder(strLen);
 		for (int i = 0; i < strLen; i++) {
@@ -689,7 +690,8 @@ public class StrKit {
 				sb.append(c);
 			}
 		}
-		list.add(sb.toString());// 加入尾串
+		// 加入尾串
+		list.add(sb.toString());
 		return list;
 	}
 
@@ -709,8 +711,10 @@ public class StrKit {
 			return new String[] { str };
 		}
 
-		int dellen = delimiter.length(); // del length
-		int maxparts = (str.length() / dellen) + 2; // one more for the last
+		// del length
+		int dellen = delimiter.length();
+		// one more for the last
+		int maxparts = (str.length() / dellen) + 2;
 		int[] positions = new int[maxparts];
 
 		int i, j = 0;
@@ -876,7 +880,8 @@ public class StrKit {
 		final char[] array = new char[size];
 		str.getChars(0, len, array, 0);
 		int n;
-		for (n = len; n < size - n; n <<= 1) {// n <<= 1相当于n *2
+		// n <<= 1相当于n *2
+		for (n = len; n < size - n; n <<= 1) {
 			System.arraycopy(array, 0, array, n, n);
 		}
 		System.arraycopy(array, 0, array, n, size - n);

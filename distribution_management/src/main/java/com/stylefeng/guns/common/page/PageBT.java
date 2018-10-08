@@ -8,11 +8,20 @@ package com.stylefeng.guns.common.page;
  */
 public class PageBT {
 
-    private int limit;        // 每页显示个数
+    /**
+     * 每页显示个数
+     */
+    private int limit;
 
-    private int offset;    // 查询的偏移量（查询的页数 = offset/limit + 1）
+    /**
+     * 查询的偏移量（查询的页数 = offset/limit + 1）
+     */
+    private int offset;
 
-    private String order;    // 排序方式
+    /**
+     * 排序方式
+     */
+    private String order;
 
 
     public PageBT() {

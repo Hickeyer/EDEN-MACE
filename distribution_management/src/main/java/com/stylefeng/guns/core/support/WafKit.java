@@ -99,7 +99,8 @@ public class WafKit {
 	 * @return
 	 */
 	public static String stripSqlInjection(String value) {
-		return (null == value) ? null : value.replaceAll("('.+--)|(--)|(%7C)", ""); //value.replaceAll("('.+--)|(--)|(\\|)|(%7C)", "");
+		//value.replaceAll("('.+--)|(--)|(\\|)|(%7C)", "");
+		return (null == value) ? null : value.replaceAll("('.+--)|(--)|(%7C)", "");
 	}
 
 	/**

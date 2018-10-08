@@ -15,7 +15,9 @@ public class ReqEditManager {
     @NotNull
     private String userId;
 
-    /* 用户姓名 */
+    /**
+     * 用户姓名
+     */
     @NotNull
     private String userName;
 

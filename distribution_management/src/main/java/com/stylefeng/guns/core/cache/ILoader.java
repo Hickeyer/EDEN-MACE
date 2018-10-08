@@ -19,5 +19,9 @@ package com.stylefeng.guns.core.cache;
  *  数据重载
  */
 public interface ILoader {
+	/**
+	 *
+	 * @return
+	 */
 	Object load();
 }

@@ -12,24 +12,34 @@ import javax.validation.constraints.NotNull;
  */
 public class ReqAddManager {
 
-    // 用户姓名
+    /**
+     * 用户姓名
+     */
     @NotNull
     private String userName;
 
-    // 用户账号
+    /**
+     * 用户账号
+     */
     @NotNull
     private String userNo;
 
-    // 手机号
+    /**
+     * 手机号
+     */
     @NotNull
     @Length(min = 11, max = 11)
     private String userPhone;
 
-    // 1:超级管理员 2：管理员
+    /**
+     * 1:超级管理员 2：管理员
+     */
     @NotNull
     private String userRole;
 
-    // 密码
+    /**
+     * 密码
+     */
     @NotNull
     private String userPassword;
 

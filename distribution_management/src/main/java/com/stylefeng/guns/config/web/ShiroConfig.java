@@ -114,7 +114,8 @@ public class ShiroConfig {
     public SimpleCookie rememberMeCookie() {
         SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
         simpleCookie.setHttpOnly(true);
-        simpleCookie.setMaxAge(7 * 24 * 60 * 60);//7天
+        //7天
+        simpleCookie.setMaxAge(7 * 24 * 60 * 60);
         return simpleCookie;
     }
 
@@ -182,9 +183,10 @@ public class ShiroConfig {
 
     /**
      * 启用shrio授权注解拦截方式，AOP式方法级权限检查
+     * DependsOn 依赖其他bean的初始化
      */
     @Bean
-    @DependsOn(value = "lifecycleBeanPostProcessor") //依赖其他bean的初始化
+    @DependsOn(value = "lifecycleBeanPostProcessor")
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         return new DefaultAdvisorAutoProxyCreator();
     }

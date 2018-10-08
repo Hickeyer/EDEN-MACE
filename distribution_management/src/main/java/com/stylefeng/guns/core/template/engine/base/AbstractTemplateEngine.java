@@ -10,11 +10,26 @@ import com.stylefeng.guns.core.template.config.*;
  */
 public class AbstractTemplateEngine {
 
-    protected ContextConfig contextConfig;                //全局配置
-    protected ControllerConfig controllerConfig;          //控制器的配置
-    protected PageConfig pageConfig;                      //页面的控制器
-    protected DaoConfig daoConfig;                        //Dao配置
-    protected ServiceConfig serviceConfig;                //Service配置
+    /**
+     * 全局配置
+     */
+    protected ContextConfig contextConfig;
+    /**
+     * 控制器的配置
+     */
+    protected ControllerConfig controllerConfig;
+    /**
+     * 页面的控制器
+     */
+    protected PageConfig pageConfig;
+    /**
+     * Dao配置
+     */
+    protected DaoConfig daoConfig;
+    /**
+     * Service配置
+     */
+    protected ServiceConfig serviceConfig;
 
     public void initConfig() {
         if (this.contextConfig == null) {

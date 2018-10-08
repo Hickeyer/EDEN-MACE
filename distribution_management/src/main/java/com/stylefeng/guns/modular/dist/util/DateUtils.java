@@ -32,10 +32,9 @@ public class DateUtils {
     public static String plusDay(int num){
         Date d = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String currdate = format.format(d);
-
         Calendar ca = Calendar.getInstance();
-        ca.add(Calendar.DATE, num);// num为增加的天数，可以改变的
+        // num为增加的天数，可以改变的
+        ca.add(Calendar.DATE, num);
         d = ca.getTime();
         String enddate = format.format(d);
         return enddate;

@@ -12,10 +12,14 @@ import java.util.List;
  */
 public class PageInfoBT<T> {
 
-    // 结果集
+    /**
+     * HTTP日期时间格式化器
+     */
     private List<T> rows;
 
-    // 总数
+    /**
+     * 总数
+     */
     private long total;
 
     public PageInfoBT(Page<T> page) {

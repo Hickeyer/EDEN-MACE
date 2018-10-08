@@ -15,7 +15,7 @@ public enum IsMenu {
     /**
      * 不是菜单
      */
-    NO(0, "不是");//不是菜单的是按钮
+    NO(0, "不是");
 
     int code;
     String message;
