@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/key")
 public class KeyController extends BaseController {
 
-    private String PREFIX = "/dist/key/";
+    private String prefix = "/dist/key/";
 
     @Value("${dist.jwt.secret}")
     private  String secret;
@@ -36,7 +36,7 @@ public class KeyController extends BaseController {
       //  String key= Jwt.sign(ShiroKit.getUser().getAccount(),secret,30L * 24L * 3600L * 1000L);
         String key= Jwt.sign(account,secret,30L * 24L * 3600L * 1000L);
         model.addAttribute("key",key);
-        return PREFIX + "key.html";
+        return prefix + "key.html";
     }
 
     /**
@@ -44,7 +44,7 @@ public class KeyController extends BaseController {
      */
     @RequestMapping("/key_add")
     public String keyAdd() {
-        return PREFIX + "key_add.html";
+        return prefix + "key_add.html";
     }
 
     /**
@@ -52,7 +52,7 @@ public class KeyController extends BaseController {
      */
     @RequestMapping("/key_update/{keyId}")
     public String keyUpdate(@PathVariable Integer keyId, Model model) {
-        return PREFIX + "key_edit.html";
+        return prefix + "key_edit.html";
     }
 
     /**

@@ -5,6 +5,9 @@ import java.util.Map;
 
 public enum  SystemUser {
 
+    /**
+     * 平台
+     */
     ADMIN_INFO("10000","admin");
     private String status;
     private String info;

@@ -27,7 +27,7 @@ import java.util.Map;
 @RequestMapping("/DisRankParam")
 public class DisRankParamController extends BaseController {
 
-    private String PREFIX = "/dist/DisRankParam/";
+    private String prefix = "/dist/DisRankParam/";
 
     @Autowired
     IDisRankParamService disRankParamService;
@@ -41,32 +41,32 @@ public class DisRankParamController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "DisRankParam.html";
+        return prefix + "DisRankParam.html";
     }
 
     /**
      * 跳转到添加段位积分
      */
     @RequestMapping("/DisRankParam_add")
-    public String DisRankParamAdd(Model model) {
+    public String disRankParamAdd(Model model) {
         model.addAttribute("disProMode",sysDicService.selectListByCode("disProMode"));
         model.addAttribute("disProType",sysDicService.selectListByCode("disProRankType"));
         model.addAttribute("disProLevel",sysDicService.selectListByCode("disProLevel"));
         model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
         model.addAttribute("disUserRank",sysDicService.selectListByCode("disUserRank"));
-        return PREFIX + "DisRankParam_add.html";
+        return prefix + "DisRankParam_add.html";
     }
 
     /**
      * 跳转到修改段位积分
      */
     @RequestMapping("/DisRankParam_update/{DisRankParamId}")
-    public String DisRankParamUpdate(@PathVariable Integer DisRankParamId, Model model) {
-        DisRankParam disRankParam = disRankParamService.selectOne(DisRankParamId);
-        model.addAttribute("id",DisRankParamId);
+    public String disRankParamUpdate(@PathVariable Integer disRankParamId, Model model) {
+        DisRankParam disRankParam = disRankParamService.selectOne(disRankParamId);
+        model.addAttribute("id",disRankParamId);
         model.addAttribute("disRankName",disRankParam.getDisRankName());
         model.addAttribute("disIntegralValue",disRankParam.getDisIntegralValue());
-        return PREFIX + "DisRankParam_edit.html";
+        return prefix + "DisRankParam_edit.html";
     }
 
     /**

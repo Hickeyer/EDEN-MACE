@@ -5,8 +5,17 @@ import java.util.Map;
 
 public enum ProRankTypeStatus {
 
+    /**
+     * 商品交易
+     */
     ZERO_STATUS("0","商品交易","您的下级%s交易%s元,您获得%s积分"),
+    /**
+     * 升级
+     */
     ONE_STATUS("1","升级","您的下级%s升级,您获得%s积分"),
+    /**
+     * 邀请
+     */
     TWO_STATUS("2","邀请","您的邀请下级%s,您获得%s积分");
     private String status;
     private String mes;

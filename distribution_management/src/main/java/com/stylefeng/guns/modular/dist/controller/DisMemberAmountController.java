@@ -32,14 +32,14 @@ public class DisMemberAmountController extends BaseController {
     @Autowired
     IDisMemberInfoService disMemberInfoService;
 
-    private String PREFIX = "/dist/disMemberAmount/";
+    private String prefix = "/dist/disMemberAmount/";
 
     /**
      * 跳转到会员账户管理首页
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "disMemberAmount.html";
+        return prefix + "disMemberAmount.html";
     }
 
     /**
@@ -47,7 +47,7 @@ public class DisMemberAmountController extends BaseController {
      */
     @RequestMapping("/disMemberAmount_add")
     public String disMemberAmountAdd() {
-        return PREFIX + "disMemberAmount_add.html";
+        return prefix + "disMemberAmount_add.html";
     }
 
     /**
@@ -55,7 +55,7 @@ public class DisMemberAmountController extends BaseController {
      */
     @RequestMapping("/disMemberAmount_update/{disMemberAmountId}")
     public String disMemberAmountUpdate(@PathVariable Integer disMemberAmountId, Model model) {
-        return PREFIX + "disMemberAmount_edit.html";
+        return prefix + "disMemberAmount_edit.html";
     }
 
     /**

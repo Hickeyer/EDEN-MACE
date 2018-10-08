@@ -245,19 +245,19 @@ public class ImgQrTool {
             }
 
             // 从图片中读取RGB
-            int[] ImageArrayFonts = new int[qrImageWidth * fontsImageHeight];
-            ImageArrayFonts = imageWithFonts.getRGB(0, 0, qrImageWidth, fontsImageHeight, ImageArrayFonts, 0, qrImageWidth);
+            int[] imageArrayFonts = new int[qrImageWidth * fontsImageHeight];
+            imageArrayFonts = imageWithFonts.getRGB(0, 0, qrImageWidth, fontsImageHeight, imageArrayFonts, 0, qrImageWidth);
 
-            int[] ImageArrayQr = new int[qrImageWidth * qrImageHeight];
-            ImageArrayQr = qrImage.getRGB(0, 0, qrImageWidth, qrImageHeight, ImageArrayQr, 0, qrImageWidth);
+            int[] imageArrayQr = new int[qrImageWidth * qrImageHeight];
+            imageArrayQr = qrImage.getRGB(0, 0, qrImageWidth, qrImageHeight, imageArrayQr, 0, qrImageWidth);
 
             // 生成新图片
-            BufferedImage ImageNew = new BufferedImage(qrImageWidth, qrImageHeight + fontsImageHeight, BufferedImage.TYPE_INT_RGB);
-            ImageNew.setRGB(0, 0, qrImageWidth, fontsImageHeight, ImageArrayFonts, 0, qrImageWidth);// 设置上半部分的RGB
-            ImageNew.setRGB(0, fontsImageHeight, qrImageWidth, qrImageHeight, ImageArrayQr, 0, qrImageWidth);// 设置下半部分的RGB
+            BufferedImage imageNew = new BufferedImage(qrImageWidth, qrImageHeight + fontsImageHeight, BufferedImage.TYPE_INT_RGB);
+            imageNew.setRGB(0, 0, qrImageWidth, fontsImageHeight, imageArrayFonts, 0, qrImageWidth);// 设置上半部分的RGB
+            imageNew.setRGB(0, fontsImageHeight, qrImageWidth, qrImageHeight, imageArrayQr, 0, qrImageWidth);// 设置下半部分的RGB
 
             File outFile = new File(para.getFileOutputPath());
-            ImageIO.write(ImageNew, "jpg", outFile);
+            ImageIO.write(imageNew, "jpg", outFile);
         } catch (Exception e) {
             e.printStackTrace();
         }

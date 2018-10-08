@@ -543,7 +543,8 @@ public class ToolUtil {
      */
     public static Boolean isWinOs(){
         String os = System.getProperty("os.name");
-        if(os.toLowerCase().startsWith("win")){
+        String win = "win";
+        if(os.toLowerCase().startsWith(win)){
             return true;
         }else{
             return false;

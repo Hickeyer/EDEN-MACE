@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -28,13 +29,11 @@ import java.util.*;
 @RequestMapping("/disMemberInfo")
 public class DisMemberInfoController extends BaseController {
 
-    private String PREFIX = "/dist/disMemberInfo/";
+    private String prefix = "/dist/disMemberInfo/";
 
     @Autowired
     IDisMemberInfoService  disMemberInfoService;
 
-    @Autowired
-    UserMgrDao userMgrDao;
 
     @Autowired
     ISysDicService sysDicService;
@@ -52,7 +51,7 @@ public class DisMemberInfoController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "disMemberInfo.html";
+        return prefix + "disMemberInfo.html";
     }
 
     /**
@@ -60,7 +59,7 @@ public class DisMemberInfoController extends BaseController {
      */
     @RequestMapping("/disMemberInfo_add")
     public String disMemberInfoAdd() {
-        return PREFIX + "disMemberInfo_add.html";
+        return prefix + "disMemberInfo_add.html";
     }
 
     /**
@@ -68,7 +67,7 @@ public class DisMemberInfoController extends BaseController {
      */
     @RequestMapping("/disMemberInfo_update/{disMemberInfoId}")
     public String disMemberInfoUpdate(@PathVariable Integer disMemberInfoId, Model model) {
-        return PREFIX + "disMemberInfo_edit.html";
+        return prefix + "disMemberInfo_edit.html";
     }
     @RequestMapping("/view/{id}")
     public String memberView(HttpServletRequest request, @PathVariable String id, Model model) {
@@ -104,7 +103,7 @@ public class DisMemberInfoController extends BaseController {
         request.setAttribute("listCategories",listCategories);
         request.setAttribute("selecteds",gson.toJson(selecteds));
         request.setAttribute("datas",gson.toJson(datas));
-        return PREFIX + "detail.html";
+        return prefix + "detail.html";
     }
 
     /**

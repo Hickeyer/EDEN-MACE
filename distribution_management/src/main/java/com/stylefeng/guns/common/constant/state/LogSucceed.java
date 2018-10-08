@@ -8,7 +8,13 @@ package com.stylefeng.guns.common.constant.state;
  */
 public enum LogSucceed {
 
+    /**
+     * 成功
+     */
     SUCCESS("成功"),
+    /**
+     * 失败
+     */
     FAIL("失败");
 
     String message;

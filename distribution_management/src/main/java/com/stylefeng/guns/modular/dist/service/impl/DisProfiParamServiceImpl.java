@@ -44,7 +44,7 @@ public class DisProfiParamServiceImpl implements IDisProfiParamService {
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void save(DisProfitParam param) {
-        if(param.getDisProLevel().equals("0")){
+        if("0".equals(param.getDisProLevel())){
             throw  new BussinessException(BizExceptionEnum.PROFIT_LEVLE_ERROR);
         }
         param.setIsDelete("N");

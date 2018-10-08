@@ -4,8 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum  UserTypeStatus {
+    /**
+     * 游客
+     */
     ZERO_STATUS("0","游客",0),
+    /**
+     * 经理
+     */
     ONE_STATUS("1","经理",1),
+    /**
+     * 老板
+     */
     TWO_STATUS("2","老板",2);
     private String status;
     private String mes;

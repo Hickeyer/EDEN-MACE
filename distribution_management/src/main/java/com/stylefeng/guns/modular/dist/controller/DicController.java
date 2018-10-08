@@ -6,6 +6,7 @@ import com.stylefeng.guns.common.annotion.Permission;
 import com.stylefeng.guns.common.annotion.log.BussinessLog;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.constant.Dict;
 import com.stylefeng.guns.common.constant.factory.ConstantFactory;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
@@ -38,7 +39,7 @@ import java.util.Map;
 @RequestMapping("/dic")
 public class DicController extends BaseController {
 
-    private String PREFIX = "/system/dic/";
+    private String prefix = "/system/dic/";
 
     @Resource
     SysDicTypeMapper sysDicTypeMapper;
@@ -59,7 +60,7 @@ public class DicController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "dic.html";
+        return prefix + "dic.html";
     }
 
 
@@ -80,7 +81,7 @@ public class DicController extends BaseController {
      */
     @RequestMapping("/dic_add")
     public String dicAdd() {
-        return PREFIX + "dic_add.html";
+        return prefix + "dic_add.html";
     }
     /**
      * 新增字典
@@ -88,7 +89,7 @@ public class DicController extends BaseController {
      * @param dictValues 格式例如   "1:启用;2:禁用;3:冻结"
      */
 
-    @BussinessLog(value = "添加系统字典记录", key = "dictName,dictValues", dict = com.stylefeng.guns.common.constant.Dict.DictMap)
+    @BussinessLog(value = "添加系统字典记录", key = "dictName,dictValues", dict = Dict.DICT_MAP)
     @RequestMapping(value = "/add")
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
@@ -112,13 +113,13 @@ public class DicController extends BaseController {
         List<SysDic> subDicts = sysDicMapper.selectList(new EntityWrapper<SysDic>().eq("dic_type_no", dict.getDicTypeNo()));
         model.addAttribute("subDicts", subDicts);
         LogObjectHolder.me().set(dict);
-        return PREFIX + "dic_edit.html";
+        return prefix + "dic_edit.html";
     }
 
     /**
      * 修改字典
      */
-    @BussinessLog(value = "修改字典", key = "dictName,dictValues", dict = com.stylefeng.guns.common.constant.Dict.DictMap)
+    @BussinessLog(value = "修改字典", key = "dictName,dictValues", dict = Dict.DICT_MAP)
     @RequestMapping(value = "/update")
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
@@ -133,7 +134,7 @@ public class DicController extends BaseController {
     /**
      * 删除字典记录
      */
-    @BussinessLog(value = "删除字典记录", key = "dictId", dict = com.stylefeng.guns.common.constant.Dict.DeleteDict)
+    @BussinessLog(value = "删除字典记录", key = "dictId", dict = Dict.DELETE_DICT)
     @RequestMapping(value = "/delete")
     @Permission(Const.ADMIN_NAME)
     @ResponseBody

@@ -26,7 +26,7 @@ import java.util.List;
 @RequestMapping("/sysJob")
 public class SysJobController extends BaseController {
 
-    private String PREFIX = "/system/sysJob/";
+    private String prefix = "/system/sysJob/";
 
     @Resource
     SysJobDao sysJobDao;
@@ -36,7 +36,7 @@ public class SysJobController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "sysJob.html";
+        return prefix + "sysJob.html";
     }
 
     /**
@@ -44,7 +44,7 @@ public class SysJobController extends BaseController {
      */
     @RequestMapping("/sysJob_add")
     public String sysJobAdd() {
-        return PREFIX + "sysJob_add.html";
+        return prefix + "sysJob_add.html";
     }
 
     /**
@@ -52,7 +52,7 @@ public class SysJobController extends BaseController {
      */
     @RequestMapping("/sysJob_update/{sysJobId}")
     public String sysJobUpdate(@PathVariable Integer sysJobId, Model model) {
-        return PREFIX + "sysJob_edit.html";
+        return prefix + "sysJob_edit.html";
     }
 
     /**

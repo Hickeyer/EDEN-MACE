@@ -9,14 +9,18 @@ import java.util.Map;
  */
 public enum ProModelStatus {
 
-
-
+    /**
+     * 按照百分比
+     */
     ZERO_STATUS("0","按照百分比计算") {
         @Override
         public BigDecimal calResult(BigDecimal amount, BigDecimal arg) {
             return amount.multiply(arg);
         }
     },
+    /**
+     * 按照固定金额
+     */
     ONE_STATUS("1","按照固定值结算") {
         @Override
         public BigDecimal calResult(BigDecimal amount, BigDecimal arg) {

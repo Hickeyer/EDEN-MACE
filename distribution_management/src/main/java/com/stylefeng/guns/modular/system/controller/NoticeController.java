@@ -35,7 +35,7 @@ import java.util.Map;
 @RequestMapping("/notice")
 public class NoticeController extends BaseController {
 
-    private String PREFIX = "/system/notice/";
+    private String prefix = "/system/notice/";
 
     @Resource
     private NoticeMapper noticeMapper;
@@ -48,7 +48,7 @@ public class NoticeController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "notice.html";
+        return prefix + "notice.html";
     }
 
     /**
@@ -56,7 +56,7 @@ public class NoticeController extends BaseController {
      */
     @RequestMapping("/notice_add")
     public String noticeAdd() {
-        return PREFIX + "notice_add.html";
+        return prefix + "notice_add.html";
     }
 
     /**
@@ -67,7 +67,7 @@ public class NoticeController extends BaseController {
         Notice notice = this.noticeMapper.selectById(noticeId);
         model.addAttribute("notice",notice);
         LogObjectHolder.me().set(notice);
-        return PREFIX + "notice_edit.html";
+        return prefix + "notice_edit.html";
     }
 
     /**
@@ -95,7 +95,7 @@ public class NoticeController extends BaseController {
      */
     @RequestMapping(value = "/add")
     @ResponseBody
-    @BussinessLog(value = "新增通知",key = "title",dict = Dict.NoticeMap)
+    @BussinessLog(value = "新增通知",key = "title",dict = Dict.NOTICE_MAP)
     public Object add(Notice notice) {
         if (ToolUtil.isOneEmpty(notice, notice.getTitle(), notice.getContent())) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
@@ -111,7 +111,7 @@ public class NoticeController extends BaseController {
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
-    @BussinessLog(value = "删除通知",key = "noticeId",dict = Dict.DeleteDict)
+    @BussinessLog(value = "删除通知",key = "noticeId",dict = Dict.DELETE_DICT)
     public Object delete(@RequestParam Integer noticeId) {
 
         //缓存通知名称
@@ -127,7 +127,7 @@ public class NoticeController extends BaseController {
      */
     @RequestMapping(value = "/update")
     @ResponseBody
-    @BussinessLog(value = "修改通知",key = "title",dict = Dict.NoticeMap)
+    @BussinessLog(value = "修改通知",key = "title",dict = Dict.NOTICE_MAP)
     public Object update(Notice notice) {
         if (ToolUtil.isOneEmpty(notice, notice.getId(), notice.getTitle(), notice.getContent())) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);

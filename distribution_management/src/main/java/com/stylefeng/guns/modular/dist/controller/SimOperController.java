@@ -22,14 +22,14 @@ public class SimOperController extends BaseController {
     @Autowired
     ISysDicService sysDicService;
 
-    private String PREFIX = "/dist/simOper/";
+    private String prefix = "/dist/simOper/";
 
     /**
      * 跳转到模拟菜单首页
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "simOper.html";
+        return prefix + "simOper.html";
     }
 
     /**
@@ -37,12 +37,12 @@ public class SimOperController extends BaseController {
      */
     @RequestMapping("/simOper_add")
     public String simOperAdd() {
-        return PREFIX + "simOper_add.html";
+        return prefix + "simOper_add.html";
     }
     @RequestMapping("/withdraw_add")
-    public String withdraw_add(Model model) {
+    public String withdrawAdd(Model model) {
         model.addAttribute("disProType",sysDicService.selectListByCode("disProType"));
-        return PREFIX + "withdraw_add.html";
+        return prefix + "withdraw_add.html";
     }
 
     /**
@@ -50,10 +50,10 @@ public class SimOperController extends BaseController {
      * @return
      */
     @RequestMapping("/member_add")
-    public String member_add(Model model) {
+    public String memberAdd(Model model) {
         model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
 
-        return PREFIX + "member_add.html";
+        return prefix + "member_add.html";
     }
 
     /**
@@ -61,10 +61,10 @@ public class SimOperController extends BaseController {
      * @return
      */
     @RequestMapping("/order_add")
-    public String order_add(Model model) {
+    public String orderAdd(Model model) {
         model.addAttribute("disProType",sysDicService.selectListByCode("disProType"));
         model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
-        return PREFIX + "order_add.html";
+        return prefix + "order_add.html";
     }
 
     /**
@@ -72,7 +72,7 @@ public class SimOperController extends BaseController {
      */
     @RequestMapping("/simOper_update/{simOperId}")
     public String simOperUpdate(@PathVariable Integer simOperId, Model model) {
-        return PREFIX + "simOper_edit.html";
+        return prefix + "simOper_edit.html";
     }
 
     /**

@@ -8,7 +8,13 @@ package com.stylefeng.guns.common.constant.state;
  */
 public enum MenuOpenStatus {
 
+    /**
+     * 打开状态
+     */
     OPEN(1, "打开"),
+    /**
+     * 关闭状态
+     */
     CLOSE(0, "关闭");
 
     int code;

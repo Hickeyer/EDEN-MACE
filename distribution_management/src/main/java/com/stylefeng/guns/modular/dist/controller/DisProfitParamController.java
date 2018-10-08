@@ -35,7 +35,11 @@ public class DisProfitParamController extends BaseController {
     @Autowired
     ISysDicService sysDicService;
 
-    private String PREFIX = "/dist/disProfiParam/";
+    private final String PREFIX;
+
+    public DisProfitParamController() {
+        PREFIX = "/dist/disProfiParam/";
+    }
 
     /**
      * 跳转到参数设置首页

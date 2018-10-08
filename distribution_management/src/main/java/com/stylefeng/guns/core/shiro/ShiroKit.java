@@ -36,12 +36,12 @@ public class ShiroKit {
     /**
      * 加盐参数
      */
-    public final static String hashAlgorithmName = "MD5";
+    public final static String HASH_ALGORITHM_NAME = "MD5";
 
     /**
      * 循环次数
      */
-    public final static int hashIterations = 1024;
+    public final static int HASH_ITERATIONS = 1024;
 
     /**
      * shiro密码加密工具类
@@ -52,7 +52,7 @@ public class ShiroKit {
      */
     public static String md5(String credentials, String saltSource) {
         ByteSource salt = new Md5Hash(saltSource);
-        return new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations).toString();
+        return new SimpleHash(HASH_ALGORITHM_NAME, credentials, salt, HASH_ITERATIONS).toString();
     }
 
     /**

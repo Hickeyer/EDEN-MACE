@@ -21,7 +21,7 @@ import java.util.Map;
 @RequestMapping("/dynamic")
 public class DynamicController extends BaseController {
 
-    private String PREFIX = "/dist/dynamic/";
+    private String prefix = "/dist/dynamic/";
 
     @Autowired
     IDisAmountSituationService disAmountSituationService;
@@ -33,7 +33,7 @@ public class DynamicController extends BaseController {
             account=null;
         }
         model.addAttribute("model",disAmountSituationService.getDynamicInfo(account));
-        return PREFIX + "dynamic.html";
+        return prefix + "dynamic.html";
     }
     @RequestMapping("/myaccount")
     public String myaccount(Model model) {
@@ -46,6 +46,6 @@ public class DynamicController extends BaseController {
         model.addAttribute("date",gson.toJson(date).toString());
         model.addAttribute("amount",gson.toJson(amount).toString());
         model.addAttribute("after",gson.toJson(after).toString());
-        return PREFIX + "myaccount.html";
+        return prefix + "myaccount.html";
     }
 }

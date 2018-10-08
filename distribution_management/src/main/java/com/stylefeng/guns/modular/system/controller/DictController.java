@@ -36,7 +36,7 @@ import java.util.Map;
 @RequestMapping("/dict")
 public class DictController extends BaseController {
 
-    private String PREFIX = "/system/dict/";
+    private String prefix = "/system/dict/";
 
     @Resource
     DictDao dictDao;
@@ -52,7 +52,7 @@ public class DictController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "dict.html";
+        return prefix + "dict.html";
     }
 
     /**
@@ -60,7 +60,7 @@ public class DictController extends BaseController {
      */
     @RequestMapping("/dict_add")
     public String deptAdd() {
-        return PREFIX + "dict_add.html";
+        return prefix + "dict_add.html";
     }
 
     /**
@@ -74,7 +74,7 @@ public class DictController extends BaseController {
         List<Dict> subDicts = dictMapper.selectList(new EntityWrapper<Dict>().eq("pid", dictId));
         model.addAttribute("subDicts", subDicts);
         LogObjectHolder.me().set(dict);
-        return PREFIX + "dict_edit.html";
+        return prefix + "dict_edit.html";
     }
 
     /**
@@ -82,7 +82,7 @@ public class DictController extends BaseController {
      *
      * @param dictValues 格式例如   "1:启用;2:禁用;3:冻结"
      */
-    @BussinessLog(value = "添加字典记录", key = "dictName,dictValues", dict = com.stylefeng.guns.common.constant.Dict.DictMap)
+    @BussinessLog(value = "添加字典记录", key = "dictName,dictValues", dict = com.stylefeng.guns.common.constant.Dict.DICT_MAP)
     @RequestMapping(value = "/add")
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
@@ -118,7 +118,7 @@ public class DictController extends BaseController {
     /**
      * 修改字典
      */
-    @BussinessLog(value = "修改字典", key = "dictName,dictValues", dict = com.stylefeng.guns.common.constant.Dict.DictMap)
+    @BussinessLog(value = "修改字典", key = "dictName,dictValues", dict = com.stylefeng.guns.common.constant.Dict.DICT_MAP)
     @RequestMapping(value = "/update")
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
@@ -133,7 +133,7 @@ public class DictController extends BaseController {
     /**
      * 删除字典记录
      */
-    @BussinessLog(value = "删除字典记录", key = "dictId", dict = com.stylefeng.guns.common.constant.Dict.DeleteDict)
+    @BussinessLog(value = "删除字典记录", key = "dictId", dict = com.stylefeng.guns.common.constant.Dict.DELETE_DICT)
     @RequestMapping(value = "/delete")
     @Permission(Const.ADMIN_NAME)
     @ResponseBody

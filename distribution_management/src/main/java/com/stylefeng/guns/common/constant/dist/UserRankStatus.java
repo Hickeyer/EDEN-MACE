@@ -5,9 +5,21 @@ import java.util.Map;
 
 public enum  UserRankStatus {
 
+    /**
+     * 青铜
+     */
     A_STATUS("A","青铜",1),
+    /**
+     * 黄金
+     */
     B_STATUS("B","黄金",2),
+    /**
+     * 铂金
+     */
     C_STATUS("C","铂金",3),
+    /**
+     * 钻石
+     */
     D_STATUS("D","钻石",4);
     private String status;
     private String mes;

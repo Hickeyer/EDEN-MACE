@@ -2,7 +2,13 @@ package com.stylefeng.guns.common.constant.dist;
 
 public enum JobStatus {
 
+    /**
+     * 启用
+     */
     FIRST_STATUS("1","启用"),
+    /**
+     * 停用
+     */
     SECOND_STATUS("2","停用");
 
     private String status;

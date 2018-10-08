@@ -7,7 +7,7 @@ import com.stylefeng.guns.common.constant.Dict;
 import com.stylefeng.guns.common.constant.dist.SystemUser;
 import com.stylefeng.guns.common.constant.factory.ConstantFactory;
 import com.stylefeng.guns.common.constant.state.ManagerStatus;
-import com.stylefeng.guns.common.constant.tips.Tip;
+import com.stylefeng.guns.common.constant.tips.AbstractTip;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
@@ -184,9 +184,9 @@ public class UserMgrController extends BaseController {
      * 添加管理员
      */
     @RequestMapping("/add")
-    @BussinessLog(value = "添加管理员", key = "account", dict = Dict.UserDict)
+    @BussinessLog(value = "添加管理员", key = "account", dict = Dict.USER_DICT)
     @ResponseBody
-    public Tip add(@Valid UserDto user, BindingResult result) {
+    public AbstractTip add(@Valid UserDto user, BindingResult result) {
         if (result.hasErrors()) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -234,9 +234,9 @@ public class UserMgrController extends BaseController {
      * @throws NoPermissionException
      */
     @RequestMapping("/edit")
-    @BussinessLog(value = "修改管理员", key = "account", dict = Dict.UserDict)
+    @BussinessLog(value = "修改管理员", key = "account", dict = Dict.USER_DICT)
     @ResponseBody
-    public Tip edit(@Valid UserDto user, BindingResult result) throws NoPermissionException {
+    public AbstractTip edit(@Valid UserDto user, BindingResult result) throws NoPermissionException {
         if (result.hasErrors()) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -258,10 +258,10 @@ public class UserMgrController extends BaseController {
      * 删除管理员（逻辑删除）
      */
     @RequestMapping("/delete")
-    @BussinessLog(value = "删除管理员", key = "userId", dict = Dict.UserDict)
+    @BussinessLog(value = "删除管理员", key = "userId", dict = Dict.USER_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip delete(@RequestParam Integer userId) {
+    public AbstractTip delete(@RequestParam Integer userId) {
         if (ToolUtil.isEmpty(userId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -289,10 +289,10 @@ public class UserMgrController extends BaseController {
      * 重置管理员的密码
      */
     @RequestMapping("/reset")
-    @BussinessLog(value = "重置管理员密码", key = "userId", dict = Dict.UserDict)
+    @BussinessLog(value = "重置管理员密码", key = "userId", dict = Dict.USER_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip reset(@RequestParam Integer userId) {
+    public AbstractTip reset(@RequestParam Integer userId) {
         if (ToolUtil.isEmpty(userId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -307,10 +307,10 @@ public class UserMgrController extends BaseController {
      * 冻结用户
      */
     @RequestMapping("/freeze")
-    @BussinessLog(value = "冻结用户", key = "userId", dict = Dict.UserDict)
+    @BussinessLog(value = "冻结用户", key = "userId", dict = Dict.USER_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip freeze(@RequestParam Integer userId) {
+    public AbstractTip freeze(@RequestParam Integer userId) {
         if (ToolUtil.isEmpty(userId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -326,10 +326,10 @@ public class UserMgrController extends BaseController {
      * 解除冻结用户
      */
     @RequestMapping("/unfreeze")
-    @BussinessLog(value = "解除冻结用户", key = "userId", dict = Dict.UserDict)
+    @BussinessLog(value = "解除冻结用户", key = "userId", dict = Dict.USER_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip unfreeze(@RequestParam Integer userId) {
+    public AbstractTip unfreeze(@RequestParam Integer userId) {
         if (ToolUtil.isEmpty(userId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -341,10 +341,10 @@ public class UserMgrController extends BaseController {
      * 分配角色
      */
     @RequestMapping("/setRole")
-    @BussinessLog(value = "分配角色", key = "userId,roleIds", dict = Dict.UserDict)
+    @BussinessLog(value = "分配角色", key = "userId,roleIds", dict = Dict.USER_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip setRole(@RequestParam("userId") Integer userId, @RequestParam("roleIds") String roleIds) {
+    public AbstractTip setRole(@RequestParam("userId") Integer userId, @RequestParam("roleIds") String roleIds) {
         if (ToolUtil.isOneEmpty(userId, roleIds)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }

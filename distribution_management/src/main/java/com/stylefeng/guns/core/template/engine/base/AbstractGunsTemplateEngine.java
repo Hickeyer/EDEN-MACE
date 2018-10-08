@@ -18,11 +18,11 @@ import java.util.Properties;
  * @author fengshuonan
  * @date 2017-05-07 22:15
  */
-public abstract class GunsTemplateEngine extends AbstractTemplateEngine {
+public abstract class AbstractGunsTemplateEngine extends AbstractTemplateEngine {
 
     protected GroupTemplate groupTemplate;
 
-    public GunsTemplateEngine() {
+    public AbstractGunsTemplateEngine() {
         initBeetlEngine();
     }
 

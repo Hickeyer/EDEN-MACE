@@ -6,7 +6,7 @@ package com.stylefeng.guns.common.constant.tips;
  * @author fengshuonan
  * @Date 2017年1月11日 下午11:58:00
  */
-public abstract class Tip {
+public abstract class AbstractTip {
 
     protected int code;
     protected String message;

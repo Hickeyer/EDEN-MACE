@@ -21,12 +21,12 @@ import com.stylefeng.guns.core.util.SpringContextHolder;
  * 权限检查工厂
  */
 public class PermissionCheckManager {
-    private final static PermissionCheckManager me = new PermissionCheckManager();
+    private final static PermissionCheckManager ME = new PermissionCheckManager();
 
     private ICheck defaultCheckFactory = SpringContextHolder.getBean(ICheck.class);
 
     public static PermissionCheckManager me() {
-        return me;
+        return ME;
     }
 
     private PermissionCheckManager() {
@@ -41,10 +41,10 @@ public class PermissionCheckManager {
     }
 
     public static boolean check(Object[] permissions) {
-        return me.defaultCheckFactory.check(permissions);
+        return ME.defaultCheckFactory.check(permissions);
     }
 
     public static boolean checkAll() {
-        return me.defaultCheckFactory.checkAll();
+        return ME.defaultCheckFactory.checkAll();
     }
 }

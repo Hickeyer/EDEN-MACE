@@ -8,7 +8,13 @@ package com.stylefeng.guns.common.constant.state;
  */
 public enum MenuStatus {
 
+    /**
+     * 启用
+     */
     ENABLE(1, "启用"),
+    /**
+     * 禁用
+     */
     DISABLE(0, "禁用");
 
     int code;

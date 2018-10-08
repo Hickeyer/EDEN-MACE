@@ -6,7 +6,7 @@ import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.Dict;
 import com.stylefeng.guns.common.constant.cache.Cache;
 import com.stylefeng.guns.common.constant.factory.ConstantFactory;
-import com.stylefeng.guns.common.constant.tips.Tip;
+import com.stylefeng.guns.common.constant.tips.AbstractTip;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
@@ -121,10 +121,10 @@ public class RoleController extends BaseController {
      * 角色新增
      */
     @RequestMapping(value = "/add")
-    @BussinessLog(value = "添加角色", key = "name", dict = Dict.RoleDict)
+    @BussinessLog(value = "添加角色", key = "name", dict = Dict.ROLE_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip add(@Valid Role role, BindingResult result) {
+    public AbstractTip add(@Valid Role role, BindingResult result) {
         if (result.hasErrors()) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -137,10 +137,10 @@ public class RoleController extends BaseController {
      * 角色修改
      */
     @RequestMapping(value = "/edit")
-    @BussinessLog(value = "修改角色", key = "name", dict = Dict.RoleDict)
+    @BussinessLog(value = "修改角色", key = "name", dict = Dict.ROLE_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip edit(@Valid Role role, BindingResult result) {
+    public AbstractTip edit(@Valid Role role, BindingResult result) {
         if (result.hasErrors()) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -155,10 +155,10 @@ public class RoleController extends BaseController {
      * 删除角色
      */
     @RequestMapping(value = "/remove")
-    @BussinessLog(value = "删除角色", key = "roleId", dict = Dict.DeleteDict)
+    @BussinessLog(value = "删除角色", key = "roleId", dict = Dict.DELETE_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip remove(@RequestParam Integer roleId) {
+    public AbstractTip remove(@RequestParam Integer roleId) {
         if (ToolUtil.isEmpty(roleId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -183,7 +183,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/view/{roleId}")
     @ResponseBody
-    public Tip view(@PathVariable Integer roleId) {
+    public AbstractTip view(@PathVariable Integer roleId) {
         if (ToolUtil.isEmpty(roleId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -195,10 +195,10 @@ public class RoleController extends BaseController {
      * 配置权限
      */
     @RequestMapping("/setAuthority")
-    @BussinessLog(value = "配置权限", key = "roleId,ids", dict = Dict.RoleDict)
+    @BussinessLog(value = "配置权限", key = "roleId,ids", dict = Dict.ROLE_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip setAuthority(@RequestParam("roleId") Integer roleId, @RequestParam("ids") String ids) {
+    public AbstractTip setAuthority(@RequestParam("roleId") Integer roleId, @RequestParam("ids") String ids) {
         if (ToolUtil.isOneEmpty(roleId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }

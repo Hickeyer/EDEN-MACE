@@ -72,13 +72,13 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
                         continue;
                     }
                     BigDecimal value=new BigDecimal(disRankParam.getDisIntegralValue());
-                    BigDecimal newIntegral_bg=new BigDecimal(0);
+                    BigDecimal newIntegralBg=new BigDecimal(0);
                     if("0".equals(disRankParam.getDisProMode())){
-                        newIntegral_bg=amount.multiply(value).setScale(0,BigDecimal.ROUND_HALF_UP);
+                        newIntegralBg=amount.multiply(value).setScale(0,BigDecimal.ROUND_HALF_UP);
                     }else{
-                        newIntegral_bg=value.setScale(0,BigDecimal.ROUND_HALF_UP);
+                        newIntegralBg=value.setScale(0,BigDecimal.ROUND_HALF_UP);
                     }
-                    Integer newIntegral=Integer.parseInt(String.valueOf(newIntegral_bg));
+                    Integer newIntegral=Integer.parseInt(String.valueOf(newIntegralBg));
                     Integer totalIntegral=newIntegral+subMember.getRankIntegral();
                     DisRankIntegralRecord record = new DisRankIntegralRecord();
                     record.setBeforeIntegral(subMember.getRankIntegral());

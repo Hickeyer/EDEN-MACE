@@ -8,7 +8,7 @@ import com.stylefeng.guns.common.exception.BizExceptionEnum;
  * @author fengshuonan
  * @date 2016年11月12日 下午5:05:22
  */
-public class ErrorTip extends Tip {
+public class ErrorTip extends AbstractTip {
 
     public ErrorTip(int code, String message) {
         super();

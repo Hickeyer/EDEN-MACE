@@ -36,7 +36,7 @@ import java.util.Map;
 @RequestMapping("/dept")
 public class DeptController extends BaseController {
 
-    private String PREFIX = "/system/dept/";
+    private String prefix = "/system/dept/";
 
     @Resource
     DeptDao deptDao;
@@ -52,7 +52,7 @@ public class DeptController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "dept.html";
+        return prefix + "dept.html";
     }
 
     /**
@@ -60,7 +60,7 @@ public class DeptController extends BaseController {
      */
     @RequestMapping("/dept_add")
     public String deptAdd() {
-        return PREFIX + "dept_add.html";
+        return prefix + "dept_add.html";
     }
 
     /**
@@ -73,7 +73,7 @@ public class DeptController extends BaseController {
         model.addAttribute(dept);
         model.addAttribute("pName", ConstantFactory.me().getDeptName(dept.getPid()));
         LogObjectHolder.me().set(dept);
-        return PREFIX + "dept_edit.html";
+        return prefix + "dept_edit.html";
     }
 
     /**
@@ -90,7 +90,7 @@ public class DeptController extends BaseController {
     /**
      * 新增部门
      */
-    @BussinessLog(value = "添加部门", key = "simplename", dict = Dict.DeptDict)
+    @BussinessLog(value = "添加部门", key = "simplename", dict = Dict.DEPT_DICT)
     @RequestMapping(value = "/add")
     @Permission
     @ResponseBody
@@ -127,7 +127,7 @@ public class DeptController extends BaseController {
     /**
      * 修改部门
      */
-    @BussinessLog(value = "修改部门", key = "simplename", dict = Dict.DeptDict)
+    @BussinessLog(value = "修改部门", key = "simplename", dict = Dict.DEPT_DICT)
     @RequestMapping(value = "/update")
     @Permission
     @ResponseBody
@@ -143,7 +143,7 @@ public class DeptController extends BaseController {
     /**
      * 删除部门
      */
-    @BussinessLog(value = "删除部门", key = "deptId", dict = Dict.DeleteDict)
+    @BussinessLog(value = "删除部门", key = "deptId", dict = Dict.DELETE_DICT)
     @RequestMapping(value = "/delete")
     @Permission
     @ResponseBody
@@ -158,7 +158,7 @@ public class DeptController extends BaseController {
     }
 
     private void deptSetPids(Dept dept) {
-        if (ToolUtil.isEmpty(dept.getPid()) || dept.getPid().equals("0")) {
+        if (ToolUtil.isEmpty(dept.getPid()) || "0".equals(dept.getPid())) {
             dept.setPid(0);
             dept.setPids("[0],");
         } else {

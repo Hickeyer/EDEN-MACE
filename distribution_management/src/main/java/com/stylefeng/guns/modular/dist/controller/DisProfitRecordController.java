@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -37,13 +38,11 @@ public class DisProfitRecordController extends BaseController {
     @Autowired
     IDisProfitRecordService disProfitRecordService;
 
-    @Autowired
-    UserMgrDao userMgrDao;
 
     @Autowired
     IDisMemberInfoService disMemberInfoService;
 
-    private String PREFIX = "/dist/disProfitRecord/";
+    private String prefix = "/dist/disProfitRecord/";
 
 
     @Value("${dist.jwt.secret}")
@@ -57,7 +56,7 @@ public class DisProfitRecordController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "disProfitRecord.html";
+        return prefix + "disProfitRecord.html";
     }
 
     /**
@@ -65,7 +64,7 @@ public class DisProfitRecordController extends BaseController {
      */
     @RequestMapping("/disProfitRecord_add")
     public String disProfitRecordAdd() {
-        return PREFIX + "disProfitRecord_add.html";
+        return prefix + "disProfitRecord_add.html";
     }
 
     /**
@@ -73,7 +72,7 @@ public class DisProfitRecordController extends BaseController {
      */
     @RequestMapping("/disProfitRecord_update/{disProfitRecordId}")
     public String disProfitRecordUpdate(@PathVariable Integer disProfitRecordId, Model model) {
-        return PREFIX + "disProfitRecord_edit.html";
+        return prefix + "disProfitRecord_edit.html";
     }
 
     /**

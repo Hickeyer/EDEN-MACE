@@ -27,31 +27,31 @@ public class DisUpgradeParamController extends BaseController {
     @Autowired
     IDisUpgradeParamService disUpgradeParamService;
 
-    private String PREFIX = "/dist/DisUpgradeParam/";
+    private String prefix = "/dist/DisUpgradeParam/";
 
     /**
      * 跳转到垂直升级配置首页
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "DisUpgradeParam.html";
+        return prefix + "DisUpgradeParam.html";
     }
 
     /**
      * 跳转到添加垂直升级配置
      */
     @RequestMapping("/DisUpgradeParam_add")
-    public String DisUpgradeParamAdd(Model model) {
+    public String disUpgradeParamAdd(Model model) {
         model.addAttribute("disUserRank",sysDicService.selectListByCode("disUserRank"));
-        return PREFIX + "DisUpgradeParam_add.html";
+        return prefix + "DisUpgradeParam_add.html";
     }
 
     /**
      * 跳转到修改垂直升级配置
      */
-    @RequestMapping("/DisUpgradeParam_update/{DisUpgradeParamId}")
-    public String DisUpgradeParamUpdate(@PathVariable Integer DisUpgradeParamId, Model model) {
-        return PREFIX + "DisUpgradeParam_edit.html";
+    @RequestMapping("/DisUpgradeParam_update/{disUpgradeParamId}")
+    public String disUpgradeParamUpdate(@PathVariable Integer disUpgradeParamId, Model model) {
+        return prefix + "DisUpgradeParam_edit.html";
     }
 
     /**

@@ -5,7 +5,13 @@ import java.util.Map;
 
 public enum  IdentityStatus {
 
+    /**
+     * 用户状态
+     */
     USER_STATUS("0","用户"),
+    /**
+     * 平台状态
+     */
     PLAT_STATUS("1","平台");
     private String status;
     private String mes;

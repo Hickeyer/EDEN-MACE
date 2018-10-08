@@ -11,36 +11,36 @@ public interface Dict {
     /**
      * 系统管理员字典
      */
-    String UserDict = "UserDict";
+    String USER_DICT = "UserDict";
 
     /**
      * 角色管理员字典
      */
-    String RoleDict = "RoleDict";
+    String ROLE_DICT = "RoleDict";
 
     /**
      * 删除业务的字典
      */
-    String DeleteDict = "DeleteDict";
+    String DELETE_DICT = "DeleteDict";
 
     /**
      * 部门管理业务的字典
      */
-    String DeptDict = "DeptDict";
+    String DEPT_DICT = "DeptDict";
 
     /**
      * 菜单管理业务的字典
      */
-    String MenuDict = "MenuDict";
+    String MENU_DICT = "MenuDict";
 
     /**
      * 字典管理业务的字典
      */
-    String DictMap = "DictMap";
+    String DICT_MAP = "DictMap";
 
     /**
      * 通知管理业务的字典
      */
-    String NoticeMap = "NoticeMap";
+    String NOTICE_MAP = "NoticeMap";
 
 }

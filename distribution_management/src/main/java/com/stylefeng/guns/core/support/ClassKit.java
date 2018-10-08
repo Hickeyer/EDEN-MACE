@@ -133,13 +133,13 @@ public class ClassKit {
 		// 基本类型
 		if (targetType.isPrimitive()) {
 			// 原始类型
-			Class<?> resolvedPrimitive = BasicType.wrapperPrimitiveMap.get(sourceType);
+			Class<?> resolvedPrimitive = BasicType.WRAPPER_PRIMITIVE_MAP.get(sourceType);
 			if (resolvedPrimitive != null && targetType.equals(resolvedPrimitive)) {
 				return true;
 			}
 		} else {
 			// 包装类型
-			Class<?> resolvedWrapper = BasicType.primitiveWrapperMap.get(sourceType);
+			Class<?> resolvedWrapper = BasicType.PRIMITIVE_WRAPPER_MAP.get(sourceType);
 			if (resolvedWrapper != null && targetType.isAssignableFrom(resolvedWrapper)) {
 				return true;
 			}

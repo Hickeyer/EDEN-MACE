@@ -25,7 +25,7 @@ import java.util.Map;
 @RequestMapping("/DistWithdrawParam")
 public class DistWithdrawParamController extends BaseController {
 
-    private String PREFIX = "/dist/DistWithdrawParam/";
+    private String prefix = "/dist/DistWithdrawParam/";
 
     @Autowired
     IDistWithdrawParamService distWithdrawParamService;
@@ -38,24 +38,24 @@ public class DistWithdrawParamController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "DistWithdrawParam.html";
+        return prefix + "DistWithdrawParam.html";
     }
 
     /**
      * 跳转到添加提现参数设置
      */
     @RequestMapping("/DistWithdrawParam_add")
-    public String DistWithdrawParamAdd(Model model) {
+    public String distWithdrawParamAdd(Model model) {
         model.addAttribute("disProMode",sysDicService.selectListByCode("disProMode"));
-        return PREFIX + "DistWithdrawParam_add.html";
+        return prefix + "DistWithdrawParam_add.html";
     }
 
     /**
      * 跳转到修改提现参数设置
      */
     @RequestMapping("/DistWithdrawParam_update/{DistWithdrawParamId}")
-    public String DistWithdrawParamUpdate(@PathVariable Integer DistWithdrawParamId, Model model) {
-        return PREFIX + "DistWithdrawParam_edit.html";
+    public String distWithdrawParamUpdate(@PathVariable Integer distWithdrawParamId, Model model) {
+        return prefix + "DistWithdrawParam_edit.html";
     }
 
     /**

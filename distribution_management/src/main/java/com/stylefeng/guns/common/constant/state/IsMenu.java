@@ -8,7 +8,13 @@ package com.stylefeng.guns.common.constant.state;
  */
 public enum IsMenu {
 
+    /**
+     * 是菜单
+     */
     YES(1, "是"),
+    /**
+     * 不是菜单
+     */
     NO(0, "不是");//不是菜单的是按钮
 
     int code;

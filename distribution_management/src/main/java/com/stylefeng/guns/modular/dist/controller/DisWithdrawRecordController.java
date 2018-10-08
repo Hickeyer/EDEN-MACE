@@ -36,7 +36,7 @@ import java.util.Map;
 @RequestMapping("/DisWithdrawRecord")
 public class DisWithdrawRecordController extends BaseController {
 
-    private String PREFIX = "/dist/DisWithdrawRecord/";
+    private String prefix = "/dist/DisWithdrawRecord/";
 
     @Autowired
     IDisMemberInfoService disMemberInfoService;
@@ -59,30 +59,30 @@ public class DisWithdrawRecordController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "DisWithdrawRecord.html";
+        return prefix + "DisWithdrawRecord.html";
     }
 
     /**
      * 跳转到添加提现记录
      */
     @RequestMapping("/DisWithdrawRecord_add")
-    public String DisWithdrawRecordAdd() {
-        return PREFIX + "DisWithdrawRecord_add.html";
+    public String disWithdrawRecordAdd() {
+        return prefix + "DisWithdrawRecord_add.html";
     }
     @RequestMapping("/DisWithdrawRecord_audit/{id}")
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public String DisWithdrawRecordAudit(@PathVariable Integer id,Model model) {
+    public String disWithdrawRecordAudit(@PathVariable Integer id,Model model) {
         DisWithdrawRecord record= disWithdrawRecordMapper.selectById(id);
         model.addAttribute("record",record);
-        return PREFIX + "DisWithdrawRecord_add.html";
+        return prefix + "DisWithdrawRecord_add.html";
     }
 
     /**
      * 跳转到修改提现记录
      */
-    @RequestMapping("/DisWithdrawRecord_update/{DisWithdrawRecordId}")
-    public String DisWithdrawRecordUpdate(@PathVariable Integer DisWithdrawRecordId, Model model) {
-        return PREFIX + "DisWithdrawRecord_edit.html";
+    @RequestMapping("/DisWithdrawRecord_update/{disWithdrawRecordId}")
+    public String disWithdrawRecordUpdate(@PathVariable Integer disWithdrawRecordId, Model model) {
+        return prefix + "DisWithdrawRecord_edit.html";
     }
 
     /**

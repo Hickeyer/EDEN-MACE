@@ -17,30 +17,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/DisAmountSituation")
 public class DisAmountSituationController extends BaseController {
 
-    private String PREFIX = "/dist/DisAmountSituation/";
+    private String prefix = "/dist/DisAmountSituation/";
 
     /**
      * 跳转到记账表首页
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "DisAmountSituation.html";
+        return prefix + "DisAmountSituation.html";
     }
 
     /**
      * 跳转到添加记账表
      */
     @RequestMapping("/DisAmountSituation_add")
-    public String DisAmountSituationAdd() {
-        return PREFIX + "DisAmountSituation_add.html";
+    public String disAmountSituationAdd() {
+        return prefix + "DisAmountSituation_add.html";
     }
 
     /**
      * 跳转到修改记账表
      */
     @RequestMapping("/DisAmountSituation_update/{DisAmountSituationId}")
-    public String DisAmountSituationUpdate(@PathVariable Integer DisAmountSituationId, Model model) {
-        return PREFIX + "DisAmountSituation_edit.html";
+    public String disAmountSituationUpdate(@PathVariable Integer disAmountSituationId, Model model) {
+        return prefix + "DisAmountSituation_edit.html";
     }
 
     /**

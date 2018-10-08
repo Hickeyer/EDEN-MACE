@@ -14,14 +14,14 @@ import ${import};
 @RequestMapping("/${context.bizEnName}")
 public class ${context.bizEnBigName}Controller extends BaseController {
 
-    private String PREFIX = "/${context.moduleName}/${context.bizEnName}/";
+    private String  prefix = "/${context.moduleName}/${context.bizEnName}/";
 
     /**
      * 跳转到${context.bizChName}首页
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "${context.bizEnName}.html";
+        return prefix + "${context.bizEnName}.html";
     }
 
     /**
@@ -29,7 +29,7 @@ public class ${context.bizEnBigName}Controller extends BaseController {
      */
     @RequestMapping("/${context.bizEnName}_add")
     public String ${context.bizEnName}Add() {
-        return PREFIX + "${context.bizEnName}_add.html";
+        return prefix + "${context.bizEnName}_add.html";
     }
 
     /**
@@ -37,7 +37,7 @@ public class ${context.bizEnBigName}Controller extends BaseController {
      */
     @RequestMapping("/${context.bizEnName}_update/{${context.bizEnName}Id}")
     public String ${context.bizEnName}Update(@PathVariable Integer ${context.bizEnName}Id, Model model) {
-        return PREFIX + "${context.bizEnName}_edit.html";
+        return prefix + "${context.bizEnName}_edit.html";
     }
 
     /**

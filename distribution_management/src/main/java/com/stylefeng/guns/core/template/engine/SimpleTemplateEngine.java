@@ -1,6 +1,6 @@
 package com.stylefeng.guns.core.template.engine;
 
-import com.stylefeng.guns.core.template.engine.base.GunsTemplateEngine;
+import com.stylefeng.guns.core.template.engine.base.AbstractGunsTemplateEngine;
 import com.stylefeng.guns.core.util.ToolUtil;
 
 /**
@@ -9,7 +9,7 @@ import com.stylefeng.guns.core.util.ToolUtil;
  * @author fengshuonan
  * @date 2017-05-09 20:32
  */
-public class SimpleTemplateEngine extends GunsTemplateEngine {
+public class SimpleTemplateEngine extends AbstractGunsTemplateEngine {
 
     @Override
     protected void generatePageEditHtml() {

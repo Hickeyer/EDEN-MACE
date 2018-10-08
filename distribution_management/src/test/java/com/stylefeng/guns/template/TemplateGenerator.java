@@ -2,7 +2,7 @@ package com.stylefeng.guns.template;
 
 import com.stylefeng.guns.core.template.config.ContextConfig;
 import com.stylefeng.guns.core.template.engine.SimpleTemplateEngine;
-import com.stylefeng.guns.core.template.engine.base.GunsTemplateEngine;
+import com.stylefeng.guns.core.template.engine.base.AbstractGunsTemplateEngine;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class TemplateGenerator {
         //contextConfig.setAddPageSwitch(false);
         //contextConfig.setEditPageSwitch(false);
 
-        GunsTemplateEngine gunsTemplateEngine = new SimpleTemplateEngine();
+        AbstractGunsTemplateEngine gunsTemplateEngine = new SimpleTemplateEngine();
         gunsTemplateEngine.setContextConfig(contextConfig);
         gunsTemplateEngine.start();
     }

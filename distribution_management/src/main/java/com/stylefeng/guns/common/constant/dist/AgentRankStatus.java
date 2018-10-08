@@ -8,8 +8,17 @@ import java.util.Map;
  */
 public enum AgentRankStatus {
 
+    /**
+     * 普通代理商
+     */
     A_STATUS("a","普通代理商",1),
+    /**
+     * 中级代理商
+     */
     B_STATUS("b","中级代理商",2),
+    /**
+     * 高级代理商
+     */
     C_STATUS("c","高级代理商",3);
     private String status;
     private String mes;

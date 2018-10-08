@@ -4,8 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum  SituationStatus {
+    /**
+     * 收入
+     */
     INCOME_STATUS("0","收入","%s的%s账户交易，根据当前费率，%s获得%s元，"),
+    /**
+     * 支出
+     */
     PAY_STATUS("1","支出","%s的%s账户提现"),
+    /**
+     * 初始化状态
+     */
     AMOUNT_INIT("2","初始化账户","账户初始化");
     private String status;
     private String mes;

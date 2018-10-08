@@ -8,7 +8,13 @@ import java.util.Map;
  */
 public enum  ProTypeStatus {
 
+    /**
+     * 交易分润
+     */
     ZERO_STATUS("0","交易分润","trade"),
+    /**
+     * 升级分润
+     */
     ONE_STATUS("1","上下级分润","level");
     private String status;
     private String mes;

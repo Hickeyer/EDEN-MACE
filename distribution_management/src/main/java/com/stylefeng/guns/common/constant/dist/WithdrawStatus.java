@@ -2,8 +2,17 @@ package com.stylefeng.guns.common.constant.dist;
 
 public enum WithdrawStatus {
 
+    /**
+     * 申请中
+     */
     FIRST_STATUS("1","申请中"),
+    /**
+     * 审核成功
+     */
     SECOND_STATUS("2","审核成功"),
+    /**
+     * 审核未通过
+     */
     THIRD_STATUS("3","审核拒绝");
 
     private String status;
