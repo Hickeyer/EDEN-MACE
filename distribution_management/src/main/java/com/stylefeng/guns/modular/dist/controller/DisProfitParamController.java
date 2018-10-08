@@ -6,7 +6,7 @@ import com.stylefeng.guns.common.persistence.model.DisProfitParam;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisProfiParamService;
 import com.stylefeng.guns.modular.dist.wapper.ProfiParamWarpper;
-import com.stylefeng.guns.modular.system.service.ISysDicService;
+import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -8,7 +8,7 @@ import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.core.util.BaseJob;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
-import com.stylefeng.guns.modular.system.service.ISysDicService;
+import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import org.apache.commons.lang.StringUtils;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;

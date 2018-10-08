@@ -13,7 +13,7 @@ import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDisSysIntegralRecordService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
-import com.stylefeng.guns.modular.system.service.ISysDicService;
+import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisProfitRecordService;

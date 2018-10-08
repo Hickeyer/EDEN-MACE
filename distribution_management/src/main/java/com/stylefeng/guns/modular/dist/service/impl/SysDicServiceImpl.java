@@ -1,4 +1,4 @@
-package com.stylefeng.guns.modular.system.service.impl;
+package com.stylefeng.guns.modular.dist.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
@@ -8,12 +8,11 @@ import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
 import com.stylefeng.guns.common.persistence.dao.SysDicTypeMapper;
-import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
 import com.stylefeng.guns.common.persistence.model.SysDic;
 import com.stylefeng.guns.common.persistence.model.SysDicType;
 import com.stylefeng.guns.common.util.PinYinUtil;
 import com.stylefeng.guns.modular.system.dao.SysDicDao;
-import com.stylefeng.guns.modular.system.service.ISysDicService;
+import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

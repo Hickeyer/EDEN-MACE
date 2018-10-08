@@ -1,4 +1,4 @@
-package com.stylefeng.guns.modular.system.controller;
+package com.stylefeng.guns.modular.dist.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
@@ -17,7 +17,7 @@ import com.stylefeng.guns.common.persistence.model.SysDicType;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.dao.SysDicTypeDao;
-import com.stylefeng.guns.modular.system.service.ISysDicService;
+import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import com.stylefeng.guns.modular.system.warpper.DicWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +31,9 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author huangpu
+ */
 @Controller
 @RequestMapping("/dic")
 public class DicController extends BaseController {

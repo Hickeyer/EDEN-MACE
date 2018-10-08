@@ -1,7 +1,7 @@
 package com.stylefeng.guns.modular.dist.controller;
 
 import com.stylefeng.guns.common.controller.BaseController;
-import com.stylefeng.guns.modular.system.service.ISysDicService;
+import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

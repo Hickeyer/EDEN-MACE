@@ -1,4 +1,4 @@
-package com.stylefeng.guns.modular.system.service;
+package com.stylefeng.guns.modular.dist.service;
 
 import java.util.List;
 import java.util.Map;

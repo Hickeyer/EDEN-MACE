@@ -12,7 +12,7 @@ import com.stylefeng.guns.modular.dist.dao.DisWithdrawRecordDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDistWithdrawParamService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
-import com.stylefeng.guns.modular.system.service.ISysDicService;
+import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.stylefeng.guns.modular.dist.service.IDisWithdrawRecordService;
