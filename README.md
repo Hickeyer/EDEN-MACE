@@ -57,7 +57,7 @@ https://pan.baidu.com/s/1MmKzOW69q8EE72ULOr2BXg
 
 https://gitee.com/codingdb/distribution_management
 
-### 引用技术
+### 技术特色
 
   1、引用guns 权限管理系统
 
@@ -75,7 +75,9 @@ https://gitee.com/codingdb/distribution_management
 
   8、 采用swagger方式对外开放接口,并且使用restful风格。
 
-  9、采用阿里云编码规约
+  9、采用阿里云编码规约。
+
+  10、分销商自动分配权限。
 
 ###  代码展示
 
