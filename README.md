@@ -43,7 +43,7 @@ https://pan.baidu.com/s/1MmKzOW69q8EE72ULOr2BXg
 3、对接多个系统，需要对多个账户进行控制的系统
 
 ### 场景案例
-   
+
   1. 电商商品需要增加购买商品分佣功能
   2. 广告网站需要增加邀请奖励功能
   3. 金融机构需要增加推广奖励 的功能 
@@ -77,8 +77,37 @@ https://gitee.com/codingdb/distribution_management
 
   9、采用阿里云编码规约
 
-   
-       
+###  代码展示
+
+枚举类实现自动计算分润
+
+ ```java
+ZERO_STATUS("0","按照百分比计算") {
+        @Override
+        public BigDecimal calResult(BigDecimal amount, BigDecimal arg) {
+            return amount.multiply(arg);
+        }
+    }
+ ```
+
+策略模式实现分佣账户的扩展
+
+```java
+ public AmountFactoryContext(String type) {
+        switch (type){
+            case "0":
+                amountService = new TradeAmountServiceImpl();
+                break;
+            case  "1":
+                amountService = new LevelAmountServiceImpl();
+                break;
+            default:
+                break;
+        }
+    }
+```
+
+
 
 ###  特别鸣谢
 
