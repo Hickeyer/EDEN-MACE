@@ -1,9 +1,14 @@
 ## 分销管理系统（ATDRP）
 
 ### 关于名字
+
  A   abstract
+
  T   thing 
+
  DRP 分销资源计划系统
+
+
 将抽象（abstract）的信息应用到具体（thing）的事物中（DRP）。
 
 ### 前言
