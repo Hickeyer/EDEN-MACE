@@ -1,15 +1,4 @@
-## 分销管理系统（ATC）
-
-### 关于名字
-
- A   abstract  抽象化
-
- T   thing   具体的事物
-
- C  commission  佣金 （系统的各种组织关系以及积分都是为佣金服务的）
-
-
-将抽象（abstract）的信息应用到具体（thing）的事物中（commission）。
+## 分销管理系统（Mace）
 
 ### 前言
 
