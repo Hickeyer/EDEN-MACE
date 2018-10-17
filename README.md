@@ -67,6 +67,8 @@ https://gitee.com/codingdb/distribution_management
   9、采用阿里云编码规约。
 
   10、分销商自动分配权限。
+  
+  11、 数据库和枚举类紧密结合的方式，实现数据字典。
 
 ###  代码展示
 
