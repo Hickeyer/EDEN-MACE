@@ -23,6 +23,7 @@
         FROM `dis_withdraw_record` d
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=d.`withdraw_status` AND e.`dic_type_no`='withdrawStatus'
         LEFT JOIN `sys_dic` f ON  f.`dic_no`=d.`account_type` AND f.`dic_type_no`='accountType'
+        order by  d.withdraw_time desc
     </select>
 
 

@@ -58,6 +58,7 @@
         <if test="endAmount != null and endAmount !=''">
             <![CDATA[ AND end_amount< #{endAmount}]]>
         </if>
+        order by d.add_time desc
     </select>
 
     <select id="count" resultType="Integer">

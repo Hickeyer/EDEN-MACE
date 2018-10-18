@@ -23,12 +23,14 @@
     </resultMap>
 
     <select id="selectList" resultMap="BaseResultMap">
-        select a.*,m.dis_platform_id from `dis_member_amount` a
+        select a.*,m.dis_platform_id
+        from `dis_member_amount` a
         left join `dis_member_info` m on a.`dis_user_id`=m.`dis_user_id`
         where 1=1
         <if test="platformId != null and platformId != ''">
             and    m.dis_plat_super=#{platformId}
         </if>
+        order by a.add_time DESC
     </select>
 
 </mapper>

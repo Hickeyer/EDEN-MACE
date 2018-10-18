@@ -17,6 +17,7 @@
         FROM  `dis_upgrade_param` u
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=u.`dis_user_rank` AND e.`dic_type_no`='disUserRank'
         WHERE u.`is_delete`='N'
+        order by u.`add_time` desc
     </select>
 
 </mapper>
