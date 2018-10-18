@@ -13,6 +13,8 @@
 		<result column="is_delete" property="isDelete" />
 		<result column="add_time" property="addTime" />
 		<result column="update_time" property="updateTime" />
+		<result column="ext_field" property="extField" />
+		<result column="ext_field2" property="extField2" />
 	</resultMap>
 
 </mapper>

@@ -9,11 +9,11 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 字典类型表
  * </p>
  *
  * @author huangpu
- * @since 2018-04-25
+ * @since 2018-10-18
  */
 @TableName("sys_dic")
 public class SysDic extends Model<SysDic> {
@@ -38,6 +38,16 @@ public class SysDic extends Model<SysDic> {
 	private String addTime;
 	@TableField("update_time")
 	private String updateTime;
+    /**
+     * 扩展字段
+     */
+	@TableField("ext_field")
+	private String extField;
+    /**
+     * 扩展字段2
+     */
+	@TableField("ext_field2")
+	private String extField2;
 
 
 	public Integer getDicId() {
@@ -112,6 +122,22 @@ public class SysDic extends Model<SysDic> {
 		this.updateTime = updateTime;
 	}
 
+	public String getExtField() {
+		return extField;
+	}
+
+	public void setExtField(String extField) {
+		this.extField = extField;
+	}
+
+	public String getExtField2() {
+		return extField2;
+	}
+
+	public void setExtField2(String extField2) {
+		this.extField2 = extField2;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.dicId;
@@ -129,6 +155,8 @@ public class SysDic extends Model<SysDic> {
 			", isDelete=" + isDelete +
 			", addTime=" + addTime +
 			", updateTime=" + updateTime +
+			", extField=" + extField +
+			", extField2=" + extField2 +
 			"}";
 	}
 }

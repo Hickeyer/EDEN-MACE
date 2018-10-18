@@ -14,8 +14,8 @@
 
                 <div class="col-sm-6">
                     <#input id="amount" name="提现金额" underline="true"/>
-                    <#select id="disProType" name="交易账户 ">
-                    @for(dis in disProType){
+                    <#select id="accountType" name="交易账户 ">
+                    @for(dis in accountType){
                     <option value="${dis.dicNo}">${dis.dicValue}</option>
                     @}
                 </#select>

@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-09-26
+ * @since 2018-10-18
  */
 @TableName("dis_member_info")
 public class DisMemberInfo extends Model<DisMemberInfo> {

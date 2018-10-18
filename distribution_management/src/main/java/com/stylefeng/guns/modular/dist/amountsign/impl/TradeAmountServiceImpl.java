@@ -70,16 +70,16 @@ public class TradeAmountServiceImpl implements AmountService {
         situation.setType(SituationStatus.INCOME_STATUS.getStatus());
         situation.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
 
-        situation.setDisProType(ProTypeStatus.ZERO_STATUS.getStatus());
+        situation.setAccountType(ProTypeStatus.ZERO_STATUS.getStatus());
         disMemberAmountMapper.updateById(memberAmount);
         Wrapper<DisAmountSituation> situationWrapper=new EntityWrapper<>();
         situationWrapper.eq("dis_user_id",userId)
-                .eq("dis_pro_type",ProTypeStatus.ZERO_STATUS.getStatus());
+                .eq("account_type",ProTypeStatus.ZERO_STATUS.getStatus());
         Integer count=disAmountSituationMapper.selectCount(situationWrapper);
         if(count == 0){
             DisMemberInfo memberInfo= disMemberInfoService.selectListByUserId(userId);
             DisAmountSituation initSituation=new DisAmountSituation();
-            initSituation.setDisProType(ProTypeStatus.ZERO_STATUS.getStatus());
+            initSituation.setAccountType(ProTypeStatus.ZERO_STATUS.getStatus());
             initSituation.setDisUserId(userId);
             initSituation.setAddTime(memberAmount.getAddTime());
             initSituation.setDescribe(SituationStatus.AMOUNT_INIT.getDes());
@@ -149,10 +149,10 @@ public class TradeAmountServiceImpl implements AmountService {
         situation.setType(SituationStatus.PAY_STATUS.getStatus());
         situation.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         SysDic sysDicParam=new SysDic();
-        sysDicParam.setDicTypeNo("disProType");
+        sysDicParam.setDicTypeNo("accountType");
         sysDicParam.setDicNotes(accountType);
         SysDic sysDic=sysDicMapper.selectOne(sysDicParam);
-        situation.setDisProType(sysDic.getDicNo());
+        situation.setAccountType(sysDic.getDicNo());
         disMemberAmountMapper.updateById(memberAmount);
         String des=SituationStatus.PAY_STATUS.getDes();
         situation.setDescribe(String.format(des,userId,accountType));

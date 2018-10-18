@@ -6,8 +6,8 @@
     <resultMap id="BaseResultMap" type="map">
         <id column="id" property="id" />
         <result column="dis_platform_id" property="disPlatformId" />
-        <result column="dis_pro_mode" property="disProMode" />
-        <result column="dis_pro_type" property="disProType" />
+        <result column="cal_model" property="calModel" />
+        <result column="account_type" property="accountType" />
         <result column="dis_pro_value" property="disProValue" />
         <result column="dis_pro_level" property="disProLevel" />
         <result column="dis_user_type" property="disUserType" />
@@ -19,13 +19,13 @@
 
     <select id="selectList" resultMap="BaseResultMap">
         SELECT p.`id`,p.`dis_platform_id`,
-        e.`dic_value` AS dis_pro_mode,d.`dic_value` AS  dis_pro_level,
-        f.`dic_value` AS dis_pro_type ,p.`add_time`,p.`dis_pro_value`
+        e.`dic_value` AS cal_model,d.`dic_value` AS  dis_pro_level,
+        f.`dic_value` AS account_type ,p.`add_time`,p.`dis_pro_value`
         ,g.`dic_value` dis_user_type,h.`dic_value` dis_user_rank
         FROM  `dis_profit_param` p
         LEFT JOIN `sys_dic` d ON  d.`dic_no`=p.`dis_pro_level` AND d.`dic_type_no`='disProLevel'
-        LEFT JOIN `sys_dic` e ON  e.`dic_no`=p.`dis_pro_mode` AND e.`dic_type_no`='disProMode'
-        LEFT JOIN `sys_dic` f ON  f.`dic_no`=p.`dis_pro_type` AND f.`dic_type_no`='disProType'
+        LEFT JOIN `sys_dic` e ON  e.`dic_no`=p.`cal_model` AND e.`dic_type_no`='calModel'
+        LEFT JOIN `sys_dic` f ON  f.`dic_no`=p.`account_type` AND f.`dic_type_no`='accountType'
         LEFT JOIN `sys_dic` g ON  g.`dic_no`=p.`dis_user_type` AND g.`dic_type_no`='disUserType'
         LEFT JOIN `sys_dic` h ON  h.`dic_no`=p.`dis_user_rank` AND h.`dic_type_no`='disUserRank'
         WHERE p.is_delete='N'

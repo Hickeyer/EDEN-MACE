@@ -189,7 +189,7 @@ public class OpenController  {
             return DistResult.failure("用户不存在");
         }
         if(isAccountVer(withdrawVo.getSecret())) {
-            disWithdrawRecordService.withdrawMoney(withdrawVo.getUserId(),withdrawVo.getAmount(),withdrawVo.getDisProType());
+            disWithdrawRecordService.withdrawMoney(withdrawVo.getUserId(),withdrawVo.getAmount(),withdrawVo.getAccountType());
         }else {
             return DistResult.failure("非法访问");
         }

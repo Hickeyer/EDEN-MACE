@@ -13,7 +13,7 @@
 		<result column="after_integral" property="afterIntegral" />
 		<result column="expire_time" property="expireTime" />
 		<result column="add_time" property="addTime" />
-		<result column="dis_pro_type" property="disProType" />
+		<result column="account_type" property="accountType" />
 		<result column="source_user_id" property="sourceUserId" />
 		<result column="source_remak" property="sourceRemak" />
 		<result column="use_time" property="useTime" />

@@ -8,13 +8,13 @@
             <div class="row">
                 <div class="col-sm-6 b-r">
                     <#input id="disProValue" name="分润值" underline="true"/>
-                    <#select id="disProMode" name="分润模型 ">
-                        @for(dis in disProMode){
+                    <#select id="calModel" name="计算模型 ">
+                        @for(dis in calModel){
                         <option value="${dis.dicNo}">${dis.dicValue}</option>
                         @}
                     </#select>
-                    <#select id="disProType" name="分润类别 ">
-                    @for(dis in disProType){
+                    <#select id="accountType" name="账户类型 ">
+                    @for(dis in accountType){
                     <option value="${dis.dicNo}">${dis.dicValue}</option>
                     @}
                     </#select>

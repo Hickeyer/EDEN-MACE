@@ -10,7 +10,7 @@
 		<result column="dis_get_user_id" property="disGetUserId" />
 		<result column="dis_set_user_id" property="disSetUserId" />
 		<result column="dis_amount" property="disAmount" />
-		<result column="dis_pro_type" property="disProType" />
+		<result column="account_type" property="accountType" />
 		<result column="dis_note" property="disNote" />
 		<result column="dis_user_type" property="disUserType" />
 		<result column="dis_order_id" property="disOrderId" />

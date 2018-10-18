@@ -51,10 +51,10 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public void withdrawMoney(String userId, BigDecimal amount, String disProMode) {
+    public void withdrawMoney(String userId, BigDecimal amount, String accountType) {
 
 
-        AmountFactoryContext amountFactoryContext = new AmountFactoryContext(disProMode);
+        AmountFactoryContext amountFactoryContext = new AmountFactoryContext(accountType);
         amountFactoryContext.amountService.frozenAmount(userId,amount);
         // disMemberAmountService.frozenAmount(userId,amount,accountType);
         Map<String,Object> map= distWithdrawParamService.calAmount(amount);
@@ -67,7 +67,7 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
         record.setRealAmount((BigDecimal) map.get("realAmount"));
         record.setFeeAmount((BigDecimal)map.get("feeAmount"));
         record.setWithdrawStatus(WithdrawStatus.FIRST_STATUS.getStatus());
-        record.setDisProMode(disProMode);
+        record.setAccountType(accountType);
         record.setWithdrawNum(sysDicService.getOrderNo("withdrawl"));
         disWithdrawRecordMapper.insert(record);
     }
@@ -85,7 +85,7 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
         if(record.getWithdrawStatus().equals(WithdrawStatus.FIRST_STATUS.getStatus())){
 
             record.setHandleTime(DateUtils.longToDateAll(System.currentTimeMillis()));
-            AmountFactoryContext amountFactoryContext = new  AmountFactoryContext(record.getDisProMode());
+            AmountFactoryContext amountFactoryContext = new  AmountFactoryContext(record.getAccountType());
             if(type.equals(WithdrawStatus.SECOND_STATUS.getStatus())){
                 record.setWithdrawStatus(WithdrawStatus.SECOND_STATUS.getStatus());
                 amountFactoryContext.amountService.reduceMoney(record.getDisUserId(),record.getTotalAmount());

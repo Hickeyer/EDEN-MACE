@@ -46,7 +46,7 @@ public class DistWithdrawParamController extends BaseController {
      */
     @RequestMapping("/DistWithdrawParam_add")
     public String distWithdrawParamAdd(Model model) {
-        model.addAttribute("disProMode",sysDicService.selectListByCode("disProMode"));
+        model.addAttribute("calModel",sysDicService.selectListByCode("calModel"));
         return prefix + "DistWithdrawParam_add.html";
     }
 

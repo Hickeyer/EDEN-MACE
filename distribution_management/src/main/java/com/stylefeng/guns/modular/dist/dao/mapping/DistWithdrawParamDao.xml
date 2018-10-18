@@ -5,7 +5,7 @@
         <id column="id" property="id" />
         <result column="begin_amount" property="beginAmount" />
         <result column="end_amount" property="endAmount" />
-        <result column="dis_pro_mode" property="disProMode" />
+        <result column="cal_model" property="calModel" />
         <result column="dis_withdraw_value" property="disWithdrawValue" />
         <result column="is_delete" property="isDelete" />
         <result column="add_time" property="addTime" />
@@ -16,7 +16,7 @@
         <id column="id" property="id" />
         <result column="begin_amount" property="beginAmount" />
         <result column="end_amount" property="endAmount" />
-        <result column="dis_pro_mode" property="disProMode" />
+        <result column="cal_model" property="calModel" />
         <result column="dis_withdraw_value" property="disWithdrawValue" />
         <result column="is_delete" property="isDelete" />
         <result column="add_time" property="addTime" />
@@ -25,9 +25,9 @@
 
     <select id="selectList" resultMap="BaseResultMap">
         SELECT d.begin_amount,d.end_amount,d.dis_withdraw_value,d.id,
-        d.is_delete,d.add_time,d.update_time ,e.`dic_value` AS dis_pro_mode
+        d.is_delete,d.add_time,d.update_time ,e.`dic_value` AS cal_model
         FROM  `dist_withdraw_param` d
-        LEFT JOIN `sys_dic` e ON  e.`dic_no`=d.`dis_pro_mode` AND e.`dic_type_no`='disProMode'
+        LEFT JOIN `sys_dic` e ON  e.`dic_no`=d.`cal_model` AND e.`dic_type_no`='calModel'
         WHERE d.`is_delete`='N'
         <if test="beginAmount!=null and beginAmount !=''">
             <![CDATA[ and begin_amount > = #{beginAmount}]]>
@@ -43,14 +43,14 @@
             <![CDATA[ and begin_amount <= #{amount}]]>
         </if>
         <if test="amount != null and amount !=''">
-            <![CDATA[ AND end_amount > #{amount}]]>
+            <![CDATA[ AND end_amount >= #{amount}]]>
         </if>
     </select>
     <select id="selectList" resultMap="BaseResultMap">
         SELECT d.begin_amount,d.end_amount,d.dis_withdraw_value,d.id,
-        d.is_delete,d.add_time,d.update_time ,e.`dic_value` AS dis_pro_mode
+        d.is_delete,d.add_time,d.update_time ,e.`dic_value` AS cal_model
         FROM  `dist_withdraw_param` d
-        LEFT JOIN `sys_dic` e ON  e.`dic_no`=d.`dis_pro_mode` AND e.`dic_type_no`='disProMode'
+        LEFT JOIN `sys_dic` e ON  e.`dic_no`=d.`cal_model` AND e.`dic_type_no`='calModel'
         WHERE d.`is_delete`='N'
         <if test="beginAmount!=null and beginAmount !=''">
             <![CDATA[ and begin_amount > = #{beginAmount}]]>
@@ -64,7 +64,7 @@
         SELECT COUNT(*) FROM  `dist_withdraw_param`
         WHERE 1=1
         <if test="beginAmount!=null and beginAmount !=''">
-           <![CDATA[ and begin_amount > = #{beginAmount}]]>
+           <![CDATA[ and begin_amount >= #{beginAmount}]]>
         </if>
         <if test="endAmount != null and endAmount !=''">
             <![CDATA[ AND end_amount< #{endAmount}]]>

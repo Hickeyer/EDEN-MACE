@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-06-09
+ * @since 2018-10-18
  */
 @TableName("dis_amount_situation")
 public class DisAmountSituation extends Model<DisAmountSituation> {
@@ -60,8 +60,8 @@ public class DisAmountSituation extends Model<DisAmountSituation> {
     /**
      * 具体账户类型
      */
-	@TableField("dis_pro_type")
-	private String disProType;
+	@TableField("account_type")
+	private String accountType;
     /**
      * 账户变动金额
      */
@@ -137,12 +137,12 @@ public class DisAmountSituation extends Model<DisAmountSituation> {
 		this.specificAfterChangeAmount = specificAfterChangeAmount;
 	}
 
-	public String getDisProType() {
-		return disProType;
+	public String getAccountType() {
+		return accountType;
 	}
 
-	public void setDisProType(String disProType) {
-		this.disProType = disProType;
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
 	}
 
 	public BigDecimal getChangeAmount() {
@@ -177,7 +177,7 @@ public class DisAmountSituation extends Model<DisAmountSituation> {
 			", addTime=" + addTime +
 			", specificBeforeChangeAmount=" + specificBeforeChangeAmount +
 			", specificAfterChangeAmount=" + specificAfterChangeAmount +
-			", disProType=" + disProType +
+			", accountType=" + accountType +
 			", changeAmount=" + changeAmount +
 			", describe=" + describe +
 			"}";

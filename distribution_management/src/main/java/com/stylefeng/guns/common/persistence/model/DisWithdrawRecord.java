@@ -10,11 +10,11 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 提现表
  * </p>
  *
  * @author huangpu
- * @since 2018-06-09
+ * @since 2018-10-18
  */
 @TableName("dis_withdraw_record")
 public class DisWithdrawRecord extends Model<DisWithdrawRecord> {
@@ -66,8 +66,8 @@ public class DisWithdrawRecord extends Model<DisWithdrawRecord> {
     /**
      * 提现账户
      */
-	@TableField("dis_pro_mode")
-	private String disProMode;
+	@TableField("account_type")
+	private String accountType;
 
 
 	public Integer getId() {
@@ -142,12 +142,12 @@ public class DisWithdrawRecord extends Model<DisWithdrawRecord> {
 		this.withdrawStatus = withdrawStatus;
 	}
 
-	public String getDisProMode() {
-		return disProMode;
+	public String getAccountType() {
+		return accountType;
 	}
 
-	public void setDisProMode(String disProMode) {
-		this.disProMode = disProMode;
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public class DisWithdrawRecord extends Model<DisWithdrawRecord> {
 			", withdrawTime=" + withdrawTime +
 			", handleTime=" + handleTime +
 			", withdrawStatus=" + withdrawStatus +
-			", disProMode=" + disProMode +
+			", accountType=" + accountType +
 			"}";
 	}
 }

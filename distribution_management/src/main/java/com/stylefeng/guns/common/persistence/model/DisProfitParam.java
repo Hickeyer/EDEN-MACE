@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-07-19
+ * @since 2018-10-18
  */
 @TableName("dis_profit_param")
 public class DisProfitParam extends Model<DisProfitParam> {
@@ -28,15 +28,15 @@ public class DisProfitParam extends Model<DisProfitParam> {
 	@TableField("dis_platform_id")
 	private String disPlatformId;
     /**
-     * 分润模型，如 百分比和固定金额
+     * 计算模型，如 百分比和固定金额
      */
-	@TableField("dis_pro_mode")
-	private String disProMode;
+	@TableField("cal_model")
+	private String calModel;
     /**
-     * 分润类别，如上级发展下级分润 ，交易分润。。。。
+     * 账户类型，如上级发展下级分润 ，交易分润。。。。
      */
-	@TableField("dis_pro_type")
-	private String disProType;
+	@TableField("account_type")
+	private String accountType;
     /**
      * 分润值
      */
@@ -95,20 +95,20 @@ public class DisProfitParam extends Model<DisProfitParam> {
 		this.disPlatformId = disPlatformId;
 	}
 
-	public String getDisProMode() {
-		return disProMode;
+	public String getCalModel() {
+		return calModel;
 	}
 
-	public void setDisProMode(String disProMode) {
-		this.disProMode = disProMode;
+	public void setCalModel(String calModel) {
+		this.calModel = calModel;
 	}
 
-	public String getDisProType() {
-		return disProType;
+	public String getAccountType() {
+		return accountType;
 	}
 
-	public void setDisProType(String disProType) {
-		this.disProType = disProType;
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
 	}
 
 	public String getDisProValue() {
@@ -185,8 +185,8 @@ public class DisProfitParam extends Model<DisProfitParam> {
 		return "DisProfitParam{" +
 			"id=" + id +
 			", disPlatformId=" + disPlatformId +
-			", disProMode=" + disProMode +
-			", disProType=" + disProType +
+			", calModel=" + calModel +
+			", accountType=" + accountType +
 			", disProValue=" + disProValue +
 			", disProLevel=" + disProLevel +
 			", disUserType=" + disUserType +

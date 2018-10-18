@@ -44,7 +44,7 @@ DisProfiParamInfoDlg.close = function() {
  * 收集数据
  */
 DisProfiParamInfoDlg.collectData = function() {
-    this.set('disProValue').set('disProMode').set('disProType').set('disProLevel').set('disUserType')
+    this.set('disProValue').set('calModel').set('accountType').set('disProLevel').set('disUserType')
         .set('disPlatformId').set("disUserRank");
 }
 

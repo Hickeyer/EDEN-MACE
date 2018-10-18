@@ -12,7 +12,7 @@
 		<result column="add_time" property="addTime" />
 		<result column="specific_before_change_amount" property="specificBeforeChangeAmount" />
 		<result column="specific_after_change_amount" property="specificAfterChangeAmount" />
-		<result column="dis_pro_type" property="disProType" />
+		<result column="account_type" property="accountType" />
 		<result column="change_amount" property="changeAmount" />
 		<result column="describe" property="describe" />
 	</resultMap>

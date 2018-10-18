@@ -9,8 +9,8 @@
                 <div class="col-sm-6 b-r">
                     <#input id="secret" name="秘钥" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzExMTczMzk4MDcsInBheWxvYWQiOiJcInhpYW9qaWFuZ1wiIn0.rOY3JXrYpNMWwATmY7r3jm0Ec6SuhNPyrP2rGD43Isk" underline="true"/>
                     <#input id="disSetUserId" name="交易人id" underline="true"/>
-                    <#select id="disProType" name="分润类别 ">
-                    @for(dis in disProType){
+                    <#select id="accountType" name="账户类型 ">
+                    @for(dis in accountType){
                     <option value="${dis.dicNo}">${dis.dicValue}</option>
                     @}
                 </#select>

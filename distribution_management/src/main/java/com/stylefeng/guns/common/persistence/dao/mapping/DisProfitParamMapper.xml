@@ -6,8 +6,8 @@
 	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.DisProfitParam">
 		<id column="id" property="id" />
 		<result column="dis_platform_id" property="disPlatformId" />
-		<result column="dis_pro_mode" property="disProMode" />
-		<result column="dis_pro_type" property="disProType" />
+		<result column="cal_model" property="calModel" />
+		<result column="account_type" property="accountType" />
 		<result column="dis_pro_value" property="disProValue" />
 		<result column="dis_pro_level" property="disProLevel" />
 		<result column="dis_user_type" property="disUserType" />

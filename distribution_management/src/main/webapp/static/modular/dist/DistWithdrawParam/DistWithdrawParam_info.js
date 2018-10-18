@@ -45,7 +45,7 @@ DistWithdrawParamInfoDlg.close = function() {
  */
 DistWithdrawParamInfoDlg.collectData = function() {
     this.set('id').set("beginAmount").set("endAmount")
-        .set("disWithdrawValue").set("disProMode");
+        .set("disWithdrawValue").set("calModel");
 }
 
 /**

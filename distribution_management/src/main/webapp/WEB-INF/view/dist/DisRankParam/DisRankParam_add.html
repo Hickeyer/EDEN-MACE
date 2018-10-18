@@ -9,13 +9,13 @@
                 <div class="col-sm-6 b-r">
                     <#input id="disRankName" name="段位名称" underline="true"/>
                     <#input id="disIntegralValue" name="段位积分值" underline="true"/>
-                    <#select id="disProMode" name="分润模型 ">
-                        @for(dis in disProMode){
+                    <#select id="calModel" name="计算模型 ">
+                        @for(dis in calModel){
                         <option value="${dis.dicNo}">${dis.dicValue}</option>
                         @}
                     </#select>
-                    <#select id="disProType" name="分润类别 ">
-                        @for(dis in disProType){
+                    <#select id="accountType" name="账户类型 ">
+                        @for(dis in accountType){
                         <option value="${dis.dicNo}">${dis.dicValue}</option>
                         @}
                     </#select>
@@ -24,7 +24,7 @@
 
                 <div class="col-sm-6">
                     <#input id="disPlatformId" name="平台id" underline="true"/>
-                    <#select id="disProLevel" name="分润级别 ">
+                    <#select id="disProLevel" name="对应等级 ">
                         @for(dis in disProLevel){
                         <option value="${dis.dicNo}">${dis.dicValue}</option>
                         @}

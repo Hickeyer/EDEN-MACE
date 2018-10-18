@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-09-28
+ * @since 2018-10-18
  */
 @TableName("dis_upgrade_param")
 public class DisUpgradeParam extends Model<DisUpgradeParam> {

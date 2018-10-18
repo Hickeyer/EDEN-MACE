@@ -13,8 +13,8 @@
 
                 <div class="col-sm-6">
                     <#input id="endAmount" name="结束值" underline="true"/>
-                    <#select id="disProMode" name="计算模型 ">
-                        @for(dis in disProMode){
+                    <#select id="calModel" name="计算模型 ">
+                        @for(dis in calModel){
                         <option value="${dis.dicNo}">${dis.dicValue}</option>
                         @}
                    </#select>

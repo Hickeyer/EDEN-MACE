@@ -54,8 +54,8 @@ public class DisProfitParamController extends BaseController {
      */
     @RequestMapping("/disProfiParam_add")
     public String disProfiParamAdd(Model model) {
-        model.addAttribute("disProMode",sysDicService.selectListByCode("disProMode"));
-        model.addAttribute("disProType",sysDicService.selectListByCode("disProType"));
+        model.addAttribute("calModel",sysDicService.selectListByCode("calModel"));
+        model.addAttribute("accountType",sysDicService.selectListByCode("accountType"));
         model.addAttribute("disProLevel",sysDicService.selectListByCode("disProLevel"));
         model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
         model.addAttribute("disUserRank",sysDicService.selectListByCode("disUserRank"));
@@ -100,7 +100,7 @@ public class DisProfitParamController extends BaseController {
     @RequestMapping(value = "/protype")
     @ResponseBody
     public Object protype() {
-        return sysDicService.selectListByCode("disProType");
+        return sysDicService.selectListByCode("accountType");
     }
 
     /**

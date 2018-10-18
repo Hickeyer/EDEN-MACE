@@ -9,11 +9,11 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 用户升级记录表
  * </p>
  *
  * @author huangpu
- * @since 2018-07-22
+ * @since 2018-10-18
  */
 @TableName("dis_upgrade_record")
 public class DisUpgradeRecord extends Model<DisUpgradeRecord> {

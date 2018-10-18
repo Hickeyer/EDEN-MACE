@@ -13,7 +13,7 @@ import java.util.Map;
 public interface IDisWithdrawRecordService {
 
 
-    public  void withdrawMoney(String userId, BigDecimal amount, String disProMode);
+    public  void withdrawMoney(String userId, BigDecimal amount, String accountType);
 
     public List<Map<String, Object>> selectList();
 

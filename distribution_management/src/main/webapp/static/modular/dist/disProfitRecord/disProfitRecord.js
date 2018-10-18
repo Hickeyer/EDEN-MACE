@@ -19,7 +19,7 @@ DisProfitRecord.initColumn = function () {
         {title: '收益账户', field: 'disGetUserId', visible: true, align: 'center', valign: 'middle'},
         {title: '交易账户', field: 'disSetUserId', visible: true, align: 'center', valign: 'middle'},
         {title: '收益', field: 'disAmount', visible: true, align: 'center', valign: 'middle'},
-        {title: '交易类型', field: 'disProType', visible: true, align: 'center', valign: 'middle'},
+        {title: '账户类型', field: 'accountType', visible: true, align: 'center', valign: 'middle'},
         {title: '订单号', field: 'disOrderId', visible: true, align: 'center', valign: 'middle'},
         {title: '备注', field: 'disNote', visible: true, align: 'center', valign: 'middle'},
         {title: '交易时间', field: 'addTime', visible: true, align: 'center', valign: 'middle'},

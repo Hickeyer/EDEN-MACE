@@ -10,11 +10,11 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 交易金额记录表
  * </p>
  *
  * @author huangpu
- * @since 2018-07-22
+ * @since 2018-10-18
  */
 @TableName("dis_trade_record")
 public class DisTradeRecord extends Model<DisTradeRecord> {

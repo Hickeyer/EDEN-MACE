@@ -41,18 +41,18 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
 
     /**
      * 根据积分设置获取积分
-     * @param disProType
+     * @param accountType
      * @param amount
      * @param memberInfo
      */
     @Override
     @DataSource(name= DSEnum.DATA_SOURCE_BIZ)
-    public void saveMember(String disProType,BigDecimal amount,DisMemberInfo memberInfo){
+    public void saveMember(String accountType,BigDecimal amount,DisMemberInfo memberInfo){
 
         //dis_pro_type可以是交易，升级、邀请等等
         Wrapper<DisRankParam> profiParamP=new EntityWrapper<>();
         profiParamP.eq("dis_platform_id",memberInfo.getDisPlatformId())
-                .eq("dis_pro_type",disProType);
+                .eq("account_type",accountType);
         List<DisRankParam> profiParamList=disRankParamMapper.selectList(profiParamP);
         if(profiParamList.size()>0){
             if(memberInfo==null){
@@ -73,7 +73,7 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
                     }
                     BigDecimal value=new BigDecimal(disRankParam.getDisIntegralValue());
                     BigDecimal newIntegralBg=new BigDecimal(0);
-                    if("0".equals(disRankParam.getDisProMode())){
+                    if("0".equals(disRankParam.getCalModel())){
                         newIntegralBg=amount.multiply(value).setScale(0,BigDecimal.ROUND_HALF_UP);
                     }else{
                         newIntegralBg=value.setScale(0,BigDecimal.ROUND_HALF_UP);
@@ -84,7 +84,7 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
                     record.setBeforeIntegral(subMember.getRankIntegral());
                     record.setIsUse("N");
                     record.setAfterIntegral(totalIntegral);
-                    record.setDisProType(disProType);
+                    record.setAccountType(accountType);
                     record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
                     record.setDisUserId(userId);
                     record.setSourceUserId(memberInfo.getDisUserId());
@@ -95,16 +95,16 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
                     SysDic sysDic=sysDicMapper.selectOne(dic);
                     record.setExpireTime(DateUtils.plusDay(Integer.parseInt(sysDic.getDicNo())));
                     String sourceRemark="";
-                    if("0".equals(disProType)){
+                    if("0".equals(accountType)){
                         String des= ProRankTypeStatus.ZERO_STATUS.getDes();
                         sourceRemark=String.format(des,memberInfo.getDisUserId()
                                 ,amount.toString()
                                 ,totalIntegral);
-                    }else if("1".equals(disProType)){
+                    }else if("1".equals(accountType)){
                         String des= ProRankTypeStatus.ONE_STATUS.getDes();
                         sourceRemark=String.format(des,memberInfo.getDisUserId()
                                 ,totalIntegral);
-                    }else if("2".equals(disProType)){
+                    }else if("2".equals(accountType)){
                         String des= ProRankTypeStatus.TWO_STATUS.getDes();
                         sourceRemark=String.format(des,memberInfo.getDisUserId()
                                 ,totalIntegral);

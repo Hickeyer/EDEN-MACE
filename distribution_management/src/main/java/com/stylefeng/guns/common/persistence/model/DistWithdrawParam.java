@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-05-30
+ * @since 2018-10-18
  */
 @TableName("dist_withdraw_param")
 public class DistWithdrawParam extends Model<DistWithdrawParam> {
@@ -34,10 +34,10 @@ public class DistWithdrawParam extends Model<DistWithdrawParam> {
 	@TableField("end_amount")
 	private BigDecimal endAmount;
     /**
-     * 分润模型，如 百分比和固定金额
+     * 计算模型，如 百分比和固定金额
      */
-	@TableField("dis_pro_mode")
-	private String disProMode;
+	@TableField("cal_model")
+	private String calModel;
     /**
      * 提现值
      */
@@ -84,12 +84,12 @@ public class DistWithdrawParam extends Model<DistWithdrawParam> {
 		this.endAmount = endAmount;
 	}
 
-	public String getDisProMode() {
-		return disProMode;
+	public String getCalModel() {
+		return calModel;
 	}
 
-	public void setDisProMode(String disProMode) {
-		this.disProMode = disProMode;
+	public void setCalModel(String calModel) {
+		this.calModel = calModel;
 	}
 
 	public String getDisWithdrawValue() {
@@ -135,7 +135,7 @@ public class DistWithdrawParam extends Model<DistWithdrawParam> {
 			"id=" + id +
 			", beginAmount=" + beginAmount +
 			", endAmount=" + endAmount +
-			", disProMode=" + disProMode +
+			", calModel=" + calModel +
 			", disWithdrawValue=" + disWithdrawValue +
 			", isDelete=" + isDelete +
 			", addTime=" + addTime +

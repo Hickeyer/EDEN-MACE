@@ -10,11 +10,11 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 账户金额表
  * </p>
  *
  * @author huangpu
- * @since 2018-05-15
+ * @since 2018-10-18
  */
 @TableName("dis_member_amount")
 public class DisMemberAmount extends Model<DisMemberAmount> {

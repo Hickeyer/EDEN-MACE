@@ -13,7 +13,7 @@ public class DisWithdrawVo {
     /**
      * 提现账户
      */
-    private String disProType;
+    private String accountType;
 
     public String getSecret() {
         return secret;
@@ -39,11 +39,11 @@ public class DisWithdrawVo {
         this.amount = amount;
     }
 
-    public String getDisProType() {
-        return disProType;
+    public String getAccountType() {
+        return accountType;
     }
 
-    public void setDisProType(String disProType) {
-        this.disProType = disProType;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 }

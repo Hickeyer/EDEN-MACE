@@ -45,7 +45,7 @@ SimOperInfoDlg.close = function() {
  */
 SimOperInfoDlg.collectData = function() {
     this.set('secret').set("userId")
-        .set("disProType").set("amount").set("disAmount");
+        .set("accountType").set("amount").set("disAmount");
 }
 
 /**

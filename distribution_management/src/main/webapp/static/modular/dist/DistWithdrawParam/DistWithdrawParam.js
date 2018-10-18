@@ -16,7 +16,7 @@ DistWithdrawParam.initColumn = function () {
         {field: 'selectItem', radio: true},
         {title: '开始金额', field: 'beginAmount', visible: true, align: 'center', valign: 'middle'},
         {title: '结束金额', field: 'endAmount', visible: true, align: 'center', valign: 'middle'},
-        {title: '计算模型', field: 'disProMode', visible: true, align: 'center', valign: 'middle'},
+        {title: '计算模型', field: 'calModel', visible: true, align: 'center', valign: 'middle'},
         {title: '计算基础', field: 'disWithdrawValue', visible: true, align: 'center', valign: 'middle'},
         {title: '添加时间', field: 'addTime', visible: true, align: 'center', valign: 'middle'},
     ];

@@ -7,7 +7,7 @@
 		<id column="id" property="id" />
 		<result column="begin_amount" property="beginAmount" />
 		<result column="end_amount" property="endAmount" />
-		<result column="dis_pro_mode" property="disProMode" />
+		<result column="cal_model" property="calModel" />
 		<result column="dis_withdraw_value" property="disWithdrawValue" />
 		<result column="is_delete" property="isDelete" />
 		<result column="add_time" property="addTime" />

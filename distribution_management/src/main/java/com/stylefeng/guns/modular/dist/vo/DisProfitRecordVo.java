@@ -15,7 +15,10 @@ public class DisProfitRecordVo {
 
     private String disPlatformId;
 
-    private String disProType;
+    /**
+     * 账户类型
+     */
+    private String accountType;
 
     private String note;
 
@@ -63,13 +66,12 @@ public class DisProfitRecordVo {
         this.disPlatformId = disPlatformId;
     }
 
-
-    public String getDisProType() {
-        return disProType;
+    public String getAccountType() {
+        return accountType;
     }
 
-    public void setDisProType(String disProType) {
-        this.disProType = disProType;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     public String getNote() {

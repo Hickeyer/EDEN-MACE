@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-06-09
+ * @since 2018-10-18
  */
 @TableName("dis_profit_record")
 public class DisProfitRecord extends Model<DisProfitRecord> {
@@ -37,10 +37,10 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 	@TableField("dis_amount")
 	private BigDecimal disAmount;
     /**
-     * 交易类型
+     * 账户类型
      */
-	@TableField("dis_pro_type")
-	private String disProType;
+	@TableField("account_type")
+	private String accountType;
     /**
      * 备注
      */
@@ -133,12 +133,12 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 		this.disAmount = disAmount;
 	}
 
-	public String getDisProType() {
-		return disProType;
+	public String getAccountType() {
+		return accountType;
 	}
 
-	public void setDisProType(String disProType) {
-		this.disProType = disProType;
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
 	}
 
 	public String getDisNote() {
@@ -243,7 +243,7 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 			", disGetUserId=" + disGetUserId +
 			", disSetUserId=" + disSetUserId +
 			", disAmount=" + disAmount +
-			", disProType=" + disProType +
+			", accountType=" + accountType +
 			", disNote=" + disNote +
 			", disUserType=" + disUserType +
 			", disOrderId=" + disOrderId +

@@ -9,11 +9,11 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 字典表
  * </p>
  *
  * @author huangpu
- * @since 2018-04-25
+ * @since 2018-10-18
  */
 @TableName("sys_dic_type")
 public class SysDicType extends Model<SysDicType> {

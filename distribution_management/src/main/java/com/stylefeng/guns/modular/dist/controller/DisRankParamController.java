@@ -49,9 +49,9 @@ public class DisRankParamController extends BaseController {
      */
     @RequestMapping("/DisRankParam_add")
     public String disRankParamAdd(Model model) {
-        model.addAttribute("disProMode",sysDicService.selectListByCode("disProMode"));
-        model.addAttribute("disProType",sysDicService.selectListByCode("disProRankType"));
-        model.addAttribute("disProLevel",sysDicService.selectListByCode("disProLevel"));
+        model.addAttribute("calModel",sysDicService.selectListByCode("calModel"));
+        model.addAttribute("accountType",sysDicService.selectListByCode("accountType"));
+        model.addAttribute("disProLevel",sysDicService.selectListByCode("disRankLevel"));
         model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
         model.addAttribute("disUserRank",sysDicService.selectListByCode("disUserRank"));
         return prefix + "DisRankParam_add.html";
@@ -60,7 +60,7 @@ public class DisRankParamController extends BaseController {
     /**
      * 跳转到修改段位积分
      */
-    @RequestMapping("/DisRankParam_update/{DisRankParamId}")
+    @RequestMapping("/DisRankParam_update/{disRankParamId}")
     public String disRankParamUpdate(@PathVariable Integer disRankParamId, Model model) {
         DisRankParam disRankParam = disRankParamService.selectOne(disRankParamId);
         model.addAttribute("id",disRankParamId);

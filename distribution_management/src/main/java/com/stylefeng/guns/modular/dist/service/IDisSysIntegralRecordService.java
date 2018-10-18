@@ -14,6 +14,12 @@ import java.math.BigDecimal;
 public interface IDisSysIntegralRecordService {
 
 
-    public void saveMember(String disProType, BigDecimal amount, DisMemberInfo memberInfo);
+    /**
+     *
+     * @param accountType 事件类型
+     * @param amount
+     * @param memberInfo
+     */
+    public void saveMember(String accountType, BigDecimal amount, DisMemberInfo memberInfo);
 
 }

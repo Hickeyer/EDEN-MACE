@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-09-26
+ * @since 2018-10-18
  */
 @TableName("dis_rank_integral_record")
 public class DisRankIntegralRecord extends Model<DisRankIntegralRecord> {
@@ -41,7 +41,7 @@ public class DisRankIntegralRecord extends Model<DisRankIntegralRecord> {
 	@TableField("is_use")
 	private String isUse;
     /**
-     * 是否过期(Y:已过期，N未过期)
+     * 是否过期(Y:已过期，N未过期) 暂时不用
      */
 	@TableField("is_expire")
 	private String isExpire;
@@ -56,7 +56,7 @@ public class DisRankIntegralRecord extends Model<DisRankIntegralRecord> {
 	@TableField("after_integral")
 	private Integer afterIntegral;
     /**
-     * 到期时间
+     * 到期时间（暂时不用）
      */
 	@TableField("expire_time")
 	private String expireTime;
@@ -68,8 +68,8 @@ public class DisRankIntegralRecord extends Model<DisRankIntegralRecord> {
     /**
      * 来源(交易、升级，下级升级)
      */
-	@TableField("dis_pro_type")
-	private String disProType;
+	@TableField("account_type")
+	private String accountType;
     /**
      * 来源用户id
      */
@@ -164,12 +164,12 @@ public class DisRankIntegralRecord extends Model<DisRankIntegralRecord> {
 		this.addTime = addTime;
 	}
 
-	public String getDisProType() {
-		return disProType;
+	public String getAccountType() {
+		return accountType;
 	}
 
-	public void setDisProType(String disProType) {
-		this.disProType = disProType;
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
 	}
 
 	public String getSourceUserId() {
@@ -221,7 +221,7 @@ public class DisRankIntegralRecord extends Model<DisRankIntegralRecord> {
 			", afterIntegral=" + afterIntegral +
 			", expireTime=" + expireTime +
 			", addTime=" + addTime +
-			", disProType=" + disProType +
+			", accountType=" + accountType +
 			", sourceUserId=" + sourceUserId +
 			", sourceRemak=" + sourceRemak +
 			", useTime=" + useTime +

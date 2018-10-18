@@ -41,7 +41,7 @@ public class SimOperController extends BaseController {
     }
     @RequestMapping("/withdraw_add")
     public String withdrawAdd(Model model) {
-        model.addAttribute("disProType",sysDicService.selectListByCode("disProType"));
+        model.addAttribute("accountType",sysDicService.selectListByCode("accountType"));
         return prefix + "withdraw_add.html";
     }
 
@@ -62,7 +62,7 @@ public class SimOperController extends BaseController {
      */
     @RequestMapping("/order_add")
     public String orderAdd(Model model) {
-        model.addAttribute("disProType",sysDicService.selectListByCode("disProType"));
+        model.addAttribute("accountType",sysDicService.selectListByCode("accountType"));
         model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
         return prefix + "order_add.html";
     }

@@ -45,7 +45,7 @@ SimOperInfoDlg.close = function() {
  */
 SimOperInfoDlg.collectData = function() {
     this.set('secret').set("disSetUserId")
-        .set("disProType").set("orderId").set("disAmount").set("upgradeLevel");
+        .set("accountType").set("orderId").set("disAmount").set("upgradeLevel");
 }
 
 /**
@@ -56,7 +56,7 @@ SimOperInfoDlg.addMemeberSubmit = function() {
     this.clearData();
     this.collectData();
     var path="";
-    if("0"==this.simOperInfoData.disProType){
+    if("0"==this.simOperInfoData.accountType){
         path="/api/v1/trade";
     }else{
         path="/api/v1/upgrade";
