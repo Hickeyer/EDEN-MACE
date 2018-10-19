@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * 产品分润模式
  */
-public enum ProModelStatus {
+public enum CalModelStatus {
 
     /**
      * 按照百分比
@@ -32,16 +32,16 @@ public enum ProModelStatus {
     public abstract BigDecimal calResult(BigDecimal amount,BigDecimal arg);
 
 
-    private static Map<String, ProModelStatus> map = new HashMap<String, ProModelStatus>();
+    private static Map<String, CalModelStatus> map = new HashMap<String, CalModelStatus>();
     static {
-        for (ProModelStatus legEnum : ProModelStatus.values()) {
+        for (CalModelStatus legEnum : CalModelStatus.values()) {
             map.put(legEnum.getStatus(), legEnum);
         }
     }
-    public static ProModelStatus getMethod(String symbol) {
+    public static CalModelStatus getMethod(String symbol) {
         return map.get(symbol);
     }
-    ProModelStatus(String status, String mes) {
+    CalModelStatus(String status, String mes) {
         this.status=status;
         this.mes=mes;
     }

@@ -32,7 +32,7 @@ spring:
   session:
     store-type: none
   profiles:
-    active: dev
+    active: dev # 激活dev
   mvc:
     static-path-pattern: /static/**
     view:

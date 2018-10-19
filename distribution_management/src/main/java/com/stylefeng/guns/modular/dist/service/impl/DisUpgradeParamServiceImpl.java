@@ -37,6 +37,12 @@ public class DisUpgradeParamServiceImpl implements IDisUpgradeParamService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public List<Map<String, Object>> selectAgentList() {
+        return disUpgradeParamDao.selectAgentList();
+    }
+
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void save(DisUpgradeParam param) {
         param.setAddTime(DateUtils.getNowDateTime());
         disUpgradeParamMapper.insert(param);

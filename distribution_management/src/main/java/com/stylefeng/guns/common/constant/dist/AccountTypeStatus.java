@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  *产品类型
  */
-public enum  ProTypeStatus {
+public enum AccountTypeStatus {
 
     /**
      * 交易分润
@@ -22,20 +22,20 @@ public enum  ProTypeStatus {
     private String code;
 
 
-    private static Map<String, ProTypeStatus> map = new HashMap<String, ProTypeStatus>();
+    private static Map<String, AccountTypeStatus> map = new HashMap<String, AccountTypeStatus>();
     static {
-        for (ProTypeStatus legEnum : ProTypeStatus.values()) {
+        for (AccountTypeStatus legEnum : AccountTypeStatus.values()) {
             map.put(legEnum.getStatus(), legEnum);
         }
     }
 
-    ProTypeStatus(String status, String mes,String code) {
+    AccountTypeStatus(String status, String mes, String code) {
         this.status=status;
         this.mes=mes;
         this.code=code;
     }
 
-    public static ProTypeStatus getMethod(String symbol) {
+    public static AccountTypeStatus getMethod(String symbol) {
         return map.get(symbol);
     }
 

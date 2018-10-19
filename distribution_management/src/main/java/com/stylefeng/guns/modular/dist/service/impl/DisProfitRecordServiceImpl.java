@@ -91,10 +91,10 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         savePlat(param,memberInfo);
         saveAdmin(param,memberInfo);
         disSysIntegralRecordService.saveMember(param.getAccountType(),param.getDisAmount(),memberInfo);
-        if(ProTypeStatus.ZERO_STATUS.getStatus().equals(param.getAccountType())){
+        if(AccountTypeStatus.ZERO_STATUS.getStatus().equals(param.getAccountType())){
             //记录交易金额
             saveTradeRecord(param);
-        }else if(ProTypeStatus.ONE_STATUS.getStatus().equals(param.getAccountType())){
+        }else if(AccountTypeStatus.ONE_STATUS.getStatus().equals(param.getAccountType())){
             //记录升级接口
             saveVerticalLevel(memberInfo.getDisUserType(),param.getUpgradeLevel(),param.getDisSetUserId());
         }
@@ -157,7 +157,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     BigDecimal value=new BigDecimal(disProfiParam.getDisProValue());
                     BigDecimal newAmount=new BigDecimal(0);
                     //根据 计算方式计算 分润
-                    newAmount = ProModelStatus.getMethod(disProfiParam.getCalModel()).calResult(param.getDisAmount(),value);
+                    newAmount = CalModelStatus.getMethod(disProfiParam.getCalModel()).calResult(param.getDisAmount(),value);
                     record.setDisAmount(newAmount);
                     record.setDisGetUserId(userId);
                     record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
@@ -202,7 +202,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                         record.setAccountType(param.getAccountType());
                         BigDecimal value = new BigDecimal(disProfiParam.getDisProValue());
                         //自动计算分润
-                        BigDecimal newAmount = ProModelStatus.getMethod(disProfiParam.getCalModel()).calResult(param.getDisAmount(),value);
+                        BigDecimal newAmount = CalModelStatus.getMethod(disProfiParam.getCalModel()).calResult(param.getDisAmount(),value);
                         record.setDisAmount(newAmount);
                         record.setDisGetUserId(userId);
                         record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
@@ -248,7 +248,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     record.setAccountType(param.getAccountType());
                     BigDecimal value = new BigDecimal(disProfiParam.getDisProValue());
                     //自动计算分润
-                    BigDecimal newAmount = ProModelStatus.getMethod(disProfiParam.getCalModel()).calResult(param.getDisAmount(),value);
+                    BigDecimal newAmount = CalModelStatus.getMethod(disProfiParam.getCalModel()).calResult(param.getDisAmount(),value);
                     record.setDisAmount(newAmount);
                     record.setDisGetUserId(userId);
                     record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
@@ -273,6 +273,6 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         String promode="0";
         BigDecimal a=new BigDecimal(100);
         BigDecimal b = new BigDecimal(1);
-        System.out.println(ProModelStatus.getMethod(promode).calResult(a,b));
+        System.out.println(CalModelStatus.getMethod(promode).calResult(a,b));
     }
 }

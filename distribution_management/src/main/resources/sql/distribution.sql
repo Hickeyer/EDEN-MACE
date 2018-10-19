@@ -234,11 +234,11 @@ CREATE TABLE `dis_upgrade_param` (
   `update_time` varchar(20) DEFAULT NULL COMMENT '修改时间',
   `identity_type` varchar(2) DEFAULT '0' COMMENT '0会员  1代理商',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='垂直升级配置表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='垂直升级配置表';
 
 /*Data for the table `dis_upgrade_param` */
 
-insert  into `dis_upgrade_param`(`id`,`upgrade_name`,`begin_integral`,`end_integral`,`dis_user_rank`,`is_delete`,`add_time`,`update_time`,`identity_type`) values (2,'11',12,12,'A','N','2018-07-23 17:08:13',NULL,NULL);
+insert  into `dis_upgrade_param`(`id`,`upgrade_name`,`begin_integral`,`end_integral`,`dis_user_rank`,`is_delete`,`add_time`,`update_time`,`identity_type`) values (4,'23',1,2,'A','N','2018-10-19 19:09:22',NULL,'0');
 
 /*Table structure for table `dis_upgrade_record` */
 

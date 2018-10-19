@@ -3,21 +3,18 @@ package com.stylefeng.guns.modular.dist.service.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
-import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
-import com.stylefeng.guns.common.constant.dist.ProTypeStatus;
+import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
 import com.stylefeng.guns.common.constant.dist.SituationStatus;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.dao.DisAmountSituationMapper;
 import com.stylefeng.guns.common.persistence.dao.DisMemberAmountMapper;
-import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
 import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
 import com.stylefeng.guns.common.persistence.model.DisAmountSituation;
 import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.SysDic;
-import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.dao.DisMemberAmountDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
@@ -109,12 +106,12 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         situation.setAfterChangeAmount(memberAmount.getTotalAmount());
         BigDecimal afterThirdAmount=new BigDecimal(0);
         BigDecimal beforeThirdAmount=new BigDecimal(0);
-        if(ProTypeStatus.ZERO_STATUS.getCode().equals(accountType)){
+        if(AccountTypeStatus.ZERO_STATUS.getCode().equals(accountType)){
             afterThirdAmount=memberAmount.getTradeTotalAmount().add(amount);
             beforeThirdAmount=memberAmount.getTradeTotalAmount();
             memberAmount.setTradeTotalAmount(memberAmount.getTradeTotalAmount().add(amount));
             memberAmount.setTradeAvaibleAmount(memberAmount.getTradeAvaibleAmount().add(amount));
-        }else if(ProTypeStatus.ONE_STATUS.getCode().equals(accountType)){
+        }else if(AccountTypeStatus.ONE_STATUS.getCode().equals(accountType)){
             afterThirdAmount=memberAmount.getLevelTotalAmount().add(amount);
             beforeThirdAmount=memberAmount.getLevelTotalAmount();
             memberAmount.setLevelTotalAmount(memberAmount.getLevelTotalAmount().add(amount));
@@ -165,9 +162,9 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         disMemberAmount.setDisUserId(userId);
         DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
         BigDecimal  avaibleThirdAmount=new BigDecimal(0);
-        if(ProTypeStatus.ZERO_STATUS.getCode().equals(accountType)){
+        if(AccountTypeStatus.ZERO_STATUS.getCode().equals(accountType)){
             avaibleThirdAmount=memberAmount.getTradeAvaibleAmount();
-        }else if(ProTypeStatus.ONE_STATUS.getCode().equals(accountType)){
+        }else if(AccountTypeStatus.ONE_STATUS.getCode().equals(accountType)){
             avaibleThirdAmount=memberAmount.getLevelAvaibleAmount();
         }
         if(avaibleThirdAmount.compareTo(amount)==-1){
@@ -176,10 +173,10 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         /*开始扣除金额*/
         memberAmount.setAvaibleAmount(memberAmount.getAvaibleAmount().subtract(amount));
         memberAmount.setFrozenAmount(memberAmount.getFrozenAmount().add(amount));
-        if(ProTypeStatus.ZERO_STATUS.getCode().equals(accountType)){
+        if(AccountTypeStatus.ZERO_STATUS.getCode().equals(accountType)){
             memberAmount.setTradeAvaibleAmount(memberAmount.getTradeAvaibleAmount().subtract(amount));
             memberAmount.setTradeFrozenAmount(memberAmount.getTradeFrozenAmount().add(amount));
-        }else if(ProTypeStatus.ONE_STATUS.getCode().equals(accountType)){
+        }else if(AccountTypeStatus.ONE_STATUS.getCode().equals(accountType)){
             memberAmount.setLevelAvaibleAmount(memberAmount.getLevelAvaibleAmount().subtract(amount));
             memberAmount.setLevelFrozenAmount(memberAmount.getLevelFrozenAmount().add(amount));
         }

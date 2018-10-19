@@ -29,12 +29,18 @@ public class DisUpgradeParamController extends BaseController {
 
     private String prefix = "/dist/DisUpgradeParam/";
 
+    private String prefix2 = "/dist/DisUpgradeAgentParam/";
+
     /**
      * 跳转到垂直升级配置首页
      */
     @RequestMapping("")
     public String index() {
         return prefix + "DisUpgradeParam.html";
+    }
+    @RequestMapping("/agent")
+    public String agent() {
+        return prefix2 + "DisUpgradeParam.html";
     }
 
     /**
@@ -44,6 +50,11 @@ public class DisUpgradeParamController extends BaseController {
     public String disUpgradeParamAdd(Model model) {
         model.addAttribute("disUserRank",sysDicService.selectListByCode("disUserRank"));
         return prefix + "DisUpgradeParam_add.html";
+    }
+    @RequestMapping("/agent/DisUpgradeParam_add")
+    public String disUpgradeAgentParamAdd(Model model) {
+        model.addAttribute("disUserRank",sysDicService.selectListByCode("agentRank"));
+        return prefix2 + "DisUpgradeParam_add.html";
     }
 
     /**
@@ -64,11 +75,29 @@ public class DisUpgradeParamController extends BaseController {
     }
 
     /**
+     * 查询代理商列表
+     * @param condition
+     * @return
+     */
+    @RequestMapping(value = "/agent/list")
+    @ResponseBody
+    public Object listAgent(String condition) {
+        return disUpgradeParamService.selectAgentList();
+    }
+
+    /**
      * 新增垂直升级配置
      */
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(DisUpgradeParam param) {
+        disUpgradeParamService.save(param);
+        return SUCCESS_TIP;
+    }
+    @RequestMapping(value = "/agent/add")
+    @ResponseBody
+    public Object addAgent(DisUpgradeParam param) {
+        param.setIdentityType("1");
         disUpgradeParamService.save(param);
         return SUCCESS_TIP;
     }
@@ -79,6 +108,12 @@ public class DisUpgradeParamController extends BaseController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(Integer id) {
+        disUpgradeParamService.deleteById(id);
+        return SUCCESS_TIP;
+    }
+    @RequestMapping(value = "/agent/delete")
+    @ResponseBody
+    public Object agentDelete(Integer id) {
         disUpgradeParamService.deleteById(id);
         return SUCCESS_TIP;
     }

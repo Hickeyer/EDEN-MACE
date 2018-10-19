@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
-import com.stylefeng.guns.common.constant.dist.ProTypeStatus;
+import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
 import com.stylefeng.guns.common.constant.dist.SituationStatus;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
@@ -17,13 +17,9 @@ import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.SysDic;
 import com.stylefeng.guns.core.util.SpringContextHolder;
 import com.stylefeng.guns.modular.dist.amountsign.AmountService;
-import com.stylefeng.guns.modular.dist.dao.DisMemberAmountDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 public class LevelAmountServiceImpl implements AmountService {
@@ -72,16 +68,16 @@ public class LevelAmountServiceImpl implements AmountService {
 
 
 
-        situation.setAccountType(ProTypeStatus.ONE_STATUS.getStatus());
+        situation.setAccountType(AccountTypeStatus.ONE_STATUS.getStatus());
         disMemberAmountMapper.updateById(memberAmount);
         Wrapper<DisAmountSituation> situationWrapper=new EntityWrapper<>();
         situationWrapper.eq("dis_user_id",userId)
-                .eq("account_type",ProTypeStatus.ONE_STATUS.getStatus());
+                .eq("account_type", AccountTypeStatus.ONE_STATUS.getStatus());
         Integer count=disAmountSituationMapper.selectCount(situationWrapper);
         if(count == 0){
             DisMemberInfo memberInfo= disMemberInfoService.selectListByUserId(userId);
             DisAmountSituation initSituation=new DisAmountSituation();
-            initSituation.setAccountType(ProTypeStatus.ONE_STATUS.getStatus());
+            initSituation.setAccountType(AccountTypeStatus.ONE_STATUS.getStatus());
             initSituation.setDisUserId(userId);
             initSituation.setAddTime(memberAmount.getAddTime());
             initSituation.setDescribe(SituationStatus.AMOUNT_INIT.getDes());
@@ -90,7 +86,7 @@ public class LevelAmountServiceImpl implements AmountService {
             disAmountSituationMapper.insert(initSituation);
         }
         String des=SituationStatus.INCOME_STATUS.getDes();
-        String lastDes = String.format(des,sourceName,ProTypeStatus.ONE_STATUS.getCode(),userId,amount.toString());
+        String lastDes = String.format(des,sourceName, AccountTypeStatus.ONE_STATUS.getCode(),userId,amount.toString());
         situation.setDescribe(lastDes);
         disAmountSituationMapper.insert(situation);
 
@@ -118,7 +114,7 @@ public class LevelAmountServiceImpl implements AmountService {
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void reduceMoney(String userId, BigDecimal amount) {
-        String accountType = ProTypeStatus.ONE_STATUS.getCode();
+        String accountType = AccountTypeStatus.ONE_STATUS.getCode();
         //记录金额
         DisAmountSituation situation=new DisAmountSituation();
         situation.setDisUserId(userId);

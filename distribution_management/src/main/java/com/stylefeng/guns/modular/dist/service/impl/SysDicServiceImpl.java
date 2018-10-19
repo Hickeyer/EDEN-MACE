@@ -119,6 +119,11 @@ public class SysDicServiceImpl implements ISysDicService {
         return sysDicDao.selectListByCodeNo(code,no);
     }
 
+    /**
+     * 根据前缀计算订单号
+     * @param codeNo
+     * @return
+     */
     @Override
     public synchronized String getOrderNo(String codeNo) {
         String orderNo="";

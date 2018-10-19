@@ -14,6 +14,7 @@ import java.util.Map;
 public interface IDisUpgradeParamService {
 
     public List<Map<String, Object>> selectList();
+    public List<Map<String, Object>> selectAgentList();
 
     public void save(DisUpgradeParam param);
 

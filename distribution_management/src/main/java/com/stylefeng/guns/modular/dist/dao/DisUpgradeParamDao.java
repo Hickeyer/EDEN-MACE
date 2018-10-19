@@ -14,4 +14,5 @@ import java.util.Map;
 public interface DisUpgradeParamDao {
 
     List<Map<String, Object>> selectList();
+    List<Map<String, Object>> selectAgentList();
 }

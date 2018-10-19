@@ -4,13 +4,12 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
-import com.stylefeng.guns.common.constant.dist.ProTypeStatus;
+import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
 import com.stylefeng.guns.common.constant.dist.SituationStatus;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.dao.DisAmountSituationMapper;
 import com.stylefeng.guns.common.persistence.dao.DisMemberAmountMapper;
-import com.stylefeng.guns.common.persistence.dao.RoleMapper;
 import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
 import com.stylefeng.guns.common.persistence.model.DisAmountSituation;
 import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
@@ -20,11 +19,7 @@ import com.stylefeng.guns.core.util.SpringContextHolder;
 import com.stylefeng.guns.modular.dist.amountsign.AmountService;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 public class TradeAmountServiceImpl implements AmountService {
@@ -70,16 +65,16 @@ public class TradeAmountServiceImpl implements AmountService {
         situation.setType(SituationStatus.INCOME_STATUS.getStatus());
         situation.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
 
-        situation.setAccountType(ProTypeStatus.ZERO_STATUS.getStatus());
+        situation.setAccountType(AccountTypeStatus.ZERO_STATUS.getStatus());
         disMemberAmountMapper.updateById(memberAmount);
         Wrapper<DisAmountSituation> situationWrapper=new EntityWrapper<>();
         situationWrapper.eq("dis_user_id",userId)
-                .eq("account_type",ProTypeStatus.ZERO_STATUS.getStatus());
+                .eq("account_type", AccountTypeStatus.ZERO_STATUS.getStatus());
         Integer count=disAmountSituationMapper.selectCount(situationWrapper);
         if(count == 0){
             DisMemberInfo memberInfo= disMemberInfoService.selectListByUserId(userId);
             DisAmountSituation initSituation=new DisAmountSituation();
-            initSituation.setAccountType(ProTypeStatus.ZERO_STATUS.getStatus());
+            initSituation.setAccountType(AccountTypeStatus.ZERO_STATUS.getStatus());
             initSituation.setDisUserId(userId);
             initSituation.setAddTime(memberAmount.getAddTime());
             initSituation.setDescribe(SituationStatus.AMOUNT_INIT.getDes());
@@ -88,7 +83,7 @@ public class TradeAmountServiceImpl implements AmountService {
             disAmountSituationMapper.insert(initSituation);
         }
         String des=SituationStatus.INCOME_STATUS.getDes();
-        String lastDes = String.format(des,sourceName,ProTypeStatus.ZERO_STATUS.getCode(),userId,amount.toString());
+        String lastDes = String.format(des,sourceName, AccountTypeStatus.ZERO_STATUS.getCode(),userId,amount.toString());
         situation.setDescribe(lastDes);
         disAmountSituationMapper.insert(situation);
     }
@@ -115,7 +110,7 @@ public class TradeAmountServiceImpl implements AmountService {
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void reduceMoney(String userId, BigDecimal amount) {
-        final String accountType = ProTypeStatus.ONE_STATUS.getCode();
+        final String accountType = AccountTypeStatus.ONE_STATUS.getCode();
         //记录金额
         DisAmountSituation situation=new DisAmountSituation();
         situation.setDisUserId(userId);

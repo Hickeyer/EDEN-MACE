@@ -12,9 +12,9 @@ public enum  SystemUser {
     private String status;
     private String info;
 
-    private static Map<String, ProTypeStatus> map = new HashMap<String, ProTypeStatus>();
+    private static Map<String, AccountTypeStatus> map = new HashMap<String, AccountTypeStatus>();
     static {
-        for (ProTypeStatus legEnum : ProTypeStatus.values()) {
+        for (AccountTypeStatus legEnum : AccountTypeStatus.values()) {
             map.put(legEnum.getStatus(), legEnum);
         }
     }
