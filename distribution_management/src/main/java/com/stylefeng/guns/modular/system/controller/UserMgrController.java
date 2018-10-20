@@ -4,6 +4,7 @@ import com.stylefeng.guns.common.annotion.Permission;
 import com.stylefeng.guns.common.annotion.log.BussinessLog;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.Dict;
+import com.stylefeng.guns.common.constant.dist.JurisdictionStatus;
 import com.stylefeng.guns.common.constant.dist.SystemUser;
 import com.stylefeng.guns.common.constant.factory.ConstantFactory;
 import com.stylefeng.guns.common.constant.state.ManagerStatus;
@@ -199,7 +200,6 @@ public class UserMgrController extends BaseController {
         String account= ShiroKit.getUser().getAccount();
         User currentUser= managerDao.getByAccount(account);
         Integer level= Integer.parseInt(currentUser.getLevel())+1;
-        Map<String, Object> map= sysDicService.selectListByCodeNo("quanxianid",level.toString());
         // 完善账号信息
         user.setSalt(ShiroKit.getRandomSalt(5));
         user.setPassword(ShiroKit.md5(user.getPassword(), user.getSalt()));
@@ -208,7 +208,8 @@ public class UserMgrController extends BaseController {
         user.setSuperaccount(account);
         user.setFullindex(currentUser.getFullindex()+"."+user.getAccount());
         user.setLevel(level.toString());
-        user.setRoleid(map.get("dicValue").toString());
+        //获取配置好的roleID
+        user.setRoleid(JurisdictionStatus.getMethod(level.toString()).getRoleId());
         this.userMapper.insert(UserFactory.createUser(user));
 
         DisMemberInfo memberInfo=new DisMemberInfo();
@@ -370,5 +371,10 @@ public class UserMgrController extends BaseController {
             throw new BussinessException(BizExceptionEnum.UPLOAD_ERROR);
         }
         return pictureName;
+    }
+
+    public static void main(String[] args) {
+        JurisdictionStatus id= JurisdictionStatus.getMethod("1");
+        System.out.println(id.getRoleId());
     }
 }
