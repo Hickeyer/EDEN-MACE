@@ -68,7 +68,7 @@ https://gitee.com/codingdb/distribution_management
 
   10、分销商自动分配权限。
   
-  11、 数据库和枚举类紧密结合的方式，实现数据字典。
+  11、自动权限配置功能。
 
 ###  代码展示
 
