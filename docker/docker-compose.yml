@@ -1,0 +1,24 @@
+version: "2"  
+services:  
+  mysql:  
+    image: mysql:5.7 
+    container_name: distribution-mysql
+    volumes:  
+      - ../data:/var/lib/mysql 
+      - ../distribution_management/src/main/resources/sql/dump:/docker-entrypoint-initdb.d 
+    restart: always
+    ports:
+      - "6603:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123
+    networks:
+      - code-network 
+
+networks:
+  code-network:
+    driver: bridge
+        
+        
+        
+        
+        

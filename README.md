@@ -192,3 +192,18 @@ plug用来调试接口，调试完成后，可以直接使用
 ![输入图片说明](https://gitee.com/uploads/images/2018/0609/143627_87c48977_1497609.jpeg "111.jpg")
 账户收益统计图
 ![输入图片说明](https://gitee.com/uploads/images/2018/0610/120127_3fc5142b_1497609.jpeg "111.jpg")
+
+### 利用docker 本地部署
+inside docker folder, start docker by
+```
+  $ ./start.sh
+```
+Then dump the data
+inside docker folder, access mysql container by
+```
+  $ docker exec -it distribution-mysql bash -l 
+  $ mysql -uroot -p
+  $ source /docker-entrypoint-initdb.d/distribution.sql;
+  $ source /docker-entrypoint-initdb.d/authority.sql;
+```
+注意： 这里mysql 的port 是 6603， 需要在application-dev.yml 中替换成相应的port.
