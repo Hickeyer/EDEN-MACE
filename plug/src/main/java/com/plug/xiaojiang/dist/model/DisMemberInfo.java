@@ -9,11 +9,10 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-07-19
+ * @since 2018-10-18
  */
-public class DisMemberInfo implements Serializable {
+public class DisMemberInfo  {
 
-    private static final long serialVersionUID = 1L;
 
     /**
      * 主键
@@ -87,6 +86,10 @@ public class DisMemberInfo implements Serializable {
      * 段位积分
      */
 	private Integer rankIntegral;
+    /**
+     * 段位总积分
+     */
+	private Integer totalRankIntegral;
 
 
 	public Integer getId() {
@@ -233,6 +236,14 @@ public class DisMemberInfo implements Serializable {
 		this.rankIntegral = rankIntegral;
 	}
 
+	public Integer getTotalRankIntegral() {
+		return totalRankIntegral;
+	}
+
+	public void setTotalRankIntegral(Integer totalRankIntegral) {
+		this.totalRankIntegral = totalRankIntegral;
+	}
+
 
 	@Override
 	public String toString() {
@@ -255,6 +266,7 @@ public class DisMemberInfo implements Serializable {
 			", disPlatLevel=" + disPlatLevel +
 			", type=" + type +
 			", rankIntegral=" + rankIntegral +
+			", totalRankIntegral=" + totalRankIntegral +
 			"}";
 	}
 }

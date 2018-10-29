@@ -1,20 +1,18 @@
 package com.plug.xiaojiang.dist.model;
 
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * <p>
- * 
+ * 账户金额表
  * </p>
  *
  * @author huangpu
- * @since 2018-05-15
+ * @since 2018-10-18
  */
-public class DisMemberAmount implements Serializable {
+public class DisMemberAmount  {
 
-    private static final long serialVersionUID = 1L;
 
 	private Integer id;
     /**
@@ -206,7 +204,6 @@ public class DisMemberAmount implements Serializable {
 	public void setLevelAvaibleAmount(BigDecimal levelAvaibleAmount) {
 		this.levelAvaibleAmount = levelAvaibleAmount;
 	}
-
 
 	@Override
 	public String toString() {
