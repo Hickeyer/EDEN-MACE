@@ -2,6 +2,7 @@ package com.stylefeng.guns.modular.dist.controller;
 
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.constant.dist.ProRankTypeStatus;
 import com.stylefeng.guns.common.constant.tips.DistResult;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
@@ -144,6 +145,7 @@ public class OpenController  {
         if(memberInfo==null){
            return  DistResult.failure("用户不存在！");
         }
+        disProfitRecordVo.setAccountType(ProRankTypeStatus.ZERO_STATUS.getStatus());
         disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
         disProfitRecordService.save(disProfitRecordVo);
         return DistResult.success(disProfitRecordVo);
