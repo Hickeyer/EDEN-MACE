@@ -20,14 +20,11 @@
 		</header>
 		<div class="ui-content" data-role="content">
 			<dl>
-				<dd>
-					<a href="javascript:void(0)" data-ajax="false" class="ui-btn ui-icon-appright ui-btn-icon-right ui-nodisc-icon">意见反馈</a>
+				<dd id="navInfo">
 				</dd>
 			</dl>
 		</div>
-		<footer  data-position="fixed" data-role="footer">
-			<a data-role="none" href="#" class="outset">退出登录</a>
-		</footer>
+		<input th:value="@{/}" id="path" type="hidden">
 		<script th:src="@{js/jquery.min.js}"></script>
 		<script th:src="@{js/jquery.mobile-1.4.5.min.js}"></script>
    		<script type="text/javascript">
@@ -35,6 +32,25 @@
 					$(".loading").fadeOut();
 					
 				})
+            var path=$("#path").val();
+            $.ajax({
+                url:path+"subordinate",
+                type:"post",
+                success:function (result) {
+                   console.log(result);
+					if(result.success){
+					   var navHtml="";
+					    for(var i=0;i<result.data.length;i++){
+                           navHtml = navHtml+
+							   " <a href='javascript:void(0)' data-ajax='false' class='ui-btn ui-icon-appright ui-btn-icon-right ui-nodisc-icon'>" +
+                               result.data[i]["memberName"] +
+							   "</a>"
+						}
+                        $("#navInfo").html(navHtml);
+
+					}
+                }
+            });
    		</script>
 	</div>
 	

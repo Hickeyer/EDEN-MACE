@@ -1,15 +1,13 @@
 package com.plug.xiaojiang.dist.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HtmlController {
 
-    @RequestMapping({"/","/index",""})
-    public String index(){
-        return "/index";
-    }
+
 
     @RequestMapping("/main")
     public String main(){
@@ -24,7 +22,7 @@ public class HtmlController {
         return "/trade/trade";
     }
 
-    @RequestMapping("/subordinate")
+    @GetMapping("/subordinate")
     public String subordinate(){
         return "/my/subordinate";
     }
