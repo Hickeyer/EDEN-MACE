@@ -199,6 +199,15 @@ plug用来调试接口，调试完成后，可以直接使用
 账户收益统计图
 ![输入图片说明](https://gitee.com/uploads/images/2018/0610/120127_3fc5142b_1497609.jpeg "111.jpg")
 
+### 模拟前端界面展示
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1210/212911_c0ca344e_1497609.jpeg "1.jpg")
+
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1210/212922_f49dec19_1497609.jpeg "2.jpg")
+
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1210/212932_f38b0f70_1497609.jpeg "3.jpg")
+
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1210/212942_8a87e13a_1497609.jpeg "4.jpg")
+
 ### 利用docker 本地部署
 inside docker folder, start docker by
 ```
