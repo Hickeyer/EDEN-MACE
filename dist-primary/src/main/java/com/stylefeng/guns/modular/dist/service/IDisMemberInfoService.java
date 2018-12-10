@@ -1,6 +1,8 @@
 package com.stylefeng.guns.modular.dist.service;
 
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
+import com.stylefeng.guns.modular.dist.http.request.SubordinateReq;
+import com.stylefeng.guns.modular.dist.http.response.SubordinateResp;
 
 import java.util.List;
 import java.util.Map;
@@ -28,5 +30,13 @@ public interface IDisMemberInfoService {
     public void saveAgent(DisMemberInfo param);
 
     public void updateLevel(DisMemberInfo param);
+
+
+    /**
+     * 查询下级会员
+     * @param req
+     * @return
+     */
+    public List<SubordinateResp> getSubordinateInfo(SubordinateReq req);
 
 }

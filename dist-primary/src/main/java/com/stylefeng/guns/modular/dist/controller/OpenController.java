@@ -11,6 +11,8 @@ import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.User;
+import com.stylefeng.guns.modular.dist.http.request.SubordinateReq;
+import com.stylefeng.guns.modular.dist.http.response.SubordinateResp;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.service.IDisProfitRecordService;
 import com.stylefeng.guns.modular.dist.service.IDisWithdrawRecordService;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -169,6 +172,7 @@ public class OpenController  {
             return DistResult.failure("请提供要升级的等级");
         }
         disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
+        disProfitRecordVo.setAccountType(ProRankTypeStatus.ONE_STATUS.getStatus());
         disProfitRecordService.save(disProfitRecordVo);
 
         memberInfo.setDisUserType(disProfitRecordVo.getUpgradeLevel());
@@ -177,8 +181,22 @@ public class OpenController  {
     }
 
     /**
-     * 新增提现
+     * 会员直属下级会员
      */
+    @PostMapping(value = "/subordinate")
+    @ResponseBody
+    @ApiOperation(value = "会员直属下级会员", notes = "此接口是查询会员直属下级会员")
+    public DistResult subordinate(@RequestBody  SubordinateReq subordinateReq) {
+        if(!isAccountVer(subordinateReq.getSecret())) {
+            return   DistResult.failure("非法访问！");
+        }
+        DisMemberInfo memberInfo=disMemberInfoService.selectListByUserId(subordinateReq.getMemberId());
+        if(memberInfo==null){
+            return DistResult.failure("用户不存在");
+        }
+        List<SubordinateResp> list = disMemberInfoService.getSubordinateInfo(subordinateReq);
+        return DistResult.success(list);
+    }
     @PostMapping(value = "/withdraw")
     @ResponseBody
     @ApiOperation(value = "新增提现接口", notes = "此接口是用用户提现")

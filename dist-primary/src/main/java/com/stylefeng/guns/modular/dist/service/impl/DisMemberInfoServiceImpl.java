@@ -11,6 +11,8 @@ import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.SysDic;
 import com.stylefeng.guns.modular.dist.dao.DisMemberInfoDao;
+import com.stylefeng.guns.modular.dist.http.request.SubordinateReq;
+import com.stylefeng.guns.modular.dist.http.response.SubordinateResp;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDisSysIntegralRecordService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
@@ -181,6 +183,27 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void updateLevel(DisMemberInfo param) {
         disMemberInfoMapper.updateAllColumnById(param);
+    }
+
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public List<SubordinateResp> getSubordinateInfo(SubordinateReq req) {
+        DisMemberInfo param=new DisMemberInfo();
+        param.setDisUserId(req.getMemberId());
+        DisMemberInfo memberInfo=disMemberInfoMapper.selectOne(param);
+        Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
+        wrapper.like("dis_full_index",memberInfo.getDisFullIndex()+"%");
+        List<DisMemberInfo> mapList = disMemberInfoMapper.selectList(wrapper);
+        List<SubordinateResp> list = new ArrayList<>();
+        if(mapList != null){
+            for (DisMemberInfo map :mapList){
+                SubordinateResp resp = new SubordinateResp();
+                resp.setMemberId(map.getDisUserId());
+                resp.setMemberName(map.getDisUserName());
+                list.add(resp);
+            }
+        }
+        return list;
     }
 
 

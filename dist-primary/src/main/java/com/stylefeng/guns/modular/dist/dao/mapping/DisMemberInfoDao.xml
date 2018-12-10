@@ -36,5 +36,11 @@
     </select>
 
 
+    <select id="selectSubordinate" resultMap="BaseResultMap">
+  SELECT dis_user_id,dis_user_name FROM `dis_member_info`
+  WHERE dis_full_index LIKE '#{fullIndex}%'
+
+    </select>
+
 
 </mapper>
