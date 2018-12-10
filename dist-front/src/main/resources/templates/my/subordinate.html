@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>赚不停</title>
+
+</head>
+<body>
+	<div class="loading"><img src="images/ajax-loader.gif"/></div>
+	<div data-role="page" class="touzi set" id="set">
+		<!--jqmb需要把所以东西放在page div内-->
+		<link rel="stylesheet" th:href="@{css/jquery.mobile-1.4.5.min.css}"/>
+		<link rel="stylesheet" th:href="@{css/style.css}"/>
+   		 
+   		<!--jqmb需要把所以东西放在page div内--> 
+		<header data-role="header" data-position="fixed">
+			<a href="#" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-left ui-nodisc-icon"  data-ajax="false">返回</a> 
+			<h3>设置</h3>
+		</header>
+		<div class="ui-content" data-role="content">
+			<dl>
+				<dd>
+					<a href="javascript:void(0)" data-ajax="false" class="ui-btn ui-icon-appright ui-btn-icon-right ui-nodisc-icon">意见反馈</a>
+				</dd>
+			</dl>
+		</div>
+		<footer  data-position="fixed" data-role="footer">
+			<a data-role="none" href="#" class="outset">退出登录</a>
+		</footer>
+		<script th:src="@{js/jquery.min.js}"></script>
+		<script th:src="@{js/jquery.mobile-1.4.5.min.js}"></script>
+   		<script type="text/javascript">
+   			$(window).load(function(){
+					$(".loading").fadeOut();
+					
+				})
+   		</script>
+	</div>
+	
+</body>
+</html>

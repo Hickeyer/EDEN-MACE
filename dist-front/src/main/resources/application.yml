@@ -14,10 +14,11 @@ spring:
           paths: /**
 server:
   port: 8080
-
+## 日志设置
 logging:
   config: classpath:logback.xml
-  path: "/plug.log"
+  path: "/logs"
+  file: front.log
   level: debug
 dist:
   server:

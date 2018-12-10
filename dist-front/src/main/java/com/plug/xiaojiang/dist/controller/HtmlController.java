@@ -23,4 +23,9 @@ public class HtmlController {
     public String trade(){
         return "/trade/trade";
     }
+
+    @RequestMapping("/subordinate")
+    public String subordinate(){
+        return "/my/subordinate";
+    }
 }
