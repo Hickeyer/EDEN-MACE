@@ -16,6 +16,8 @@ public class ExecuSql {
     private static String uname="root";
 
     private static String pwd="123456";
+
+    private static String ip = "127.0.0.1";
     /**
      * 下载代码后执行这一段代码即可自动导入数据库
      * @param args
@@ -26,14 +28,14 @@ public class ExecuSql {
     }
 
     public static  void authoritySql(){
-        String url="jdbc:mysql://127.0.0.1:3306/?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false";
+        String url="jdbc:mysql://"+ip+":3306/?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false";
         String fileName="authority";
         String uname= ExecuSql.uname;
         String  pwd=ExecuSql.pwd;
         toExcuesql(url,uname,pwd,fileName);
     }
     public static void distributionSql(){
-        String url="jdbc:mysql://127.0.0.1:3306/?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false";
+        String url="jdbc:mysql://"+ip+":3306/?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false";
         String fileName="distribution";
         String uname= ExecuSql.uname;
         String  pwd=ExecuSql.pwd;

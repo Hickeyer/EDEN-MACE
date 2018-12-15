@@ -11,19 +11,19 @@ public class HtmlController {
 
     @RequestMapping("/main")
     public String main(){
-        return "/main";
+        return "main";
     }
     @RequestMapping("/invite")
     public String invite(){
-        return "/trade/invite";
+        return "trade/invite";
     }
     @RequestMapping("/trade")
     public String trade(){
-        return "/trade/trade";
+        return "trade/trade";
     }
 
     @GetMapping("/subordinate")
     public String subordinate(){
-        return "/my/subordinate";
+        return "my/subordinate";
     }
 }

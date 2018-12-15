@@ -192,7 +192,8 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         param.setDisUserId(req.getMemberId());
         DisMemberInfo memberInfo=disMemberInfoMapper.selectOne(param);
         Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
-        wrapper.like("dis_full_index",memberInfo.getDisFullIndex()+"%");
+        wrapper.like("dis_full_index",memberInfo.getDisFullIndex()+"%")
+        .or().like("dis_full_index",memberInfo.getDisUserId()+"%");
         List<DisMemberInfo> mapList = disMemberInfoMapper.selectList(wrapper);
         List<SubordinateResp> list = new ArrayList<>();
         if(mapList != null){

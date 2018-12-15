@@ -23,7 +23,7 @@ logging:
   level: debug
 dist:
   server:
-    prefix: http://localhost/
+    prefix: http://47.104.183.147/
     secret: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzE3MjcyNjkxMzIsInBheWxvYWQiOiJcInhpYW9qaWFuZ1wiIn0.OhzV51QMAi2JreuarIvnd1yEZWJLty9f02pkiZjl7M8
 
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,15 +24,15 @@ public class LoginController {
 
     @RequestMapping({"/","/index",""})
     public String index(){
-        return "/index";
+        return "index";
     }
 
-    @RequestMapping("/home")
+    @GetMapping("/home")
+    public String home(){
+        return "self";
+    }
+    @RequestMapping("/login")
     public String home(String userId, HttpServletRequest request){
-        DisMemberInfo memberInfo= (DisMemberInfo) request.getSession().getAttribute("member");
-        if(memberInfo!=null){
-            return "/self";
-        }
         DistResult result= RestClient.create(prefix+"/api/v1/getUserInfo")
                 .contentType(MediaType.APPLICATION_JSON)
                 .acceptableMediaType(MediaType.APPLICATION_JSON)
@@ -47,8 +48,8 @@ public class LoginController {
             request.getSession().setAttribute("amount",amount);
         }else{
             System.out.println("登录失败");
-            return "/index";
+            return "index";
         }
-        return "/self";
+        return "self";
     }
 }

@@ -14,9 +14,12 @@ public class LoginInterceptor  implements HandlerInterceptor {
         DisMemberInfo memberInfo= (DisMemberInfo) request.getSession().getAttribute("member");
         if(memberInfo==null){
             String uri = request.getRequestURI();
-            if("/".equals(uri)||"/index".equals(uri)||"/home".equals(uri)){
+            if("/".equals(uri)||"/index".equals(uri)||"/login".equals(uri)){
                return true;
             }else{
+                if(uri.contains("login")){
+                    return true;
+                }
                 response.sendRedirect(request.getContextPath()+"/index");
                 return false;
             }

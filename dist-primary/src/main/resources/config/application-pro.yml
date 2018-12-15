@@ -2,15 +2,26 @@
 ###################  正式环境的profile  ###################
 ##########################################################
 spring:
-  profiles: pro
   datasource:
-      url: jdbc:mysql://127.0.0.1:3306/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+      url: jdbc:mysql://47.104.183.147:3306/authority?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
       username: root
-      password: root
+      password: 123456
       filters: log4j,wall,mergeStat
 
+#多数据源
+biz:
+  datasource:
+    url: jdbc:mysql://47.104.183.147:3306/distribution?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: 123456
+
 logging:
-  level.root: warn
+  level.root: info
+  level.com.stylefeng: debug
   path: logs/
   file: dist.log
+
+###################  项目启动端口  ###################
+server:
+  port: 8081
 

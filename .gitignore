@@ -15,3 +15,4 @@ LOG_PATH_IS_UNDEFINED/
 *.ear
 *.log
 dist.log.*
+/dist-primary/src/main/resources/config/application-pro.yml
