@@ -20,6 +20,6 @@ public interface IDisSysIntegralRecordService {
      * @param amount
      * @param memberInfo
      */
-    public void saveMember(String accountType, BigDecimal amount, DisMemberInfo memberInfo);
+    public void saveIntegral(String accountType, BigDecimal amount, DisMemberInfo memberInfo) throws Exception;
 
 }

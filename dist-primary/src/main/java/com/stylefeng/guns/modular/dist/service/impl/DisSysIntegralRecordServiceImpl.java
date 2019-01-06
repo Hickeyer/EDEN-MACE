@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
 import com.stylefeng.guns.common.constant.dist.IdentityStatus;
-import com.stylefeng.guns.common.constant.dist.ProRankTypeStatus;
 import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
@@ -47,7 +47,7 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
      */
     @Override
     @DataSource(name= DSEnum.DATA_SOURCE_BIZ)
-    public void saveMember(String accountType,BigDecimal amount,DisMemberInfo memberInfo){
+    public void saveIntegral(String accountType,BigDecimal amount,DisMemberInfo memberInfo) throws Exception {
 
         //dis_pro_type可以是交易，升级、邀请等等
         Wrapper<DisRankParam> profiParamP=new EntityWrapper<>();
@@ -96,18 +96,20 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
                     record.setExpireTime(DateUtils.plusDay(Integer.parseInt(sysDic.getDicNo())));
                     String sourceRemark="";
                     if("0".equals(accountType)){
-                        String des= ProRankTypeStatus.ZERO_STATUS.getDes();
+                        String des= AccountTypeStatus.ZERO_STATUS.getIntDes();
                         sourceRemark=String.format(des,memberInfo.getDisUserId()
                                 ,amount.toString()
                                 ,totalIntegral);
                     }else if("1".equals(accountType)){
-                        String des= ProRankTypeStatus.ONE_STATUS.getDes();
+                        String des= AccountTypeStatus.ONE_STATUS.getIntDes();
                         sourceRemark=String.format(des,memberInfo.getDisUserId()
                                 ,totalIntegral);
                     }else if("2".equals(accountType)){
-                        String des= ProRankTypeStatus.TWO_STATUS.getDes();
+                        String des= AccountTypeStatus.TWO_STATUS.getIntDes();
                         sourceRemark=String.format(des,memberInfo.getDisUserId()
                                 ,totalIntegral);
+                    }else {
+                        throw  new Exception("没有对应积分账户类型");
                     }
                     record.setSourceRemak(sourceRemark);
                     //新增积分

@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
  * <p>
-  *  Mapper 接口
+  * 账户金额表 Mapper 接口
  * </p>
  *
  * @author huangpu
- * @since 2018-05-15
+ * @since 2019-01-06
  */
 public interface DisMemberAmountMapper extends BaseMapper<DisMemberAmount> {
 

@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-10-18
+ * @since 2019-01-06
  */
 @TableName("dis_member_amount")
 public class DisMemberAmount extends Model<DisMemberAmount> {
@@ -97,6 +97,21 @@ public class DisMemberAmount extends Model<DisMemberAmount> {
      */
 	@TableField("level_avaible_amount")
 	private BigDecimal levelAvaibleAmount;
+    /**
+     * 扩展字段，邀请用户总积分
+     */
+	@TableField("invite_total_amount")
+	private BigDecimal inviteTotalAmount;
+    /**
+     * 扩展字段，邀请用户冻结积分
+     */
+	@TableField("invite_frozen_amount")
+	private BigDecimal inviteFrozenAmount;
+    /**
+     * 扩展字段，邀请用户可用积分
+     */
+	@TableField("invite_avaible_amount")
+	private BigDecimal inviteAvaibleAmount;
 
 
 	public Integer getId() {
@@ -227,6 +242,30 @@ public class DisMemberAmount extends Model<DisMemberAmount> {
 		this.levelAvaibleAmount = levelAvaibleAmount;
 	}
 
+	public BigDecimal getInviteTotalAmount() {
+		return inviteTotalAmount;
+	}
+
+	public void setInviteTotalAmount(BigDecimal inviteTotalAmount) {
+		this.inviteTotalAmount = inviteTotalAmount;
+	}
+
+	public BigDecimal getInviteFrozenAmount() {
+		return inviteFrozenAmount;
+	}
+
+	public void setInviteFrozenAmount(BigDecimal inviteFrozenAmount) {
+		this.inviteFrozenAmount = inviteFrozenAmount;
+	}
+
+	public BigDecimal getInviteAvaibleAmount() {
+		return inviteAvaibleAmount;
+	}
+
+	public void setInviteAvaibleAmount(BigDecimal inviteAvaibleAmount) {
+		this.inviteAvaibleAmount = inviteAvaibleAmount;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -251,6 +290,9 @@ public class DisMemberAmount extends Model<DisMemberAmount> {
 			", levelTotalAmount=" + levelTotalAmount +
 			", levelFrozenAmount=" + levelFrozenAmount +
 			", levelAvaibleAmount=" + levelAvaibleAmount +
+			", inviteTotalAmount=" + inviteTotalAmount +
+			", inviteFrozenAmount=" + inviteFrozenAmount +
+			", inviteAvaibleAmount=" + inviteAvaibleAmount +
 			"}";
 	}
 }

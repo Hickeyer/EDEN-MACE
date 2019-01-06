@@ -22,7 +22,7 @@ import com.stylefeng.guns.modular.dist.util.DateUtils;
 
 import java.math.BigDecimal;
 
-public class LevelAmountServiceImpl implements AmountService {
+public class InviteAmountServiceImpl implements AmountService {
 
     private DisAmountSituationMapper disAmountSituationMapper =  SpringContextHolder.getBean(DisAmountSituationMapper.class);
 
@@ -54,10 +54,10 @@ public class LevelAmountServiceImpl implements AmountService {
         BigDecimal beforeThirdAmount=new BigDecimal(0);
 
         /*每次需要改变的地方*/
-        afterThirdAmount=memberAmount.getLevelTotalAmount().add(amount);
-        beforeThirdAmount=memberAmount.getLevelTotalAmount();
-        memberAmount.setLevelTotalAmount(memberAmount.getLevelTotalAmount().add(amount));
-        memberAmount.setLevelAvaibleAmount(memberAmount.getLevelAvaibleAmount().add(amount));
+        afterThirdAmount=memberAmount.getInviteTotalAmount().add(amount);
+        beforeThirdAmount=memberAmount.getInviteTotalAmount();
+        memberAmount.setInviteTotalAmount(memberAmount.getInviteTotalAmount().add(amount));
+        memberAmount.setInviteAvaibleAmount(memberAmount.getInviteAvaibleAmount().add(amount));
         /*每次需要改变的地方*/
 
         situation.setSpecificBeforeChangeAmount(beforeThirdAmount);
@@ -68,16 +68,16 @@ public class LevelAmountServiceImpl implements AmountService {
 
 
 
-        situation.setAccountType(AccountTypeStatus.ONE_STATUS.getStatus());
+        situation.setAccountType(AccountTypeStatus.TWO_STATUS.getStatus());
         disMemberAmountMapper.updateById(memberAmount);
         Wrapper<DisAmountSituation> situationWrapper=new EntityWrapper<>();
         situationWrapper.eq("dis_user_id",userId)
-                .eq("account_type", AccountTypeStatus.ONE_STATUS.getStatus());
+                .eq("account_type", AccountTypeStatus.TWO_STATUS.getStatus());
         Integer count=disAmountSituationMapper.selectCount(situationWrapper);
         if(count == 0){
             DisMemberInfo memberInfo= disMemberInfoService.selectListByUserId(userId);
             DisAmountSituation initSituation=new DisAmountSituation();
-            initSituation.setAccountType(AccountTypeStatus.ONE_STATUS.getStatus());
+            initSituation.setAccountType(AccountTypeStatus.TWO_STATUS.getStatus());
             initSituation.setDisUserId(userId);
             initSituation.setAddTime(memberAmount.getAddTime());
             initSituation.setDescribe(SituationStatus.AMOUNT_INIT.getDes());
@@ -86,7 +86,7 @@ public class LevelAmountServiceImpl implements AmountService {
             disAmountSituationMapper.insert(initSituation);
         }
         String des=SituationStatus.INCOME_STATUS.getDes();
-        String lastDes = String.format(des,sourceName, AccountTypeStatus.ONE_STATUS.getCode(),userId,amount.toString());
+        String lastDes = String.format(des,sourceName, AccountTypeStatus.TWO_STATUS.getCode(),userId,amount.toString());
         situation.setDescribe(lastDes);
         disAmountSituationMapper.insert(situation);
 
@@ -99,22 +99,22 @@ public class LevelAmountServiceImpl implements AmountService {
         disMemberAmount.setDisUserId(userId);
         DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
         BigDecimal  avaibleThirdAmount=new BigDecimal(0);
-        avaibleThirdAmount=memberAmount.getLevelAvaibleAmount();
+        avaibleThirdAmount=memberAmount.getInviteAvaibleAmount();
         if(avaibleThirdAmount.compareTo(amount)==-1){
             throw  new BussinessException(BizExceptionEnum.LOW_MONEY);
         }
         /*开始扣除金额*/
         memberAmount.setAvaibleAmount(memberAmount.getAvaibleAmount().subtract(amount));
         memberAmount.setFrozenAmount(memberAmount.getFrozenAmount().add(amount));
-        memberAmount.setLevelAvaibleAmount(memberAmount.getLevelAvaibleAmount().subtract(amount));
-        memberAmount.setLevelFrozenAmount(memberAmount.getLevelFrozenAmount().add(amount));
+        memberAmount.setInviteAvaibleAmount(memberAmount.getInviteAvaibleAmount().subtract(amount));
+        memberAmount.setInviteFrozenAmount(memberAmount.getInviteFrozenAmount().add(amount));
         disMemberAmountMapper.updateById(memberAmount);
     }
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void reduceMoney(String userId, BigDecimal amount) {
-        String accountType = AccountTypeStatus.ONE_STATUS.getCode();
+        String accountType = AccountTypeStatus.TWO_STATUS.getCode();
         //记录金额
         DisAmountSituation situation=new DisAmountSituation();
         situation.setDisUserId(userId);
@@ -127,7 +127,7 @@ public class LevelAmountServiceImpl implements AmountService {
         situation.setAfterChangeAmount(memberAmount.getTotalAmount().subtract(amount));
         BigDecimal  avaibleThirdAmount=new BigDecimal(0);
 
-        avaibleThirdAmount=memberAmount.getLevelFrozenAmount();
+        avaibleThirdAmount=memberAmount.getInviteFrozenAmount();
 
 
         if(avaibleThirdAmount.compareTo(amount)==-1){
@@ -139,9 +139,9 @@ public class LevelAmountServiceImpl implements AmountService {
         BigDecimal beforeThirdAmount=new BigDecimal(0);
 
 
-        beforeThirdAmount=memberAmount.getLevelTotalAmount();
-        memberAmount.setLevelFrozenAmount(memberAmount.getLevelFrozenAmount().subtract(amount));
-        memberAmount.setLevelTotalAmount(beforeThirdAmount.subtract(amount));
+        beforeThirdAmount=memberAmount.getInviteTotalAmount();
+        memberAmount.setInviteFrozenAmount(memberAmount.getInviteFrozenAmount().subtract(amount));
+        memberAmount.setInviteTotalAmount(beforeThirdAmount.subtract(amount));
 
         situation.setSpecificBeforeChangeAmount(beforeThirdAmount);
         situation.setSpecificAfterChangeAmount(beforeThirdAmount.subtract(amount));
@@ -166,7 +166,7 @@ public class LevelAmountServiceImpl implements AmountService {
         DisMemberAmount memberAmount=disMemberAmountMapper.selectOne(disMemberAmount);
         BigDecimal  avaibleThirdAmount=new BigDecimal(0);
 
-        avaibleThirdAmount=memberAmount.getLevelFrozenAmount();
+        avaibleThirdAmount=memberAmount.getInviteFrozenAmount();
 
         if(avaibleThirdAmount.compareTo(amount)==-1){
             throw  new BussinessException(BizExceptionEnum.LOW_MONEY);
@@ -175,8 +175,8 @@ public class LevelAmountServiceImpl implements AmountService {
         memberAmount.setAvaibleAmount(memberAmount.getAvaibleAmount().add(amount));
         memberAmount.setFrozenAmount(memberAmount.getFrozenAmount().subtract(amount));
 
-        memberAmount.setLevelAvaibleAmount(memberAmount.getLevelAvaibleAmount().add(amount));
-        memberAmount.setLevelFrozenAmount(memberAmount.getLevelFrozenAmount().subtract(amount));
+        memberAmount.setInviteAvaibleAmount(memberAmount.getInviteAvaibleAmount().add(amount));
+        memberAmount.setInviteFrozenAmount(memberAmount.getInviteFrozenAmount().subtract(amount));
 
         disMemberAmountMapper.updateById(memberAmount);
     }

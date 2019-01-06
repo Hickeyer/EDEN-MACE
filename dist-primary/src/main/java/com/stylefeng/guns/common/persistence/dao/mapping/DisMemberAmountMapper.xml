@@ -20,6 +20,9 @@
 		<result column="level_total_amount" property="levelTotalAmount" />
 		<result column="level_frozen_amount" property="levelFrozenAmount" />
 		<result column="level_avaible_amount" property="levelAvaibleAmount" />
+		<result column="invite_total_amount" property="inviteTotalAmount" />
+		<result column="invite_frozen_amount" property="inviteFrozenAmount" />
+		<result column="invite_avaible_amount" property="inviteAvaibleAmount" />
 	</resultMap>
 
 </mapper>

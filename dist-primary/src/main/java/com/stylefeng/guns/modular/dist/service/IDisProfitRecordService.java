@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.dist.service;
 
+import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public interface IDisProfitRecordService {
 
     List<Map<String, Object>> selectList(String account);
 
-    public void save(DisProfitRecordVo param);
+    public void save(DisProfitRecordVo param) throws Exception;
+
+    public void generatorAllRecord(DisProfitRecordVo param,DisMemberInfo memberInfo);
 
 }

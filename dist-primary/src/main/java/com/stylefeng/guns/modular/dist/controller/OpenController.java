@@ -2,7 +2,7 @@ package com.stylefeng.guns.modular.dist.controller;
 
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
-import com.stylefeng.guns.common.constant.dist.ProRankTypeStatus;
+import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
 import com.stylefeng.guns.common.constant.tips.DistResult;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
@@ -68,7 +68,11 @@ public class OpenController  {
     private  boolean jwtUse;
 
 
-
+    /**
+     * 用户登录获取相关用户信息
+     * @param userId
+     * @return
+     */
     @GetMapping("/getUserInfo")
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     @ResponseBody
@@ -93,12 +97,12 @@ public class OpenController  {
         }
     }
     /**
-     * 新增会员接口
+     * 邀请会员，调用此接口
      */
     @PostMapping(value = "/memberAdd")
     @ResponseBody
     @ApiOperation(value = "新增会员", notes = "")
-    public DistResult add(@RequestBody DisMemberInfoVo memberInfoVo) {
+    public DistResult add(@RequestBody DisMemberInfoVo memberInfoVo) throws Exception {
 
         if(!isAccountVer(memberInfoVo.getSecret())){
             return DistResult.failure("非法访问");
@@ -134,12 +138,12 @@ public class OpenController  {
     }
 
     /**
-     * 新增交易
+     * 会员交易后调用此接口
      */
     @PostMapping(value = "/trade")
     @ResponseBody
     @ApiOperation(value = "新增交易奖励", notes = "此接口是用于交易奖励的接口，及关注有相关分润的数据")
-    public DistResult add(@RequestBody DisProfitRecordVo disProfitRecordVo) {
+    public DistResult add(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
         if(!isAccountVer(disProfitRecordVo.getSecret())) {
            return   DistResult.failure("非法访问！");
         }
@@ -148,18 +152,18 @@ public class OpenController  {
         if(memberInfo==null){
            return  DistResult.failure("用户不存在！");
         }
-        disProfitRecordVo.setAccountType(ProRankTypeStatus.ZERO_STATUS.getStatus());
+        disProfitRecordVo.setAccountType(AccountTypeStatus.ZERO_STATUS.getStatus());
         disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
         disProfitRecordService.save(disProfitRecordVo);
         return DistResult.success(disProfitRecordVo);
     }
     /**
-     * 会员升级
+     * 会员升级后调用此接口，相关联的数据会产生分润
      */
     @PostMapping(value = "/upgrade")
     @ResponseBody
     @ApiOperation(value = "升级奖励", notes = "此接口是用于升级奖励的接口")
-    public DistResult upgrade(@RequestBody DisProfitRecordVo disProfitRecordVo) {
+    public DistResult upgrade(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
         if(!isAccountVer(disProfitRecordVo.getSecret())) {
             return   DistResult.failure("非法访问！");
         }
@@ -172,7 +176,7 @@ public class OpenController  {
             return DistResult.failure("请提供要升级的等级");
         }
         disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
-        disProfitRecordVo.setAccountType(ProRankTypeStatus.ONE_STATUS.getStatus());
+        disProfitRecordVo.setAccountType(AccountTypeStatus.ONE_STATUS.getStatus());
         disProfitRecordService.save(disProfitRecordVo);
 
         memberInfo.setDisUserType(disProfitRecordVo.getUpgradeLevel());
@@ -181,7 +185,7 @@ public class OpenController  {
     }
 
     /**
-     * 会员直属下级会员
+     *  用户查询他发展的会员
      */
     @PostMapping(value = "/subordinate")
     @ResponseBody
@@ -197,6 +201,12 @@ public class OpenController  {
         List<SubordinateResp> list = disMemberInfoService.getSubordinateInfo(subordinateReq);
         return DistResult.success(list);
     }
+
+    /**
+     * 用户提现，针对用户界面对某一账户进行提现
+     * @param withdrawVo
+     * @return
+     */
     @PostMapping(value = "/withdraw")
     @ResponseBody
     @ApiOperation(value = "新增提现接口", notes = "此接口是用用户提现")
@@ -215,6 +225,11 @@ public class OpenController  {
         }
         return DistResult.success();
     }
+
+    /**
+     * 获取调用接口授权码
+     * @return
+     */
     @GetMapping("/getSign")
     @ResponseBody
     @ApiOperation(value = "获取secret", notes = "获取secret")

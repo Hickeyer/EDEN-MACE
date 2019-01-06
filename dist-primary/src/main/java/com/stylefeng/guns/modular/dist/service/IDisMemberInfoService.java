@@ -25,7 +25,7 @@ public interface IDisMemberInfoService {
 
     String[] getDetaiCanvas(String id);
 
-    public void save(DisMemberInfo param);
+    public void save(DisMemberInfo param) throws Exception;
 
     public void saveAgent(DisMemberInfo param);
 

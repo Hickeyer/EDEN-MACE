@@ -82,7 +82,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
      */
     @Override
     @DataSource(name=DSEnum.DATA_SOURCE_BIZ)
-    public void save(DisProfitRecordVo param) {
+    public void save(DisProfitRecordVo param) throws Exception {
         //根据所属上级和用户id查询会员信息
         DisMemberInfo memberInfoParam=new DisMemberInfo();
         memberInfoParam.setDisUserId(param.getDisSetUserId());
@@ -90,7 +90,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         saveMember(param,memberInfo);
         savePlat(param,memberInfo);
         saveAdmin(param,memberInfo);
-        disSysIntegralRecordService.saveMember(param.getAccountType(),param.getDisAmount(),memberInfo);
+        disSysIntegralRecordService.saveIntegral(param.getAccountType(),param.getDisAmount(),memberInfo);
         if(AccountTypeStatus.ZERO_STATUS.getStatus().equals(param.getAccountType())){
             //记录交易金额
             saveTradeRecord(param);
@@ -98,6 +98,19 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
             //记录升级接口
             saveVerticalLevel(memberInfo.getDisUserType(),param.getUpgradeLevel(),param.getDisSetUserId());
         }
+    }
+
+    /**
+     * 生成所有的分润信息
+     * @param param
+     * @param memberInfo
+     */
+    @Override
+    @DataSource(name=DSEnum.DATA_SOURCE_BIZ)
+    public void generatorAllRecord(DisProfitRecordVo param,DisMemberInfo memberInfo){
+        saveMember(param,memberInfo);
+        savePlat(param,memberInfo);
+        saveAdmin(param,memberInfo);
     }
 
     public  void saveVerticalLevel(String beforeLevel,String afterLevel,String userId){
@@ -126,7 +139,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         //对会员级别的数据进行分润分配，并且加入到余额中去
         //对平台级别的数据进行分润分配，并且加入到余额中去
         Wrapper<DisProfitParam> profiParamP=new EntityWrapper<>();
-        profiParamP.eq("dis_platform_id",param.getDisPlatformId())
+        profiParamP.eq("dis_platform_id",memberInfo.getDisPlatformId())
                 .eq("account_type",param.getAccountType());
         List<DisProfitParam> profiParamList=disProfiParamMapper.selectList(profiParamP);
         if(profiParamList.size()>0){
@@ -150,7 +163,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     DisProfitRecord record=new DisProfitRecord();
                     record.setDisPlatformId(memberInfo.getDisPlatformId());
                     record.setDisUserType(disProfiParam.getDisUserType());
-                    record.setDisSetUserId(param.getDisSetUserId());
+                    record.setDisSetUserId(memberInfo.getDisUserId());
                     record.setDisNote(param.getNote());
                     record.setDisOrderId(param.getOrderId());
                     record.setAccountType(param.getAccountType());
@@ -196,7 +209,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                         //设置分润
                         DisProfitRecord record = new DisProfitRecord();
                         record.setDisUserType(disProfiParam.getDisUserType());
-                        record.setDisSetUserId(param.getDisSetUserId());
+                        record.setDisSetUserId(memberInfo.getDisUserId());
                         record.setDisNote(param.getNote());
                         record.setDisOrderId(param.getOrderId());
                         record.setAccountType(param.getAccountType());
@@ -242,7 +255,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     //设置分润
                     DisProfitRecord record = new DisProfitRecord();
                     record.setDisUserType(disProfiParam.getDisUserType());
-                    record.setDisSetUserId(param.getDisSetUserId());
+                    record.setDisSetUserId(memberInfo.getDisUserId());
                     record.setDisNote(param.getNote());
                     record.setDisOrderId(param.getOrderId());
                     record.setAccountType(param.getAccountType());

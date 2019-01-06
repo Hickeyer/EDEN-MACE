@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.google.gson.Gson;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
-import com.stylefeng.guns.common.constant.dist.ProRankTypeStatus;
+import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
 import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
@@ -13,16 +13,14 @@ import com.stylefeng.guns.common.persistence.model.SysDic;
 import com.stylefeng.guns.modular.dist.dao.DisMemberInfoDao;
 import com.stylefeng.guns.modular.dist.http.request.SubordinateReq;
 import com.stylefeng.guns.modular.dist.http.response.SubordinateResp;
-import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
-import com.stylefeng.guns.modular.dist.service.IDisSysIntegralRecordService;
+import com.stylefeng.guns.modular.dist.service.*;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
+import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
 import com.stylefeng.guns.modular.dist.vo.LinksVo;
 import com.stylefeng.guns.modular.dist.vo.MemberRecordVo;
 import com.stylefeng.guns.modular.dist.vo.NodesVo;
-import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -60,6 +58,9 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
 
     @Autowired
     IDisSysIntegralRecordService disSysIntegralRecordService;
+
+    @Autowired
+    IDisProfitRecordService disProfitRecordService;
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
@@ -124,7 +125,7 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
      */
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public void save(DisMemberInfo param) {
+    public void save(DisMemberInfo param) throws Exception {
         //逻辑判断
         //查询上级是否存在
         if (param.getDisModelId()!=null&&!"".equals(param.getDisModelId())){
@@ -165,9 +166,16 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         }
         param.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         param.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
+        //初始化会员表
         disMemberInfoMapper.insert(param);
+        //初始化账户表
         disMemberAmountService.save(param.getDisUserId(),param.getDisUserName(),"0");
-        disSysIntegralRecordService.saveMember(ProRankTypeStatus.TWO_STATUS.getStatus(),new BigDecimal(0),param);
+        //初始化积分表
+        disSysIntegralRecordService.saveIntegral(AccountTypeStatus.TWO_STATUS.getStatus(),new BigDecimal(0),param);
+        //生成邀请奖励
+        DisProfitRecordVo recordVo = new DisProfitRecordVo();
+        recordVo.setAccountType(AccountTypeStatus.TWO_STATUS.getStatus());
+        disProfitRecordService.generatorAllRecord(recordVo,param);
     }
 
     @Override

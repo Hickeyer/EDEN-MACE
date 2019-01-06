@@ -7,12 +7,15 @@ import java.math.BigDecimal;
  */
 public class DisProfitRecordVo {
 
+    //秘钥
     private String  secret;
-
+    //发起人
     private String disSetUserId;
 
+    //交易人金额
     private BigDecimal disAmount;
 
+    //平台id
     private String disPlatformId;
 
     /**
@@ -20,6 +23,7 @@ public class DisProfitRecordVo {
      */
     private String accountType;
 
+    //备注
     private String note;
 
     private  String orderId;
