@@ -1,4 +1,4 @@
-1、运行ExecuSql 类，即可自动导入sql
+1、将sql 导入到数据库，注意是两个库，一个是authority，一个是distribution
 2、通过DistributionManageApplication 运行项目
 3、通过localhost访问项目 账户、密码分别为admin/111111，dist/123
 4、有问题加qq 3174667330
