@@ -1,6 +1,7 @@
 package com.stylefeng.guns.modular.dist.amountsign;
 
 import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
+import com.stylefeng.guns.modular.dist.amountsign.impl.InviteAmountServiceImpl;
 import com.stylefeng.guns.modular.dist.amountsign.impl.LevelAmountServiceImpl;
 import com.stylefeng.guns.modular.dist.amountsign.impl.TradeAmountServiceImpl;
 
@@ -21,7 +22,7 @@ public class AmountFactoryContext {
                 amountService = new LevelAmountServiceImpl();
                 break;
             case  "2":
-                amountService = new LevelAmountServiceImpl();
+                amountService = new InviteAmountServiceImpl();
                 break;
             default:
                 break;
