@@ -82,7 +82,7 @@ CREATE TABLE `dis_member_info` (
   `dis_full_index` varchar(4000) DEFAULT NULL COMMENT '全路径',
   `dis_user_name` varchar(100) DEFAULT NULL COMMENT '用户名',
   `dis_level` int(11) DEFAULT NULL COMMENT '级别',
-  `dis_user_type` varchar(10) DEFAULT NULL COMMENT '身份类型',
+  `dis_user_type` varchar(10) DEFAULT '0' COMMENT '身份类型',
   `dis_user_rank` varchar(10) DEFAULT 'A' COMMENT '用户段位(青铜、黄金、白银等)',
   `dis_note` varchar(100) DEFAULT NULL COMMENT '备注',
   `add_time` varchar(20) DEFAULT NULL COMMENT '添加时间',
@@ -93,7 +93,7 @@ CREATE TABLE `dis_member_info` (
   `dis_plat_level` int(11) DEFAULT NULL COMMENT '代理商等级',
   `type` varchar(10) DEFAULT '0' COMMENT '账户类型(0,会员，1：代理商)',
   `rank_integral` int(10) DEFAULT '0' COMMENT '段位积分',
-  `total_rank_integral` int(10) DEFAULT NULL COMMENT '段位总积分',
+  `total_rank_integral` int(10) DEFAULT '0' COMMENT '段位总积分',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COMMENT='用户表';
 

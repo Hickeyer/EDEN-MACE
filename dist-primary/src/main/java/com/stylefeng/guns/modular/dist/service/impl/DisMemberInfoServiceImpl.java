@@ -215,6 +215,21 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         return list;
     }
 
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public void saveNoOperate(DisMemberInfo param) {
+        disMemberInfoMapper.insert(param);
+
+        //初始化账户表
+        disMemberAmountService.save(param.getDisUserId(),param.getDisUserName(),"0");
+        //初始化积分表
+        try {
+            disSysIntegralRecordService.saveIntegral(AccountTypeStatus.TWO_STATUS.getStatus(),new BigDecimal(0),param);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public  List<MemberRecordVo> getSource(List<NodesVo> nodelist, List<LinksVo> linkList,List<MemberRecordVo> listParam){

@@ -1,6 +1,7 @@
 package com.stylefeng.guns.modular.dist.controller;
 
 import com.stylefeng.guns.common.annotion.DataSource;
+import com.stylefeng.guns.common.annotion.log.StatisticsSocket;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
 import com.stylefeng.guns.common.constant.tips.DistResult;
@@ -85,6 +86,7 @@ public class OpenController  {
     @GetMapping("/getUserInfo")
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     @ResponseBody
+    @ApiOperation(value = "查询会员信息")
     public DistResult getUserInfo(String userId){
 
         DisMemberInfo memberInfoParam=new DisMemberInfo();
@@ -110,7 +112,8 @@ public class OpenController  {
     @PostMapping(value = "/memberAdd")
     @ResponseBody
     @ApiOperation(value = "新增会员")
-    public DistResult add(@RequestBody DisMemberInfoVo memberInfoVo) throws Exception {
+    @StatisticsSocket
+    public DistResult inviteMember(@RequestBody DisMemberInfoVo memberInfoVo) throws Exception {
 
         if(!isAccountVer(memberInfoVo.getSecret())){
             return DistResult.failure("非法访问");
@@ -150,7 +153,8 @@ public class OpenController  {
     @PostMapping(value = "/trade")
     @ResponseBody
     @ApiOperation(value = "新增交易奖励", notes = "此接口是用于交易奖励的接口，及关注有相关分润的数据")
-    public DistResult add(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
+    @StatisticsSocket
+    public DistResult tradeOrder(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
         if(!isAccountVer(disProfitRecordVo.getSecret())) {
            return   DistResult.failure("非法访问！");
         }
@@ -171,7 +175,8 @@ public class OpenController  {
     @PostMapping(value = "/upgrade")
     @ResponseBody
     @ApiOperation(value = "升级奖励", notes = "此接口是用于升级奖励的接口")
-    public DistResult upgrade(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
+    @StatisticsSocket
+    public DistResult upgradeLevel(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
         if(!isAccountVer(disProfitRecordVo.getSecret())) {
             return   DistResult.failure("非法访问！");
         }
@@ -198,7 +203,7 @@ public class OpenController  {
     @PostMapping(value = "/subordinate")
     @ResponseBody
     @ApiOperation(value = "会员直属下级会员", notes = "此接口是查询会员直属下级会员")
-    public DistResult subordinate(@RequestBody  SubordinateReq subordinateReq) {
+    public DistResult subordinateMember(@RequestBody  SubordinateReq subordinateReq) {
         if(!isAccountVer(subordinateReq.getSecret())) {
             return   DistResult.failure("非法访问！");
         }
@@ -217,6 +222,7 @@ public class OpenController  {
     @PostMapping(value = "/withdraw")
     @ResponseBody
     @ApiOperation(value = "新增提现接口", notes = "此接口是用用户提现")
+    @StatisticsSocket
     public DistResult withdraw(@RequestBody DisWithdrawVo withdrawVo) {
         if(!isAccountVer(withdrawVo.getSecret())) {
             return   DistResult.failure("非法访问！");

@@ -3,6 +3,9 @@ package com.stylefeng.guns.common.constant.dist;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author  xiaojiang
+ */
 public enum  UserTypeStatus {
     /**
      * 游客
@@ -15,8 +18,14 @@ public enum  UserTypeStatus {
     /**
      * 老板
      */
-    TWO_STATUS("2","老板",2);
+    TWO_STATUS("2","老板",2),
+    /**
+     * 平台标识
+     */
+    PLAT_STATUS("10000","平台",10000);
+
     private String status;
+
     private String mes;
 
     private int order;

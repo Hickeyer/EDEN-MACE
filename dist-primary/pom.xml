@@ -196,6 +196,13 @@
             <version>${commons-lang3.version}</version>
         </dependency>
 
+
+        <!--支持websocket-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

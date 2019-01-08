@@ -2,6 +2,8 @@ package com.stylefeng.guns.modular.dist.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.stylefeng.guns.common.annotion.DataSource;
+import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.constant.dist.UserRankStatus;
 import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
@@ -45,6 +47,21 @@ public class TaskServiceServiceImpl implements ITaskService {
     @Resource
     DisUpgradeRecordMapper disUpgradeRecordMapper;
 
+    @Resource
+    DisAmountSituationMapper disAmountSituationMapper;
+
+    @Resource
+    DisMemberAmountMapper disMemberAmountMapper;
+
+    @Resource
+    DisProfitRecordMapper disProfitRecordMapper;
+
+    @Resource
+    DisTradeRecordMapper disTradeRecordMapper;
+
+    @Resource
+    DisWithdrawRecordMapper disWithdrawRecordMapper;
+
     /**
      * 根据类型处理用户和代理商的水平等级
      * @link {com.stylefeng.guns.common.constant.dist.IdentityStatus }
@@ -52,6 +69,7 @@ public class TaskServiceServiceImpl implements ITaskService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void upgradeLevel(String type) {
         //查询大于0的积分代理商或者会员的积分
         Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
@@ -134,4 +152,21 @@ public class TaskServiceServiceImpl implements ITaskService {
             });
         }
     }
+
+    /**
+     * 初始化数据库
+     */
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public void clearData() {
+        disAmountSituationMapper.delete(null);
+        disMemberInfoMapper.delete(null);
+        disMemberAmountMapper.delete(null);
+        disProfitRecordMapper.delete(null);
+        disRankIntegralRecordMapper.delete(null);
+        disTradeRecordMapper.delete(null);
+        disUpgradeRecordMapper.delete(null);
+        disWithdrawRecordMapper.delete(null);
+    }
+
 }

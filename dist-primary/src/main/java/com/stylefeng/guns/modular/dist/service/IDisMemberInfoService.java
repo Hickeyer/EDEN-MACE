@@ -39,4 +39,6 @@ public interface IDisMemberInfoService {
      */
     public List<SubordinateResp> getSubordinateInfo(SubordinateReq req);
 
+    public void saveNoOperate(DisMemberInfo param);
+
 }

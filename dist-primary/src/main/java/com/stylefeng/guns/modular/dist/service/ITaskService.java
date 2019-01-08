@@ -5,4 +5,6 @@ public interface ITaskService {
 
     public void upgradeLevel(String type);
 
+    public void clearData();
+
 }

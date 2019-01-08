@@ -4,8 +4,7 @@ import com.stylefeng.guns.common.annotion.Permission;
 import com.stylefeng.guns.common.annotion.log.BussinessLog;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.Dict;
-import com.stylefeng.guns.common.constant.dist.JurisdictionStatus;
-import com.stylefeng.guns.common.constant.dist.SystemUser;
+import com.stylefeng.guns.common.constant.dist.*;
 import com.stylefeng.guns.common.constant.factory.ConstantFactory;
 import com.stylefeng.guns.common.constant.state.ManagerStatus;
 import com.stylefeng.guns.common.constant.tips.AbstractTip;
@@ -28,6 +27,7 @@ import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
 import com.stylefeng.guns.modular.system.warpper.UserWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -69,6 +69,15 @@ public class UserMgrController extends BaseController {
 
     @Autowired
     IDisMemberInfoService disMemberInfoService;
+
+
+
+
+    /**
+     * 会员初始化后缀
+     */
+    @Value("${dist.member.suffix}")
+    private  String suffix;
 
     /**
      * 跳转到查看管理员列表的页面
@@ -215,7 +224,7 @@ public class UserMgrController extends BaseController {
         DisMemberInfo memberInfo=new DisMemberInfo();
         memberInfo.setDisUserId(user.getAccount());
         memberInfo.setDisUserName(user.getName());
-        memberInfo.setType("1");
+        memberInfo.setType(IdentityStatus.PLAT_STATUS.getStatus());
         memberInfo.setDisPlatformId(user.getFullindex().split("\\.")[1]);
         memberInfo.setDisPlatSuper(user.getSuperaccount());
         memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
@@ -226,6 +235,18 @@ public class UserMgrController extends BaseController {
         memberInfo.setDisLevel(Integer.parseInt(user.getLevel()));
         memberInfo.setIsDelete("N");
         disMemberInfoService.saveAgent(memberInfo);
+        if(DistCommonArg.ADMIN.equals(memberInfo.getDisModelId())){
+            String memberId =memberInfo.getDisUserId()+suffix;
+            memberInfo.setDisModelId("");
+            memberInfo.setDisFullIndex(memberId);
+            memberInfo.setDisUserId(memberId);
+            memberInfo.setDisLevel(0);
+            memberInfo.setDisUserRank(UserRankStatus.A_STATUS.getStatus());
+            memberInfo.setDisUserType(UserTypeStatus.ZERO_STATUS.getStatus());
+            memberInfo.setDisNote("系统自动生成，用于初始化数据");
+            memberInfo.setType(IdentityStatus.USER_STATUS.getStatus());
+            disMemberInfoService.saveNoOperate(memberInfo);
+        }
         return SUCCESS_TIP;
     }
 

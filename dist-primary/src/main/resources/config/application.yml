@@ -69,3 +69,5 @@ dist:
     secret: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
     account: xiaojiang
     isUse: false
+  member:
+    suffix: member
