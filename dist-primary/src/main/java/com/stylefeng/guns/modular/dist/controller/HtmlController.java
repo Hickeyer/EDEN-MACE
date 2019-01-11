@@ -54,7 +54,7 @@ public class HtmlController extends BaseController {
         memberInfo.setDisLevel(Integer.parseInt(user.getLevel()));
         memberInfo.setIsDelete("N");
         disMemberInfoService.saveAgent(memberInfo);
-        return "清理成功";
+        return "sucess";
     }
 
 }

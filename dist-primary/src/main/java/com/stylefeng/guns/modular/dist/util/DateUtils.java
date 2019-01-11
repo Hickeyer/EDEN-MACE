@@ -9,10 +9,14 @@ public class DateUtils {
 
 
     public static void main(String[] args) {
-        System.out.println(DateUtils.getNowDateTime());
+        System.out.println(LocalDateTime.now().getHour());
     }
     public static String longToDateAll(Long time) {
         return getDateParser("yyyy-MM-dd HH:mm:ss").format(new Date(time));
+    }
+
+    public static String preNowDate(){
+        return LocalDateTime.now().toString().substring(0,10);
     }
 
     public static String getNowDateTime(){
@@ -39,4 +43,6 @@ public class DateUtils {
         String enddate = format.format(d);
         return enddate;
     }
+
+
 }

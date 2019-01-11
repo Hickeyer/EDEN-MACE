@@ -2,18 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <script src="${ctxPath}/static/lib/jquery/jquery.min.js"></script>
 <script src="${ctxPath}/static/lib/echarts.min.js"></script>
+<script src="${ctxPath}/static/modular/dist/socket/statisticsSocket.js"></script>
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>系统实时数据</title>
 </head>
+<style>
+    .demo{
+        display: flex;
+    }
+    .item{
+        flex: 1;
+    }
+</style>
 <body>
-<div id="main" style="width: 500px;height: 500px"></div>
+
+<div class="main">
+    <div id="main" class="item" style="height: 500px"></div>
+    <div id="trade" class="item" style="height: 500px"></div>
+</div>
+
 <script type="text/javascript">
     var myChart;
+    var tradeChart;
     window.onload = function () {
         myChart = echarts.init(document.getElementById('main'));
+        tradeChart = echarts.init(document.getElementById('trade'));
         ws();
         httpData();
+        tradeinfo();
     }
     function ws() {
         var socket;
@@ -39,6 +56,7 @@
                 var data = $.parseJSON(msg.data);
                 console.log(data["memberCount"]);
                 SetOptions(data);
+                tradeinfo(data);
             };
             //连接关闭事件
             socket.onclose = function() {
@@ -63,8 +81,9 @@
             type:"post",
             success:function (data) {
                 var data = $.parseJSON(data);
-                console.log(data["memberCount"]);
+                console.log(data);
                 SetOptions(data);
+                tradeinfo(data);
             }
         })
     }

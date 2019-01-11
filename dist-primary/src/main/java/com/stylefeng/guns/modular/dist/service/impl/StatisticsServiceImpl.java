@@ -9,16 +9,21 @@ import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
 import com.stylefeng.guns.common.constant.dist.IdentityStatus;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
 import com.stylefeng.guns.common.persistence.dao.DisProfitRecordMapper;
+import com.stylefeng.guns.common.persistence.dao.DisTradeRecordMapper;
 import com.stylefeng.guns.common.persistence.dao.DisWithdrawRecordMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.DisProfitRecord;
+import com.stylefeng.guns.common.persistence.model.DisTradeRecord;
 import com.stylefeng.guns.common.persistence.model.DisWithdrawRecord;
+import com.stylefeng.guns.modular.dist.dao.DisTradeRecordDao;
 import com.stylefeng.guns.modular.dist.service.IStatisticsService;
+import com.stylefeng.guns.modular.dist.util.DateUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  * @author  xiaojiang
@@ -34,6 +39,12 @@ public class StatisticsServiceImpl  implements IStatisticsService {
 
     @Resource
     DisWithdrawRecordMapper disWithdrawRecordMapper;
+
+    @Resource
+    DisTradeRecordMapper disTradeRecordMapper;
+
+    @Resource
+    DisTradeRecordDao disTradeRecordDao;
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
@@ -84,8 +95,54 @@ public class StatisticsServiceImpl  implements IStatisticsService {
         int invitedrawCount = disWithdrawRecordMapper.selectCount(invitedrawWrapper);
         map.put("invitedrawCount",invitedrawCount);
 
-
+        getTradeInfo(map);
 
         return JSON.toJSONString(map);
+    }
+
+
+    /**
+     * 交易统计，
+     * @param map
+     * @return
+     */
+    public  Map getTradeInfo(Map map){
+
+
+        List tradeCounts = new ArrayList();
+        List tradeAmounts = new ArrayList();
+        int max = LocalDateTime.now().getHour();
+        for (int i=1;i<=max;i++){
+            List tradeCount = new ArrayList();
+            List tradeAmount = new ArrayList();
+            String time = DateUtils.preNowDate();
+            String hour ="";
+            if (i<10){
+                hour = "0"+i;
+            }else{
+                hour = i+"";
+            }
+            String startTime = time +" "+ hour +":00:00";
+            String endTime = time + " "+hour +":59:59";
+            String frontTime =hour + ":00";
+            Wrapper<DisTradeRecord> tradeWrapper = new EntityWrapper<>();
+            tradeWrapper.ge("trade_time",startTime);
+            tradeWrapper.le("trade_time",endTime);
+            Integer count = disTradeRecordMapper.selectCount(tradeWrapper);
+            tradeCount.add(frontTime);
+            tradeCount.add(count);
+
+            BigDecimal am = disTradeRecordDao.findSumAmount(startTime,endTime);
+            tradeAmount.add(frontTime);
+            tradeAmount.add(am);
+
+            tradeCounts.add(tradeCount);
+            tradeAmounts.add(tradeAmount);
+        }
+
+
+        map.put("tradeCounts",tradeCounts);
+        map.put("tradeAmounts",tradeAmounts);
+        return map;
     }
 }

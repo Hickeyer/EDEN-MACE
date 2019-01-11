@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.dist.dao.DisTradeRecordDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.DisTradeRecord">
+		<id column="id" property="id" />
+		<result column="dis_user_id" property="disUserId" />
+		<result column="trade_num" property="tradeNum" />
+		<result column="trade_amount" property="tradeAmount" />
+		<result column="trade_time" property="tradeTime" />
+	</resultMap>
+
+
+	<select id="findSumAmount" resultType="BigDecimal">
+		SELECT IFNULL (SUM(trade_amount),0) FROM  `dis_trade_record`
+		WHERE 1=1
+		<if test="startTime!=null and startTime !=''">
+			<![CDATA[ and trade_time >= #{startTime}]]>
+		</if>
+		<if test="endTime != null and endTime !=''">
+			<![CDATA[ AND trade_time < #{endTime}]]>
+		</if>
+
+
+	</select>
+
+
+</mapper>

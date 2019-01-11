@@ -1,5 +1,6 @@
 package com.stylefeng.guns.config;
 
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +16,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * 实现websocket通信
  */
 @Component
-@ServerEndpoint(value = "/ws/statis")
+@ServerEndpoint(value = "/ws/statis",configurator = WebSocketConfig.class)
 public class StatisticsWebSocket {
 
 
@@ -24,6 +25,8 @@ public class StatisticsWebSocket {
     //每个客户端的标志
     private Session session;
 
+    private String account;
+
     private static CopyOnWriteArraySet<StatisticsWebSocket> copyOnWriteArraySet = new CopyOnWriteArraySet<StatisticsWebSocket>();
 
     /**
@@ -31,8 +34,10 @@ public class StatisticsWebSocket {
      * @param session
      */
     @OnOpen
-    public void onOpen(Session session){
+    public void onOpen(Session session,EndpointConfig config){
+        String account = (String) config.getUserProperties().get("account");
         this.session = session;
+        this.account = account;
         copyOnWriteArraySet.add(this);
         logger.info("新的连接进入，总数:{}",copyOnWriteArraySet.size());
     }
@@ -62,6 +67,7 @@ public class StatisticsWebSocket {
      * @param message
      */
     public void sendMessage(String message) {
+        String account = ShiroKit.getUser().getAccount();
         //遍历客户端
         for (StatisticsWebSocket webSocket : copyOnWriteArraySet) {
             logger.info("广播消息：" + message);
