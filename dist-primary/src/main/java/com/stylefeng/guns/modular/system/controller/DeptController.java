@@ -158,7 +158,7 @@ public class DeptController extends BaseController {
     }
 
     private void deptSetPids(Dept dept) {
-        if (ToolUtil.isEmpty(dept.getPid()) || "0".equals(dept.getPid())) {
+        if (dept.getPid() == 0) {
             dept.setPid(0);
             dept.setPids("[0],");
         } else {

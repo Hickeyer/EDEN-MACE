@@ -30,11 +30,11 @@ CREATE TABLE `dept` (
   `tips` varchar(255) DEFAULT NULL COMMENT '提示',
   `version` int(11) DEFAULT NULL COMMENT '版本（乐观锁保留字段）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='部门表';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='部门表';
 
 /*Data for the table `dept` */
 
-insert  into `dept`(`id`,`num`,`pid`,`pids`,`simplename`,`fullname`,`tips`,`version`) values (25,2,24,'[0],[24],','开发部','开发部','',NULL),(26,3,24,'[0],[24],','运营部','运营部','',NULL),(27,4,24,'[0],[24],','战略部','战略部','',NULL),(28,5,1,NULL,'测试','测试fullname','测试tips',1),(29,5,1,NULL,'测试','测试fullname','测试tips',1),(30,5,1,NULL,'测试','测试fullname','测试tips',1);
+insert  into `dept`(`id`,`num`,`pid`,`pids`,`simplename`,`fullname`,`tips`,`version`) values (25,2,0,'[0],[24],','开发部','开发部','',NULL),(26,3,0,'[0],[24],','运营部','运营部','',NULL),(27,4,0,'[0],[24],','战略部','战略部','',NULL),(28,5,0,NULL,'测试','测试fullname','测试tips',1),(29,5,0,NULL,'测试','测试fullname','测试tips',1),(30,5,0,NULL,'测试','测试fullname','测试tips',1),(31,6,0,'[0],','测试部门','测试部门','1',NULL);
 
 /*Table structure for table `dict` */
 
@@ -130,11 +130,9 @@ CREATE TABLE `operation_log` (
   `succeed` varchar(255) DEFAULT NULL COMMENT '是否成功',
   `message` text COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='操作日志';
 
 /*Data for the table `operation_log` */
-
-insert  into `operation_log`(`id`,`logtype`,`logname`,`userid`,`classname`,`method`,`createtime`,`succeed`,`message`) values (1,'业务日志','菜单新增',1,'com.stylefeng.guns.modular.system.controller.MenuController','add','2019-01-11 20:24:13','成功','菜单名称=实时交易数据'),(2,'业务日志','配置权限',1,'com.stylefeng.guns.modular.system.controller.RoleController','setAuthority','2019-01-11 20:24:24','成功','角色名称=超级管理员,资源名称=系统管理,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,菜单管理,添加菜单,修改菜单,删除菜单,菜单编辑跳转,菜单列表,业务日志,清空日志,日志列表,日志详情,监控管理,部门管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,登录日志,清空登录日志,登录日志列表,通知管理,添加通知,修改通知,删除通知,代码生成,任务调度,对接参考,接口文档,查看秘钥,模拟操作,模拟菜单,会员信息,会员管理,模拟新增会员,查看关系图,账单查询,账单查询,分销配置,分润设置,新增分润类型,删除,分润查询,分销字典管理,分销字典增加,分销字典修改,分销 字典删除,提现费率设置,菜单,新增,修改,删除,段位积分设置,添加,段位积分修改,段位积分删除,会员垂直升级配置,添加,修改,删除,代理垂直升级配置,添加,删除,交易中心,分润信息,模拟交易,提现信息,菜单,统计中心,交易动态,动态查询,我的账户,实时交易数据');
 
 /*Table structure for table `qrtz_blob_triggers` */
 
