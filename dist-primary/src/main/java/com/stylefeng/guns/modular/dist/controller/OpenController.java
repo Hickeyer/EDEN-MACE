@@ -126,6 +126,8 @@ public class OpenController  {
             }else {
                 superPaltId=param.getDisPlatSuper();
             }
+        }else {
+            superPaltId = memberInfoVo.getDisPlatformId();
         }
         User user=userMgrDao.getByAccount(superPaltId);
         if(user==null){
@@ -138,7 +140,7 @@ public class OpenController  {
         DisMemberInfo memberInfo=new DisMemberInfo();
         BeanUtils.copyProperties(memberInfoVo,memberInfo);
         memberInfo.setDisUserType("0");
-        memberInfo.setDisPlatSuper(memberInfoVo.getDisPlatSuper());
+        memberInfo.setDisPlatSuper(user.getSuperaccount());
         memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
         memberInfo.setDisPlatFullIndex(user.getFullindex());
         memberInfo.setDisPlatformId(user.getFullindex().split("\\.")[1]);

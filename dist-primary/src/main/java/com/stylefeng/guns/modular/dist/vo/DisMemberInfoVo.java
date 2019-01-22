@@ -16,7 +16,6 @@ public class DisMemberInfoVo   {
 
     private String disNote;
 
-    private String disPlatSuper;
 
     public String getSecret() {
         return secret;
@@ -74,11 +73,4 @@ public class DisMemberInfoVo   {
         this.disNote = disNote;
     }
 
-    public String getDisPlatSuper() {
-        return disPlatSuper;
-    }
-
-    public void setDisPlatSuper(String disPlatSuper) {
-        this.disPlatSuper = disPlatSuper;
-    }
 }

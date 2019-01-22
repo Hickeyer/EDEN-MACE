@@ -44,7 +44,7 @@ SimOperInfoDlg.close = function() {
  * 收集数据
  */
 SimOperInfoDlg.collectData = function() {
-    this.set('disPlatSuper').set("disModelId")
+    this.set('disPlatformId').set("disModelId")
         .set("secret").set("disUserName").set("disUserId")
         .set("disNote");
 }

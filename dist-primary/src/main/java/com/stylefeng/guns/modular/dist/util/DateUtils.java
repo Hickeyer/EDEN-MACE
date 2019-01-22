@@ -9,7 +9,8 @@ public class DateUtils {
 
 
     public static void main(String[] args) {
-        System.out.println(LocalDateTime.now().getHour());
+        System.out.println(getFirstMountDay(1));
+        System.out.println(getLastMountDay(1));
     }
     public static String longToDateAll(Long time) {
         return getDateParser("yyyy-MM-dd HH:mm:ss").format(new Date(time));
@@ -42,7 +43,40 @@ public class DateUtils {
         d = ca.getTime();
         String enddate = format.format(d);
         return enddate;
+
+
+
     }
 
+
+    public static String getLastMountDay(int num){
+        Calendar ca = Calendar.getInstance();
+        // num为增加的天数，可以改变的
+        ca.add(Calendar.MONTH, num);
+        ca.set(Calendar.DAY_OF_MONTH, ca.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+        Date d = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        d =ca.getTime();
+        return  format.format(d);
+    }
+    public static String getFirstMountDay(int num){
+        Calendar ca = Calendar.getInstance();
+        // num为增加的天数，可以改变的
+        ca.add(Calendar.MONTH, num);
+        ca.set(Calendar.DAY_OF_MONTH, ca.getActualMinimum(Calendar.DAY_OF_MONTH));
+
+        Date d = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        d =ca.getTime();
+        return  format.format(d);
+    }
+
+    public static  Date getNextYear(Date date){
+        Calendar ca = Calendar.getInstance();
+        ca.setTime(date);
+        ca.add(Calendar.YEAR,1);
+        return ca.getTime();
+    }
 
 }
