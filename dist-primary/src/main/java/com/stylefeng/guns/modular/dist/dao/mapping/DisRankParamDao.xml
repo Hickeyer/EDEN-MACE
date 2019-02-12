@@ -33,6 +33,18 @@
         <if test="account != null and account != ''">
             and p.dis_platform_id=#{account}
         </if>
+        <if test="calModel != null and calModel != ''">
+            and p.cal_model=#{calModel}
+        </if>
+        <if test="accountType != null and accountType != ''">
+            and p.account_type=#{accountType}
+        </if>
+        <if test="disUserType != null and disUserType != ''">
+            and p.dis_user_type=#{disUserType}
+        </if>
+        <if test="disUserRank != null and disUserRank != ''">
+            and p.dis_user_rank=#{disUserRank}
+        </if>
         order by  p.add_time DESC
     </select>
 

@@ -21,8 +21,8 @@
     <select id="list" resultMap="BaseResultMap">
         select * from sys_dic_type
         where 1=1
-        <if test="condition != null and condition != ''">
-            AND dic_type_name like CONCAT('%',#{condition},'%')
+        <if test="dicTypeName != null and dicTypeName != ''">
+            AND dic_type_name like CONCAT('%',#{dicTypeName},'%')
         </if>
         order by dic_type_order ASC
     </select>

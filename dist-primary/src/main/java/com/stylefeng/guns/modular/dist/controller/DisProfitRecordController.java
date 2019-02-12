@@ -1,14 +1,19 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.github.pagehelper.Page;
 import com.stylefeng.guns.common.constant.Const;
+import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
+import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
+import com.stylefeng.guns.common.persistence.model.DisProfitRecord;
 import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.service.IDisProfitRecordService;
+import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import com.stylefeng.guns.modular.dist.util.Jwt;
 import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
 import com.stylefeng.guns.modular.dist.wapper.ProfiParamWarpper;
@@ -38,9 +43,11 @@ public class DisProfitRecordController extends BaseController {
     @Autowired
     IDisProfitRecordService disProfitRecordService;
 
-
     @Autowired
     IDisMemberInfoService disMemberInfoService;
+
+    @Autowired
+    ISysDicService sysDicService;
 
     private String prefix = "/dist/disProfitRecord/";
 
@@ -55,7 +62,8 @@ public class DisProfitRecordController extends BaseController {
      * 跳转到交易首页
      */
     @RequestMapping("")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("accountType",sysDicService.selectListByCode("accountType"));
         return prefix + "disProfitRecord.html";
     }
 
@@ -80,13 +88,14 @@ public class DisProfitRecordController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
+    public Object list(String disGetUserId,String disSetUserId,String disOrderId,String accountType,String userType) {
         String account= ShiroKit.getUser().getAccount();
         if(ShiroKit.hasRole(Const.ADMIN_NAME)){
             account=null;
         }
-        List<Map<String, Object>> list=disProfitRecordService.selectList(account);
-        return super.warpObject(new ProfitRecordWarpper(list));
+        Page page = new PageFactory<DisProfitRecord>().defaultPage();
+        List<Map<String, Object>> list=disProfitRecordService.selectList(account,disGetUserId,disSetUserId,disOrderId,accountType,userType);
+        return super.packForBT((List)new ProfitRecordWarpper(list).warp(),page.getTotal());
     }
 
 

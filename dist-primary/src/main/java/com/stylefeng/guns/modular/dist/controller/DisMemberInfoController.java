@@ -1,13 +1,15 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.github.pagehelper.Page;
 import com.google.gson.Gson;
 import com.stylefeng.guns.common.constant.Const;
+import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.controller.BaseController;
+import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.vo.Categories;
 import com.stylefeng.guns.modular.dist.wapper.MemberWarpper;
-import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -33,6 +34,7 @@ public class DisMemberInfoController extends BaseController {
 
     @Autowired
     IDisMemberInfoService  disMemberInfoService;
+
 
 
     @Autowired
@@ -111,13 +113,15 @@ public class DisMemberInfoController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
+    public Object list(String disUserId,String disModelId) {
         String account= ShiroKit.getUser().getAccount();
         if(ShiroKit.hasRole(Const.ADMIN_NAME)){
             account=null;
         }
-        List<Map<String, Object>>  list=disMemberInfoService.selectList(account);
-        return super.warpObject(new MemberWarpper(list));
+        Page page = new  PageFactory().defaultPage();
+        List<Map<String, Object>>  result =disMemberInfoService.selectList(account,disUserId,disModelId);
+        List<DisMemberInfo> list = (List<DisMemberInfo>) new MemberWarpper(result).warp();
+        return super.packForBT(list,page.getTotal());
     }
 
 
@@ -138,6 +142,14 @@ public class DisMemberInfoController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update() {
+        return SUCCESS_TIP;
+    }
+    @RequestMapping(value = "/confine")
+    @ResponseBody
+    public Object confine(String status,String memberId) {
+        DisMemberInfo memberInfo = disMemberInfoService.selectListByUserId(memberId);
+        memberInfo.setConfineStatus(Integer.parseInt(status));
+        disMemberInfoService.updateLevel(memberInfo);
         return SUCCESS_TIP;
     }
 

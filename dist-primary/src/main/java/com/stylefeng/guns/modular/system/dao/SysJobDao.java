@@ -18,7 +18,7 @@ import java.util.Map;
 public interface SysJobDao {
 
 
-    List<Map<String, Object>> selectList(@Param("page") Page<SysJob> page);
+    List<Map<String, Object>> selectList();
 
     /**
      * 获取任务数量

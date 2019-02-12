@@ -1,6 +1,6 @@
 package com.stylefeng.guns.modular.system.controller;
 
-import com.baomidou.mybatisplus.plugins.Page;
+import com.github.pagehelper.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.persistence.model.OperationLog;
@@ -61,10 +61,10 @@ public class SysJobController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        Page<SysJob> page = new PageFactory<SysJob>().defaultPage();
-        List list= sysJobDao.selectList(page);
-        page.setRecords((List<SysJob>) new SysJobWarpper(list).warp());
-        return super.packForBT(page) ;
+        Page page = new PageFactory<SysJob>().defaultPage();
+        List list= sysJobDao.selectList();
+        List<SysJob> lists= (List<SysJob>) new SysJobWarpper(list).warp();
+        return super.packForBT(lists,page.getTotal()) ;
     }
 
     /**

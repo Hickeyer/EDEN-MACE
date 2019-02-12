@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-10-18
+ * @since 2019-02-02
  */
 @TableName("dis_member_info")
 public class DisMemberInfo extends Model<DisMemberInfo> {
@@ -114,6 +114,11 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
      */
 	@TableField("total_rank_integral")
 	private Integer totalRankIntegral;
+    /**
+     * 限制状态，0为正常，1为禁止邀请用户
+     */
+	@TableField("confine_status")
+	private Integer confineStatus;
 
 
 	public Integer getId() {
@@ -268,6 +273,14 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 		this.totalRankIntegral = totalRankIntegral;
 	}
 
+	public Integer getConfineStatus() {
+		return confineStatus;
+	}
+
+	public void setConfineStatus(Integer confineStatus) {
+		this.confineStatus = confineStatus;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -295,6 +308,7 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 			", type=" + type +
 			", rankIntegral=" + rankIntegral +
 			", totalRankIntegral=" + totalRankIntegral +
+			", confineStatus=" + confineStatus +
 			"}";
 	}
 }

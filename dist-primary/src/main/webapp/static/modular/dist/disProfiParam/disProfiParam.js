@@ -93,14 +93,20 @@ DisProfiParam.delete = function () {
  * 查询参数设置列表
  */
 DisProfiParam.search = function () {
-    var queryData = {};
-    queryData['condition'] = $("#condition").val();
-    DisProfiParam.table.refresh({query: queryData});
+    DisProfiParam.table.refresh({query: DisProfiParam.formParams()});
 };
-
+DisProfiParam.formParams = function() {
+    var queryData = {};
+    queryData['calModel'] = $("#calModel").val();
+    queryData['accountType'] = $("#accountType").val();
+    queryData['disUserType'] = $("#disUserType").val();
+    queryData['disUserRank'] = $("#disUserRank").val();
+    return queryData;
+}
 $(function () {
     var defaultColunms = DisProfiParam.initColumn();
     var table = new BSTable(DisProfiParam.id, "/disProfiParam/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
+    table.setQueryParams(DisProfiParam.formParams());
     DisProfiParam.table = table.init();
 });

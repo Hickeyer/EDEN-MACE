@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.dist.dao;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,7 +15,8 @@ import java.util.Map;
  */
 public interface DisMemberInfoDao {
 
-    List<Map<String, Object>> selectList(@Param("account")  String account);
+    List<Map<String, Object>> selectList(@Param("account")  String account,
+                                         @Param("disUserId") String disUserId,@Param("disModelId") String disModelId);
 
     List<Map<String, Object>> selectSubordinate(@Param("fullIndex")  String fullIndex);
 

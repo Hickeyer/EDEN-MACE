@@ -1,6 +1,8 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.github.pagehelper.Page;
 import com.stylefeng.guns.common.constant.Const;
+import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.persistence.model.DisProfitParam;
 import com.stylefeng.guns.core.shiro.ShiroKit;
@@ -45,7 +47,12 @@ public class DisProfitParamController extends BaseController {
      * 跳转到参数设置首页
      */
     @RequestMapping("")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("calModel",sysDicService.selectListByCode("calModel"));
+        model.addAttribute("accountType",sysDicService.selectListByCode("accountType"));
+        model.addAttribute("disProLevel",sysDicService.selectListByCode("disProLevel"));
+        model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
+        model.addAttribute("disUserRank",sysDicService.selectListByCode("disUserRank"));
         return PREFIX + "disProfiParam.html";
     }
 
@@ -75,13 +82,15 @@ public class DisProfitParamController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
+    public Object list(String calModel,String accountType,String disUserType,String disUserRank) {
         String account= ShiroKit.getUser().getAccount();
         if(ShiroKit.hasRole(Const.ADMIN_NAME)){
             account=null;
         }
-        List<Map<String, Object>> list=disProfiParamService.selectList(account);
-        return super.warpObject(new ProfiParamWarpper(list));
+        Page page = new PageFactory().defaultPage();
+        List<Map<String, Object>> list=disProfiParamService.selectList(account,calModel, accountType, disUserType, disUserRank);
+        List<DisProfitParam> lists =(List<DisProfitParam>)new ProfiParamWarpper(list).warp();
+        return super.packForBT(lists,page.getTotal());
     }
 
     /**

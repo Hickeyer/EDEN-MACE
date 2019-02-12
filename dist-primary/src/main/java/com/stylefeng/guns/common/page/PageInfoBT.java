@@ -22,9 +22,9 @@ public class PageInfoBT<T> {
      */
     private long total;
 
-    public PageInfoBT(Page<T> page) {
-        this.rows = page.getRecords();
-        this.total = page.getTotal();
+    public PageInfoBT(List<T> list,long rows) {
+        this.rows = list;
+        this.total = rows;
     }
 
     public List<T> getRows() {

@@ -4,6 +4,7 @@ import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.persistence.model.DisUpgradeParam;
 import com.stylefeng.guns.modular.dist.service.IDisUpgradeParamService;
 import com.stylefeng.guns.modular.dist.service.ISysDicService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,19 +71,25 @@ public class DisUpgradeParamController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
-        return disUpgradeParamService.selectList();
+    public Object list(String upgradeName) {
+        if(StringUtils.isNotEmpty(upgradeName)){
+            upgradeName ="%"+upgradeName+"%";
+        }
+        return disUpgradeParamService.selectList(upgradeName);
     }
 
     /**
      * 查询代理商列表
-     * @param condition
+     * @param upgradeName
      * @return
      */
     @RequestMapping(value = "/agent/list")
     @ResponseBody
-    public Object listAgent(String condition) {
-        return disUpgradeParamService.selectAgentList();
+    public Object listAgent(String upgradeName) {
+        if(StringUtils.isNotEmpty(upgradeName)){
+            upgradeName ="%"+upgradeName+"%";
+        }
+        return disUpgradeParamService.selectAgentList(upgradeName);
     }
 
     /**

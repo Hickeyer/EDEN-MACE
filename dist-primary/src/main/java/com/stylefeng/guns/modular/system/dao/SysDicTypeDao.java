@@ -18,10 +18,10 @@ public interface SysDicTypeDao {
 
     /**
      * 查询字典类型  列表
-     * @param conditiion
+     * @param dicTypeName
      * @return
      */
-    List<Map<String, Object>> list(@Param("condition") String conditiion);
+    List<Map<String, Object>> list(@Param("dicTypeName") String dicTypeName);
 
     List<Map<String, Object>> getDicList(@Param("page") Page<OperationLog> page, @Param("condition") String condition);
 

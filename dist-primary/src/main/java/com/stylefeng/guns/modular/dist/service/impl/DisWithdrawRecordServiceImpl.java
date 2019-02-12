@@ -74,8 +74,8 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public List<Map<String, Object>> selectList() {
-        return disWithdrawRecordDao.selectList();
+    public List<Map<String, Object>> selectList(String account,String disUserId,String withdrawNum,String withdrawStatus,String accountType) {
+        return disWithdrawRecordDao.selectList( account, disUserId, withdrawNum, withdrawStatus, accountType);
     }
 
     @Override

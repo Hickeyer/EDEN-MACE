@@ -1,11 +1,15 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.github.pagehelper.Page;
 import com.stylefeng.guns.common.constant.Const;
+import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.persistence.model.DisRankParam;
+import com.stylefeng.guns.common.warpper.BaseControllerWarpper;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisRankParamService;
 import com.stylefeng.guns.modular.dist.service.ISysDicService;
+import com.stylefeng.guns.modular.dist.wapper.CommonWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +44,12 @@ public class DisRankParamController extends BaseController {
      * 跳转到段位积分首页
      */
     @RequestMapping("")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("calModel",sysDicService.selectListByCode("calModel"));
+        model.addAttribute("accountType",sysDicService.selectListByCode("accountType"));
+        model.addAttribute("disProLevel",sysDicService.selectListByCode("disRankLevel"));
+        model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
+        model.addAttribute("disUserRank",sysDicService.selectListByCode("disUserRank"));
         return prefix + "DisRankParam.html";
     }
 
@@ -74,13 +83,15 @@ public class DisRankParamController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
+    public Object list(String calModel,String accountType,String disUserType,String disUserRank) {
         String account= ShiroKit.getUser().getAccount();
         if(ShiroKit.hasRole(Const.ADMIN_NAME)){
             account=null;
         }
-        List<Map<String, Object>> list = disRankParamService.selectList(account);
-        return list ;
+        Page page = new PageFactory().defaultPage();
+        List<Map<String, Object>> list = disRankParamService.selectList(account,calModel, accountType, disUserType, disUserRank);
+        List<DisRankParam> lists = (List<DisRankParam> )new CommonWarpper(list).warp();
+        return super.packForBT(lists,page.getTotal()) ;
     }
 
     /**

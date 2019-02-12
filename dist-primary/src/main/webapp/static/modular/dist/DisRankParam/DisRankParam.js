@@ -93,14 +93,20 @@ DisRankParam.delete = function () {
  * 查询段位积分列表
  */
 DisRankParam.search = function () {
-    var queryData = {};
-    queryData['condition'] = $("#condition").val();
-    DisRankParam.table.refresh({query: queryData});
+    DisRankParam.table.refresh({query: DisRankParam.formParams()});
 };
-
+DisRankParam.formParams = function() {
+    var queryData = {};
+    queryData['calModel'] = $("#calModel").val();
+    queryData['accountType'] = $("#accountType").val();
+    queryData['disUserType'] = $("#disUserType").val();
+    queryData['disUserRank'] = $("#disUserRank").val();
+    return queryData;
+}
 $(function () {
     var defaultColunms = DisRankParam.initColumn();
     var table = new BSTable(DisRankParam.id, "/DisRankParam/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
+    table.setQueryParams(DisRankParam.formParams());
     DisRankParam.table = table.init();
 });

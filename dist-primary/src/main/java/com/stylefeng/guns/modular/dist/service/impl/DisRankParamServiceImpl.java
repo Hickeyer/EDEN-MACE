@@ -32,8 +32,8 @@ public class DisRankParamServiceImpl implements IDisRankParamService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public List<Map<String, Object>> selectList(String account) {
-        List<Map<String, Object>> list = disRankParamDao.selectList(account);
+    public List<Map<String, Object>> selectList(String account,String calModel,String accountType,String disUserType,String disUserRank) {
+        List<Map<String, Object>> list = disRankParamDao.selectList(account,calModel, accountType, disUserType, disUserRank);
         return list;
     }
 

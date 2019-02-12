@@ -13,8 +13,8 @@ import java.util.Map;
  */
 public interface IDisUpgradeParamService {
 
-    public List<Map<String, Object>> selectList();
-    public List<Map<String, Object>> selectAgentList();
+    public List<Map<String, Object>> selectList(String upgradeName);
+    public List<Map<String, Object>> selectAgentList(String upgradeName);
 
     public void save(DisUpgradeParam param);
 

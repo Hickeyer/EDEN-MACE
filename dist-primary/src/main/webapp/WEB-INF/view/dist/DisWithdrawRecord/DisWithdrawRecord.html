@@ -9,10 +9,30 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <#NameCon id="condition" name="名称" />
+                            <div class="col-sm-2">
+                                <#NameCon id="disUserId" name="客户账户" />
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
+                                <#NameCon id="withdrawNum" name="订单号" />
+                            </div>
+                            <div class="col-sm-2">
+                                <#SelectCon id="withdrawStatus" name="分润类型" >
+                                    <option value="">请选择</option>
+                                    <option value="1">待审核</option>
+                                    <option value="2">审核成功</option>
+                                    <option value="3">审核拒绝</option>
+                                    <option value="4">审核处理中</option>
+                                </#SelectCon>
+                        </div>
+                        <div class="col-sm-2">
+                            <#SelectCon id="accountType" name="账户类型 ">
+                            <option value="">请选择</option>
+                            @for(dis in accountType){
+                            <option value="${dis.dicNo}">${dis.dicValue}</option>
+                            @}
+                        </#SelectCon>
+                    </div>
+                            <div class="col-sm-2">
                                 <#button name="搜索" icon="fa-search" clickFun="DisWithdrawRecord.search()"/>
                             </div>
                         </div>

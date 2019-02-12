@@ -92,14 +92,21 @@ DisProfitRecord.delete = function () {
  * 查询交易列表
  */
 DisProfitRecord.search = function () {
-    var queryData = {};
-    queryData['condition'] = $("#condition").val();
-    DisProfitRecord.table.refresh({query: queryData});
+    DisProfitRecord.table.refresh({query: DisProfitRecord.formParams()});
 };
-
+DisProfitRecord.formParams = function() {
+    var queryData = {};
+    queryData['disGetUserId'] = $("#disGetUserId").val();
+    queryData['disSetUserId'] = $("#disSetUserId").val();
+    queryData['disOrderId'] = $("#disOrderId").val();
+    queryData['accountType'] = $("#accountType").val();
+    queryData['userType'] = $("#userType").val();
+    return queryData;
+}
 $(function () {
     var defaultColunms = DisProfitRecord.initColumn();
     var table = new BSTable(DisProfitRecord.id, "/disProfitRecord/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
+    table.setQueryParams(DisProfitRecord.formParams());
     DisProfitRecord.table = table.init();
 });

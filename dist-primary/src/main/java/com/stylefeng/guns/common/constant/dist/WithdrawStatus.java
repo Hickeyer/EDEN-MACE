@@ -13,7 +13,11 @@ public enum WithdrawStatus {
     /**
      * 审核未通过
      */
-    THIRD_STATUS("3","审核拒绝");
+    THIRD_STATUS("3","审核拒绝"),
+    /**
+     * 如果调用支付宝，或者其他的第三方接口需要 改成此状态
+     */
+    FORTH_STATUS("4","审核处理中");
 
     private String status;
     private String mes;

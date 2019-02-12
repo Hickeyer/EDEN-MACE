@@ -119,14 +119,22 @@ DisMemberAmount.setAmount = function () {
  * 查询会员账户管理列表
  */
 DisMemberAmount.search = function () {
-    var queryData = {};
-    queryData['condition'] = $("#condition").val();
-    DisMemberAmount.table.refresh({query: queryData});
+    DisMemberAmount.table.refresh({query: DisMemberAmount.formParams()});
 };
 
+
+DisMemberAmount.formParams = function() {
+    var queryData = {};
+
+    queryData['disUserId'] = $("#disUserId").val();
+    queryData['userType'] = $("#userType").val();
+
+    return queryData;
+}
 $(function () {
     var defaultColunms = DisMemberAmount.initColumn();
     var table = new BSTable(DisMemberAmount.id, "/disMemberAmount/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
+    table.setQueryParams(DisMemberAmount.formParams());
     DisMemberAmount.table = table.init();
 });

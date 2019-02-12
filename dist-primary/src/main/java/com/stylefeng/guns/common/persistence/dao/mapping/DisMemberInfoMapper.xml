@@ -23,6 +23,7 @@
 		<result column="type" property="type" />
 		<result column="rank_integral" property="rankIntegral" />
 		<result column="total_rank_integral" property="totalRankIntegral" />
+		<result column="confine_status" property="confineStatus" />
 	</resultMap>
 
 </mapper>

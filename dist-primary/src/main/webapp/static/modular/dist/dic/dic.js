@@ -92,7 +92,7 @@ Dict.delete = function () {
  */
 Dict.search = function () {
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
+    queryData['dicTypeName'] = $("#dicTypeName").val();
     Dict.table.refresh({query: queryData});
 };
 

@@ -18,10 +18,11 @@
         <result column="update_time" property="updateTime" />
         <result column="is_delete" property="isDelete" />
         <result column="rank_integral" property="rankIntegral" />
+        <result column="confine_status" property="confineStatus" />
     </resultMap>
 
     <select id="selectList" resultMap="BaseResultMap">
-        SELECT m.rank_integral,m.`id`,m.`dis_platform_id`,m.`dis_user_id`,m.`dis_model_id`,m.`dis_full_index`,m.`dis_user_name`,e.`dic_value` AS dis_level,m.`update_time`
+        SELECT m.confine_status,m.rank_integral,m.`id`,m.`dis_platform_id`,m.`dis_user_id`,m.`dis_model_id`,m.`dis_full_index`,m.`dis_user_name`,e.`dic_value` AS dis_level,m.`update_time`
         ,m.`dis_note`,m.`add_time`,d.`dic_value` AS dis_user_type,f.`dic_value` AS dis_user_rank
         FROM  `dis_member_info` m
         LEFT JOIN `sys_dic` d ON m.`dis_user_type`=d.`dic_no` AND d.`dic_type_no`='disUserType' AND d.`is_delete`='N'
@@ -31,6 +32,12 @@
 
         <if test="account != null and account != ''">
             and    m.dis_plat_super=#{account}
+        </if>
+        <if test="disUserId != null and disUserId != ''">
+            and    m.dis_user_id=#{disUserId}
+        </if>
+        <if test="disModelId != null and disModelId != ''">
+            and    m.dis_model_id=#{disModelId}
         </if>
         order by m.add_time DESC
     </select>

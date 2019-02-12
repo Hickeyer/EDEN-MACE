@@ -14,7 +14,7 @@ import java.util.Map;
 public interface IDisRankParamService {
 
 
-    public List<Map<String, Object>> selectList(String account);
+    public List<Map<String, Object>> selectList(String account,String calModel,String accountType,String disUserType,String disUserRank);
 
     public void save(DisRankParam param);
 

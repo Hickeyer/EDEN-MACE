@@ -31,14 +31,14 @@ public class DisUpgradeParamServiceImpl implements IDisUpgradeParamService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public List<Map<String, Object>> selectList() {
-        return disUpgradeParamDao.selectList();
+    public List<Map<String, Object>> selectList(String upgradeName) {
+        return disUpgradeParamDao.selectList(upgradeName);
     }
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public List<Map<String, Object>> selectAgentList() {
-        return disUpgradeParamDao.selectAgentList();
+    public List<Map<String, Object>> selectAgentList(String upgradeName) {
+        return disUpgradeParamDao.selectAgentList(upgradeName);
     }
 
     @Override

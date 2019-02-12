@@ -36,8 +36,8 @@ public class DisProfiParamServiceImpl implements IDisProfiParamService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public List<Map<String, Object>> selectList(String account) {
-        List<Map<String, Object>> list=disProfitParamDao.selectList(account);
+    public List<Map<String, Object>> selectList(String account,String calModel,String accountType,String disUserType,String disUserRank) {
+        List<Map<String, Object>> list=disProfitParamDao.selectList(account,calModel, accountType, disUserType, disUserRank);
         return list;
     }
 

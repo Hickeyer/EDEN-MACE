@@ -9,8 +9,15 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <#NameCon id="condition" name="名称" />
+                            <div class="col-sm-2">
+                                <#NameCon id="disUserId" name="会员id" />
+                            </div>
+                            <div class="col-sm-2">
+                                <#SelectCon id="userType" name="分润类型" >
+                                <option value="">请选择</option>
+                                <option value="0">用户</option>
+                                <option value="1">平台</option>
+                            </#SelectCon>
                             </div>
                             <div class="col-sm-3">
                                 <#button name="搜索" icon="fa-search" clickFun="DisMemberAmount.search()"/>
@@ -18,7 +25,7 @@
                         </div>
                         <div class="hidden-xs" id="DisMemberAmountTableToolbar" role="group">
 
-                            <#button name="同步会员账户" icon="fa-plus" clickFun="DisMemberAmount.setAmount()" space="true"/>
+                           <!-- <#button name="同步会员账户" icon="fa-plus" clickFun="DisMemberAmount.setAmount()" space="true"/>-->
                             @if(shiro.hasPermission("/disMemberAmount/add")){
                                 <#button name="添加" icon="fa-plus" clickFun="DisMemberAmount.openAddDisMemberAmount()"/>
                             @}

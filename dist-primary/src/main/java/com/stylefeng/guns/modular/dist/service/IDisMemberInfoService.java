@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.dist.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.modular.dist.http.request.SubordinateReq;
 import com.stylefeng.guns.modular.dist.http.response.SubordinateResp;
@@ -15,7 +16,7 @@ import java.util.Map;
  */
 public interface IDisMemberInfoService {
 
-    List<Map<String, Object>> selectList(String account);
+    List<Map<String, Object>> selectList(String account, String disUserId, String disModelId);
 
     /**
      * 根据用户名查询用户

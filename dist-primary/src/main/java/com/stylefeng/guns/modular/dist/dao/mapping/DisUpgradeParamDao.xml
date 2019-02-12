@@ -17,6 +17,9 @@
         FROM  `dis_upgrade_param` u
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=u.`dis_user_rank` AND e.`dic_type_no`='disUserRank'
         WHERE u.`is_delete`='N' and identity_type='0'
+        <if test="upgradeName != null and upgradeName != ''">
+            and u.upgrade_name LIKE #{upgradeName}
+        </if>
         order by u.`add_time` desc
     </select>
     <select id="selectAgentList" resultMap="BaseResultMap">
@@ -25,6 +28,9 @@
         FROM  `dis_upgrade_param` u
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=u.`dis_user_rank` AND e.`dic_type_no`='agentRank'
         WHERE u.`is_delete`='N'  and identity_type='1'
+        <if test="upgradeName != null and upgradeName != ''">
+            and u.upgrade_name LIKE #{upgradeName}
+        </if>
         order by u.`add_time` desc
     </select>
 

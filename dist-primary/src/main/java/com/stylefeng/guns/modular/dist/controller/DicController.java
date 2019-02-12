@@ -20,6 +20,7 @@ import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.dao.SysDicTypeDao;
 import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import com.stylefeng.guns.modular.system.warpper.DicWarpper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +40,7 @@ import java.util.Map;
 @RequestMapping("/dic")
 public class DicController extends BaseController {
 
-    private String prefix = "/system/dic/";
+    private String prefix = "/dist/dic/";
 
     @Resource
     SysDicTypeMapper sysDicTypeMapper;
@@ -71,8 +72,8 @@ public class DicController extends BaseController {
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public Object list(String condition) {
-        List<Map<String, Object>> list = this.sysDicTypeDao.list(condition);
+    public Object list(String dicTypeName) {
+        List<Map<String, Object>> list = this.sysDicTypeDao.list(dicTypeName);
         return super.warpObject(new DicWarpper(list));
     }
 

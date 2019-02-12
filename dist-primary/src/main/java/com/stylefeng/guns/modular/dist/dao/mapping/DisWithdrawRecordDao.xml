@@ -13,17 +13,36 @@
         <result column="withdraw_time" property="withdrawTime" />
         <result column="handle_time" property="handleTime" />
         <result column="withdraw_status" property="withdrawStatus" />
+        <result column="withdraw_desc" property="withdrawDesc" />
         <result column="account_type" property="accountType" />
     </resultMap>
 
     <select id="selectList" resultMap="BaseResultMap">
         SELECT d.dis_user_id,d.`id`,d.withdraw_num,d.total_amount,
-        d.fee_amount,d.real_amount,d.withdraw_time,d.handle_time,e.dic_value  withdraw_status
-        ,f.dic_value account_type
+        d.fee_amount,d.real_amount,d.withdraw_time,d.handle_time,e.dic_value  withdraw_desc
+        ,f.dic_value account_type,d.withdraw_status
         FROM `dis_withdraw_record` d
+        LEFT JOIN `dis_member_info` m ON m.`dis_user_id` =d.`dis_user_id`
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=d.`withdraw_status` AND e.`dic_type_no`='withdrawStatus'
         LEFT JOIN `sys_dic` f ON  f.`dic_no`=d.`account_type` AND f.`dic_type_no`='accountType'
-        order by  d.withdraw_time desc
+        WHERE 1=1
+
+        <if test="account != null and account != ''">
+            and m.`dis_platform_id` = #{account}
+        </if>
+        <if test="disUserId != null and disUserId != ''">
+            and d.`dis_user_id` = #{disUserId}
+        </if>
+        <if test="withdrawNum != null and withdrawNum != ''">
+            and d.`withdraw_num` = #{withdrawNum}
+        </if>
+        <if test="withdrawStatus != null and withdrawStatus != ''">
+            and d.`withdraw_status` = #{withdrawStatus}
+        </if>
+        <if test="accountType != null and accountType != ''">
+            and d.`account_type` = #{accountType}
+        </if>
+        ORDER BY  d.withdraw_time DESC
     </select>
 
 

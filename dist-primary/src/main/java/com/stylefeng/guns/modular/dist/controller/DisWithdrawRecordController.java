@@ -1,22 +1,21 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.github.pagehelper.Page;
 import com.stylefeng.guns.common.annotion.DataSource;
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.DSEnum;
+import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.controller.BaseController;
-import com.stylefeng.guns.common.exception.BizExceptionEnum;
-import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.dao.DisWithdrawRecordMapper;
-import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.DisWithdrawRecord;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
 import com.stylefeng.guns.modular.dist.service.IDisWithdrawRecordService;
-import com.stylefeng.guns.modular.dist.util.Jwt;
-import com.stylefeng.guns.modular.dist.vo.DisWithdrawVo;
-import io.swagger.annotations.ApiOperation;
+import com.stylefeng.guns.modular.dist.service.ISysDicService;
+import com.stylefeng.guns.modular.dist.wapper.CommonWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
@@ -47,6 +46,9 @@ public class DisWithdrawRecordController extends BaseController {
     @Resource
     DisWithdrawRecordMapper disWithdrawRecordMapper;
 
+    @Autowired
+    ISysDicService sysDicService;
+
     @Value("${dist.jwt.account}")
     private  String account;
 
@@ -58,7 +60,8 @@ public class DisWithdrawRecordController extends BaseController {
      * 跳转到提现记录首页
      */
     @RequestMapping("")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("accountType",sysDicService.selectListByCode("accountType"));
         return prefix + "DisWithdrawRecord.html";
     }
 
@@ -90,9 +93,14 @@ public class DisWithdrawRecordController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
-        List<Map<String, Object>> list=disWithdrawRecordService.selectList();
-        return list;
+    public Object list(String disUserId,String withdrawNum,String withdrawStatus,String accountType) {
+        String account= ShiroKit.getUser().getAccount();
+        if(ShiroKit.hasRole(Const.ADMIN_NAME)){
+            account=null;
+        }
+        Page page = new PageFactory().defaultPage();
+        List<Map<String, Object>> list=disWithdrawRecordService.selectList( account, disUserId, withdrawNum, withdrawStatus, accountType);
+        return super.packForBT((List)new CommonWarpper(list).warp(),page.getTotal());
     }
 
 

@@ -46,4 +46,14 @@ public class DisWithdrawVo {
     public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
+
+    @Override
+    public String toString() {
+        return "DisWithdrawVo{" +
+                "secret='" + secret + '\'' +
+                ", userId='" + userId + '\'' +
+                ", amount=" + amount +
+                ", accountType='" + accountType + '\'' +
+                '}';
+    }
 }

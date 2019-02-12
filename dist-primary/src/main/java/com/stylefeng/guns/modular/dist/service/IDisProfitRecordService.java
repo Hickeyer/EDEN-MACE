@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface IDisProfitRecordService {
 
-    List<Map<String, Object>> selectList(String account);
+    List<Map<String, Object>> selectList(String account,String disGetUserId,String disSetUserId,String disOrderId,String accountType,String userType);
 
     public void save(DisProfitRecordVo param) throws Exception;
 

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 public class BaseController {
 
@@ -58,8 +59,8 @@ public class BaseController {
     /**
      * 把service层的分页信息，封装为bootstrap table通用的分页封装
      */
-    protected <T> PageInfoBT<T> packForBT(Page<T> page) {
-        return new PageInfoBT<T>(page);
+    protected <T> PageInfoBT<T> packForBT(List<T> list,long rows) {
+        return new PageInfoBT<T>(list,rows);
     }
 
     /**

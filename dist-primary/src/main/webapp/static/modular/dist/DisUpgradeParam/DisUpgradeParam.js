@@ -90,7 +90,7 @@ DisUpgradeParam.delete = function () {
  */
 DisUpgradeParam.search = function () {
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
+    queryData['upgradeName'] = $("#upgradeName").val();
     DisUpgradeParam.table.refresh({query: queryData});
 };
 

@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface IDisProfiParamService {
 
-    public List<Map<String, Object>> selectList(String account);
+    public List<Map<String, Object>> selectList(String account,String calModel,String accountType,String disUserType,String disUserRank);
 
     public void save(DisProfitParam param);
 

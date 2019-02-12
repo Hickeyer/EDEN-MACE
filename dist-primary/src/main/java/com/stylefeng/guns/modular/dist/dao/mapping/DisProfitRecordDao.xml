@@ -28,6 +28,21 @@
         <if test="account != null and account != ''">
             and r.dis_platform_id=#{account}
         </if>
+        <if test="disGetUserId != null and disGetUserId != ''">
+            and r.dis_get_user_id=#{disGetUserId}
+        </if>
+        <if test="disSetUserId != null and disSetUserId != ''">
+            and r.dis_set_user_id=#{disSetUserId}
+        </if>
+        <if test="disOrderId != null and disOrderId != ''">
+            and r.dis_order_id=#{disOrderId}
+        </if>
+        <if test="accountType != null and accountType != ''">
+            and r.account_type=#{accountType}
+        </if>
+        <if test="userType != null and userType != ''">
+            and r.dis_user_type=#{userType}
+        </if>
     order by  r.add_time DESC
     </select>
 

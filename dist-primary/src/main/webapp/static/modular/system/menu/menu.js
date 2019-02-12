@@ -113,7 +113,7 @@ $(function () {
     table.setIdField("id");
     table.setCodeField("code");
     table.setParentCodeField("pcode");
-    table.setExpandAll(true);
+    table.setExpandAll(false);
     table.init();
     Menu.table = table;
 });

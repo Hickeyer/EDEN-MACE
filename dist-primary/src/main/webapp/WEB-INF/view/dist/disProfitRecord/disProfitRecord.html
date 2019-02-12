@@ -9,10 +9,31 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <#NameCon id="condition" name="名称" />
+                            <div class="col-sm-2">
+                                <#NameCon id="disGetUserId" name="收益账户" />
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
+                                <#NameCon id="disSetUserId" name="交易账户" />
+                            </div>
+                            <div class="col-sm-2">
+                                <#NameCon id="disOrderId" name="第三方订单号" />
+                            </div>
+                            <div class="col-sm-2">
+                                <#SelectCon id="accountType" name="账户类型 ">
+                                <option value="">请选择</option>
+                                @for(dis in accountType){
+                                <option value="${dis.dicNo}">${dis.dicValue}</option>
+                                @}
+                                </#SelectCon>
+                            </div>
+                            <div class="col-sm-2">
+                                <#SelectCon id="userType" name="分润类型" >
+                                    <option value="">请选择</option>
+                                    <option value="0">用户</option>
+                                    <option value="1">平台</option>
+                                 </#SelectCon>
+                            </div>
+                            <div class="col-sm-2">
                                 <#button name="搜索" icon="fa-search" clickFun="DisProfitRecord.search()"/>
                             </div>
                         </div>

@@ -15,7 +15,7 @@ public interface IDisWithdrawRecordService {
 
     public  void withdrawMoney(String userId, BigDecimal amount, String accountType);
 
-    public List<Map<String, Object>> selectList();
+    public List<Map<String, Object>> selectList(String account,String disUserId,String withdrawNum,String withdrawStatus,String accountType);
 
     public void dealWithdrawl(Integer id,String type);
 

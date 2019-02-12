@@ -2,10 +2,12 @@ package com.stylefeng.guns.modular.dist.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.google.gson.Gson;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
+import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
 import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
@@ -19,6 +21,7 @@ import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
 import com.stylefeng.guns.modular.dist.vo.LinksVo;
 import com.stylefeng.guns.modular.dist.vo.MemberRecordVo;
 import com.stylefeng.guns.modular.dist.vo.NodesVo;
+import com.stylefeng.guns.modular.dist.wapper.MemberWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,9 +67,8 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public List<Map<String, Object>> selectList(String account) {
-
-        List<Map<String, Object>> list=disMemberInfoDao.selectList(account);
+    public  List<Map<String, Object>> selectList(String account,String disUserId,String disModelId) {
+        List<Map<String, Object>> list=disMemberInfoDao.selectList(account,disUserId,disModelId);
         return list;
     }
 

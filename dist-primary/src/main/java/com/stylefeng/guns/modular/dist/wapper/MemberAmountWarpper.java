@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.dist.wapper;
 
+import com.stylefeng.guns.common.constant.dist.IdentityStatus;
 import com.stylefeng.guns.common.constant.factory.ConstantFactory;
 import com.stylefeng.guns.common.persistence.model.SysDic;
 import com.stylefeng.guns.common.warpper.BaseControllerWarpper;
@@ -18,9 +19,9 @@ public class MemberAmountWarpper extends BaseControllerWarpper {
     protected void warpTheMap(Map<String, Object> map) {
         String type = (String) map.get("type");
         String typeDetail="未知";
-        if("0".equals(type)){
+        if(IdentityStatus.USER_STATUS.getStatus().equals(type)){
             typeDetail="用户分润";
-        }else if("1".equals(type)){
+        }else if(IdentityStatus.PLAT_STATUS.getStatus().equals(type)){
             typeDetail="平台分润";
         }
         map.put("typeDetail",typeDetail);

@@ -14,7 +14,7 @@ public interface IDisMemberAmountService {
 
     public void save(String userId,String userName,String type);
 
-    List<Map<String, Object>> selectList(String platformId);
+    List<Map<String, Object>> selectList(String platformId,String disUserId,String userType);
 
     public void  addMoney(String userId, BigDecimal amount, String accountType,String sourceName,String type);
 

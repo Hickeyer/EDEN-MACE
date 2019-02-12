@@ -69,8 +69,8 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
 
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
-    public List<Map<String, Object>> selectList(String platformId) {
-        List<Map<String, Object>> list= disMemberAmountDao.selectList(platformId);
+    public List<Map<String, Object>> selectList(String platformId,String disUserId,String userType) {
+        List<Map<String, Object>> list= disMemberAmountDao.selectList(platformId,disUserId,userType);
         return list;
     }
 

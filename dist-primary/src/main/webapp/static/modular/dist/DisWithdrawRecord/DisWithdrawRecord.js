@@ -22,7 +22,8 @@ DisWithdrawRecord.initColumn = function () {
         {title: '实际到账金额', field: 'realAmount', visible: true, align: 'center', valign: 'middle'},
         {title: '申请时间', field: 'withdrawTime', visible: true, align: 'center', valign: 'middle'},
         {title: '处理时间', field: 'handleTime', visible: true, align: 'center', valign: 'middle'},
-        {title: '提现状态', field: 'withdrawStatus', visible: true, align: 'center', valign: 'middle'},
+        {title: '提现状态', field: 'withdrawDesc', visible: true, align: 'center', valign: 'middle'},
+        {title: '提现账户', field: 'accountType', visible: true, align: 'center', valign: 'middle'},
     ];
 };
 
@@ -45,6 +46,12 @@ DisWithdrawRecord.check = function () {
  */
 DisWithdrawRecord.openAddDisWithdrawRecord = function () {
     if (this.check()) {
+        var status = DisWithdrawRecord.seItem.withdrawStatus;
+        console.log(status)
+        if(status != 1){
+            Feng.info("只能审核申请中的数据！");
+            return ;
+        }
         var index = layer.open({
             type: 2,
             title: '提现审核',
@@ -95,14 +102,20 @@ DisWithdrawRecord.delete = function () {
  * 查询提现记录列表
  */
 DisWithdrawRecord.search = function () {
-    var queryData = {};
-    queryData['condition'] = $("#condition").val();
-    DisWithdrawRecord.table.refresh({query: queryData});
+    DisWithdrawRecord.table.refresh({query: DisWithdrawRecord.formParams()});
 };
-
+DisWithdrawRecord.formParams = function() {
+    var queryData = {};
+    queryData['disUserId'] = $("#disUserId").val();
+    queryData['withdrawNum'] = $("#withdrawNum").val();
+    queryData['withdrawStatus'] = $("#withdrawStatus").val();
+    queryData['accountType'] = $("#accountType").val();
+    return queryData;
+}
 $(function () {
     var defaultColunms = DisWithdrawRecord.initColumn();
     var table = new BSTable(DisWithdrawRecord.id, "/DisWithdrawRecord/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
+    table.setQueryParams(DisWithdrawRecord.formParams());
     DisWithdrawRecord.table = table.init();
 });

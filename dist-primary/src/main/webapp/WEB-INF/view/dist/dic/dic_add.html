@@ -7,46 +7,26 @@
 
             <div class="row">
                 <div class="col-sm-12" id="itemsArea">
-                    <input type="hidden" id="itemSize" value="${subDicts.~size!0}" />
                     <div class="form-group">
                         <label class="col-sm-2 control-label">字典名称</label>
                         <div class="col-sm-2">
-                            <input class="form-control" id="dictName" type="text" value="${dict.dicTypeName}">
-                            <input type="hidden" id="dictId" value="${dict.dicTypeId}">
+                            <input class="form-control" id="dictName" type="text">
                         </div>
                         <label class="col-sm-2 control-label">字典编号</label>
                         <div class="col-sm-3">
-                            <input class="form-control" id="disTypeNo" type="text" value="${dict.dicTypeNo}">
+                            <input class="form-control" id="disTypeNo" type="text">
                         </div>
                         <div class="col-sm-2">
                             <#button btnCss="info" name="增加" icon="fa-plus" clickFun="DictInfoDlg.addItem()"/>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
-                    @for(item in subDicts){
-                        <div class="form-group" name="dictItem" id="dictItem${itemLP.index}">
-                            <label class="col-sm-1 control-label">值</label>
-                            <div class="col-sm-2">
-                                <input class="form-control" type="text" name="itemNum" value="${item.dicNo}">
-                            </div>
-                            <label class="col-sm-1 control-label" style="width: 8%;">名称</label>
-                            <div class="col-sm-2">
-                                <input class="form-control" type="text" name="itemName" value="${item.dicValue}">
-                            </div>
-                            <label class="col-sm-1 control-label" style="width: 8%;">备注</label>
-                            <div class="col-sm-2">
-                                <input class="form-control" type="text" name="itemNotes" value="${item.dicNotes}">
-                            </div>
-                            <div class="col-sm-2">
-                                <#button btnCss="danger" name="删除" id="cancel" icon="fa-remove" clickFun="DictInfoDlg.deleteItem(event)"/>
-                            </div>
-                        </div>
-                    @}
-                </input>
+
+                </div>
             </div>
             <div class="row btn-group-m-t">
                 <div class="col-sm-10">
-                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="DictInfoDlg.editSubmit()"/>
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="DictInfoDlg.addSubmit()"/>
                     <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="DictInfoDlg.close()"/>
                 </div>
             </div>
@@ -73,5 +53,5 @@
         </div>
     </script>
 
-    <script src="${ctxPath}/static/modular/system/dic/dic_info.js"></script>
+    <script src="${ctxPath}/static/modular/dist/dic/dic_info.js"></script>
 @}

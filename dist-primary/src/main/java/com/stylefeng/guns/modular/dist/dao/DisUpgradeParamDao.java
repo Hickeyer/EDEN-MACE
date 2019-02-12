@@ -13,6 +13,6 @@ import java.util.Map;
  */
 public interface DisUpgradeParamDao {
 
-    List<Map<String, Object>> selectList();
-    List<Map<String, Object>> selectAgentList();
+    List<Map<String, Object>> selectList(@Param("upgradeName") String upgradeName);
+    List<Map<String, Object>> selectAgentList(@Param("upgradeName") String upgradeName);
 }

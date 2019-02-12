@@ -18,14 +18,61 @@ DisMemberInfo.initColumn = function () {
         {title: '用户标识', field: 'disUserId', visible: true, align: 'center', valign: 'middle'},
         {title: '上级唯一标识', field: 'disModelId', visible: true, align: 'center', valign: 'middle'},
         {title: '用户名称', field: 'disUserName', visible: true, align: 'center', valign: 'middle'},
-        {title: '用户级别', field: 'disLevel', visible: true, align: 'center', valign: 'middle'},
         {title: '用户类型', field: 'disUserType', visible: true, align: 'center', valign: 'middle'},
         {title: '用户段位', field: 'disUserRank', visible: true, align: 'center', valign: 'middle'},
         {title: '段位积分', field: 'rankIntegral', visible: true, align: 'center', valign: 'middle'},
         {title: '创建时间', field: 'addTime', visible: true, align: 'center', valign: 'middle'},
+        {title:"操作",field:'Button',events:operateEvents,formatter:DisMemberInfo.AddFunction}
     ];
 };
 
+
+DisMemberInfo.AddFunction = function(value,row,index){
+    console.log(value);
+    console.log(row['confineStatus']);
+    console.log(index);
+    if(row['confineStatus'] == 0){
+        return [
+            '<button id="confineMember" type="button" class="btn btn-default">限制</button>'
+        ].join("");
+    }else{
+        return [
+            '<button id="unConfineMember" type="button" class="btn btn-default">解除</button>'
+        ].join("");
+    }
+
+}
+window.operateEvents = {
+    'click #confineMember':function (e,value,row,index) {
+        console.log(e);
+        console.log(value);
+        console.log(row);
+        console.log(index);
+        DisMemberInfo.confineMembers(1,row['disUserId']);
+
+    },
+    'click #unConfineMember':function (e,value,row,index) {
+        console.log(e);
+        console.log(value);
+        console.log(row);
+        console.log(index);
+        DisMemberInfo.confineMembers(0,row['disUserId']);
+
+    },
+}
+DisMemberInfo.confineMembers = function (status,memberId) {
+    //提交信息
+    var ajax = new $ax(Feng.ctxPath + "/disMemberInfo/confine", function(data){
+        Feng.success("处理成功!");
+        DisMemberInfo.search();
+
+    },function(data){
+        Feng.error("处理失败!" + data.responseJSON.message + "!");
+    });
+    var confineData = {'status':status,'memberId':memberId};
+    ajax.set(confineData);
+    ajax.start();
+}
 /**
  * 检查是否选中
  */
@@ -39,7 +86,6 @@ DisMemberInfo.check = function () {
         return true;
     }
 };
-
 /**
  * 点击添加分销
  */
@@ -105,14 +151,22 @@ DisMemberInfo.delete = function () {
  * 查询分销列表
  */
 DisMemberInfo.search = function () {
-    var queryData = {};
-    queryData['condition'] = $("#condition").val();
-    DisMemberInfo.table.refresh({query: queryData});
+    DisMemberInfo.table.refresh({query: DisMemberInfo.formParams()});
 };
+
+DisMemberInfo.formParams = function() {
+    var queryData = {};
+
+    queryData['disUserId'] = $("#disUserId").val();
+    queryData['disModelId'] = $("#disModelId").val();
+
+    return queryData;
+}
 
 $(function () {
     var defaultColunms = DisMemberInfo.initColumn();
     var table = new BSTable(DisMemberInfo.id, "/disMemberInfo/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
+    table.setQueryParams(DisMemberInfo.formParams());
     DisMemberInfo.table = table.init();
 });

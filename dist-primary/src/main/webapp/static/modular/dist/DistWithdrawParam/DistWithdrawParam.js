@@ -89,7 +89,7 @@ DistWithdrawParam.delete = function () {
  */
 DistWithdrawParam.search = function () {
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
+
     DistWithdrawParam.table.refresh({query: queryData});
 };
 

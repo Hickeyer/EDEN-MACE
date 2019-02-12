@@ -1,10 +1,16 @@
 package com.stylefeng.guns.modular.dist.controller;
 
+import com.github.pagehelper.Page;
 import com.stylefeng.guns.common.constant.Const;
+import com.stylefeng.guns.common.constant.dist.IdentityStatus;
+import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.controller.BaseController;
+import com.stylefeng.guns.common.persistence.model.DisMemberAmount;
+import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDisMemberInfoService;
+import com.stylefeng.guns.modular.dist.wapper.MemberAmountWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,23 +69,15 @@ public class DisMemberAmountController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
+    public Object list(String disUserId,String userType) {
         String platformId= ShiroKit.getUser().getAccount();
         if(ShiroKit.hasRole(Const.ADMIN_NAME)){
             platformId=null;
         }
-        List<Map<String, Object>> list=disMemberAmountService.selectList(platformId);
-        list.forEach((map)->{
-            String type = (String) map.get("type");
-            String typeDetail="未知";
-            if("0".equals(type)){
-                typeDetail="用户分润";
-            }else if("1".equals(type)){
-                typeDetail="平台分润";
-            }
-            map.put("typeDetail",typeDetail);
-        });
-        return list;
+        Page page = new PageFactory<DisMemberAmount>().defaultPage();
+        List<Map<String, Object>> list=disMemberAmountService.selectList(platformId,disUserId,userType);
+        List<DisMemberAmount> lists = (List<DisMemberAmount>) new MemberAmountWarpper(list).warp();
+        return super.packForBT(lists,page.getTotal());
     }
 
     /**
@@ -93,15 +91,15 @@ public class DisMemberAmountController extends BaseController {
         if(ShiroKit.hasRole(Const.ADMIN_NAME)){
             account=null;
         }
-        List<Map<String, Object>>  list=disMemberInfoService.selectList(account);
+      /*  List<Map<String, Object>>  list=disMemberInfoService.selectList(account,null,null);
         if(list.size()>0){
             list.forEach(map->{
                 //针对会员同步相关账户
                 disMemberAmountService.save(map.get("disUserId").toString()
                         ,map.get("disUserName").toString(),"0");
             });
-        }
-        return list;
+        }*/
+        return null;
     }
 
     /**

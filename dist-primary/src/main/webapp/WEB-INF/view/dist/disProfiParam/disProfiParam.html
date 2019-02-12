@@ -9,10 +9,39 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <#NameCon id="condition" name="名称" />
+                            <div class="col-sm-2">
+                                <#SelectCon id="calModel" name="计算模型 ">
+                                <option value="">请选择</option>
+                                @for(dis in calModel){
+                                <option value="${dis.dicNo}">${dis.dicValue}</option>
+                                @}
+                                </#SelectCon>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
+                                <#SelectCon id="accountType" name="账户类型 ">
+                                <option value="">请选择</option>
+                                @for(dis in accountType){
+                                <option value="${dis.dicNo}">${dis.dicValue}</option>
+                                @}
+                            </#SelectCon>
+                            </div>
+                             <div class="col-sm-2">
+                                <#SelectCon id="disUserType" name="用户类型 ">
+                                <option value="">请选择</option>
+                                @for(dis in disUserType){
+                                <option value="${dis.dicNo}">${dis.dicValue}</option>
+                                @}
+                            </#SelectCon>
+                            </div>
+                             <div class="col-sm-2">
+                                 <#SelectCon id="disUserRank" name="用户段位 ">
+                                 <option value="">请选择</option>
+                                 @for(dis in disUserRank){
+                                 <option value="${dis.dicNo}">${dis.dicValue}</option>
+                                 @}
+                             </#SelectCon>
+                             </div>
+                            <div class="col-sm-2">
                                 <#button name="搜索" icon="fa-search" clickFun="DisProfiParam.search()"/>
                             </div>
                         </div>

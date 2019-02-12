@@ -33,6 +33,12 @@
         <if test="platformId != null and platformId != ''">
             and    m.dis_plat_super=#{platformId}
         </if>
+        <if test="disUserId != null and disUserId != ''">
+            and    m.dis_user_id=#{disUserId}
+        </if>
+        <if test="userType != null and userType != ''">
+            and    m.type=#{userType}
+        </if>
         order by a.add_time DESC
     </select>
 

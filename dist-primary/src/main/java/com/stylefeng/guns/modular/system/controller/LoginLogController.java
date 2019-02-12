@@ -1,7 +1,8 @@
 package com.stylefeng.guns.modular.system.controller;
 
 import com.baomidou.mybatisplus.mapper.SqlRunner;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.stylefeng.guns.common.annotion.Permission;
 import com.stylefeng.guns.common.annotion.log.BussinessLog;
 import com.stylefeng.guns.common.constant.Const;
@@ -49,10 +50,10 @@ public class LoginLogController extends BaseController {
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
     public Object list(@RequestParam(required = false) String beginTime, @RequestParam(required = false) String endTime, @RequestParam(required = false) String logName) {
-        Page<OperationLog> page = new PageFactory<OperationLog>().defaultPage();
-        List<Map<String, Object>> result = logDao.getLoginLogs(page, beginTime, endTime, logName, page.getOrderByField(), page.isAsc());
-        page.setRecords((List<OperationLog>) new LogWarpper(result).warp());
-        return super.packForBT(page);
+        Page p = new PageFactory<OperationLog>().defaultPage();
+        List<Map<String, Object>> result = logDao.getLoginLogs(beginTime, endTime, logName);
+        List<OperationLog> list= (List<OperationLog>) new LogWarpper(result).warp();
+        return super.packForBT(list,p.getTotal());
     }
 
     /**
