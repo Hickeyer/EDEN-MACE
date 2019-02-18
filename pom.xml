@@ -8,7 +8,7 @@
 
 	<groupId>cn.dist</groupId>
 	<artifactId>dist-parent</artifactId>
-	<version>1.1.4</version>
+	<version>1.4.0</version>
 	<name>eden-mace</name>
 	<description>分销管理系统</description>
 	<url>https://gitee.com/codingdb/distribution_management</url>
