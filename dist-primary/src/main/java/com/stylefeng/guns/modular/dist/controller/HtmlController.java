@@ -10,6 +10,7 @@ import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,7 +33,7 @@ public class HtmlController extends BaseController {
 
 
 
-    @GetMapping("/clearData")
+    @PostMapping("/clearData")
     @ResponseBody
     public  String clearData(){
         //删除分销表的信息

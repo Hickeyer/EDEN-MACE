@@ -110,6 +110,14 @@ SimOper.search = function () {
     queryData['condition'] = $("#condition").val();
     SimOper.table.refresh({query: queryData});
 };
+SimOper.clearData = function () {
+    var ajax = new $ax(Feng.ctxPath + "/clearData", function(data){
+        Feng.success("数据清理成功!");
+    },function(data){
+        Feng.error("清理失败!" + data.responseJSON.message + "!");
+    });
+    ajax.start();
+};
 
 $(function () {
 
