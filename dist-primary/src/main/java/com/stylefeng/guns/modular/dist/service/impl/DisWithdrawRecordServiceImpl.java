@@ -7,7 +7,7 @@ import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.dao.DisWithdrawRecordMapper;
 import com.stylefeng.guns.common.persistence.model.DisWithdrawRecord;
-import com.stylefeng.guns.modular.dist.amountsign.AmountFactoryContext;
+import com.stylefeng.guns.modular.dist.amountTemplate.AmountTemplateFactoryContext;
 import com.stylefeng.guns.modular.dist.dao.DisWithdrawRecordDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
 import com.stylefeng.guns.modular.dist.service.IDistWithdrawParamService;
@@ -54,8 +54,8 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
     public void withdrawMoney(String userId, BigDecimal amount, String accountType) {
 
 
-        AmountFactoryContext amountFactoryContext = new AmountFactoryContext(accountType);
-        amountFactoryContext.amountService.frozenAmount(userId,amount);
+        AmountTemplateFactoryContext amountFactoryContext = new AmountTemplateFactoryContext(accountType);
+        amountFactoryContext.amountTemplate.frozenAmount(userId,amount);
         // disMemberAmountService.frozenAmount(userId,amount,accountType);
         Map<String,Object> map= distWithdrawParamService.calAmount(amount);
 
@@ -85,15 +85,15 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
         if(record.getWithdrawStatus().equals(WithdrawStatus.FIRST_STATUS.getStatus())){
 
             record.setHandleTime(DateUtils.longToDateAll(System.currentTimeMillis()));
-            AmountFactoryContext amountFactoryContext = new  AmountFactoryContext(record.getAccountType());
+            AmountTemplateFactoryContext amountFactoryContext = new  AmountTemplateFactoryContext(record.getAccountType());
             if(type.equals(WithdrawStatus.SECOND_STATUS.getStatus())){
                 record.setWithdrawStatus(WithdrawStatus.SECOND_STATUS.getStatus());
-                amountFactoryContext.amountService.reduceMoney(record.getDisUserId(),record.getTotalAmount());
+                amountFactoryContext.amountTemplate.reduceMoney(record.getDisUserId(),record.getTotalAmount());
               //  disMemberAmountService.reduceMoney(record.getDisUserId(),record.getTotalAmount(),accountType);
                 disWithdrawRecordMapper.updateAllColumnById(record);
             }else if(type.equals(WithdrawStatus.THIRD_STATUS.getStatus())){
                 record.setWithdrawStatus(WithdrawStatus.THIRD_STATUS.getStatus());
-                amountFactoryContext.amountService.returnMoney(record.getDisUserId(),record.getTotalAmount());
+                amountFactoryContext.amountTemplate.returnMoney(record.getDisUserId(),record.getTotalAmount());
                 //disMemberAmountService.returnMoney(record.getDisUserId(),record.getTotalAmount(),accountType);
                 disWithdrawRecordMapper.updateAllColumnById(record);
             }

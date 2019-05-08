@@ -7,6 +7,7 @@ import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.constant.dist.*;
 import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
+import com.stylefeng.guns.modular.dist.amountTemplate.AmountTemplateFactoryContext;
 import com.stylefeng.guns.modular.dist.amountsign.AmountFactoryContext;
 import com.stylefeng.guns.modular.dist.dao.DisProfitRecordDao;
 import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
@@ -181,8 +182,8 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                     disProfitRecordMapper.insert(record);
 
                     //增加会员金额信息
-                    AmountFactoryContext context = new AmountFactoryContext(disProfiParam.getAccountType());
-                    context.amountService.addMoney(userId,newAmount,memberInfo.getDisUserId(), IdentityStatus.USER_STATUS.getStatus());
+                    AmountTemplateFactoryContext context = new AmountTemplateFactoryContext(disProfiParam.getAccountType());
+                    context.amountTemplate.addMoney(userId,newAmount,memberInfo.getDisUserId(), IdentityStatus.USER_STATUS.getStatus());
                     //disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId(), IdentityStatus.USER_STATUS.getStatus());
                 }
             }
@@ -226,8 +227,8 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
                         disProfitRecordMapper.insert(record);
 
                         //增加平台金额信息
-                        AmountFactoryContext context = new AmountFactoryContext(disProfiParam.getAccountType());
-                        context.amountService.addMoney(userId,newAmount,memberInfo.getDisUserId(), IdentityStatus.PLAT_STATUS.getStatus());
+                        AmountTemplateFactoryContext context = new AmountTemplateFactoryContext(disProfiParam.getAccountType());
+                        context.amountTemplate.addMoney(userId,newAmount,memberInfo.getDisUserId(), IdentityStatus.PLAT_STATUS.getStatus());
                        // disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId(),IdentityStatus.PLAT_STATUS.getStatus());
                     }
 
@@ -273,8 +274,8 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
 
                     //增加平台金额信息
                     //增加平台金额信息
-                    AmountFactoryContext context = new AmountFactoryContext(disProfiParam.getAccountType());
-                    context.amountService.addMoney(userId,newAmount,memberInfo.getDisUserId(),
+                    AmountTemplateFactoryContext context = new AmountTemplateFactoryContext(disProfiParam.getAccountType());
+                    context.amountTemplate.addMoney(userId,newAmount,memberInfo.getDisUserId(),
                             IdentityStatus.PLAT_STATUS.getStatus());
                    // disMemberAmountService.addMoney(userId,newAmount,accountType,memberInfo.getDisUserId(),IdentityStatus.PLAT_STATUS.getStatus());
                 }
