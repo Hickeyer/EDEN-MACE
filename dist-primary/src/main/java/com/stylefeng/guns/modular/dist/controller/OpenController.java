@@ -132,7 +132,7 @@ public class OpenController  {
             if(param==null){
                 return DistResult.failure("邀请用户不存在");
             }else {
-                if(param.getConfineStatus() == ConfineStatus.NORMAL_STATUS.getStatus()){
+                if(param.getConfineStatus() == ConfineStatus.ONE_STAUTS.getStatus()){
                     //会员被禁止邀请请会员
                     memberInfoVo.setDisModelId(null);
                 }
