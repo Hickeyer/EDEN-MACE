@@ -47,7 +47,10 @@
                         </div>
                         <div class="hidden-xs" id="DisProfiParamTableToolbar" role="group">
                             @if(shiro.hasPermission("/disProfiParam/add")){
-                                <#button name="添加" icon="fa-plus" clickFun="DisProfiParam.openAddDisProfiParam()"/>
+                                <#button name="添加会员配置" icon="fa-plus" clickFun="DisProfiParam.openAddDisProfiParam()"/>
+                            @}
+                            @if(shiro.hasPermission("/disProfiParam/addPlat")){
+                                <#button name="添加平台配置" icon="fa-plus" clickFun="DisProfiParam.openAddPlatDisProfiParam()"/>
                             @}
                             @if(shiro.hasPermission("/disProfiParam/update")){
                                 <#button name="修改" icon="fa-plus" clickFun="DisProfiParam.openDisProfiParamDetail()" space="true"/>

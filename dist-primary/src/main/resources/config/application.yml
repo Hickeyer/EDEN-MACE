@@ -73,3 +73,8 @@ dist:
     isUse: false
   member:
     suffix: member
+  profit:
+    isUse: true
+    userModel: fix
+    fix: 1000
+    rate: 0.01

@@ -11,15 +11,15 @@ public enum AgentRankStatus {
     /**
      * 普通代理商
      */
-    A_STATUS("a","普通代理商",1),
+    A_STATUS("N1","普通代理商",1),
     /**
      * 中级代理商
      */
-    B_STATUS("b","中级代理商",2),
+    B_STATUS("N2","中级代理商",2),
     /**
      * 高级代理商
      */
-    C_STATUS("c","高级代理商",3);
+    C_STATUS("N3","高级代理商",3);
     private String status;
     private String mes;
 

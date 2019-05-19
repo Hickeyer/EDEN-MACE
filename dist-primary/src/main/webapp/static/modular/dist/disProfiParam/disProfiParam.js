@@ -21,7 +21,7 @@ DisProfiParam.initColumn = function () {
         {title: '分润值', field: 'disProValue', visible: true, align: 'center', valign: 'middle'},
         {title: '分润级别', field: 'disProLevel', visible: true, align: 'center', valign: 'middle'},
         {title: '用户类型', field: 'disUserType', visible: true, align: 'center', valign: 'middle'},
-        {title: '用户段位', field: 'disUserRank', visible: true, align: 'center', valign: 'middle'},
+        {title: '用户段位', field: 'disUserRankDetail', visible: true, align: 'center', valign: 'middle'},
         {title: '添加时间', field: 'addTime', visible: true, align: 'center', valign: 'middle'},
     ];
 };
@@ -47,7 +47,7 @@ DisProfiParam.openAddDisProfiParam = function () {
 
     var index = layer.open({
         type: 2,
-        title: '添加设置',
+        title: '会员分润设置',
         area: ['800px', '420px'], //宽高
         fix: false, //不固定
         maxmin: true,
@@ -55,7 +55,17 @@ DisProfiParam.openAddDisProfiParam = function () {
     });
     this.layerIndex = index;
 };
-
+DisProfiParam.openAddPlatDisProfiParam = function () {
+    var index = layer.open({
+        type: 2,
+        title: '平台分润设置',
+        area: ['800px', '420px'], //宽高
+        fix: false, //不固定
+        maxmin: true,
+        content: Feng.ctxPath + '/disProfiParam/disProfiParam_add_plat'
+    });
+    this.layerIndex = index;
+};
 /**
  * 打开查看参数设置详情
  */

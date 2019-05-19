@@ -1,0 +1,53 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="disProValue" name="分润值" underline="true"/>
+                    <#select id="calModel" name="计算模型 ">
+                        @for(dis in calModel){
+                        <option value="${dis.dicNo}">${dis.dicValue}</option>
+                        @}
+                    </#select>
+                    <#select id="accountType" name="账户类型 ">
+                    @for(dis in accountType){
+                    <option value="${dis.dicNo}">${dis.dicValue}</option>
+                    @}
+                    </#select>
+
+
+                </div>
+
+                <div class="col-sm-6">
+                    <#input id="disPlatformId" name="平台id" underline="true"/>
+                    <#select id="disProLevel" name="分润级别 ">
+                    @for(dis in disProLevel){
+                    <option value="${dis.dicNo}">${dis.dicValue}</option>
+                    @}
+                </#select>
+
+                    <#select id="disUserRank" name="代理级别">
+                    @for(dis in disUserRank){
+                    <option value="${dis.dicNo}">${dis.dicValue}</option>
+                    @}
+                </#select>
+                <input type="hidden" value="10000" id="disUserType">
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="DisProfiParamInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="DisProfiParamInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/dist/disProfiParam/disProfiParam_info_plat.js"></script>
+@}

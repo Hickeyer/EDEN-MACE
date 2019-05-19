@@ -69,6 +69,15 @@ public class DisProfitParamController extends BaseController {
         return PREFIX + "disProfiParam_add.html";
     }
 
+    @RequestMapping("/disProfiParam_add_plat")
+    public String disProfiParamAddPlat(Model model) {
+        model.addAttribute("calModel",sysDicService.selectListByCode("calModel"));
+        model.addAttribute("accountType",sysDicService.selectListByCode("accountType"));
+        model.addAttribute("disProLevel",sysDicService.selectListByCode("disProLevel"));
+        model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
+        model.addAttribute("disUserRank",sysDicService.selectListByCode("agentRank"));
+        return PREFIX + "disProfiParam_add_plat.html";
+    }
     /**
      * 跳转到修改参数设置
      */

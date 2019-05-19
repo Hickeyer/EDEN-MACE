@@ -22,7 +22,7 @@ public enum  UserTypeStatus {
     /**
      * 平台标识
      */
-    PLAT_STATUS("10000","平台",10000);
+    PLAT_STATUS("10000","平台标识",10000);
 
     private String status;
 
