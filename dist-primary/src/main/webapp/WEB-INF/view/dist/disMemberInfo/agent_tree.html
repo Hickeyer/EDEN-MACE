@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人员关系</title>
+    <script src="${ctxPath}/static/lib/jquery/jquery.min.js"></script>
+    <script src="${ctxPath}/static/lib/echarts.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 100%;height:800px;"></div>
+</body>
+
+<script type="text/javascript">
+
+
+
+    function fillData(data) {
+        var myChart = echarts.init(document.getElementById('main'));
+        myChart.setOption(option = {
+            tooltip: {
+                trigger: 'item',
+                triggerOn: 'mousemove'
+            },
+            series:[
+                {
+                    type: 'tree',
+
+                    data: [data],
+
+                    left: '2%',
+                    right: '2%',
+                    top: '8%',
+                    bottom: '20%',
+
+                    symbol: 'emptyCircle',
+
+                    orient: 'vertical',
+
+                    expandAndCollapse: true,
+
+                    label: {
+                        normal: {
+                            position: 'top',
+                            rotate: -90,
+                            verticalAlign: 'middle',
+                            align: 'right',
+                            fontSize: 9
+                        }
+                    },
+
+                    leaves: {
+                        label: {
+                            normal: {
+                                position: 'bottom',
+                                rotate: -90,
+                                verticalAlign: 'middle',
+                                align: 'left'
+                            }
+                        }
+                    },
+
+                    animationDurationUpdate: 750
+                }
+            ]
+
+        });
+    }
+
+
+    fillData(${data});
+</script>
+</html>

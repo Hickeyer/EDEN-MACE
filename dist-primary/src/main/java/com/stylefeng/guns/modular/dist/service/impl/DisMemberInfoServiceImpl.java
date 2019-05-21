@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
+import com.stylefeng.guns.common.constant.dist.IdentityStatus;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
 import com.stylefeng.guns.common.persistence.dao.SysDicMapper;
@@ -17,10 +18,7 @@ import com.stylefeng.guns.modular.dist.http.request.SubordinateReq;
 import com.stylefeng.guns.modular.dist.http.response.SubordinateResp;
 import com.stylefeng.guns.modular.dist.service.*;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
-import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
-import com.stylefeng.guns.modular.dist.vo.LinksVo;
-import com.stylefeng.guns.modular.dist.vo.MemberRecordVo;
-import com.stylefeng.guns.modular.dist.vo.NodesVo;
+import com.stylefeng.guns.modular.dist.vo.*;
 import com.stylefeng.guns.modular.dist.wapper.MemberWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -230,6 +228,100 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    public String getTreeList(String memmberId) {
+        //查询当前用户
+        DisMemberInfo curParam = new DisMemberInfo();
+        curParam.setDisUserId(memmberId);
+        DisMemberInfo memberInfo = disMemberInfoMapper.selectOne(curParam);
+        MemberTreeVo vos = new MemberTreeVo();
+        vos.setName(memberInfo.getDisUserName());
+        vos.setChildren(this.getAgentList(memmberId));
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(vos));
+        return gson.toJson(vos);
+    }
+
+    /**
+     * 查询用户下的所有的用户关系
+     * @param userId
+     * @return
+     */
+    private List<MemberTreeVo> getMemberVoList(String userId){
+        MemberTreeVo memberTreeVo = new MemberTreeVo();
+        List<MemberTreeVo> memberTreeVos = new ArrayList<>();
+        Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
+        wrapper.eq("dis_model_id",userId)
+                .eq("type", IdentityStatus.USER_STATUS.getStatus());
+        List<DisMemberInfo> list = disMemberInfoMapper.selectList(wrapper);
+        if(list != null&& list.size()>0){
+            for (DisMemberInfo memberInfo:list){
+                MemberTreeVo vos = new MemberTreeVo();
+                List<MemberTreeVo> children =  this.getMemberVoList(memberInfo.getDisUserId());
+                if(children != null){
+                    vos.setName(memberInfo.getDisUserName());
+                    vos.setChildren(children);
+                }else{
+                    vos.setName(memberInfo.getDisUserName());
+                }
+                memberTreeVos.add(vos);
+            }
+        }else{
+            return null;
+        }
+        return memberTreeVos;
+    }
+
+
+    private List<MemberTreeVo> getAgentList(String userId){
+        List<MemberTreeVo> memberTreeVos = new ArrayList<>();
+        Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
+        wrapper.eq("dis_plat_super",userId)
+        .eq("type", IdentityStatus.PLAT_STATUS.getStatus());
+        List<DisMemberInfo> list = disMemberInfoMapper.selectList(wrapper);
+        if(list != null&& list.size()>0){
+            for (DisMemberInfo memberInfo:list){
+                MemberTreeVo vos = new MemberTreeVo();
+                List<MemberTreeVo> children =  this.getAgentList(memberInfo.getDisUserId());
+                MemberTreeVo memberTreeVo = getAgentAndMemberList(memberInfo);
+
+                if(children != null){
+                    vos.setName(memberInfo.getDisUserName());
+                }else{
+                    vos.setName(memberInfo.getDisUserName());
+                    children = new ArrayList<>();
+                }
+                children.add(memberTreeVo);
+                vos.setChildren(children);
+                memberTreeVos.add(vos);
+
+            }
+        }else{
+            return null;
+        }
+        return memberTreeVos;
+    }
+    public MemberTreeVo getAgentAndMemberList(DisMemberInfo memberInfo){
+        Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
+        wrapper.eq("dis_platform_id",memberInfo.getDisUserId())
+                .eq("dis_plat_super",memberInfo.getDisUserId())
+                .isNull("dis_model_id");
+        List<DisMemberInfo> memberInfoList = disMemberInfoMapper.selectList(wrapper);
+        List<MemberTreeVo> voList = new ArrayList<>();
+        for (DisMemberInfo disMemberInfo : memberInfoList) {
+            List<MemberTreeVo> treeMembers = this.getMemberVoList(disMemberInfo.getDisUserId());
+            MemberTreeVo vo = new MemberTreeVo();
+            vo.setName(disMemberInfo.getDisUserName());
+            vo.setChildren(treeMembers);
+            voList.add(vo);
+        }
+        MemberTreeVo treeVo = new MemberTreeVo();
+        treeVo.setName("会员分支");
+        treeVo.setChildren(voList);
+        return treeVo;
     }
 
 

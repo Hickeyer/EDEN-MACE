@@ -136,7 +136,7 @@ public class OpenController  {
                     //会员被禁止邀请请会员
                     memberInfoVo.setDisModelId(null);
                 }
-                superPlatId=param.getDisPlatSuper();
+                superPlatId=param.getDisPlatformId();
             }
         }else {
             superPlatId = memberInfoVo.getDisPlatformId();
@@ -152,10 +152,11 @@ public class OpenController  {
         DisMemberInfo memberInfo=new DisMemberInfo();
         BeanUtils.copyProperties(memberInfoVo,memberInfo);
         memberInfo.setDisUserType("0");
-        memberInfo.setDisPlatSuper(user.getSuperaccount());
+        memberInfo.setDisPlatSuper(user.getAccount());
         memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
         memberInfo.setDisPlatFullIndex(user.getFullindex());
-        memberInfo.setDisPlatformId(user.getFullindex().split("\\.")[1]);
+        String[]  platArr = user.getFullindex().split("\\.");
+        memberInfo.setDisPlatformId(platArr[1]);
         memberInfo.setType("0");
         disMemberInfoService.save(memberInfo);
         logger.info("新增会员->新增会员结束");

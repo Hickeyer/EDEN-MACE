@@ -46,7 +46,19 @@ public class DisMemberInfoController extends BaseController {
     @Value("${dist.jwt.account}")
     private  String account;
 
+    @GetMapping("/agentTreeUrl")
+    public String agentTreeUrl(HttpServletRequest request){
+        String memberId = ShiroKit.getUser().getAccount();
+        request.setAttribute("data",disMemberInfoService.getTreeList(memberId));
+        return prefix+"agent_tree.html";
+    }
 
+    @RequestMapping("/agentTree")
+    @ResponseBody
+    public String  agentTree(){
+        String memberId = ShiroKit.getUser().getAccount();
+        return disMemberInfoService.getTreeList(memberId);
+    }
 
     /**
      * 跳转到分销首页

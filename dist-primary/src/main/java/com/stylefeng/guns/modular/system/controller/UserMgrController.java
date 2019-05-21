@@ -239,7 +239,7 @@ public class UserMgrController extends BaseController {
         //自动生成关联会员信息
         if(DistCommonArg.ADMIN.equals(memberInfo.getDisModelId())){
             String memberId =memberInfo.getDisUserId()+suffix;
-            memberInfo.setDisModelId("");
+            memberInfo.setDisModelId(null);
             memberInfo.setDisFullIndex(memberId);
             memberInfo.setDisUserId(memberId);
             memberInfo.setDisLevel(0);
@@ -248,6 +248,7 @@ public class UserMgrController extends BaseController {
             memberInfo.setDisNote("系统自动生成，用于初始化数据");
             memberInfo.setType(IdentityStatus.USER_STATUS.getStatus());
             memberInfo.setDisUserRank(UserRankStatus.A_STATUS.getStatus());
+            memberInfo.setDisPlatSuper(user.getAccount());
             disMemberInfoService.saveNoOperate(memberInfo);
         }
         return SUCCESS_TIP;

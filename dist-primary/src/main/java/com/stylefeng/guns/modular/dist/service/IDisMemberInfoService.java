@@ -42,4 +42,6 @@ public interface IDisMemberInfoService {
 
     public void saveNoOperate(DisMemberInfo param);
 
+    public String getTreeList(String memmberId);
+
 }
