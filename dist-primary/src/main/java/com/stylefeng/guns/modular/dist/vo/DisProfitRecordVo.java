@@ -33,6 +33,9 @@ public class DisProfitRecordVo {
     //计算分润基础金额
     private BigDecimal baseAmount;
 
+
+    private BigDecimal baseFixAmount;
+
     public String getUpgradeLevel() {
         return upgradeLevel;
     }
@@ -103,5 +106,13 @@ public class DisProfitRecordVo {
 
     public void setBaseAmount(BigDecimal baseAmount) {
         this.baseAmount = baseAmount;
+    }
+
+    public BigDecimal getBaseFixAmount() {
+        return baseFixAmount;
+    }
+
+    public void setBaseFixAmount(BigDecimal baseFixAmount) {
+        this.baseFixAmount = baseFixAmount;
     }
 }

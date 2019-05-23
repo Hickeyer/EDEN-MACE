@@ -150,6 +150,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         }
         //设置基础金额
         param.setBaseAmount(baseAmount);
+        param.setBaseFixAmount(baseAmount);
     }
 
     public  void saveVerticalLevel(String beforeLevel,String afterLevel,String userId){
@@ -230,7 +231,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         BigDecimal value=new BigDecimal(disProfit.getDisProValue());
         BigDecimal newAmount=new BigDecimal(0);
         //根据 计算方式计算 分润
-        newAmount = CalModelStatus.getMethod(disProfit.getCalModel()).calResult(param.getBaseAmount(),value);
+        newAmount = CalModelStatus.getMethod(disProfit.getCalModel()).calResult(param.getBaseFixAmount(),value);
 
         if(param.getDisAmount()!=null&&param.getDisAmount().compareTo(BigDecimal.ZERO)==1){
             BigDecimal newBaseAmount = param.getBaseAmount().subtract(newAmount);
