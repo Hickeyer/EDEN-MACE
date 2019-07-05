@@ -91,41 +91,31 @@ public class TaskServiceServiceImpl implements ITaskService {
         List<DisUpgradeParam> upgradeParams = disUpgradeParamMapper.selectList(upgradeParam);
         if(upgradeParams == null) { return; }
         logger.info("积分升级->查询到升级配置数量:{}",upgradeParams.size());
+        SysDic param=new SysDic();
+        //后台设置isTotalIntegral的值（是否按照总积分计算）
+        //因为如果平台的宽容政策，以前的积分也进行累计积分判断，
+        // 或者根据平台阶段性配置，对以前的积分清零
+        //如果按照总积分即totalRankIntegral 不清零的积分 计算
+        //如果按照分期积分即按照rankIntegral 清零的积分 计算
+        //分销配置>分销字典管理
+        param.setDicTypeNo("isTotalIntegral");
+        SysDic sysDic = sysDicMapper.selectOne(param);
 
         memberInfoList.forEach((memberInfo)->{
             //开始对会员或者代理商进行处理
-            SysDic param=new SysDic();
-            //后台设置isTotalIntegral的值（是否按照总积分计算）
-            //因为如果平台的宽容政策，以前的积分也进行累计积分判断，
-            // 或者根据平台阶段性配置，对以前的积分清零
-            //如果按照总积分即totalRankIntegral 不清零的积分 计算
-            //如果按照分期积分即按照rankIntegral 清零的积分 计算
-            //分销配置>分销字典管理
-            param.setDicTypeNo("isTotalIntegral");
-            SysDic sysDic = sysDicMapper.selectOne(param);
+
             //判断是根据总积分还是根据每个阶段的额度进行级别判定
-            Integer integral=0;
-            if("Y".equals(sysDic.getDicNo())){
-                integral=memberInfo.getTotalRankIntegral();
-            }else if("N".equals(sysDic.getDicNo())){
-                integral=memberInfo.getRankIntegral();
-            }else {
-                logger.info("类型错误！");
-                return;
-            }
-            if(integral == null){
-                integral = 0;
-            }
+
+            Integer integral = "Y".equals(sysDic.getDicNo())? memberInfo.getTotalRankIntegral():memberInfo.getRankIntegral();
+            if(integral == null){integral = 0;}
 
             //根据目前的积分获取可以获得的等级
             String rank="";
-            if(upgradeParams!=null){
-                for (DisUpgradeParam upgrade:upgradeParams){
-                    int max= upgrade.getEndIntegral();
-                    int min = upgrade.getBeginIntegral();
-                    if(integral.intValue() >=min&& integral.intValue() <=max){
-                        rank=upgrade.getDisUserRank();
-                    }
+            for (DisUpgradeParam upgrade:upgradeParams){
+                int max= upgrade.getEndIntegral();
+                int min = upgrade.getBeginIntegral();
+                if(integral.intValue() >=min&& integral.intValue() <=max){
+                    rank=upgrade.getDisUserRank();
                 }
             }
             logger.info("积分升级->用户{},原级别为{},匹配升级为{}",memberInfo.getDisUserName(),memberInfo.getDisUserRank(),rank);
