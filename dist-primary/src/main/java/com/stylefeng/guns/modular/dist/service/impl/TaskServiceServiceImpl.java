@@ -72,86 +72,99 @@ public class TaskServiceServiceImpl implements ITaskService {
     @Transactional(rollbackFor = Exception.class)
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void upgradeLevel(String type) {
+
+        logger.info("积分升级->开始积分任务处理:{}",type);
+        long start = System.currentTimeMillis();
         //查询大于0的积分代理商或者会员的积分
         Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
         wrapper.gt("rank_integral","0")
                 .eq("type", type);
         List<DisMemberInfo> memberInfoList=disMemberInfoMapper.selectList(wrapper);
+        if(memberInfoList==null){return ;}
+        logger.info("积分升级->查询会员数量:{}",memberInfoList.size());
 
-        if(memberInfoList!=null){
-            memberInfoList.forEach((memberInfo)->{
-                //开始对会员或者代理商进行处理
-                SysDic param=new SysDic();
-                //后台设置isTotalIntegral的值（是否按照总积分计算）
-                //因为如果平台的宽容政策，以前的积分也进行累计积分判断，
-                // 或者根据平台阶段性配置，对以前的积分清零
-                //如果按照总积分即totalRankIntegral 不清零的积分 计算
-                //如果按照分期积分即按照rankIntegral 清零的积分 计算
-                //分销配置>分销字典管理
-                param.setDicTypeNo("isTotalIntegral");
-                SysDic sysDic = sysDicMapper.selectOne(param);
-                //判断是根据总积分还是根据每个阶段的额度进行级别判定
-                Integer integral=0;
-                if("Y".equals(sysDic.getDicValue())){
-                    integral=memberInfo.getTotalRankIntegral();
-                }else if("N".equals(sysDic.getDicValue())){
-                    integral=memberInfo.getRankIntegral();
-                }else {
-                    logger.info("类型错误！");
-                    return;
-                }
-                //分销配置>会员垂直升级配置/代理垂直升级配置
-                //根据垂直升级配置来实现会员或者垂直代理的升级
-                Wrapper<DisUpgradeParam> upgradeParam = new EntityWrapper<>();
-                upgradeParam.eq("identity_type", type);
-                List<DisUpgradeParam> upgradeParams = disUpgradeParamMapper.selectList(upgradeParam);
-                //根据目前的积分获取可以获得的等级
-                String rank="";
-                if(upgradeParams!=null){
-                    Integer finalIntegral = integral;
-                    for (DisUpgradeParam upgrade:upgradeParams){
-                        int max=upgrade.getBeginIntegral();
-                        int min = upgrade.getEndIntegral();
-                        if(finalIntegral >=min&& finalIntegral <=max){
-                            rank=upgrade.getDisUserRank();
-                        }
+
+        //分销配置>会员垂直升级配置/代理垂直升级配置
+        //根据垂直升级配置来实现会员或者垂直代理的升级
+        Wrapper<DisUpgradeParam> upgradeParam = new EntityWrapper<>();
+        upgradeParam.eq("identity_type", type);
+        List<DisUpgradeParam> upgradeParams = disUpgradeParamMapper.selectList(upgradeParam);
+        if(upgradeParams == null) { return; }
+        logger.info("积分升级->查询到升级配置数量:{}",upgradeParams.size());
+
+        memberInfoList.forEach((memberInfo)->{
+            //开始对会员或者代理商进行处理
+            SysDic param=new SysDic();
+            //后台设置isTotalIntegral的值（是否按照总积分计算）
+            //因为如果平台的宽容政策，以前的积分也进行累计积分判断，
+            // 或者根据平台阶段性配置，对以前的积分清零
+            //如果按照总积分即totalRankIntegral 不清零的积分 计算
+            //如果按照分期积分即按照rankIntegral 清零的积分 计算
+            //分销配置>分销字典管理
+            param.setDicTypeNo("isTotalIntegral");
+            SysDic sysDic = sysDicMapper.selectOne(param);
+            //判断是根据总积分还是根据每个阶段的额度进行级别判定
+            Integer integral=0;
+            if("Y".equals(sysDic.getDicNo())){
+                integral=memberInfo.getTotalRankIntegral();
+            }else if("N".equals(sysDic.getDicNo())){
+                integral=memberInfo.getRankIntegral();
+            }else {
+                logger.info("类型错误！");
+                return;
+            }
+            if(integral == null){
+                integral = 0;
+            }
+
+            //根据目前的积分获取可以获得的等级
+            String rank="";
+            if(upgradeParams!=null){
+                for (DisUpgradeParam upgrade:upgradeParams){
+                    int max= upgrade.getEndIntegral();
+                    int min = upgrade.getBeginIntegral();
+                    if(integral.intValue() >=min&& integral.intValue() <=max){
+                        rank=upgrade.getDisUserRank();
                     }
                 }
+            }
+            logger.info("积分升级->用户{},原级别为{},匹配升级为{}",memberInfo.getDisUserName(),memberInfo.getDisUserRank(),rank);
+            //如果没有配置相关等级，则不更新
+            if(StringUtils.isEmpty(rank)){
+                return;
+            }
 
-                //如果没有配置相关等级，则不更新
-                if(StringUtils.isEmpty(rank)){
+            // 更新积分记录表
+            // 将此阶段（此次更新到上次更新阶段）的积分是否使用更新为已使用
+            Wrapper<DisRankIntegralRecord> wrapperIntegral=new EntityWrapper();
+            wrapperIntegral.eq("dis_user_id",memberInfo.getDisUserId())
+                    .eq("is_use","N");
+            DisRankIntegralRecord record=new DisRankIntegralRecord();
+            record.setIsUse("Y");
+            record.setUseTime(DateUtils.getNowDateTime());
+            disRankIntegralRecordMapper.update(record,wrapperIntegral);
 
-                    return;
-                }
+            //新增升级记录
+            DisUpgradeRecord upgradeRecord=new DisUpgradeRecord();
+            upgradeRecord.setDisUserId(memberInfo.getDisUserId());
+            upgradeRecord.setUpgradeTime(DateUtils.getNowDateTime());
+            upgradeRecord.setBeforeUpgradeLevel(memberInfo.getDisUserRank());
+            upgradeRecord.setAfterUpgradeLevel(rank);
+            Integer diff= UserRankStatus.getMethod(rank).getOrder()-UserRankStatus.getMethod(memberInfo.getDisUserRank()).getOrder();
+            upgradeRecord.setLevelDiffer(diff.toString());
+            upgradeRecord.setLevelType("1");
+            disUpgradeRecordMapper.insert(upgradeRecord);
 
-                // 更新积分记录表
-                // 将此阶段（此次更新到上次更新阶段）的积分是否使用更新为已使用
-                Wrapper<DisRankIntegralRecord> wrapperIntegral=new EntityWrapper();
-                wrapperIntegral.eq("dis_user_id",memberInfo.getDisUserId())
-                        .eq("is_use","N");
-                DisRankIntegralRecord record=new DisRankIntegralRecord();
-                record.setIsUse("Y");
-                record.setUseTime(DateUtils.getNowDateTime());
-                disRankIntegralRecordMapper.update(record,wrapperIntegral);
+            //更新积分,等级，rankIntegral清零，并且把等级更新成最新的等级
+            memberInfo.setRankIntegral(0);
+            memberInfo.setDisUserRank(rank);
+            disMemberInfoMapper.updateById(memberInfo);
 
-                //新增升级记录
-                DisUpgradeRecord upgradeRecord=new DisUpgradeRecord();
-                upgradeRecord.setDisUserId(memberInfo.getDisUserId());
-                upgradeRecord.setUpgradeTime(DateUtils.getNowDateTime());
-                upgradeRecord.setBeforeUpgradeLevel(memberInfo.getDisUserRank());
-                upgradeRecord.setAfterUpgradeLevel(rank);
-                Integer diff= UserRankStatus.getMethod(rank).getOrder()-UserRankStatus.getMethod(memberInfo.getDisUserRank()).getOrder();
-                upgradeRecord.setLevelDiffer(diff.toString());
-                upgradeRecord.setLevelType("1");
-                disUpgradeRecordMapper.insert(upgradeRecord);
+        });
 
-                //更新积分,等级，rankIntegral清零，并且把等级更新成最新的等级
-                memberInfo.setRankIntegral(0);
-                memberInfo.setDisUserRank(rank);
-                disMemberInfoMapper.updateById(memberInfo);
+        long end = System.currentTimeMillis();
 
-            });
-        }
+        logger.info("积分升级->积分升级处理完成,处理时间:{}s",(end-start)/1000);
     }
 
     /**
