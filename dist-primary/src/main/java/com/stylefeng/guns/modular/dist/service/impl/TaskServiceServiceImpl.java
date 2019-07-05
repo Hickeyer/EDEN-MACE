@@ -20,11 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service
+
 /**
  * @date 2019-01-07
  * @author xiaojiang
  */
+@Service
 public class TaskServiceServiceImpl implements ITaskService {
 
     private Logger logger =  LoggerFactory.getLogger(TaskServiceServiceImpl.class);

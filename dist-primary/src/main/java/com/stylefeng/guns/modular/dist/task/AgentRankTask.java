@@ -7,6 +7,7 @@ import com.stylefeng.guns.common.constant.dist.UserRankStatus;
 import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.core.util.BaseJob;
+import com.stylefeng.guns.core.util.SpringContextHolder;
 import com.stylefeng.guns.modular.dist.service.ITaskService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.service.ISysDicService;
@@ -33,8 +34,11 @@ public class AgentRankTask implements BaseJob {
 
     private Logger logger =  LoggerFactory.getLogger(AgentRankTask.class);
 
-    @Autowired
     ITaskService taskService;
+
+    public AgentRankTask() {
+        taskService = SpringContextHolder.getBean(ITaskService.class);
+    }
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {

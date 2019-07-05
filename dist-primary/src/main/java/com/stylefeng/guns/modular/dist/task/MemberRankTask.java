@@ -7,6 +7,7 @@ import com.stylefeng.guns.common.constant.dist.UserRankStatus;
 import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.core.util.BaseJob;
+import com.stylefeng.guns.core.util.SpringContextHolder;
 import com.stylefeng.guns.modular.dist.service.ITaskService;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.service.ISysDicService;
@@ -16,6 +17,7 @@ import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -32,8 +34,11 @@ public class MemberRankTask implements BaseJob {
 
     private Logger logger =  LoggerFactory.getLogger(MemberRankTask.class);
 
-    @Autowired
     ITaskService taskService;
+
+    public MemberRankTask() {
+        taskService = SpringContextHolder.getBean(ITaskService.class);
+    }
 
 
     @Override
