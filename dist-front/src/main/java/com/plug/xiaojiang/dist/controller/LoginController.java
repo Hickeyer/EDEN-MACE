@@ -1,6 +1,7 @@
 package com.plug.xiaojiang.dist.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.plug.xiaojiang.dist.common.tip.DistResult;
 import com.plug.xiaojiang.dist.model.DisMemberAmount;
 import com.plug.xiaojiang.dist.model.DisMemberInfo;
@@ -41,9 +42,11 @@ public class LoginController {
                 });
         if(result.isSuccess()){
             Map<String ,Object> map= (Map<String, Object>) result.getData();
-            ObjectMapper mapper=new ObjectMapper();
-            DisMemberInfo member = mapper.convertValue(map.get("member"), DisMemberInfo.class);
-            DisMemberAmount amount= mapper.convertValue(map.get("amount"),DisMemberAmount.class) ;
+            Gson gson = new Gson();
+            String memberJson = gson.toJson(map.get("member")).toString();
+            DisMemberInfo member = gson.fromJson(memberJson,DisMemberInfo.class);
+            String amountJson = gson.toJson(map.get("amount")).toString();
+            DisMemberAmount amount= gson.fromJson(amountJson,DisMemberAmount.class);
             request.getSession().setAttribute("member",member);
             request.getSession().setAttribute("amount",amount);
         }else{

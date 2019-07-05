@@ -9,10 +9,11 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-10-18
+ * @since 2019-02-02
  */
 public class DisMemberInfo  {
 
+    private static final long serialVersionUID = 1L;
 
     /**
      * 主键
@@ -90,6 +91,10 @@ public class DisMemberInfo  {
      * 段位总积分
      */
 	private Integer totalRankIntegral;
+    /**
+     * 限制状态，0为正常，1为禁止邀请用户
+     */
+	private Integer confineStatus;
 
 
 	public Integer getId() {
@@ -244,29 +249,37 @@ public class DisMemberInfo  {
 		this.totalRankIntegral = totalRankIntegral;
 	}
 
+	public Integer getConfineStatus() {
+		return confineStatus;
+	}
+
+	public void setConfineStatus(Integer confineStatus) {
+		this.confineStatus = confineStatus;
+	}
 
 	@Override
 	public String toString() {
 		return "DisMemberInfo{" +
-			"id=" + id +
-			", disPlatformId=" + disPlatformId +
-			", disUserId=" + disUserId +
-			", disModelId=" + disModelId +
-			", disFullIndex=" + disFullIndex +
-			", disUserName=" + disUserName +
-			", disLevel=" + disLevel +
-			", disUserType=" + disUserType +
-			", disUserRank=" + disUserRank +
-			", disNote=" + disNote +
-			", addTime=" + addTime +
-			", updateTime=" + updateTime +
-			", isDelete=" + isDelete +
-			", disPlatSuper=" + disPlatSuper +
-			", disPlatFullIndex=" + disPlatFullIndex +
-			", disPlatLevel=" + disPlatLevel +
-			", type=" + type +
-			", rankIntegral=" + rankIntegral +
-			", totalRankIntegral=" + totalRankIntegral +
-			"}";
+				"id=" + id +
+				", disPlatformId='" + disPlatformId + '\'' +
+				", disUserId='" + disUserId + '\'' +
+				", disModelId='" + disModelId + '\'' +
+				", disFullIndex='" + disFullIndex + '\'' +
+				", disUserName='" + disUserName + '\'' +
+				", disLevel=" + disLevel +
+				", disUserType='" + disUserType + '\'' +
+				", disUserRank='" + disUserRank + '\'' +
+				", disNote='" + disNote + '\'' +
+				", addTime='" + addTime + '\'' +
+				", updateTime='" + updateTime + '\'' +
+				", isDelete='" + isDelete + '\'' +
+				", disPlatSuper='" + disPlatSuper + '\'' +
+				", disPlatFullIndex='" + disPlatFullIndex + '\'' +
+				", disPlatLevel=" + disPlatLevel +
+				", type='" + type + '\'' +
+				", rankIntegral=" + rankIntegral +
+				", totalRankIntegral=" + totalRankIntegral +
+				", confineStatus=" + confineStatus +
+				'}';
 	}
 }

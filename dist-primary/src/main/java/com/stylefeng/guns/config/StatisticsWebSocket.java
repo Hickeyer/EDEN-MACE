@@ -67,7 +67,7 @@ public class StatisticsWebSocket {
      * @param message
      */
     public void sendMessage(String message) {
-        String account = ShiroKit.getUser().getAccount();
+      //  String account = ShiroKit.getUser().getAccount();
         //遍历客户端
         for (StatisticsWebSocket webSocket : copyOnWriteArraySet) {
             logger.info("广播消息：" + message);
