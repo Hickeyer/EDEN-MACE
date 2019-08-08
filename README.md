@@ -1,3 +1,5 @@
+
+<font face="黑体" color=red size=30>乐伽公寓耍流氓破产，政府不作为，暂停维护此项目</font>
 ## 分销管理系统（EDEN-MACE）
 
 ###  视频教程 
