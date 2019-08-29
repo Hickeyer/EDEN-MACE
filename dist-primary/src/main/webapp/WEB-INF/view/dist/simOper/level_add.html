@@ -8,15 +8,18 @@
             <div class="row">
                 <div class="col-sm-6 b-r">
                     <#input id="secret" name="秘钥" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzExMTczMzk4MDcsInBheWxvYWQiOiJcInhpYW9qaWFuZ1wiIn0.rOY3JXrYpNMWwATmY7r3jm0Ec6SuhNPyrP2rGD43Isk" underline="true"/>
-                    <#input id="disUserName" name="用户名称" underline="true"/>
-                    <#input id="disUserId" name="用户唯一标示" underline="true"/>
-
+                    <#input id="disSetUserId" name="交易人id" underline="true"/>
+                    <#select id="upgradeLevel" name="等级">
+                    @for(dis in upgradeLevel){
+                    <option value="${dis.dicNo}">${dis.dicValue}</option>
+                    @}
+                </#select>
                 </div>
 
                 <div class="col-sm-6">
-                <#input id="disPlatformId" name="直属平台账号" underline="true"/>
-                <#input id="disModelId" name="邀请用户" underline="true"/>
-                <#input id="disNote" name="备注" underline="true"/>
+                    <#input id="orderId" name="升级订单号" underline="true"/>
+                    <#input id="disAmount" name="交易金额" underline="true"/>
+                    <#input id="disNote" name="备注" underline="true"/>
                 </div>
             </div>
 
@@ -24,12 +27,11 @@
                 <div class="col-sm-10">
                     <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="SimOperInfoDlg.addMemeberSubmit()"/>
                     <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="SimOperInfoDlg.close()"/>
-                    <span >提示:<b style="color:red">直属平台账号</b>和<b style="color:red"> 邀请用户</b>二选一输入</span>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
-<script src="${ctxPath}/static/modular/dist/simOper/member_add.js"></script>
+<script src="${ctxPath}/static/modular/dist/simOper/level_add.js"></script>
 @}

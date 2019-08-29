@@ -27,7 +27,7 @@
         LEFT JOIN `sys_dic` d ON  d.`dic_no`=p.`dis_pro_level` AND d.`dic_type_no`='disRankLevel'
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=p.`cal_model` AND e.`dic_type_no`='calModel'
         LEFT JOIN `sys_dic` f ON  f.`dic_no`=p.`account_type` AND f.`dic_type_no`='accountType'
-        LEFT JOIN `sys_dic` g ON  g.`dic_no`=p.`dis_user_type` AND g.`dic_type_no`='disUserType'
+        LEFT JOIN `sys_dic` g ON  g.`dic_no`=p.`dis_user_type` AND g.`dic_type_no`='disUserPlatType'
         LEFT JOIN `sys_dic` h ON  h.`dic_no`=p.`dis_user_rank` AND h.`dic_type_no`='disUserRank'
         WHERE p.is_delete='N'
         <if test="account != null and account != ''">

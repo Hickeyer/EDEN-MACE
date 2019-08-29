@@ -45,7 +45,7 @@ SimOperInfoDlg.close = function() {
  */
 SimOperInfoDlg.collectData = function() {
     this.set('secret').set("disSetUserId")
-        .set("orderId").set("disAmount").set("upgradeLevel");
+        .set("orderId").set("disAmount").set("upgradeLevel").set("upgradeLevel");
 }
 
 /**
@@ -56,7 +56,7 @@ SimOperInfoDlg.addMemeberSubmit = function() {
     this.clearData();
     this.collectData();
     var path="";
-    path="/api/v1/trade";
+    path="/api/v1/upgrade";
 
     $.ajax({
         url:Feng.ctxPath +path,

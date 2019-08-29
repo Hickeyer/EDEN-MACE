@@ -67,6 +67,18 @@ public class SimOperController extends BaseController {
         return prefix + "order_add.html";
     }
 
+
+    /**
+     * 升级页面
+     * @param model
+     * @return
+     */
+    @RequestMapping("/level_add")
+    public String levelAdd(Model model) {
+        model.addAttribute("upgradeLevel",sysDicService.selectListByCode("disUserType"));
+
+        return prefix + "level_add.html";
+    }
     /**
      * 跳转到修改模拟菜单
      */
