@@ -1,7 +1,6 @@
-package com.plug.xiaojiang.dist.utils;
+package com.dist.api.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.plug.xiaojiang.dist.model.DisMemberInfo;
 
 public class ObjectMapperConver {
     public static Object converToObject(Object o){

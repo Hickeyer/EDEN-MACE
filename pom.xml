@@ -16,7 +16,8 @@
 	<modules>
 		<module>dist-primary</module>
 		<module>dist-front</module>
-	</modules>
+        <module>dist-api</module>
+    </modules>
 
 	<parent>
         <groupId>org.springframework.boot</groupId>

@@ -1,11 +1,12 @@
 package com.plug.xiaojiang.dist.controller;
 
+import com.dist.api.SendToDistService;
+import com.dist.api.common.tip.DistResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.plug.xiaojiang.dist.common.tip.DistResult;
 import com.plug.xiaojiang.dist.model.DisMemberAmount;
 import com.plug.xiaojiang.dist.model.DisMemberInfo;
-import com.plug.xiaojiang.dist.utils.http.RestClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
@@ -19,6 +20,9 @@ import java.util.Map;
 @Controller
 public class LoginController {
 
+
+    @Autowired
+    SendToDistService sendToDistService;
 
     @Value("${dist.server.prefix}")
     private String prefix;
@@ -34,12 +38,7 @@ public class LoginController {
     }
     @RequestMapping("/login")
     public String home(String userId, HttpServletRequest request){
-        DistResult result= RestClient.create(prefix+"/api/v1/getUserInfo")
-                .contentType(MediaType.APPLICATION_JSON)
-                .acceptableMediaType(MediaType.APPLICATION_JSON)
-                .addParam("userId",userId)
-                .get(new ParameterizedTypeReference<DistResult>() {
-                });
+        DistResult result= sendToDistService.getUserInfo(prefix,userId);
         if(result.isSuccess()){
             Map<String ,Object> map= (Map<String, Object>) result.getData();
             Gson gson = new Gson();
