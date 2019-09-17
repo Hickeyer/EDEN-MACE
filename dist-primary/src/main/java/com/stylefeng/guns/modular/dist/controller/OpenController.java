@@ -21,6 +21,7 @@ import com.stylefeng.guns.modular.dist.vo.DisMemberInfoVo;
 import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
 import com.stylefeng.guns.modular.dist.vo.DisWithdrawVo;
 import com.stylefeng.guns.modular.system.dao.UserMgrDao;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -93,6 +94,7 @@ public class OpenController  {
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     @ResponseBody
     @ApiOperation(value = "查询会员信息")
+    @ApiImplicitParam(name="userId",value="用户id",required = true,paramType = "query",dataType = "String")
     public DistResult getUserInfo(String userId){
         logger.info("会员查询->开始查询会员信息:{}",userId);
         DisMemberInfo memberInfoParam=new DisMemberInfo();
