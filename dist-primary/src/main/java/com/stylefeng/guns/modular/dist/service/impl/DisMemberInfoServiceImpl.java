@@ -206,6 +206,10 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         List<SubordinateResp> list = new ArrayList<>();
         if(mapList != null){
             for (DisMemberInfo map :mapList){
+                //自己不算自己的下级会员
+                if(map.getDisUserId().equals(req.getMemberId())){
+                    continue;
+                }
                 SubordinateResp resp = new SubordinateResp();
                 resp.setMemberId(map.getDisUserId());
                 resp.setMemberName(map.getDisUserName());
