@@ -218,6 +218,10 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         //账户类型
         disProfitParam.setAccountType(param.getAccountType());
         //垂直等级 ,admin用户不参与垂直等级 划分
+        //admin平台不需要配置段位，没有等级之分
+        //因为admin没有业绩的考察，不需要垂直等级,
+        //admin网上也没有等级，这个地方则不用设置
+        //只要是admin，通过其账户类型有且只有一个分润设置
         if(!userId.equals(SystemUser.ADMIN_INFO.getInfo())){
             disProfitParam.setDisUserRank(subMember.getDisUserRank());
             disProfitParam.setDisProLevel(level);
