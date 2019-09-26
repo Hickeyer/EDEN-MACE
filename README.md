@@ -15,6 +15,9 @@
 
 2.分润计算
 
+##  相关软件下载
+zookeeper下载:https://pan.baidu.com/s/184q_XyAL-R7n4KZnOgUs1w
+
 ###  更新记录
 * 2019-09-26  增加zk分布式锁
 * 2019-07-05  定时任务bug修复
