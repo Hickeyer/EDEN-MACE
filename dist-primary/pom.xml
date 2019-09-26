@@ -90,17 +90,17 @@
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-framework</artifactId>
-            <version>4.0.0</version>
+            <version>${curator-framework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>
-            <version>4.0.0</version>
+            <version>${curator-recipe.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
-            <version>3.4.9</version>
+            <version>${zookeeper.version}</version>
         </dependency>
         <!--其他依赖-->
         <dependency>
@@ -259,8 +259,8 @@
             </resource>
         </resources>
     </build>
-    <!--由于有些jar在阿里云里不存在，需要打开此配置-->
-  <!--  <repositories>
+    <!--仓库配置，默认不开启-->
+   <!-- <repositories>
         <repository>
             <id>central</id>
             <name>Central Repository</name>

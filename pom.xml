@@ -48,6 +48,9 @@
         <spring-context-support.version>3.2.3.RELEASE</spring-context-support.version>
         <quartz-jobs.version>2.2.3</quartz-jobs.version>
         <quartz.version>2.2.3</quartz.version>
+         <curator-framework.version>4.0.0</curator-framework.version>
+         <curator-recipe.version>4.0.0</curator-recipe.version>
+         <zookeeper.version>3.4.9</zookeeper.version>
     </properties>
 
 	<dependencies>
