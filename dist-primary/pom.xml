@@ -259,6 +259,17 @@
             </resource>
         </resources>
     </build>
-
+    <!--由于有些jar在阿里云里不存在，需要打开此配置-->
+  <!--  <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>-->
 
 </project>
