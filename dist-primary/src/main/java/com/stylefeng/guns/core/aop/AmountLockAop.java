@@ -38,9 +38,19 @@ public class AmountLockAop {
 
     private static CuratorFramework curatorFramework = null;
 
-    static {
+
+
+    @Pointcut(value = "@annotation(com.stylefeng.guns.common.annotion.AmoutLock)")
+    public void cutService() {
+    }
+
+    public void initFramework(){
+        if(curatorFramework!=null){
+            return ;
+        }
         Properties properties = new Properties();
         InputStream in = AmountLockAop.class.getClass().getResourceAsStream("/config/zookeeper.properties");
+        if(in==null){return;};
         try {
             properties.load(in);
         } catch (IOException e) {
@@ -48,24 +58,16 @@ public class AmountLockAop {
         }
         switchTag = properties.getProperty("zk.switch");
         connectString = properties.getProperty("zk.connectString");
-         if("true".equals(switchTag)){
-             curatorFramework =
-                     CuratorFrameworkFactory.builder()
-                             .connectString(connectString)
-                             .retryPolicy(new ExponentialBackoffRetry(1000,3))
-                             .build();
-             curatorFramework.start();
+        if("true".equals(switchTag)){
+            curatorFramework =
+                    CuratorFrameworkFactory.builder()
+                            .connectString(connectString)
+                            .retryPolicy(new ExponentialBackoffRetry(1000,3))
+                            .build();
+            curatorFramework.start();
 
-         }
-
-
+        }
     }
-
-
-    @Pointcut(value = "@annotation(com.stylefeng.guns.common.annotion.AmoutLock)")
-    public void cutService() {
-    }
-
 
     /**
      * 获取第一个参数加锁
@@ -75,7 +77,7 @@ public class AmountLockAop {
      */
     @Around("cutService()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
-
+        initFramework();
         Object[] args = point.getArgs();
         if(args!=null&&args.length>0&&curatorFramework!=null){
 
