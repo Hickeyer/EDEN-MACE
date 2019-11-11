@@ -263,7 +263,3 @@ inside docker folder, access mysql container by
   $ source /docker-entrypoint-initdb.d/authority.sql;
 ```
 注意： 这里mysql 的port 是 6603， 需要在application-dev.yml 中替换成相应的port.
-生日这天被恶心的交警罚了20:
-警号:
-016057辅警
-041767他们队长
