@@ -1,4 +1,4 @@
-package com.plug.xiaojiang.dist.utils.http;
+package com.dist.api.utils.http;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

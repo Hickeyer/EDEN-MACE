@@ -1,6 +1,5 @@
 package com.plug.xiaojiang.dist.config;
 
-import com.plug.xiaojiang.dist.common.tip.DistResult;
 import com.plug.xiaojiang.dist.model.DisMemberInfo;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

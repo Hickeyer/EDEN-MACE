@@ -9,13 +9,10 @@ import com.stylefeng.guns.common.persistence.dao.DisWithdrawRecordMapper;
 import com.stylefeng.guns.common.persistence.model.DisWithdrawRecord;
 import com.stylefeng.guns.modular.dist.amountTemplate.AmountTemplateFactoryContext;
 import com.stylefeng.guns.modular.dist.dao.DisWithdrawRecordDao;
-import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
-import com.stylefeng.guns.modular.dist.service.IDistWithdrawParamService;
+import com.stylefeng.guns.modular.dist.service.*;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
-import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.stylefeng.guns.modular.dist.service.IDisWithdrawRecordService;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -49,13 +46,16 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
     @Autowired
     ISysDicService sysDicService;
 
+    @Autowired
+    IAmountMangeService amountMangeService;
+
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void withdrawMoney(String userId, BigDecimal amount, String accountType) {
 
-
-        AmountTemplateFactoryContext amountFactoryContext = new AmountTemplateFactoryContext(accountType);
-        amountFactoryContext.amountTemplate.frozenAmount(userId,amount);
+        amountMangeService.frozenAmount(userId,amount,accountType);
+//        AmountTemplateFactoryContext amountFactoryContext = new AmountTemplateFactoryContext(accountType);
+//        amountFactoryContext.amountTemplate.frozenAmount(userId,amount);
         // disMemberAmountService.frozenAmount(userId,amount,accountType);
         Map<String,Object> map= distWithdrawParamService.calAmount(amount);
 
@@ -85,16 +85,13 @@ public class DisWithdrawRecordServiceImpl implements IDisWithdrawRecordService {
         if(record.getWithdrawStatus().equals(WithdrawStatus.FIRST_STATUS.getStatus())){
 
             record.setHandleTime(DateUtils.longToDateAll(System.currentTimeMillis()));
-            AmountTemplateFactoryContext amountFactoryContext = new  AmountTemplateFactoryContext(record.getAccountType());
             if(type.equals(WithdrawStatus.SECOND_STATUS.getStatus())){
                 record.setWithdrawStatus(WithdrawStatus.SECOND_STATUS.getStatus());
-                amountFactoryContext.amountTemplate.reduceMoney(record.getDisUserId(),record.getTotalAmount());
-              //  disMemberAmountService.reduceMoney(record.getDisUserId(),record.getTotalAmount(),accountType);
+                amountMangeService.reduceMoney(record.getDisUserId(),record.getTotalAmount(),record.getAccountType());
                 disWithdrawRecordMapper.updateAllColumnById(record);
             }else if(type.equals(WithdrawStatus.THIRD_STATUS.getStatus())){
                 record.setWithdrawStatus(WithdrawStatus.THIRD_STATUS.getStatus());
-                amountFactoryContext.amountTemplate.returnMoney(record.getDisUserId(),record.getTotalAmount());
-                //disMemberAmountService.returnMoney(record.getDisUserId(),record.getTotalAmount(),accountType);
+                amountMangeService.returnMoney(record.getDisUserId(),record.getTotalAmount(),record.getAccountType());
                 disWithdrawRecordMapper.updateAllColumnById(record);
             }
 

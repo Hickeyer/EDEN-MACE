@@ -1,15 +1,16 @@
 package com.plug.xiaojiang.dist.controller;
 
+import com.dist.api.SendToDistService;
+import com.dist.api.common.tip.DistResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.plug.xiaojiang.dist.common.tip.DistResult;
 import com.plug.xiaojiang.dist.dto.DisMemberInfoVo;
 import com.plug.xiaojiang.dist.dto.DisProfitRecordVo;
 import com.plug.xiaojiang.dist.http.request.SubordinateReq;
 import com.plug.xiaojiang.dist.model.DisMemberAmount;
 import com.plug.xiaojiang.dist.model.DisMemberInfo;
 import com.plug.xiaojiang.dist.utils.PinYinUtil;
-import com.plug.xiaojiang.dist.utils.http.RestClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
@@ -29,7 +30,8 @@ public class IndexController {
     @Value("${dist.server.secret}")
     private String secret;
 
-
+    @Autowired
+    SendToDistService sendToDistService;
 
 
     @RequestMapping("/inviteUser")
@@ -47,14 +49,7 @@ public class IndexController {
         vo.setDisPlatSuper(memberInfo.getDisPlatSuper());
         vo.setDisNote("来源：plug测试");
         Gson gson=new Gson();
-        DistResult result= RestClient.create(prefix+"/api/v1/memberAdd")
-                .header("content-type", "text/xml,charset=utf-8")
-                .contentType(MediaType.APPLICATION_JSON)
-                .acceptableMediaType(MediaType.APPLICATION_JSON)
-                .body(gson.toJson(vo))
-                .post(new ParameterizedTypeReference<DistResult>() {
-                });
-
+        DistResult result= sendToDistService.inviteUser(prefix,gson.toJson(vo));
         return result;
     }
 
@@ -72,14 +67,7 @@ public class IndexController {
         vo.setDisPlatformId(memberInfo.getDisPlatformId());
         vo.setDisSetUserId(memberInfo.getDisUserId());
         Gson gson=new Gson();
-        DistResult result= RestClient.create(prefix+"/api/v1/trade")
-                .header("content-type", "text/xml,charset=utf-8")
-                .contentType(MediaType.APPLICATION_JSON)
-                .acceptableMediaType(MediaType.APPLICATION_JSON)
-                .body(gson.toJson(vo))
-                .post(new ParameterizedTypeReference<DistResult>() {
-                });
-
+        DistResult result= sendToDistService.trade(prefix,gson.toJson(vo));
         return result;
     }
 
@@ -93,13 +81,7 @@ public class IndexController {
         SubordinateReq req = new SubordinateReq();
         req.setMemberId(memberInfo.getDisUserId());
         Gson gson=new Gson();
-        DistResult result= RestClient.create(prefix+"/api/v1/subordinate")
-                .header("content-type", "text/xml,charset=utf-8")
-                .contentType(MediaType.APPLICATION_JSON)
-                .acceptableMediaType(MediaType.APPLICATION_JSON)
-                .body(gson.toJson(req))
-                .post(new ParameterizedTypeReference<DistResult>() {
-                });
+        DistResult result= sendToDistService.subordinate(prefix,gson.toJson(req));
         return result;
     }
 }

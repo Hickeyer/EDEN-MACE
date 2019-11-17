@@ -57,6 +57,18 @@ SimOper.openOrderAdd = function () {
     });
     this.layerIndex = index;
 };
+
+SimOper.openLevelAdd = function () {
+    var index = layer.open({
+        type: 2,
+        title: '模拟升级',
+        area: ['800px', '420px'], //宽高
+        fix: false, //不固定
+        maxmin: true,
+        content: Feng.ctxPath + '/simOper/level_add'
+    });
+    this.layerIndex = index;
+};
 SimOper.openWithdrawAdd = function () {
     var index = layer.open({
         type: 2,

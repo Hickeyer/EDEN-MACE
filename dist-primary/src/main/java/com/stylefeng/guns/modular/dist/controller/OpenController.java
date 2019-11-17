@@ -21,6 +21,7 @@ import com.stylefeng.guns.modular.dist.vo.DisMemberInfoVo;
 import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
 import com.stylefeng.guns.modular.dist.vo.DisWithdrawVo;
 import com.stylefeng.guns.modular.system.dao.UserMgrDao;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -93,6 +94,7 @@ public class OpenController  {
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     @ResponseBody
     @ApiOperation(value = "查询会员信息")
+    @ApiImplicitParam(name="userId",value="用户id",required = true,paramType = "query",dataType = "String")
     public DistResult getUserInfo(String userId){
         logger.info("会员查询->开始查询会员信息:{}",userId);
         DisMemberInfo memberInfoParam=new DisMemberInfo();
@@ -171,6 +173,8 @@ public class OpenController  {
     @ApiOperation(value = "新增交易奖励", notes = "此接口是用于交易奖励的接口，及关注有相关分润的数据")
     @StatisticsSocket
     public DistResult tradeOrder(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
+        // 交易奖励
+        disProfitRecordVo.setAccountType(AccountTypeStatus.ZERO_STATUS.getStatus());
         logger.info("订单交易->开始订单交易");
         if(!isAccountVer(disProfitRecordVo.getSecret())) {
            return   DistResult.failure("非法访问！");
@@ -195,7 +199,8 @@ public class OpenController  {
     @ApiOperation(value = "升级奖励", notes = "此接口是用于升级奖励的接口")
     @StatisticsSocket
     public DistResult upgradeLevel(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
-        logger.info("用户升级->开始升级");
+        disProfitRecordVo.setAccountType(AccountTypeStatus.ONE_STATUS.getStatus());
+        logger.info("用户升级->开始升级,入参{}",disProfitRecordVo.toString());
         if(!isAccountVer(disProfitRecordVo.getSecret())) {
             return   DistResult.failure("非法访问！");
         }
@@ -208,7 +213,6 @@ public class OpenController  {
             return DistResult.failure("请提供要升级的等级");
         }
         disProfitRecordVo.setDisPlatformId(memberInfo.getDisPlatformId());
-        disProfitRecordVo.setAccountType(AccountTypeStatus.ONE_STATUS.getStatus());
         disProfitRecordService.save(disProfitRecordVo);
 
         memberInfo.setDisUserType(disProfitRecordVo.getUpgradeLevel());

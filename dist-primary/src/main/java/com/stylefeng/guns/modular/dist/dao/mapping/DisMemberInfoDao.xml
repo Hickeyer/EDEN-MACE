@@ -25,7 +25,7 @@
         SELECT m.confine_status,m.rank_integral,m.`id`,m.`dis_platform_id`,m.`dis_user_id`,m.`dis_model_id`,m.`dis_full_index`,m.`dis_user_name`,e.`dic_value` AS dis_level,m.`update_time`
         ,m.`dis_note`,m.`add_time`,d.`dic_value` AS dis_user_type,f.`dic_value` AS dis_user_rank
         FROM  `dis_member_info` m
-        LEFT JOIN `sys_dic` d ON m.`dis_user_type`=d.`dic_no` AND d.`dic_type_no`='disUserType' AND d.`is_delete`='N'
+        LEFT JOIN `sys_dic` d ON m.`dis_user_type`=d.`dic_no` AND d.`dic_type_no`='disUserPlatType' AND d.`is_delete`='N'
         LEFT JOIN `sys_dic` e ON m.`dis_level`=e.`dic_no` AND e.`dic_type_no`='disProLevel' AND e.`is_delete`='N'
         LEFT JOIN `sys_dic` f ON m.`dis_user_rank`=f.`dic_no` AND f.`dic_type_no`='disUserRank' AND f.`is_delete`='N'
         WHERE m.is_delete='N' and m.type='0'

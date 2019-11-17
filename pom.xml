@@ -8,7 +8,7 @@
 
 	<groupId>cn.dist</groupId>
 	<artifactId>dist-parent</artifactId>
-	<version>1.5.1</version>
+	<version>1.6.0</version>
 	<name>eden-mace</name>
 	<description>分销管理系统</description>
 	<url>https://gitee.com/codingdb/distribution_management</url>
@@ -16,7 +16,8 @@
 	<modules>
 		<module>dist-primary</module>
 		<module>dist-front</module>
-	</modules>
+        <module>dist-api</module>
+    </modules>
 
 	<parent>
         <groupId>org.springframework.boot</groupId>
@@ -47,6 +48,9 @@
         <spring-context-support.version>3.2.3.RELEASE</spring-context-support.version>
         <quartz-jobs.version>2.2.3</quartz-jobs.version>
         <quartz.version>2.2.3</quartz.version>
+         <curator-framework.version>4.0.0</curator-framework.version>
+         <curator-recipe.version>4.0.0</curator-recipe.version>
+         <zookeeper.version>3.4.9</zookeeper.version>
     </properties>
 
 	<dependencies>

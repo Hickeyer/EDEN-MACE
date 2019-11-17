@@ -2,6 +2,7 @@ package com.stylefeng.guns.modular.dist.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.stylefeng.guns.common.annotion.AmoutLock;
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.constant.dist.*;
@@ -10,19 +11,16 @@ import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.modular.dist.amountTemplate.AmountTemplateFactoryContext;
 import com.stylefeng.guns.modular.dist.amountsign.AmountFactoryContext;
 import com.stylefeng.guns.modular.dist.dao.DisProfitRecordDao;
-import com.stylefeng.guns.modular.dist.service.IDisMemberAmountService;
-import com.stylefeng.guns.modular.dist.service.IDisSysIntegralRecordService;
+import com.stylefeng.guns.modular.dist.service.*;
 import com.stylefeng.guns.modular.dist.task.AgentRankTask;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.util.DistUtils;
 import com.stylefeng.guns.modular.dist.vo.DisProfitRecordVo;
-import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.stylefeng.guns.modular.dist.service.IDisProfitRecordService;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -68,6 +66,9 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
 
     @Resource
     DisUpgradeRecordMapper disUpgradeRecordMapper;
+
+    @Autowired
+    IAmountMangeService amountMangeService;
 
     @Value("${dist.profit.isUse}")
     private  boolean  isUse;
@@ -218,6 +219,10 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         //账户类型
         disProfitParam.setAccountType(param.getAccountType());
         //垂直等级 ,admin用户不参与垂直等级 划分
+        //admin平台不需要配置段位，没有等级之分
+        //因为admin没有业绩的考察，不需要垂直等级,
+        //admin网上也没有等级，这个地方则不用设置
+        //只要是admin，通过其账户类型有且只有一个分润设置
         if(!userId.equals(SystemUser.ADMIN_INFO.getInfo())){
             disProfitParam.setDisUserRank(subMember.getDisUserRank());
             disProfitParam.setDisProLevel(level);
@@ -261,11 +266,12 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         record.setType(idType);
         record.setProfitNum(sysDicService.getOrderNo("profit"));
         disProfitRecordMapper.insert(record);
-
+        amountMangeService.addMoney(userId,newAmount,memberInfo.getDisUserId(), idType,disProfit.getAccountType());
         //增加会员金额信息
-        AmountTemplateFactoryContext context = new AmountTemplateFactoryContext(disProfit.getAccountType());
-        context.amountTemplate.addMoney(userId,newAmount,memberInfo.getDisUserId(), idType);
+       // AmountTemplateFactoryContext context = new AmountTemplateFactoryContext(disProfit.getAccountType());
+        //context.amountTemplate.addMoney(userId,newAmount,memberInfo.getDisUserId(), idType);
     }
+
 
 
     public static void main(String[] args) {

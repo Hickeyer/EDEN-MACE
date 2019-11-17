@@ -1,4 +1,4 @@
-package com.plug.xiaojiang.dist.utils.http;
+package com.dist.api.utils.http;
 
 import org.apache.http.conn.ssl.AbstractVerifier;
 

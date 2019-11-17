@@ -1,4 +1,4 @@
-package com.plug.xiaojiang.dist.common.tip;
+package com.dist.api.common.tip;
 
 import java.io.Serializable;
 

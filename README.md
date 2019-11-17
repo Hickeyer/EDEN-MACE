@@ -1,4 +1,10 @@
+
+
 ## 分销管理系统（EDEN-MACE）
+
+## 声明
+
+本人对此软件拥有所有权，可以接私活，或者作为公司的解决方案，但是，请勿在贵公司网站上作为自己的产品宣传。
 
 ###  视频教程 
 
@@ -9,7 +15,11 @@
 
 2.分润计算
 
+##  相关软件下载
+zookeeper下载:https://pan.baidu.com/s/184q_XyAL-R7n4KZnOgUs1w
+
 ###  更新记录
+* 2019-09-26  增加zk分布式锁
 * 2019-07-05  定时任务bug修复
 * 2019-05-21  新增代理-会员关系图
 * 2019-05-19  重构分润核心代码,增加分段计算分润的方式，让分润更加精准化,防止因分润带来财务风险
@@ -18,6 +28,13 @@
 
  * 2019-02-12 优化界面查询，重构后端分页，增加会员邀请限制
  * 2019-01-22 更新邀请会员接口，可以支持邀请会员或者平台任选一个
+
+###  模块介绍
+ dist-primary  分销主模块
+
+ dist-front  模拟前端
+
+ dist-api   分销接口调用插件
 
 #### 前言
 
@@ -131,9 +148,6 @@ ZERO_STATUS("0","按照百分比计算") {
 
 
 
-###  特别鸣谢
-
-咕泡学院青山老师
 
 ### 项目总览
 项目使用场景图示
@@ -182,13 +196,14 @@ plug用来调试接口，调试完成后，可以直接使用
 
 ####  分销配置化
 
-  假设**李老板**  原来只设置一级又分润，后面需要给二级或者三级分润，这个时候只需要在后台进行配置就可以。**李老板** 如果设置原来的配置每笔交易按照百分比收取，后来改为每笔交易按照固定金额收取，就可以直接在后台进行配置。
+  假设平台原来只设置一级又分润，后面需要给二级或者三级分润，这个时候只需要在后台进行配置就可以。平台 如果设置原来的配置每笔交易按照百分比收取，后来改为每笔交易按照固定金额收取，就可以直接在后台进行配置。
 如下图中的分润配置，可以根据各种情况进行配置分润。
-![输入图片说明](https://gitee.com/uploads/images/2018/0616/205340_a24ef103_1497609.jpeg "分润详情.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/124938_5c6bfe2a_1497609.jpeg "1.jpg")
 
 #### 会员关系可视化
 
   会员的发展理论上可以无限制的发展下去，并且可以通过树状图表现出来。
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125057_50d7945a_1497609.png "2.png")
 
 #### 分销关系权限化
 
@@ -204,23 +219,29 @@ plug用来调试接口，调试完成后，可以直接使用
 ![输入图片说明](https://gitee.com/uploads/images/2018/0531/232723_3195cc5d_1497609.jpeg "1.jpg")
 
 会员信息对会员账号和会员资金进行管理
-![输入图片说明](https://gitee.com/uploads/images/2018/0531/232930_a2b39ed8_1497609.jpeg "2.jpg")
-![输入图片说明](https://gitee.com/uploads/images/2018/0531/233008_65b79616_1497609.jpeg "3.jpg")
-![输入图片说明](https://gitee.com/uploads/images/2018/0531/233016_a1f5825b_1497609.jpeg "4.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125304_39f85ddb_1497609.jpeg "3.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125317_29b491b0_1497609.jpeg "4.jpg")
 
 分销配置用来配置分润等信息
-![输入图片说明](https://gitee.com/uploads/images/2018/0531/233057_0ec35361_1497609.jpeg "5.jpg")
-![输入图片说明](https://gitee.com/uploads/images/2018/0531/233120_47801737_1497609.jpeg "6.jpg")
-![输入图片说明](https://gitee.com/uploads/images/2018/0531/233110_36d91f83_1497609.jpeg "7.jpg")
+
+
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125606_c861fc15_1497609.jpeg "5-1.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125615_ba303b29_1497609.jpeg "5-2.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125626_1eb5a8fc_1497609.jpeg "5-3.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125635_36af37a0_1497609.jpeg "5-4.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125642_78bde0ea_1497609.jpeg "5-5.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125651_2e20c013_1497609.jpeg "5-6.jpg")
 
 交易中心 集中对收入和支出进行管理
-![输入图片说明](https://gitee.com/uploads/images/2018/0531/233149_4a1d658e_1497609.jpeg "8.jpg")
-![输入图片说明](https://gitee.com/uploads/images/2018/0531/233201_d8fb5542_1497609.jpeg "9.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125745_1d7fd7a7_1497609.jpeg "6-1.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125759_5e0ef61c_1497609.jpeg "6-2.jpg")
+
 统计中心 对数据进行统计
 交易动态，可以查看最新的交易成功的动态
 ![输入图片说明](https://gitee.com/uploads/images/2018/0609/143627_87c48977_1497609.jpeg "111.jpg")
 账户收益统计图
 ![输入图片说明](https://gitee.com/uploads/images/2018/0610/120127_3fc5142b_1497609.jpeg "111.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0802/125900_97438488_1497609.jpeg "7.jpg")
 
 ### 模拟前端界面展示
 
