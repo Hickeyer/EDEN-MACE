@@ -19,6 +19,7 @@
 zookeeper下载:https://pan.baidu.com/s/184q_XyAL-R7n4KZnOgUs1w
 
 ###  更新记录
+* 2019-11-06  增加docker部署(参考[传送门](https://my.oschina.net/u/3704586/blog/3126725))
 * 2019-09-26  增加zk分布式锁
 * 2019-07-05  定时任务bug修复
 * 2019-05-21  新增代理-会员关系图
