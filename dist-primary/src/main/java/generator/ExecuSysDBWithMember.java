@@ -21,6 +21,17 @@ import java.util.concurrent.*;
  **/
 public class ExecuSysDBWithMember {
 
+
+
+    public static void main(String[] args) throws Exception {
+        long start  = System.currentTimeMillis();
+        new ExecuSysDBWithMember().process();
+
+        long end  = System.currentTimeMillis();
+
+        System.out.println("耗时:"+(end-start)/1000+"秒");
+    }
+
     private JdbcTemplate jdbcTemplate;
 
     private int updateBatchSzie = 3000;
@@ -31,7 +42,7 @@ public class ExecuSysDBWithMember {
 
     public ExecuSysDBWithMember() {
 
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("/plugin/syn_db_set.xml.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/plugin/syn_db_set.xml");
         jdbcTemplate= (JdbcTemplate)ctx.getBean("jdbcTemplate");
 
         //  设置策略
@@ -150,14 +161,7 @@ public class ExecuSysDBWithMember {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        long start  = System.currentTimeMillis();
-        new ExecuSysDBWithMember().process();
 
-        long end  = System.currentTimeMillis();
-
-        System.out.println("耗时:"+(end-start)/1000+"秒");
-    }
 
 
     public void insertMemberInfo(List<Object[]> params){

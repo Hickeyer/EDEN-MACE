@@ -1,0 +1,5 @@
+1. 首先导入demo.sql中的sql
+2. 如果变表 需要修改member_relation.properties
+3. 数据库连接配置在syn_db_set.xml中配置i
+4. 务必保证authority、distribution 和需要同步的表名在同一数据库中
+5. 执行ExecuSysDBWithMember中的main方法
