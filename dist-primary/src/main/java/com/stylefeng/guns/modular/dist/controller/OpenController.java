@@ -1,6 +1,7 @@
 package com.stylefeng.guns.modular.dist.controller;
 
 import com.stylefeng.guns.common.annotion.DataSource;
+import com.stylefeng.guns.common.annotion.OpenApiEncrypt;
 import com.stylefeng.guns.common.annotion.log.StatisticsSocket;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
@@ -41,6 +42,7 @@ import java.util.Map;
  * 系统对外开放接口
  * @author  xiaojiang
  */
+
 @Controller
 @RequestMapping("/api/v1/")
 public class OpenController  {
@@ -123,6 +125,7 @@ public class OpenController  {
     @ResponseBody
     @ApiOperation(value = "新增会员")
     @StatisticsSocket
+    @OpenApiEncrypt
     public DistResult inviteMember(@RequestBody DisMemberInfoVo memberInfoVo) throws Exception {
         logger.info("新增会员->开始进入新增会员");
         if(!isAccountVer(memberInfoVo.getSecret())){
@@ -172,6 +175,7 @@ public class OpenController  {
     @ResponseBody
     @ApiOperation(value = "新增交易奖励", notes = "此接口是用于交易奖励的接口，及关注有相关分润的数据")
     @StatisticsSocket
+    @OpenApiEncrypt
     public DistResult tradeOrder(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
         // 交易奖励
         disProfitRecordVo.setAccountType(AccountTypeStatus.ZERO_STATUS.getStatus());
@@ -198,6 +202,7 @@ public class OpenController  {
     @ResponseBody
     @ApiOperation(value = "升级奖励", notes = "此接口是用于升级奖励的接口")
     @StatisticsSocket
+    @OpenApiEncrypt
     public DistResult upgradeLevel(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
         disProfitRecordVo.setAccountType(AccountTypeStatus.ONE_STATUS.getStatus());
         logger.info("用户升级->开始升级,入参{}",disProfitRecordVo.toString());
@@ -227,6 +232,7 @@ public class OpenController  {
     @PostMapping(value = "/subordinate")
     @ResponseBody
     @ApiOperation(value = "会员直属下级会员", notes = "此接口是查询会员直属下级会员")
+    @OpenApiEncrypt
     public DistResult subordinateMember(@RequestBody  SubordinateReq subordinateReq) {
         logger.info("会员下级->开始查询");
         if(!isAccountVer(subordinateReq.getSecret())) {
@@ -248,6 +254,7 @@ public class OpenController  {
     @ResponseBody
     @ApiOperation(value = "新增提现接口", notes = "此接口是用用户提现")
     @StatisticsSocket
+    @OpenApiEncrypt
     public DistResult withdraw(@RequestBody DisWithdrawVo withdrawVo) {
         logger.info("会员提现->开始提现,入参信息:{}",withdrawVo.toString());
         if(!isAccountVer(withdrawVo.getSecret())) {

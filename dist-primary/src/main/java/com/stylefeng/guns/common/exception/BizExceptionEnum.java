@@ -59,7 +59,17 @@ public enum BizExceptionEnum {
 	DICT_MUST_BE_NUMBER(400,"字典的值必须为数字"),
 	REQUEST_NULL(400, "请求有错误"),
 	SESSION_TIMEOUT(400, "会话超时"),
-	SERVER_ERROR(500, "服务器异常");
+	SERVER_ERROR(500, "服务器异常"),
+
+
+	/**
+	 *  加解密异常
+	 */
+	REQUEST_DECRYPT_ERROR(421,"open api request decrypt invalid"),
+	RESPONSE_ENCRYPT_ERROR(522,"open api response encrypt invalid"),
+	;
+
+
 
 	BizExceptionEnum(int code, String message) {
 		this.friendlyCode = code;

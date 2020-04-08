@@ -293,7 +293,7 @@ DROP TABLE IF EXISTS `dist_withdraw_param`;
 CREATE TABLE `dist_withdraw_param` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `begin_amount` decimal(10,2) DEFAULT NULL COMMENT '开始金额',
-  `end_amount` decimal(10,2) DEFAULT NULL COMMENT '结束时间',
+  `end_amount` decimal(10,2) DEFAULT NULL COMMENT '结束金额',
   `cal_model` varchar(10) DEFAULT NULL COMMENT '计算模型，如 百分比和固定金额',
   `dis_withdraw_value` varchar(50) DEFAULT NULL COMMENT '提现值',
   `is_delete` varchar(2) DEFAULT 'N' COMMENT '是否删除',
