@@ -1,6 +1,7 @@
 package com.stylefeng.guns.modular.dist.controller;
 
 import com.stylefeng.guns.common.constant.dist.IdentityStatus;
+import com.stylefeng.guns.common.constant.dist.UserTypeStatus;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.User;
@@ -44,15 +45,15 @@ public class HtmlController extends BaseController {
         DisMemberInfo memberInfo=new DisMemberInfo();
         memberInfo.setDisUserId(user.getAccount());
         memberInfo.setDisUserName(user.getName());
-        memberInfo.setType(IdentityStatus.PLAT_STATUS.getStatus());
+        memberInfo.setIdentityType(IdentityStatus.PLAT_STATUS.getStatus());
         memberInfo.setDisPlatformId(account);
         memberInfo.setDisPlatSuper(user.getSuperaccount());
         memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
         memberInfo.setDisPlatFullIndex(user.getFullindex());
         memberInfo.setDisFullIndex(user.getFullindex());
-        memberInfo.setDisModelId(user.getSuperaccount());
-        memberInfo.setDisUserType("10000");
-        memberInfo.setDisLevel(Integer.parseInt(user.getLevel()));
+        memberInfo.setDisParentId(user.getSuperaccount());
+        memberInfo.setDisUserType(UserTypeStatus.PLAT_STATUS.getStatus());
+//        memberInfo.setDisLevel(Integer.parseInt(user.getLevel()));
         memberInfo.setIsDelete("N");
         disMemberInfoService.saveAgent(memberInfo);
         return "sucess";

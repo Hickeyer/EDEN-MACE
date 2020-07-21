@@ -21,9 +21,50 @@ SysJob.initColumn = function () {
         {title: '类路径', field: 'jobClassPath', visible: true, align: 'center', valign: 'middle'},
         {title: '状态', field: 'statusInfo', visible: true, align: 'center', valign: 'middle'},
         {title: '描述', field: 'jobDescribe', visible: true, align: 'center', valign: 'middle'},
+        {title:"操作",field:'Button',events:operateEvents,formatter:SysJob.AddFunction}
     ];
 };
 
+//状态:1启用 0停用
+SysJob.AddFunction = function(value,row,index){
+
+    if(row['jobStatus'] == 0){
+        return [
+            '<button id="confineMember" type="button" class="btn btn-primary ">启用</button>'
+        ].join("");
+    }else{
+        return [
+            '<button id="unConfineMember" type="button" class="btn btn-default">停用</button>'
+        ].join("");
+    }
+
+}
+window.operateEvents = {
+    'click #confineMember':function (e,value,row,index) {
+
+        SysJob.confineMembers(1,row['id']);
+
+    },
+    'click #unConfineMember':function (e,value,row,index) {
+
+        SysJob.confineMembers(0,row['id']);
+
+    },
+}
+
+SysJob.confineMembers = function (status,id) {
+    //提交信息
+    var ajax = new $ax(Feng.ctxPath + "/sysJob/confine", function(data){
+        Feng.success("处理成功!");
+        SysJob.search();
+
+    },function(data){
+        Feng.error("处理失败!" + data.responseJSON.message + "!");
+    });
+    var confineData = {'status':status,'id':id};
+    ajax.set(confineData);
+    ajax.start();
+}
 /**
  * 检查是否选中
  */
@@ -91,7 +132,7 @@ SysJob.delete = function () {
  */
 SysJob.search = function () {
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
+    queryData['jobName'] = $("#jobName").val();
     SysJob.table.refresh({query: queryData});
 };
 

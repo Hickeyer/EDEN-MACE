@@ -7,10 +7,9 @@
 		<id column="id" property="id" />
 		<result column="dis_platform_id" property="disPlatformId" />
 		<result column="dis_user_id" property="disUserId" />
-		<result column="dis_model_id" property="disModelId" />
+		<result column="dis_parent_id" property="disParentId" />
 		<result column="dis_full_index" property="disFullIndex" />
 		<result column="dis_user_name" property="disUserName" />
-		<result column="dis_level" property="disLevel" />
 		<result column="dis_user_type" property="disUserType" />
 		<result column="dis_user_rank" property="disUserRank" />
 		<result column="dis_note" property="disNote" />
@@ -20,7 +19,7 @@
 		<result column="dis_plat_super" property="disPlatSuper" />
 		<result column="dis_plat_full_index" property="disPlatFullIndex" />
 		<result column="dis_plat_level" property="disPlatLevel" />
-		<result column="type" property="type" />
+		<result column="identity_type" property="identityType" />
 		<result column="rank_integral" property="rankIntegral" />
 		<result column="total_rank_integral" property="totalRankIntegral" />
 		<result column="confine_status" property="confineStatus" />

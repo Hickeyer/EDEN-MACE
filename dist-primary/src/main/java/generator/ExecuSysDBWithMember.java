@@ -181,10 +181,10 @@ public class ExecuSysDBWithMember {
             +"            (                          "
             +"             `dis_platform_id`,             "
             +"             `dis_user_id`,                 "
-            +"             `dis_model_id`,                "
+            +"             `dis_parent_id`,                "
             +"             `dis_full_index`,              "
             +"             `dis_user_name`,               "
-            +"             `dis_level`,                   "
+//            +"             `dis_level`,                   "
             +"             `dis_user_type`,               "
             +"             `dis_note`,                    "
             +"             `add_time`,                    "
@@ -198,14 +198,14 @@ public class ExecuSysDBWithMember {
             +"        null,                     " // 上级id
             +"        ?,                   " //全路径
             +"        ?,                    " //用户姓名
-            +"        '0',                        "// 级别
+//            +"        '0',                        "// 级别
             +"        '0',                    "
             +"        '第三方数据导入',                         "
             +"        ?,                         "//添加时间
             +"        ?,                      "//更新时间
-            +"        ?,                   "//上级代理商id
-            +"        ?,              "//代理商全路径
-            +"        ?);                    ";//代理商等级
+            +"        ?,                   "//上级平台商id
+            +"        ?,              "//平台商全路径
+            +"        ?);                    ";//平台商等级
 
     private  String insertMemberAmountSql =
                     " INSERT INTO `distribution`.`dis_member_amount`"
@@ -215,7 +215,7 @@ public class ExecuSysDBWithMember {
                     +"             `total_amount`,                  "
                     +"             `frozen_amount`,                 "
                     +"             `avaible_amount`,                "
-                    +"             `type`,                          "
+                    +"             `identity_type`,                          "
                     +"             `add_time`,                      "
                     +"             `update_time`,                   "
                     +"             `amount_status`,                 "

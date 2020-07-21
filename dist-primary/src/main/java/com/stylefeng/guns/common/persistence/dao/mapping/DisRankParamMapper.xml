@@ -16,6 +16,7 @@
 		<result column="add_time" property="addTime" />
 		<result column="dis_user_rank" property="disUserRank" />
 		<result column="dis_rank_name" property="disRankName" />
+		<result column="identity_type" property="identityType" />
 	</resultMap>
 
 </mapper>

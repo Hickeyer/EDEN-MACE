@@ -22,4 +22,8 @@ public interface IDisSysIntegralRecordService {
      */
     public void saveIntegral(String accountType, BigDecimal amount, DisMemberInfo memberInfo) throws Exception;
 
+
+
+    public void saveAgentIntegral(String accountType, BigDecimal amount, DisMemberInfo memberInfo) throws Exception;
+
 }

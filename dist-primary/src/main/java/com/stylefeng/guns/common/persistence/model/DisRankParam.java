@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-10-18
+ * @since 2020-07-21
  */
 @TableName("dis_rank_param")
 public class DisRankParam extends Model<DisRankParam> {
@@ -80,6 +80,11 @@ public class DisRankParam extends Model<DisRankParam> {
      */
 	@TableField("dis_rank_name")
 	private String disRankName;
+    /**
+     * 身份类型(0,会员，1：平台商)
+     */
+	@TableField("identity_type")
+	private String identityType;
 
 
 	public Integer getId() {
@@ -178,6 +183,14 @@ public class DisRankParam extends Model<DisRankParam> {
 		this.disRankName = disRankName;
 	}
 
+	public String getIdentityType() {
+		return identityType;
+	}
+
+	public void setIdentityType(String identityType) {
+		this.identityType = identityType;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -198,6 +211,7 @@ public class DisRankParam extends Model<DisRankParam> {
 			", addTime=" + addTime +
 			", disUserRank=" + disUserRank +
 			", disRankName=" + disRankName +
+			", identityType=" + identityType +
 			"}";
 	}
 }

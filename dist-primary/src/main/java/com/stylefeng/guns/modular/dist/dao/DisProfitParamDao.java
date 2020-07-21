@@ -14,6 +14,7 @@ import java.util.Map;
 public interface DisProfitParamDao {
 
     List<Map<String, Object>> selectList(@Param("account") String account,@Param("calModel") String calModel
-            ,@Param("accountType") String accountType,@Param("disUserType") String disUserType,@Param("disUserRank") String disUserRank);
+            ,@Param("accountType") String accountType,@Param("disUserType") String disUserType,@Param("disUserRank") String disUserRank
+            ,@Param("identityType") String identityType);
 
 }

@@ -224,29 +224,28 @@ public class UserMgrController extends BaseController {
         DisMemberInfo memberInfo=new DisMemberInfo();
         memberInfo.setDisUserId(user.getAccount());
         memberInfo.setDisUserName(user.getName());
-        memberInfo.setType(IdentityStatus.PLAT_STATUS.getStatus());
+        memberInfo.setIdentityType(IdentityStatus.PLAT_STATUS.getStatus());
         memberInfo.setDisPlatformId(user.getFullindex().split("\\.")[1]);
         memberInfo.setDisPlatSuper(user.getSuperaccount());
         memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
         memberInfo.setDisPlatFullIndex(user.getFullindex());
         memberInfo.setDisFullIndex(user.getFullindex());
-        memberInfo.setDisModelId(user.getSuperaccount());
+        memberInfo.setDisParentId(user.getSuperaccount());
         memberInfo.setDisUserType("10000");
-        memberInfo.setDisLevel(Integer.parseInt(user.getLevel()));
+//        memberInfo.setDisLevel(Integer.parseInt(user.getLevel()));
         memberInfo.setIsDelete("N");
         memberInfo.setDisUserRank(AgentRankStatus.A_STATUS.getStatus());
         disMemberInfoService.saveAgent(memberInfo);
         //自动生成关联会员信息
-        if(DistCommonArg.ADMIN.equals(memberInfo.getDisModelId())){
+        if(DistCommonArg.ADMIN.equals(memberInfo.getDisParentId())){
             String memberId =memberInfo.getDisUserId()+suffix;
-            memberInfo.setDisModelId(null);
+            memberInfo.setDisParentId(null);
             memberInfo.setDisFullIndex(memberId);
             memberInfo.setDisUserId(memberId);
-            memberInfo.setDisLevel(0);
             memberInfo.setDisUserRank(UserRankStatus.A_STATUS.getStatus());
             memberInfo.setDisUserType(UserTypeStatus.ZERO_STATUS.getStatus());
             memberInfo.setDisNote("系统自动生成，用于初始化数据");
-            memberInfo.setType(IdentityStatus.USER_STATUS.getStatus());
+            memberInfo.setIdentityType(IdentityStatus.USER_STATUS.getStatus());
             memberInfo.setDisUserRank(UserRankStatus.A_STATUS.getStatus());
             memberInfo.setDisPlatSuper(user.getAccount());
             disMemberInfoService.saveNoOperate(memberInfo);

@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2019-02-02
+ * @since 2020-07-17
  */
 @TableName("dis_member_info")
 public class DisMemberInfo extends Model<DisMemberInfo> {
@@ -38,8 +38,8 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
     /**
      * 上级id
      */
-	@TableField("dis_model_id")
-	private String disModelId;
+	@TableField("dis_parent_id")
+	private String disParentId;
     /**
      * 全路径
      */
@@ -51,17 +51,12 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 	@TableField("dis_user_name")
 	private String disUserName;
     /**
-     * 级别
-     */
-	@TableField("dis_level")
-	private Integer disLevel;
-    /**
-     * 身份类型
+     * 用户类型(会员:游客，经理、老板，平台商统一为1000，后面待启用)
      */
 	@TableField("dis_user_type")
 	private String disUserType;
     /**
-     * 用户段位(青铜、黄金、白银等)
+     * 用户段位(青铜、黄金、白银等、初级平台商，中级平台商、高级平台商)
      */
 	@TableField("dis_user_rank")
 	private String disUserRank;
@@ -86,31 +81,32 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 	@TableField("is_delete")
 	private String isDelete;
     /**
-     * 上级代理商id
+     * 上级平台商id
      */
 	@TableField("dis_plat_super")
 	private String disPlatSuper;
     /**
-     * 代理商全路径
+     * 平台商全路径
      */
 	@TableField("dis_plat_full_index")
 	private String disPlatFullIndex;
     /**
-     * 代理商等级
+     * 平台商等级
      */
 	@TableField("dis_plat_level")
 	private Integer disPlatLevel;
     /**
-     * 账户类型(0,会员，1：代理商)
+     * 身份类型(0,会员，1：平台商)
      */
-	private String type;
+	@TableField("identity_type")
+	private String identityType;
     /**
-     * 段位积分
+     * 段位积分(清零积分)
      */
 	@TableField("rank_integral")
 	private Integer rankIntegral;
     /**
-     * 段位总积分
+     * 段位总积分(不清零积分)
      */
 	@TableField("total_rank_integral")
 	private Integer totalRankIntegral;
@@ -145,12 +141,12 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 		this.disUserId = disUserId;
 	}
 
-	public String getDisModelId() {
-		return disModelId;
+	public String getDisParentId() {
+		return disParentId;
 	}
 
-	public void setDisModelId(String disModelId) {
-		this.disModelId = disModelId;
+	public void setDisParentId(String disParentId) {
+		this.disParentId = disParentId;
 	}
 
 	public String getDisFullIndex() {
@@ -167,14 +163,6 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 
 	public void setDisUserName(String disUserName) {
 		this.disUserName = disUserName;
-	}
-
-	public Integer getDisLevel() {
-		return disLevel;
-	}
-
-	public void setDisLevel(Integer disLevel) {
-		this.disLevel = disLevel;
 	}
 
 	public String getDisUserType() {
@@ -249,12 +237,12 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 		this.disPlatLevel = disPlatLevel;
 	}
 
-	public String getType() {
-		return type;
+	public String getIdentityType() {
+		return identityType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setIdentityType(String identityType) {
+		this.identityType = identityType;
 	}
 
 	public Integer getRankIntegral() {
@@ -292,10 +280,9 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 			"id=" + id +
 			", disPlatformId=" + disPlatformId +
 			", disUserId=" + disUserId +
-			", disModelId=" + disModelId +
+			", disParentId=" + disParentId +
 			", disFullIndex=" + disFullIndex +
 			", disUserName=" + disUserName +
-			", disLevel=" + disLevel +
 			", disUserType=" + disUserType +
 			", disUserRank=" + disUserRank +
 			", disNote=" + disNote +
@@ -305,7 +292,7 @@ public class DisMemberInfo extends Model<DisMemberInfo> {
 			", disPlatSuper=" + disPlatSuper +
 			", disPlatFullIndex=" + disPlatFullIndex +
 			", disPlatLevel=" + disPlatLevel +
-			", type=" + type +
+			", identityType=" + identityType +
 			", rankIntegral=" + rankIntegral +
 			", totalRankIntegral=" + totalRankIntegral +
 			", confineStatus=" + confineStatus +

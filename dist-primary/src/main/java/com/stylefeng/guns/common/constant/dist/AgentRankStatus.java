@@ -4,22 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 代理商级别
+ * 平台商级别
  */
 public enum AgentRankStatus {
 
     /**
-     * 普通代理商
+     * 普通平台商
      */
-    A_STATUS("N1","普通代理商",1),
+    A_STATUS("N1","初级平台商",1),
     /**
-     * 中级代理商
+     * 中级平台商
      */
-    B_STATUS("N2","中级代理商",2),
+    B_STATUS("N2","中级平台商",2),
     /**
-     * 高级代理商
+     * 高级平台商
      */
-    C_STATUS("N3","高级代理商",3);
+    C_STATUS("N3","高级平台商",3);
     private String status;
     private String mes;
 

@@ -58,7 +58,7 @@ public class DisUpgradeParam extends Model<DisUpgradeParam> {
 	@TableField("update_time")
 	private String updateTime;
     /**
-     * 0会员  1代理商
+     * 0会员  1平台商
      */
 	@TableField("identity_type")
 	private String identityType;

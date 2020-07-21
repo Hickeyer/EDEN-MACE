@@ -36,7 +36,7 @@ public class DisMemberAmount  {
      */
 	private BigDecimal avaibleAmount;
     /**
-     * 类型（0会员 1 代理商）
+     * 类型（0会员 1 平台商）
      */
 	private String type;
     /**

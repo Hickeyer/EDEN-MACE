@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 代理商调整
+ * 平台商调整
  *积分任务调度
  * 规则：
  * 在当前时间下 所有的没有过期的 并且没有使用过的积分进行计算，给用户分配级别
@@ -42,9 +42,9 @@ public class AgentRankTask implements BaseJob {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        logger.info("开始更新代理商的水平等级");
+        logger.info("开始更新平台商的水平等级");
         taskService.upgradeLevel(IdentityStatus.PLAT_STATUS.getStatus());
-        logger.info("更新代理商的水平等级结束");
+        logger.info("更新平台商的水平等级结束");
     }
 
 

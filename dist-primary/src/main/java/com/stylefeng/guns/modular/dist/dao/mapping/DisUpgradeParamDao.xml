@@ -13,7 +13,7 @@
     </resultMap>
     <select id="selectList" resultMap="BaseResultMap">
         SELECT  u.`begin_integral`,u.`id`,u.`end_integral`,u.`add_time`,u.`upgrade_name`,
-        e.`dic_no` dis_user_rank
+        e.`dic_value` dis_user_rank
         FROM  `dis_upgrade_param` u
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=u.`dis_user_rank` AND e.`dic_type_no`='disUserRank'
         WHERE u.`is_delete`='N' and identity_type='0'
@@ -24,7 +24,7 @@
     </select>
     <select id="selectAgentList" resultMap="BaseResultMap">
         SELECT  u.`begin_integral`,u.`id`,u.`end_integral`,u.`add_time`,u.`upgrade_name`,
-        e.`dic_no` dis_user_rank
+        e.`dic_value` dis_user_rank
         FROM  `dis_upgrade_param` u
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=u.`dis_user_rank` AND e.`dic_type_no`='agentRank'
         WHERE u.`is_delete`='N'  and identity_type='1'

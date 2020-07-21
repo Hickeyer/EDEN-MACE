@@ -2,6 +2,7 @@ package com.stylefeng.guns.modular.dist.controller;
 
 import com.github.pagehelper.Page;
 import com.stylefeng.guns.common.constant.Const;
+import com.stylefeng.guns.common.constant.dist.IdentityStatus;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.persistence.model.DisProfitParam;
@@ -97,7 +98,7 @@ public class DisProfitParamController extends BaseController {
             account=null;
         }
         Page page = new PageFactory().defaultPage();
-        List<Map<String, Object>> list=disProfiParamService.selectList(account,calModel, accountType, disUserType, disUserRank);
+        List<Map<String, Object>> list=disProfiParamService.selectList(account,calModel, accountType, disUserType, disUserRank, IdentityStatus.USER_STATUS.getStatus());
         List<DisProfitParam> lists =(List<DisProfitParam>)new ProfiParamWarpper(list).warp();
         return super.packForBT(lists,page.getTotal());
     }
@@ -112,6 +113,7 @@ public class DisProfitParamController extends BaseController {
         if(!ShiroKit.hasRole(Const.ADMIN_NAME)){
             param.setDisPlatformId(account);
         }
+        param.setIdentityType(IdentityStatus.USER_STATUS.getStatus());
         disProfiParamService.save(param);
         return SUCCESS_TIP;
     }

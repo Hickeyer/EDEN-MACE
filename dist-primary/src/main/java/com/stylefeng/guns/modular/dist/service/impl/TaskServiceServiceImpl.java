@@ -64,7 +64,7 @@ public class TaskServiceServiceImpl implements ITaskService {
     DisWithdrawRecordMapper disWithdrawRecordMapper;
 
     /**
-     * 根据类型处理用户和代理商的水平等级
+     * 根据类型处理用户和平台商的水平等级
      * @link {com.stylefeng.guns.common.constant.dist.IdentityStatus }
      * @param type
      */
@@ -73,12 +73,12 @@ public class TaskServiceServiceImpl implements ITaskService {
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
     public void upgradeLevel(String type) {
 
-        logger.info("积分升级->开始积分任务处理:{}",type);
+        logger.info("积分升级->开始积分任务处理,身份类型为:{}",type);
         long start = System.currentTimeMillis();
-        //查询大于0的积分代理商或者会员的积分
+        //查询大于0的积分平台商或者会员的积分
         Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
         wrapper.gt("rank_integral","0")
-                .eq("type", type);
+                .eq("identity_type", type);
         List<DisMemberInfo> memberInfoList=disMemberInfoMapper.selectList(wrapper);
         if(memberInfoList==null){return ;}
         logger.info("积分升级->查询会员数量:{}",memberInfoList.size());
@@ -102,7 +102,7 @@ public class TaskServiceServiceImpl implements ITaskService {
         SysDic sysDic = sysDicMapper.selectOne(param);
 
         memberInfoList.forEach((memberInfo)->{
-            //开始对会员或者代理商进行处理
+            //开始对会员或者平台商进行处理
 
             //判断是根据总积分还是根据每个阶段的额度进行级别判定
 
@@ -142,7 +142,8 @@ public class TaskServiceServiceImpl implements ITaskService {
             upgradeRecord.setAfterUpgradeLevel(rank);
             Integer diff= UserRankStatus.getMethod(rank).getOrder()-UserRankStatus.getMethod(memberInfo.getDisUserRank()).getOrder();
             upgradeRecord.setLevelDiffer(diff.toString());
-            upgradeRecord.setLevelType("1");
+            //升级类型(0:垂直升级 1：水平升级)
+            upgradeRecord.setLevelType("0");
             disUpgradeRecordMapper.insert(upgradeRecord);
 
             //更新积分,等级，rankIntegral清零，并且把等级更新成最新的等级

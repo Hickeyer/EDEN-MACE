@@ -3,6 +3,7 @@ package com.stylefeng.guns.modular.system.controller;
 import com.github.pagehelper.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.controller.BaseController;
+import com.stylefeng.guns.common.persistence.model.DisMemberInfo;
 import com.stylefeng.guns.common.persistence.model.OperationLog;
 import com.stylefeng.guns.common.persistence.model.SysJob;
 import com.stylefeng.guns.modular.system.dao.SysJobDao;
@@ -30,6 +31,7 @@ public class SysJobController extends BaseController {
 
     @Resource
     SysJobDao sysJobDao;
+
 
     /**
      * 跳转到任务调度首页
@@ -60,11 +62,21 @@ public class SysJobController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
+    public Object list(String jobName) {
         Page page = new PageFactory<SysJob>().defaultPage();
-        List list= sysJobDao.selectList();
+        List list= sysJobDao.selectList(jobName);
         List<SysJob> lists= (List<SysJob>) new SysJobWarpper(list).warp();
         return super.packForBT(lists,page.getTotal()) ;
+    }
+
+    @RequestMapping(value = "/confine")
+    @ResponseBody
+    public Object confine(Integer status,Integer id) {
+        SysJob sysJob = new SysJob();
+        sysJob.setId(id);
+        sysJob.setJobStatus(status);
+        sysJobDao.updateByPrimaryKeySelective(sysJob);
+        return SUCCESS_TIP;
     }
 
     /**

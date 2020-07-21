@@ -17,7 +17,7 @@ public class MemberAmountWarpper extends BaseControllerWarpper {
 
     @Override
     protected void warpTheMap(Map<String, Object> map) {
-        String type = (String) map.get("type");
+        String type = (String) map.get("identityType");
         String typeDetail="未知";
         if(IdentityStatus.USER_STATUS.getStatus().equals(type)){
             typeDetail="用户分润";

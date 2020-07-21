@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2019-01-06
+ * @since 2020-07-17
  */
 @TableName("dis_member_amount")
 public class DisMemberAmount extends Model<DisMemberAmount> {
@@ -49,9 +49,10 @@ public class DisMemberAmount extends Model<DisMemberAmount> {
 	@TableField("avaible_amount")
 	private BigDecimal avaibleAmount;
     /**
-     * 类型（0会员 1 代理商）
+     * 类型（0会员 1 平台商）
      */
-	private String type;
+	@TableField("identity_type")
+	private String identityType;
     /**
      * 添加时间
      */
@@ -162,12 +163,12 @@ public class DisMemberAmount extends Model<DisMemberAmount> {
 		this.avaibleAmount = avaibleAmount;
 	}
 
-	public String getType() {
-		return type;
+	public String getIdentityType() {
+		return identityType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setIdentityType(String identityType) {
+		this.identityType = identityType;
 	}
 
 	public String getAddTime() {
@@ -280,7 +281,7 @@ public class DisMemberAmount extends Model<DisMemberAmount> {
 			", totalAmount=" + totalAmount +
 			", frozenAmount=" + frozenAmount +
 			", avaibleAmount=" + avaibleAmount +
-			", type=" + type +
+			", identityType=" + identityType +
 			", addTime=" + addTime +
 			", updateTime=" + updateTime +
 			", amountStatus=" + amountStatus +

@@ -15,13 +15,14 @@
         <result column="update_time" property="updateTime" />
         <result column="add_time" property="addTime" />
         <result column="dis_user_rank" property="disUserRank" />
+        <result column="identity_type" property="identityType" />
     </resultMap>
 
     <select id="selectList" resultMap="BaseResultMap">
         SELECT p.`id`,p.`dis_platform_id`,
         e.`dic_value` AS cal_model,d.`dic_value` AS  dis_pro_level,
         f.`dic_value` AS account_type ,p.`add_time`,p.`dis_pro_value`
-        ,g.`dic_value` dis_user_type,p.dis_user_rank
+        ,g.`dic_value` dis_user_type,p.dis_user_rank,p.identity_type
         FROM  `dis_profit_param` p
         LEFT JOIN `sys_dic` d ON  d.`dic_no`=p.`dis_pro_level` AND d.`dic_type_no`='disProLevel'
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=p.`cal_model` AND e.`dic_type_no`='calModel'
@@ -42,6 +43,9 @@
         </if>
         <if test="disUserRank != null and disUserRank != ''">
             and p.dis_user_rank=#{disUserRank}
+        </if>
+        <if test="identityType != null and identityType != ''">
+            and p.identity_type=#{identityType}
         </if>
         order by p.add_time DESC
     </select>

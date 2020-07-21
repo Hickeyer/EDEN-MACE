@@ -274,7 +274,7 @@ public class DisMemberAmountServiceImpl implements IDisMemberAmountService {
         DisMemberAmount amount=new DisMemberAmount();
         amount.setDisUserId(userId);
         amount.setDisUserName(userName);
-        amount.setType(type);
+        amount.setIdentityType(type);
         amount.setAmountStatus("0");
         amount.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         amount.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));

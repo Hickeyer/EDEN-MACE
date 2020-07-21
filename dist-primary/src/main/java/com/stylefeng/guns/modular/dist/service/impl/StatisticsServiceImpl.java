@@ -51,12 +51,12 @@ public class StatisticsServiceImpl  implements IStatisticsService {
     public String findStatisticsInfo() {
         Map map = new HashMap();
         Wrapper<DisMemberInfo> memberInfoWrapper=new EntityWrapper();
-        memberInfoWrapper.eq("type", IdentityStatus.USER_STATUS.getStatus());
+        memberInfoWrapper.eq("identity_type", IdentityStatus.USER_STATUS.getStatus());
         int memberCount =  disMemberInfoMapper.selectCount(memberInfoWrapper);
         map.put("memberCount",memberCount);
 
         Wrapper<DisMemberInfo> agentMemberWrapper=new EntityWrapper();
-        agentMemberWrapper.eq("type", IdentityStatus.PLAT_STATUS.getStatus());
+        agentMemberWrapper.eq("identity_type", IdentityStatus.PLAT_STATUS.getStatus());
         int agentCount =  disMemberInfoMapper.selectCount(agentMemberWrapper);
         map.put("agentCount",agentCount);
 

@@ -6,6 +6,7 @@ import com.stylefeng.guns.common.annotion.log.StatisticsSocket;
 import com.stylefeng.guns.common.constant.DSEnum;
 import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
 import com.stylefeng.guns.common.constant.dist.ConfineStatus;
+import com.stylefeng.guns.common.constant.dist.IdentityStatus;
 import com.stylefeng.guns.common.constant.tips.DistResult;
 import com.stylefeng.guns.common.persistence.dao.DisMemberAmountMapper;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
@@ -125,7 +126,7 @@ public class OpenController  {
     @ResponseBody
     @ApiOperation(value = "新增会员")
     @StatisticsSocket
-    @OpenApiEncrypt
+//    @OpenApiEncrypt
     public DistResult inviteMember(@RequestBody DisMemberInfoVo memberInfoVo) throws Exception {
         logger.info("新增会员->开始进入新增会员");
         if(!isAccountVer(memberInfoVo.getSecret())){
@@ -148,7 +149,7 @@ public class OpenController  {
         }
         User user=userMgrDao.getByAccount(superPlatId);
         if(user==null){
-            return DistResult.failure("代理商不存在");
+            return DistResult.failure("平台商不存在");
         }
 
         if(verifyMember(memberInfoVo.getDisUserId())){
@@ -162,7 +163,7 @@ public class OpenController  {
         memberInfo.setDisPlatFullIndex(user.getFullindex());
         String[]  platArr = user.getFullindex().split("\\.");
         memberInfo.setDisPlatformId(platArr[1]);
-        memberInfo.setType("0");
+        memberInfo.setIdentityType(IdentityStatus.USER_STATUS.getStatus());
         disMemberInfoService.save(memberInfo);
         logger.info("新增会员->新增会员结束");
         return DistResult.success();
@@ -175,7 +176,7 @@ public class OpenController  {
     @ResponseBody
     @ApiOperation(value = "新增交易奖励", notes = "此接口是用于交易奖励的接口，及关注有相关分润的数据")
     @StatisticsSocket
-    @OpenApiEncrypt
+//    @OpenApiEncrypt
     public DistResult tradeOrder(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
         // 交易奖励
         disProfitRecordVo.setAccountType(AccountTypeStatus.ZERO_STATUS.getStatus());
@@ -202,7 +203,7 @@ public class OpenController  {
     @ResponseBody
     @ApiOperation(value = "升级奖励", notes = "此接口是用于升级奖励的接口")
     @StatisticsSocket
-    @OpenApiEncrypt
+//    @OpenApiEncrypt
     public DistResult upgradeLevel(@RequestBody DisProfitRecordVo disProfitRecordVo) throws Exception {
         disProfitRecordVo.setAccountType(AccountTypeStatus.ONE_STATUS.getStatus());
         logger.info("用户升级->开始升级,入参{}",disProfitRecordVo.toString());
@@ -232,7 +233,7 @@ public class OpenController  {
     @PostMapping(value = "/subordinate")
     @ResponseBody
     @ApiOperation(value = "会员直属下级会员", notes = "此接口是查询会员直属下级会员")
-    @OpenApiEncrypt
+//    @OpenApiEncrypt
     public DistResult subordinateMember(@RequestBody  SubordinateReq subordinateReq) {
         logger.info("会员下级->开始查询");
         if(!isAccountVer(subordinateReq.getSecret())) {
@@ -254,7 +255,7 @@ public class OpenController  {
     @ResponseBody
     @ApiOperation(value = "新增提现接口", notes = "此接口是用用户提现")
     @StatisticsSocket
-    @OpenApiEncrypt
+//    @OpenApiEncrypt
     public DistResult withdraw(@RequestBody DisWithdrawVo withdrawVo) {
         logger.info("会员提现->开始提现,入参信息:{}",withdrawVo.toString());
         if(!isAccountVer(withdrawVo.getSecret())) {
@@ -299,7 +300,7 @@ public class OpenController  {
 
     /**
      * 校验用户是否存在或者被限制使用等
-     * 原则上可以支持每个代理商下的用户可以重名
+     * 原则上可以支持每个平台商下的用户可以重名
      * 但是为了以后的扩展这里设置不可以重名
      * 如果需要重名，系统需要修改提现的部分，需要增加平台
      * @param userId

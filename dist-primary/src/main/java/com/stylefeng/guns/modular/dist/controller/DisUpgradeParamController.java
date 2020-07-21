@@ -79,7 +79,7 @@ public class DisUpgradeParamController extends BaseController {
     }
 
     /**
-     * 查询代理商列表
+     * 查询平台商列表
      * @param upgradeName
      * @return
      */

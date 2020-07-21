@@ -68,19 +68,19 @@ public class DisMemberInfo  {
      */
 	private String isDelete;
     /**
-     * 上级代理商id
+     * 上级平台商id
      */
 	private String disPlatSuper;
     /**
-     * 代理商全路径
+     * 平台商全路径
      */
 	private String disPlatFullIndex;
     /**
-     * 代理商等级
+     * 平台商等级
      */
 	private Integer disPlatLevel;
     /**
-     * 账户类型(0,会员，1：代理商)
+     * 账户类型(0,会员，1：平台商)
      */
 	private String type;
     /**

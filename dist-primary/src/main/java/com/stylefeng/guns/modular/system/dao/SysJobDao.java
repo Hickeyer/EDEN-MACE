@@ -18,7 +18,7 @@ import java.util.Map;
 public interface SysJobDao {
 
 
-    List<Map<String, Object>> selectList();
+    List<Map<String, Object>> selectList(@Param("jobName") String jobName);
 
     /**
      * 获取任务数量

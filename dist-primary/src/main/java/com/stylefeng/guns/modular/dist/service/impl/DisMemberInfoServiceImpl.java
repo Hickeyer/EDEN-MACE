@@ -20,6 +20,7 @@ import com.stylefeng.guns.modular.dist.service.*;
 import com.stylefeng.guns.modular.dist.util.DateUtils;
 import com.stylefeng.guns.modular.dist.vo.*;
 import com.stylefeng.guns.modular.dist.wapper.MemberWarpper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -128,9 +129,9 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
     public void save(DisMemberInfo param) throws Exception {
         //逻辑判断
         //查询上级是否存在
-        if (param.getDisModelId()!=null&&!"".equals(param.getDisModelId())){
+        if (StringUtils.isNotEmpty(param.getDisParentId())){
             DisMemberInfo parentMemberParam=new DisMemberInfo();
-            parentMemberParam.setDisUserId(param.getDisModelId());
+            parentMemberParam.setDisUserId(param.getDisParentId());
             DisMemberInfo parentMember=disMemberInfoMapper.selectOne(parentMemberParam);
 
             //级别限制 主要对dislevel和 disfullindex进行限制
@@ -139,11 +140,16 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
             SysDic dis=sysDicMapper.selectOne(dicParam);
             if(dis!=null){
                 Integer maxLevel=Integer.parseInt(dis.getDicNo());
-                Integer factLevel=parentMember.getDisLevel()+1;
+                String[] indexArr=parentMember.getDisFullIndex().split("\\.");
+                Integer factLevel =  0;
+                if(indexArr.length>0){
+                    factLevel= indexArr.length -1;
+                }
+//                Integer factLevel=parentMember.getDisLevel()+1;
                 if(factLevel>=maxLevel){
                     //截取
-                    param.setDisLevel(maxLevel);
-                    String[] indexArr=parentMember.getDisFullIndex().split("\\.");
+//                    param.setDisLevel(maxLevel);
+
                     String fullIndex="";
                     //取倒数最大值-1位数据
                     int indexSize=indexArr.length;
@@ -153,16 +159,16 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
                     param.setDisFullIndex(fullIndex+param.getDisUserId());
                 }else{
                     //正常执行
-                    param.setDisLevel(parentMember.getDisLevel()+1);
+//                    param.setDisLevel(parentMember.getDisLevel()+1);
                     param.setDisFullIndex(parentMember.getDisFullIndex()+"."+param.getDisUserId());
                 }
             }else{
-                param.setDisLevel(parentMember.getDisLevel()+1);
+//                param.setDisLevel(parentMember.getDisLevel()+1);
                 param.setDisFullIndex(parentMember.getDisFullIndex()+"."+param.getDisUserId());
             }
         }else {
             param.setDisFullIndex(param.getDisUserId().toString());
-            param.setDisLevel(0);
+//            param.setDisLevel(0);
         }
         param.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         param.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
@@ -172,6 +178,7 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         disMemberAmountService.save(param.getDisUserId(),param.getDisUserName(),"0");
         //初始化积分表
         disSysIntegralRecordService.saveIntegral(AccountTypeStatus.TWO_STATUS.getStatus(),new BigDecimal(0),param);
+        disSysIntegralRecordService.saveAgentIntegral(AccountTypeStatus.TWO_STATUS.getStatus(),new BigDecimal(0),param);
         //生成邀请奖励
         DisProfitRecordVo recordVo = new DisProfitRecordVo();
         recordVo.setAccountType(AccountTypeStatus.TWO_STATUS.getStatus());
@@ -258,8 +265,8 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         MemberTreeVo memberTreeVo = new MemberTreeVo();
         List<MemberTreeVo> memberTreeVos = new ArrayList<>();
         Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
-        wrapper.eq("dis_model_id",userId)
-                .eq("type", IdentityStatus.USER_STATUS.getStatus());
+        wrapper.eq("dis_parent_id",userId)
+                .eq("identity_type", IdentityStatus.USER_STATUS.getStatus());
         List<DisMemberInfo> list = disMemberInfoMapper.selectList(wrapper);
         if(list != null&& list.size()>0){
             for (DisMemberInfo memberInfo:list){
@@ -284,7 +291,7 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         List<MemberTreeVo> memberTreeVos = new ArrayList<>();
         Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
         wrapper.eq("dis_plat_super",userId)
-        .eq("type", IdentityStatus.PLAT_STATUS.getStatus());
+        .eq("identity_type", IdentityStatus.PLAT_STATUS.getStatus());
         List<DisMemberInfo> list = disMemberInfoMapper.selectList(wrapper);
         if(list != null&& list.size()>0){
             for (DisMemberInfo memberInfo:list){
@@ -312,7 +319,7 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
         wrapper.eq("dis_platform_id",memberInfo.getDisUserId())
                 .eq("dis_plat_super",memberInfo.getDisUserId())
-                .isNull("dis_model_id");
+                .isNull("dis_parent_id");
         List<DisMemberInfo> memberInfoList = disMemberInfoMapper.selectList(wrapper);
         List<MemberTreeVo> voList = new ArrayList<>();
         for (DisMemberInfo disMemberInfo : memberInfoList) {
@@ -334,13 +341,13 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
         List<MemberRecordVo> memberRecordVoList=new ArrayList<MemberRecordVo>();
         for(MemberRecordVo memberRecord:listParam){
             Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
-            wrapper.eq("dis_model_id",memberRecord.getUserId());
+            wrapper.eq("dis_parent_id",memberRecord.getUserId());
             List<DisMemberInfo> nextMemberList=disMemberInfoMapper.selectList(wrapper);
             if(nextMemberList!=null){
                 for(DisMemberInfo member:nextMemberList){
                     //判断是否存在下级，如果存在则记录下来
                     Wrapper<DisMemberInfo> nextCountMemberParam=new EntityWrapper();
-                    nextCountMemberParam.eq("dis_model_id",member.getDisUserId());
+                    nextCountMemberParam.eq("dis_parent_id",member.getDisUserId());
                     int count=disMemberInfoMapper.selectCount(nextCountMemberParam);
                     if(count>0){
                         MemberRecordVo vo=new MemberRecordVo();

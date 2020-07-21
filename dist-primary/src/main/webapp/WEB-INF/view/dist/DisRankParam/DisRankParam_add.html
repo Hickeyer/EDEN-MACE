@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-sm-6 b-r">
                     <#input id="disRankName" name="段位名称" underline="true"/>
-                    <#input id="disIntegralValue" name="段位积分值" underline="true"/>
+                    <#input id="disIntegralValue" name="段位积分" underline="true"/>
                     <#select id="calModel" name="计算模型 ">
                         @for(dis in calModel){
                         <option value="${dis.dicNo}">${dis.dicValue}</option>
@@ -24,7 +24,7 @@
 
                 <div class="col-sm-6">
                     <#input id="disPlatformId" name="平台id" underline="true"/>
-                    <#select id="disProLevel" name="对应等级 ">
+                    <#select id="disProLevel" name="对应等级 " underline="true">
                         @for(dis in disProLevel){
                         <option value="${dis.dicNo}">${dis.dicValue}</option>
                         @}

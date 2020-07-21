@@ -10,7 +10,7 @@
 		<result column="total_amount" property="totalAmount" />
 		<result column="frozen_amount" property="frozenAmount" />
 		<result column="avaible_amount" property="avaibleAmount" />
-		<result column="type" property="type" />
+		<result column="identity_type" property="identityType" />
 		<result column="add_time" property="addTime" />
 		<result column="update_time" property="updateTime" />
 		<result column="amount_status" property="amountStatus" />

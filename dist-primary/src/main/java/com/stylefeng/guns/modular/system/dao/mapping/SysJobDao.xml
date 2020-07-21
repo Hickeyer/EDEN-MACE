@@ -34,6 +34,10 @@
 
     <select id="selectList" resultMap="ResultMap">
         SELECT * FROM  `sys_job`
+        where 1=1
+        <if test="jobName != null and jobName != ''">
+            and    job_name=#{jobName}
+        </if>
     </select>
 
     <!-- 获取任务总数-->

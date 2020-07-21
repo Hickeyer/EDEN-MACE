@@ -109,6 +109,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         DisMemberInfo memberInfo=disMemberInfoMapper.selectOne(memberInfoParam);
         generatorAllRecord(param,memberInfo);
         disSysIntegralRecordService.saveIntegral(param.getAccountType(),param.getDisAmount(),memberInfo);
+        disSysIntegralRecordService.saveAgentIntegral(param.getAccountType(),param.getDisAmount(),memberInfo);
         if(AccountTypeStatus.ZERO_STATUS.getStatus().equals(param.getAccountType())){
             //记录交易金额
             saveTradeRecord(param);
@@ -154,6 +155,12 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         param.setBaseFixAmount(baseAmount);
     }
 
+    /**
+     * 默认保存水平升级  即 游客 到经理 到老板的转换
+     * @param beforeLevel
+     * @param afterLevel
+     * @param userId
+     */
     public  void saveVerticalLevel(String beforeLevel,String afterLevel,String userId){
         DisUpgradeRecord upgradeRecord=new DisUpgradeRecord();
         upgradeRecord.setBeforeUpgradeLevel(beforeLevel);
@@ -163,6 +170,8 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         int differ=UserTypeStatus.getMethod(afterLevel).getOrder()-
                 UserTypeStatus.getMethod(beforeLevel).getOrder();
         upgradeRecord.setLevelDiffer(String.valueOf(differ));
+
+        upgradeRecord.setLevelType("1");
         disUpgradeRecordMapper.insert(upgradeRecord);
     }
     public  void saveTradeRecord(DisProfitRecordVo param){

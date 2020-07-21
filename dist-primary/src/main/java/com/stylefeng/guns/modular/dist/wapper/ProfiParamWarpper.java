@@ -12,10 +12,10 @@ public class ProfiParamWarpper extends BaseControllerWarpper {
 
     @Override
     protected void warpTheMap(Map<String, Object> map) {
-        String disUserType = (String) map.get("disUserType");
+        String identityType = (String) map.get("identityType");
         String disUserRank = (String) map.get("disUserRank");
         String newRank = "";
-        if(disUserType.equals(UserTypeStatus.PLAT_STATUS.getMes())){
+        if(identityType.equals(IdentityStatus.PLAT_STATUS.getStatus())){
             newRank = AgentRankStatus.getMethod(disUserRank).getMes();
         }else{
             newRank =UserRankStatus.getMethod(disUserRank).getMes();

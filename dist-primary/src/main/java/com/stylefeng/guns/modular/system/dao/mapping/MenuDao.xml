@@ -19,6 +19,8 @@
 		<if test="level != null and level != ''">
 			and levels = #{level}
 		</if>
+
+		order by num
 	</select>
 
 	<select id="getMenuIdsByRoleId" resultType="int">

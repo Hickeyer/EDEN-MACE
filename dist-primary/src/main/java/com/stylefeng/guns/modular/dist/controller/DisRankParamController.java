@@ -2,6 +2,7 @@ package com.stylefeng.guns.modular.dist.controller;
 
 import com.github.pagehelper.Page;
 import com.stylefeng.guns.common.constant.Const;
+import com.stylefeng.guns.common.constant.dist.IdentityStatus;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.controller.BaseController;
 import com.stylefeng.guns.common.persistence.model.DisRankParam;
@@ -10,6 +11,7 @@ import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.dist.service.IDisRankParamService;
 import com.stylefeng.guns.modular.dist.service.ISysDicService;
 import com.stylefeng.guns.modular.dist.wapper.CommonWarpper;
+import com.stylefeng.guns.modular.dist.wapper.DisRankParamWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,8 +91,8 @@ public class DisRankParamController extends BaseController {
             account=null;
         }
         Page page = new PageFactory().defaultPage();
-        List<Map<String, Object>> list = disRankParamService.selectList(account,calModel, accountType, disUserType, disUserRank);
-        List<DisRankParam> lists = (List<DisRankParam> )new CommonWarpper(list).warp();
+        List<Map<String, Object>> list = disRankParamService.selectList(account,calModel, accountType, disUserType, disUserRank, IdentityStatus.USER_STATUS.getStatus());
+        List<DisRankParam> lists = (List<DisRankParam> )new DisRankParamWarpper(list).warp();
         return super.packForBT(lists,page.getTotal()) ;
     }
 
@@ -104,6 +106,7 @@ public class DisRankParamController extends BaseController {
         if(!ShiroKit.hasRole(Const.ADMIN_NAME)){
             param.setDisPlatformId(account);
         }
+        param.setIdentityType(IdentityStatus.USER_STATUS.getStatus());
         disRankParamService.save(param);
         return SUCCESS_TIP;
     }

@@ -16,6 +16,7 @@
 		<result column="add_time" property="addTime" />
 		<result column="dist_trade_mode" property="distTradeMode" />
 		<result column="dis_user_rank" property="disUserRank" />
+		<result column="identity_type" property="identityType" />
 	</resultMap>
 
 </mapper>
