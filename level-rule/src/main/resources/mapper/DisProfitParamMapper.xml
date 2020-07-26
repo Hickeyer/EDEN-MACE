@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rule.graph.mybatis.dao.DisProfitParamMapper">
+  <resultMap id="BaseResultMap" type="com.rule.graph.mybatis.domain.DisProfitParam">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dis_platform_id" jdbcType="VARCHAR" property="disPlatformId" />
+    <result column="cal_model" jdbcType="VARCHAR" property="calModel" />
+    <result column="account_type" jdbcType="VARCHAR" property="accountType" />
+    <result column="dis_pro_value" jdbcType="VARCHAR" property="disProValue" />
+    <result column="dis_pro_level" jdbcType="VARCHAR" property="disProLevel" />
+    <result column="dis_user_type" jdbcType="VARCHAR" property="disUserType" />
+    <result column="is_delete" jdbcType="VARCHAR" property="isDelete" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="add_time" jdbcType="VARCHAR" property="addTime" />
+    <result column="dist_trade_mode" jdbcType="VARCHAR" property="distTradeMode" />
+    <result column="dis_user_rank" jdbcType="VARCHAR" property="disUserRank" />
+    <result column="identity_type" jdbcType="VARCHAR" property="identityType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dis_platform_id, cal_model, account_type, dis_pro_value, dis_pro_level, dis_user_type, 
+    is_delete, update_time, add_time, dist_trade_mode, dis_user_rank, identity_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dis_profit_param
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dis_profit_param
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rule.graph.mybatis.domain.DisProfitParam">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dis_profit_param (dis_platform_id, cal_model, account_type, 
+      dis_pro_value, dis_pro_level, dis_user_type, 
+      is_delete, update_time, add_time, 
+      dist_trade_mode, dis_user_rank, identity_type
+      )
+    values (#{disPlatformId,jdbcType=VARCHAR}, #{calModel,jdbcType=VARCHAR}, #{accountType,jdbcType=VARCHAR}, 
+      #{disProValue,jdbcType=VARCHAR}, #{disProLevel,jdbcType=VARCHAR}, #{disUserType,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{addTime,jdbcType=VARCHAR}, 
+      #{distTradeMode,jdbcType=VARCHAR}, #{disUserRank,jdbcType=VARCHAR}, #{identityType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rule.graph.mybatis.domain.DisProfitParam">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dis_profit_param
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="disPlatformId != null">
+        dis_platform_id,
+      </if>
+      <if test="calModel != null">
+        cal_model,
+      </if>
+      <if test="accountType != null">
+        account_type,
+      </if>
+      <if test="disProValue != null">
+        dis_pro_value,
+      </if>
+      <if test="disProLevel != null">
+        dis_pro_level,
+      </if>
+      <if test="disUserType != null">
+        dis_user_type,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="distTradeMode != null">
+        dist_trade_mode,
+      </if>
+      <if test="disUserRank != null">
+        dis_user_rank,
+      </if>
+      <if test="identityType != null">
+        identity_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="disPlatformId != null">
+        #{disPlatformId,jdbcType=VARCHAR},
+      </if>
+      <if test="calModel != null">
+        #{calModel,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="disProValue != null">
+        #{disProValue,jdbcType=VARCHAR},
+      </if>
+      <if test="disProLevel != null">
+        #{disProLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="disUserType != null">
+        #{disUserType,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="distTradeMode != null">
+        #{distTradeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="disUserRank != null">
+        #{disUserRank,jdbcType=VARCHAR},
+      </if>
+      <if test="identityType != null">
+        #{identityType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rule.graph.mybatis.domain.DisProfitParam">
+    update dis_profit_param
+    <set>
+      <if test="disPlatformId != null">
+        dis_platform_id = #{disPlatformId,jdbcType=VARCHAR},
+      </if>
+      <if test="calModel != null">
+        cal_model = #{calModel,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        account_type = #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="disProValue != null">
+        dis_pro_value = #{disProValue,jdbcType=VARCHAR},
+      </if>
+      <if test="disProLevel != null">
+        dis_pro_level = #{disProLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="disUserType != null">
+        dis_user_type = #{disUserType,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="distTradeMode != null">
+        dist_trade_mode = #{distTradeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="disUserRank != null">
+        dis_user_rank = #{disUserRank,jdbcType=VARCHAR},
+      </if>
+      <if test="identityType != null">
+        identity_type = #{identityType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rule.graph.mybatis.domain.DisProfitParam">
+    update dis_profit_param
+    set dis_platform_id = #{disPlatformId,jdbcType=VARCHAR},
+      cal_model = #{calModel,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=VARCHAR},
+      dis_pro_value = #{disProValue,jdbcType=VARCHAR},
+      dis_pro_level = #{disProLevel,jdbcType=VARCHAR},
+      dis_user_type = #{disUserType,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=VARCHAR},
+      dist_trade_mode = #{distTradeMode,jdbcType=VARCHAR},
+      dis_user_rank = #{disUserRank,jdbcType=VARCHAR},
+      identity_type = #{identityType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

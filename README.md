@@ -16,6 +16,7 @@
 zookeeper下载:https://pan.baidu.com/s/184q_XyAL-R7n4KZnOgUs1w
 
 ###  更新记录
+* 2020-07-26  系统优化，以及增加可视化插件
 * 2020-04-02  增加同步老系统数据插件
 * 2019-11-06  增加docker部署(参考[传送门](https://my.oschina.net/u/3704586/blog/3126725))
 * 2019-09-26  增加zk分布式锁

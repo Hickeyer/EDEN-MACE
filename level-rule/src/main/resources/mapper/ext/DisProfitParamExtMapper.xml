@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rule.graph.mybatis.dao.ext.DisProfitParamExtMapper">
+  <resultMap id="BaseResultMap" type="com.rule.graph.mybatis.domain.DisProfitParam">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dis_platform_id" jdbcType="VARCHAR" property="disPlatformId" />
+    <result column="cal_model" jdbcType="VARCHAR" property="calModel" />
+    <result column="account_type" jdbcType="VARCHAR" property="accountType" />
+    <result column="dis_pro_value" jdbcType="VARCHAR" property="disProValue" />
+    <result column="dis_pro_level" jdbcType="VARCHAR" property="disProLevel" />
+    <result column="dis_user_type" jdbcType="VARCHAR" property="disUserType" />
+    <result column="is_delete" jdbcType="VARCHAR" property="isDelete" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="add_time" jdbcType="VARCHAR" property="addTime" />
+    <result column="dist_trade_mode" jdbcType="VARCHAR" property="distTradeMode" />
+    <result column="dis_user_rank" jdbcType="VARCHAR" property="disUserRank" />
+    <result column="identity_type" jdbcType="VARCHAR" property="identityType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dis_platform_id, cal_model, account_type, dis_pro_value, dis_pro_level, dis_user_type, 
+    is_delete, update_time, add_time, dist_trade_mode, dis_user_rank
+  </sql>
+
+  <insert id="insertBatch"  >
+    insert into dis_profit_param (dis_platform_id, cal_model, account_type,
+    dis_pro_value, dis_pro_level, dis_user_type,
+    is_delete, update_time, add_time,
+    dist_trade_mode, dis_user_rank, identity_type
+    )
+    values
+     <foreach collection="list" item="disProfitParam" separator=",">
+        (#{disProfitParam.disPlatformId,jdbcType=VARCHAR}, #{disProfitParam.calModel,jdbcType=VARCHAR}, #{disProfitParam.accountType,jdbcType=VARCHAR},
+       #{disProfitParam.disProValue,jdbcType=VARCHAR}, #{disProfitParam.disProLevel,jdbcType=VARCHAR}, #{disProfitParam.disUserType,jdbcType=VARCHAR},
+       #{disProfitParam.isDelete,jdbcType=VARCHAR}, #{disProfitParam.updateTime,jdbcType=VARCHAR}, #{disProfitParam.addTime,jdbcType=VARCHAR},
+       #{disProfitParam.distTradeMode,jdbcType=VARCHAR}, #{disProfitParam.disUserRank,jdbcType=VARCHAR}, #{disProfitParam.identityType,jdbcType=VARCHAR}
+       )
+     </foreach>
+
+  </insert>
+
+</mapper>

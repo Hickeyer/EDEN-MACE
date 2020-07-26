@@ -17,6 +17,7 @@
 		<module>dist-primary</module>
 		<module>dist-front</module>
         <module>dist-api</module>
+        <module>level-rule</module>
     </modules>
 
 	<parent>
