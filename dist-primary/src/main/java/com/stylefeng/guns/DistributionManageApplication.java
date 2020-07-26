@@ -30,7 +30,6 @@ public class DistributionManageApplication extends WebMvcConfigurerAdapter{
             registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
         }
     }
-
     public static void main(String[] args) {
         SpringApplication.run(DistributionManageApplication.class, args);
         logger.info("Application is sussess!");

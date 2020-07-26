@@ -28,7 +28,7 @@
     <!--<logger name="org.springframework" level="error"/>-->
     <!--<logger name="jdbc.connection" level="OFF"/>-->
     <!--<logger name="org.apache" level="error"/>-->
-    <!--<logger name="com.alibaba" level="error"/>-->
+    <logger name="com.alibaba" level="error"/>
     <!--<logger name="org.apache.kafka.clients.producer.ProducerConfig" level="warn"/>-->
 
     <root level="INFO">

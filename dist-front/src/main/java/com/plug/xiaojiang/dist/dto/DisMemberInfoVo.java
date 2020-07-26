@@ -8,7 +8,7 @@ public class DisMemberInfoVo {
 
     private String disUserId;
 
-    private String disModelId;
+    private String disParentId;
 
     private String disUserName;
 
@@ -42,12 +42,12 @@ public class DisMemberInfoVo {
         this.disUserId = disUserId;
     }
 
-    public String getDisModelId() {
-        return disModelId;
+    public String getDisParentId() {
+        return disParentId;
     }
 
-    public void setDisModelId(String disModelId) {
-        this.disModelId = disModelId;
+    public void setDisParentId(String disParentId) {
+        this.disParentId = disParentId;
     }
 
     public String getDisUserName() {
@@ -80,5 +80,20 @@ public class DisMemberInfoVo {
 
     public void setDisPlatSuper(String disPlatSuper) {
         this.disPlatSuper = disPlatSuper;
+    }
+
+
+    @Override
+    public String toString() {
+        return "DisMemberInfoVo{" +
+                "secret='" + secret + '\'' +
+                ", disPlatformId='" + disPlatformId + '\'' +
+                ", disUserId='" + disUserId + '\'' +
+                ", disParentId='" + disParentId + '\'' +
+                ", disUserName='" + disUserName + '\'' +
+                ", disUserType='" + disUserType + '\'' +
+                ", disNote='" + disNote + '\'' +
+                ", disPlatSuper='" + disPlatSuper + '\'' +
+                '}';
     }
 }

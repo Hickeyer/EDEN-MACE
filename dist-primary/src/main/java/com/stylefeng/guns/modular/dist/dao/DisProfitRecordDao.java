@@ -15,5 +15,5 @@ public interface DisProfitRecordDao {
 
     List<Map<String, Object>> selectList(@Param("account")  String account,@Param("disGetUserId") String disGetUserId,
                                          @Param("disSetUserId") String disSetUserId,@Param("disOrderId") String disOrderId,
-                                         @Param("accountType") String accountType,@Param("userType") String userType);
+                                         @Param("accountType") String accountType,@Param("identityType") String identityType);
 }

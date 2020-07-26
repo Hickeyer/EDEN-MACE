@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-10-18
+ * @since 2020-07-25
  */
 @TableName("dis_profit_record")
 public class DisProfitRecord extends Model<DisProfitRecord> {
@@ -62,7 +62,8 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
     /**
      * 分类（0：用户分润 1:平台分润）
      */
-	private String type;
+	@TableField("identity_type")
+	private String identityType;
     /**
      * 交易前金额
      */
@@ -189,12 +190,12 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 		this.updateTime = updateTime;
 	}
 
-	public String getType() {
-		return type;
+	public String getIdentityType() {
+		return identityType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setIdentityType(String identityType) {
+		this.identityType = identityType;
 	}
 
 	public BigDecimal getBeforeAmount() {
@@ -250,7 +251,7 @@ public class DisProfitRecord extends Model<DisProfitRecord> {
 			", isDelete=" + isDelete +
 			", addTime=" + addTime +
 			", updateTime=" + updateTime +
-			", type=" + type +
+			", identityType=" + identityType +
 			", beforeAmount=" + beforeAmount +
 			", afterAmount=" + afterAmount +
 			", beforeProAmount=" + beforeProAmount +

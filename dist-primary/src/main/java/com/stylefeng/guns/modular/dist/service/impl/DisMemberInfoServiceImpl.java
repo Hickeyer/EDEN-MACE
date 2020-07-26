@@ -23,6 +23,7 @@ import com.stylefeng.guns.modular.dist.wapper.MemberWarpper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -126,6 +127,7 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
      */
     @Override
     @DataSource(name = DSEnum.DATA_SOURCE_BIZ)
+    @Transactional
     public void save(DisMemberInfo param) throws Exception {
         //逻辑判断
         //查询上级是否存在
@@ -143,9 +145,10 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
                 String[] indexArr=parentMember.getDisFullIndex().split("\\.");
                 Integer factLevel =  0;
                 if(indexArr.length>0){
-                    factLevel= indexArr.length -1;
+                    factLevel= indexArr.length;
                 }
 //                Integer factLevel=parentMember.getDisLevel()+1;
+                //factLevel>=maxLevel
                 if(factLevel>=maxLevel){
                     //截取
 //                    param.setDisLevel(maxLevel);
@@ -317,9 +320,9 @@ public class DisMemberInfoServiceImpl implements IDisMemberInfoService {
     }
     public MemberTreeVo getAgentAndMemberList(DisMemberInfo memberInfo){
         Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
-        wrapper.eq("dis_platform_id",memberInfo.getDisUserId())
-                .eq("dis_plat_super",memberInfo.getDisUserId())
-                .isNull("dis_parent_id");
+        wrapper.eq("dis_platform_id",memberInfo.getDisPlatformId())
+                .eq("dis_plat_super",memberInfo.getDisUserId());
+//                .isNull("dis_parent_id");
         List<DisMemberInfo> memberInfoList = disMemberInfoMapper.selectList(wrapper);
         List<MemberTreeVo> voList = new ArrayList<>();
         for (DisMemberInfo disMemberInfo : memberInfoList) {

@@ -45,7 +45,7 @@ public class MemberRankTask implements BaseJob {
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
         logger.info("开始更新会员的水平等级");
-        taskService.upgradeLevel(IdentityStatus.USER_STATUS.getStatus());
+        taskService.upgradeLevelVersionTwo(IdentityStatus.USER_STATUS.getStatus());
         logger.info("更新会员的水平等级结束");
 
     }

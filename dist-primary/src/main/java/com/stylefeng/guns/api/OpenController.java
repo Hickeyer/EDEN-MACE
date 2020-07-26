@@ -1,12 +1,10 @@
-package com.stylefeng.guns.modular.dist.controller;
+package com.stylefeng.guns.api;
 
 import com.stylefeng.guns.common.annotion.DataSource;
 import com.stylefeng.guns.common.annotion.OpenApiEncrypt;
 import com.stylefeng.guns.common.annotion.log.StatisticsSocket;
 import com.stylefeng.guns.common.constant.DSEnum;
-import com.stylefeng.guns.common.constant.dist.AccountTypeStatus;
-import com.stylefeng.guns.common.constant.dist.ConfineStatus;
-import com.stylefeng.guns.common.constant.dist.IdentityStatus;
+import com.stylefeng.guns.common.constant.dist.*;
 import com.stylefeng.guns.common.constant.tips.DistResult;
 import com.stylefeng.guns.common.persistence.dao.DisMemberAmountMapper;
 import com.stylefeng.guns.common.persistence.dao.DisMemberInfoMapper;
@@ -119,6 +117,27 @@ public class OpenController  {
             return DistResult.failure("没有此用户");
         }
     }
+
+    /**
+     *  用户查询他发展的会员
+     */
+    @PostMapping(value = "/subordinate")
+    @ResponseBody
+    @ApiOperation(value = "会员直属下级会员", notes = "此接口是查询会员直属下级会员")
+//    @OpenApiEncrypt
+    public DistResult subordinateMember(@RequestBody  SubordinateReq subordinateReq) {
+        logger.info("会员下级->开始查询");
+        if(!isAccountVer(subordinateReq.getSecret())) {
+            return   DistResult.failure("非法访问！");
+        }
+        if(!verifyMember(subordinateReq.getMemberId())){
+            return DistResult.failure("用户校验失败");
+        }
+        List<SubordinateResp> list = disMemberInfoService.getSubordinateInfo(subordinateReq);
+        logger.info("会员下级->查询结束");
+        return DistResult.success(list);
+    }
+
     /**
      * 邀请会员，调用此接口
      */
@@ -132,17 +151,21 @@ public class OpenController  {
         if(!isAccountVer(memberInfoVo.getSecret())){
             return DistResult.failure("非法访问");
         }
+        if(StringUtils.isEmpty(memberInfoVo.getDisParentId())&& StringUtils.isEmpty(memberInfoVo.getDisPlatformId())){
+            return DistResult.failure("不存在的邀请用户");
+        }
         String superPlatId;
-        if(StringUtils.isNotEmpty(memberInfoVo.getDisModelId())){
-            DisMemberInfo param= disMemberInfoService.selectListByUserId(memberInfoVo.getDisModelId());
+        if(StringUtils.isNotEmpty(memberInfoVo.getDisParentId())){
+            DisMemberInfo param= disMemberInfoService.selectListByUserId(memberInfoVo.getDisParentId());
             if(param==null){
                 return DistResult.failure("邀请用户不存在");
             }else {
                 if(param.getConfineStatus() == ConfineStatus.ONE_STAUTS.getStatus()){
                     //会员被禁止邀请请会员
-                    memberInfoVo.setDisModelId(null);
+                    memberInfoVo.setDisParentId(null);
+                    return DistResult.failure("邀请用户非法");
                 }
-                superPlatId=param.getDisPlatformId();
+                superPlatId=param.getDisPlatSuper();
             }
         }else {
             superPlatId = memberInfoVo.getDisPlatformId();
@@ -157,7 +180,7 @@ public class OpenController  {
         }
         DisMemberInfo memberInfo=new DisMemberInfo();
         BeanUtils.copyProperties(memberInfoVo,memberInfo);
-        memberInfo.setDisUserType("0");
+        memberInfo.setDisUserType(UserTypeStatus.ZERO_STATUS.getStatus());
         memberInfo.setDisPlatSuper(user.getAccount());
         memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
         memberInfo.setDisPlatFullIndex(user.getFullindex());
@@ -227,25 +250,7 @@ public class OpenController  {
         return DistResult.success(disProfitRecordVo);
     }
 
-    /**
-     *  用户查询他发展的会员
-     */
-    @PostMapping(value = "/subordinate")
-    @ResponseBody
-    @ApiOperation(value = "会员直属下级会员", notes = "此接口是查询会员直属下级会员")
-//    @OpenApiEncrypt
-    public DistResult subordinateMember(@RequestBody  SubordinateReq subordinateReq) {
-        logger.info("会员下级->开始查询");
-        if(!isAccountVer(subordinateReq.getSecret())) {
-            return   DistResult.failure("非法访问！");
-        }
-        if(!verifyMember(subordinateReq.getMemberId())){
-            return DistResult.failure("用户校验失败");
-        }
-        List<SubordinateResp> list = disMemberInfoService.getSubordinateInfo(subordinateReq);
-        logger.info("会员下级->查询结束");
-        return DistResult.success(list);
-    }
+
 
     /**
      * 用户提现，针对用户界面对某一账户进行提现

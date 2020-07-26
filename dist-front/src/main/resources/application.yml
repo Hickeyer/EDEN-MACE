@@ -20,7 +20,7 @@ logging:
   config: classpath:logback.xml
   path: "/logs"
   file: front.log
-  level: debug
+  level: info
 dist:
   server:
     prefix: http://127.0.0.1/

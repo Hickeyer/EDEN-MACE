@@ -59,7 +59,7 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
         Wrapper<DisRankParam> profiParamP=new EntityWrapper<>();
         profiParamP.eq("dis_platform_id",memberInfo.getDisPlatformId())
                 .eq("account_type",accountType)
-                .ne("identity_type", IdentityStatus.PLAT_STATUS.getStatus());
+                .eq("identity_type", IdentityStatus.USER_STATUS.getStatus());
         List<DisRankParam> profiParamList=disRankParamMapper.selectList(profiParamP);
         if(profiParamList.size()>0){
             if(memberInfo==null){
@@ -140,6 +140,7 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
      * @throws Exception
      */
     @Override
+    @DataSource(name= DSEnum.DATA_SOURCE_BIZ)
     public void saveAgentIntegral(String accountType,BigDecimal amount,DisMemberInfo memberInfo) throws Exception {
         logger.info("开始处理平台商积分");
         //dis_pro_type可以是交易，升级、邀请等等
@@ -158,7 +159,7 @@ public class DisSysIntegralRecordServiceImpl implements IDisSysIntegralRecordSer
                 level = level +1 ;
                 // 平台商为正序排序  admin.dist.yiji_ceshi
                 // 第一次取 level+1 ,如一级为自身 1+0 =1 取 dist
-                if(level<=levelInfo.length){
+                if(level.intValue()<levelInfo.length){
                     //如果等级不对也无需计算分润 level +1
                     String userId= levelInfo[level];
                     logger.info("{}级{}平台商账户，开始分配积分",level,userId);

@@ -88,13 +88,13 @@ public class DisProfitRecordController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String disGetUserId,String disSetUserId,String disOrderId,String accountType,String userType) {
+    public Object list(String disGetUserId,String disSetUserId,String disOrderId,String accountType,String identityType) {
         String account= ShiroKit.getUser().getAccount();
         if(ShiroKit.hasRole(Const.ADMIN_NAME)){
             account=null;
         }
         Page page = new PageFactory<DisProfitRecord>().defaultPage();
-        List<Map<String, Object>> list=disProfitRecordService.selectList(account,disGetUserId,disSetUserId,disOrderId,accountType,userType);
+        List<Map<String, Object>> list=disProfitRecordService.selectList(account,disGetUserId,disSetUserId,disOrderId,accountType,identityType);
         return super.packForBT((List)new ProfitRecordWarpper(list).warp(),page.getTotal());
     }
 

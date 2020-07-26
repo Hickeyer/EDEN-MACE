@@ -65,7 +65,7 @@ mybatis-plus:
 
 
   #################################  分销配置#####################################
-
+  ##userModel:两种模式fix(最高分配金额);rate（最高比例分配金额）,如果不限制则把isUse改为false
 dist:
   jwt:
     secret: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9

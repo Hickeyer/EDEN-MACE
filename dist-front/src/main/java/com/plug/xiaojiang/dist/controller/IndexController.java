@@ -45,7 +45,7 @@ public class IndexController {
         vo.setSecret(secret);
         vo.setDisUserId(PinYinUtil.getFullSpell(userName));
         vo.setDisUserName(userName);
-        vo.setDisModelId(memberInfo.getDisUserId());
+        vo.setDisParentId(memberInfo.getDisUserId());
         vo.setDisPlatSuper(memberInfo.getDisPlatSuper());
         vo.setDisNote("来源：plug测试");
         Gson gson=new Gson();

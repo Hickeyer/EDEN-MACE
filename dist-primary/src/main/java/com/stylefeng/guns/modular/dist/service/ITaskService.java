@@ -1,10 +1,17 @@
 package com.stylefeng.guns.modular.dist.service;
 
+import com.stylefeng.guns.common.persistence.model.User;
+
 public interface ITaskService {
 
 
-    public void upgradeLevel(String type);
+    @Deprecated
+    void upgradeLevel(String type);
 
-    public void clearData();
+    void clearData(User user);
+
+    void clearAuthDB();
+
+    void upgradeLevelVersionTwo(String identityType);
 
 }

@@ -17,7 +17,7 @@ biz:
 
 logging:
   level.root: info
-  level.com.stylefeng: debug
+  level.com.stylefeng: info
   path: logs/
   file: dist.log
 ###################  项目启动端口  ###################

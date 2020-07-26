@@ -7,8 +7,10 @@ import com.stylefeng.guns.modular.dist.amountsign.impl.TradeAmountServiceImpl;
 
 /**
  * 新增金额控制
+ * 已改为模板方法模式，此类不建议使用
  * @see  AccountTypeStatus
  */
+@Deprecated
 public class AmountFactoryContext {
 
     public AmountService amountService;

@@ -7,7 +7,7 @@
     <parent>
         <groupId>cn.dist</groupId>
         <artifactId>dist-parent</artifactId>
-        <version>1.6.0</version>
+        <version>1.7.0</version>
     </parent>
     <artifactId>dist-front</artifactId>
     <name>${project.artifactId}</name>
@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>com.dist.api</groupId>
 			<artifactId>dist-api</artifactId>
-			<version>1.6.0</version>
+			<version>1.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

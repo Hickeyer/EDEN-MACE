@@ -100,7 +100,7 @@ DisProfitRecord.formParams = function() {
     queryData['disSetUserId'] = $("#disSetUserId").val();
     queryData['disOrderId'] = $("#disOrderId").val();
     queryData['accountType'] = $("#accountType").val();
-    queryData['userType'] = $("#userType").val();
+    queryData['identityType'] = $("#userType").val();
     return queryData;
 }
 $(function () {

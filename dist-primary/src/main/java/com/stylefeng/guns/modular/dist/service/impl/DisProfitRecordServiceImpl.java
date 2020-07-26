@@ -84,8 +84,8 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
 
     @Override
     @DataSource(name=DSEnum.DATA_SOURCE_BIZ)
-    public List<Map<String, Object>> selectList(String account,String disGetUserId,String disSetUserId,String disOrderId,String accountType,String userType) {
-        List<Map<String, Object>> list=disProfitRecordDao.selectList(account,disGetUserId,disSetUserId,disOrderId,accountType,userType);
+    public List<Map<String, Object>> selectList(String account,String disGetUserId,String disSetUserId,String disOrderId,String accountType,String identityType) {
+        List<Map<String, Object>> list=disProfitRecordDao.selectList(account,disGetUserId,disSetUserId,disOrderId,accountType,identityType);
         return list;
     }
 
@@ -272,7 +272,7 @@ public class DisProfitRecordServiceImpl implements IDisProfitRecordService {
         record.setAddTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         record.setUpdateTime(DateUtils.longToDateAll(System.currentTimeMillis()));
         record.setIsDelete("N");
-        record.setType(idType);
+        record.setIdentityType(idType);
         record.setProfitNum(sysDicService.getOrderNo("profit"));
         disProfitRecordMapper.insert(record);
         amountMangeService.addMoney(userId,newAmount,memberInfo.getDisUserId(), idType,disProfit.getAccountType());

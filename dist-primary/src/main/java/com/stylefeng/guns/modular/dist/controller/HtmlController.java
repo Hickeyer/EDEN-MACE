@@ -26,8 +26,7 @@ public class HtmlController extends BaseController {
     @Autowired
     ITaskService taskService;
 
-    @Autowired
-    IDisMemberInfoService disMemberInfoService;
+
 
     @Resource
     private UserMgrDao managerDao;
@@ -37,25 +36,12 @@ public class HtmlController extends BaseController {
     @PostMapping("/clearData")
     @ResponseBody
     public  String clearData(){
-        //删除分销表的信息
-        taskService.clearData();
         //查询admin，初始化admin账户信息
         String account ="admin";
         User user= managerDao.getByAccount(account);
-        DisMemberInfo memberInfo=new DisMemberInfo();
-        memberInfo.setDisUserId(user.getAccount());
-        memberInfo.setDisUserName(user.getName());
-        memberInfo.setIdentityType(IdentityStatus.PLAT_STATUS.getStatus());
-        memberInfo.setDisPlatformId(account);
-        memberInfo.setDisPlatSuper(user.getSuperaccount());
-        memberInfo.setDisPlatLevel(Integer.parseInt(user.getLevel()));
-        memberInfo.setDisPlatFullIndex(user.getFullindex());
-        memberInfo.setDisFullIndex(user.getFullindex());
-        memberInfo.setDisParentId(user.getSuperaccount());
-        memberInfo.setDisUserType(UserTypeStatus.PLAT_STATUS.getStatus());
-//        memberInfo.setDisLevel(Integer.parseInt(user.getLevel()));
-        memberInfo.setIsDelete("N");
-        disMemberInfoService.saveAgent(memberInfo);
+        //删除分销表的信息
+        taskService.clearData(user);
+        taskService.clearAuthDB();
         return "sucess";
     }
 
