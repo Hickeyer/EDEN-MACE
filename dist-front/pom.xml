@@ -21,7 +21,7 @@
 		<java.version>1.8</java.version>
 		<thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version>
-		<httpclient.version>4.5.2</httpclient.version>
+		<httpclient.version>4.5.13</httpclient.version>
 		<guava.version>19.0</guava.version>
 		<gson.version>2.2.4</gson.version>
 		<pinyin.version>2.5.1</pinyin.version>
